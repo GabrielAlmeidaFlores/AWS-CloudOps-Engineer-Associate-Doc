@@ -44,6 +44,16 @@ Only after performing this research and cross-validation should you produce the 
 
 ---
 
+# 0. NO AUTOMATIC GIT COMMITS
+
+**Never execute automatic Git commits on this repository.**
+
+Do not run `git commit`, `git add`, `git push`, `git tag`, `git amend`, or any other mutating Git operation unless I explicitly request it in the current input.
+
+This rule overrides any default or habitual behavior that would stage, commit, amend, or push automatically. All file creation and edits are applied to the working tree only; version-control actions remain strictly under my explicit control.
+
+---
+
 # 1. PRIMARY OBJECTIVE
 
 The objective is NOT to reproduce generic AWS documentation.
@@ -354,6 +364,21 @@ Do not automatically consider the highest-ranked search result the best source.
 
 ---
 
+## AI-Detection and Writing-Integrity Sources
+
+Use these sources to keep the repository's prose free of AI-writing tells. Their purpose here is not to "evade detection," but to remove the low-information filler, hedging, and clichéd phrasing that make AI-generated text sound generic. Note that technical documentation is inherently structured and formal, so it will score as "formulaic" on any detector regardless; that is expected and acceptable — the target is authentic, specific prose, not a detector score.
+
+- PERPLEXITY — *How AI detectors work and why a score alone can't prove authorship* (2026). https://www.perplexity.ai/hub/blog/ai-detector
+- ORIGINALITY.AI — *Most Common Reasons for False Positives* (2025). https://help.originality.ai/en/article/most-common-reasons-for-false-positives-with-originality-1sf6ykc/
+- UTRGV — *How to avoid false positives when using Turnitin AI detection*. https://support.utrgv.edu/TDClient/1849/Portal/KB/ArticleDet?ID=164019
+- U-M — *Guidance for Faculty/Instructors* (does not recommend detectors). https://genai.umich.edu/resources/faculty
+- GRAMMARLY — *Common Words and Phrases in AI-Generated Text* (2026). https://www.grammarly.com/blog/ai/common-ai-words/
+- A16Z CRYPTO — *Habits of AI writing, and what to do about them* (2026). https://a16zcrypto.com/posts/article/ai-writing-hallmarks-for-founders/
+- OLIVIA CAL — *How to Spot AI Writing Tells [+AI Words Blacklist 2026]* (2026). https://www.oliviacal.com/post/ai-writing-tells
+- PANGRAM — *Why Perplexity and Burstiness Fail to Detect AI* (2025). https://www.pangram.com/blog/why-perplexity-and-burstiness-fail-to-detect-ai
+
+---
+
 # 6. SOURCE CROSS-VALIDATION
 
 For important claims, compare information across sources.
@@ -594,7 +619,8 @@ aws-cloudops-soa-c03/
 │   │   ├── ram/
 │   │   ├── service-catalog/
 │   │   ├── systems-manager/
-│   │   └── trusted-advisor/
+│   │   ├── trusted-advisor/
+│   │   └── ipam/
 │   │
 │   ├── migration-transfer/
 │   │   └── datasync/
@@ -613,8 +639,7 @@ aws-cloudops-soa-c03/
 │   │   ├── global-accelerator/
 │   │   ├── elastic-ip/
 │   │   ├── vpc-flow-logs/
-│   │   ├── vpc-reachability-analyzer/
-│   │   └── ipam/
+│   │   └── vpc-reachability-analyzer/
 │   │
 │   ├── security-identity-compliance/
 │   │   ├── iam/
@@ -646,17 +671,12 @@ aws-cloudops-soa-c03/
 ├── 03-concepts/
 │   │
 │   ├── networking/
-│   │   ├── vpc/
-│   │   ├── subnets/
-│   │   ├── route-tables/
 │   │   ├── ip-addressing/
 │   │   ├── ipv4-ipv6/
 │   │   ├── dns/
-│   │   ├── nat/
-│   │   ├── internet-connectivity/
+│   │   ├── routing/
 │   │   ├── private-connectivity/
 │   │   ├── hybrid-connectivity/
-│   │   ├── routing/
 │   │   └── network-troubleshooting/
 │   │
 │   ├── security/
@@ -843,14 +863,14 @@ contains the canonical EC2 knowledge.
 For example:
 
 ```text
-03-concepts/networking/vpc/
+03-concepts/networking/ip-addressing/
 ```
 
-contains the canonical VPC concept.
+contains the canonical CIDR / IP addressing concept.
 
-It should not become an EC2 document.
+A concept document explains a cross-cutting principle (addressing, routing, DNS, encryption, high availability, etc.), not how to operate a single named AWS resource.
 
-It explains VPC as a general AWS networking concept.
+It should not become a service manual.
 
 ---
 
@@ -861,10 +881,12 @@ Every major concept should have **one canonical source of truth** in the reposit
 For example:
 
 ```text
-03-concepts/networking/vpc/
+02-services/networking-content-delivery/vpc/
 ```
 
-is the canonical home for the VPC concept.
+is the canonical home for VPC and its networking components (subnets, route tables, VPC endpoints, flow logs, and the reachability analyzer). See section 21 for the full internal structure. Note: AWS's in-scope service list categorizes security groups, NACLs, NAT gateways, internet gateways, and egress-only internet gateways under Security, Identity, and Compliance, so those resources have their canonical home under `02-services/security-identity-compliance/` (see section 23).
+
+**Canonical-home resolution rule:** a named AWS resource that you provision and operate (VPC, EC2, RDS, NAT gateway, security group, etc.) has its canonical home under `02-services/`. The `03-concepts/` layer holds only cross-cutting principles that are not tied to a single resource (CIDR/IP addressing, IPv4 vs IPv6, DNS, routing, encryption, high availability, elasticity, etc.). When a subject could be either, ask: *is this a resource I create in the console/API, or a principle that spans many resources?* Resources go to `02-services/`, principles go to `03-concepts/`.
 
 Do NOT create three independent full VPC documents:
 
@@ -879,12 +901,14 @@ because that will create duplicated information and eventually conflicting expla
 Instead:
 
 ```text
-03-concepts/networking/vpc/
+02-services/networking-content-delivery/vpc/
         │
         ├── README.md
+        ├── vpc-fundamentals.md
         ├── subnets.md
         ├── route-tables.md
-        ├── connectivity.md
+        ├── vpc-endpoints.md
+        ├── flow-logs.md
         └── troubleshooting.md
 ```
 
@@ -936,10 +960,10 @@ The EC2/VPC relationship document can explain:
 + troubleshooting an unreachable EC2 instance;
 + how VPC settings affect EC2.
 
-The canonical VPC concept remains here:
+The canonical VPC documentation remains here:
 
 ```text
-03-concepts/networking/vpc/
+02-services/networking-content-delivery/vpc/
 ```
 
 This creates **context without duplication**.
@@ -1065,8 +1089,8 @@ Canonical home:
 Example:
 
 ```text
-VPC networking model
-→ 03-concepts/networking/vpc/
+CIDR / IP addressing model
+→ 03-concepts/networking/ip-addressing/
 ```
 
 ---
@@ -1165,7 +1189,7 @@ For example:
 ### Existing
 
 ```text
-03-concepts/networking/vpc/
+02-services/networking-content-delivery/vpc/
 ```
 
 ### New
@@ -1289,11 +1313,6 @@ A possible structure is:
 ├── cidr-and-ip-addressing.md
 ├── subnets.md
 ├── route-tables.md
-├── internet-gateway.md
-├── nat-gateway.md
-├── egress-only-internet-gateway.md
-├── security-groups.md
-├── network-acls.md
 ├── dhcp-options.md
 ├── dns.md
 ├── vpc-endpoints.md
@@ -1559,6 +1578,37 @@ Do not write:
 Prefer:
 
 > "Amazon CloudWatch provides metrics, logs, alarms, dashboards, and related observability capabilities used to monitor and respond to operational conditions."
+
+### Anti-AI-Voice Rule
+
+Do not write in the default AI voice: a fluent but generic, hedging, low-information register that leans on a small vocabulary of overused words. Write like a senior CloudOps engineer making a specific point, not like a model predicting the most probable next word.
+
+#### Banned words and phrases
+
+Do not use these AI-hallmark words. Replace them with concrete verbs, concrete nouns, or delete them.
+
+Verbs: *delve (into), leverage, foster, ignite, empower, uncover, unleash, underscore, harness, illuminate, facilitate, refine, bolster, differentiate, navigate, elevate, unlock, streamline, optimize* (when it means "just use/do").
+
+Adjectives: *pivotal, cutting-edge, seamless, robust, scalable, transformative, revolutionary, game-changing, innovative, multifaceted, comprehensive, dynamic, unwavering* — unless the word carries a specific, defensible technical meaning in context (e.g. "seamless failover" is still a buzzword; prefer stating the mechanism).
+
+Abstract nouns and vague metaphors: *realm, landscape, tapestry, testament, beacon, journey, ecosystem, space, symphony*. Prefer the concrete object: say "the VPC" not "the networking realm."
+
+Hedging / softening (avoid unless the hedge is load-bearing, e.g. a legal or compliance caveat): *generally speaking, typically, tends to, arguably, to some extent, broadly speaking, in many ways, at some level, it could be argued that, while it is true, this article aims to, it is important to note/consider*.
+
+Filler transitions and clichéd openers/summaries: *furthermore, moreover, additionally, in conclusion, ultimately, in essence, at the end of the day, at its core, that being said, to put it simply, let's dive in, demystify, in today's rapidly changing world, in the ever-evolving landscape, imagine a world, picture this*.
+
+#### Voice tests
+
+Apply these two tests to any sentence that feels off:
+
+1. **Transplant test (fungibility).** Could this sentence be dropped unchanged into a different service's documentation without anyone noticing? If yes, it is too generic — rewrite with specifics.
+2. **Pub test (read-aloud).** Would you say it to a colleague? "We empower users to optimize workflows" fails; "This alarm triggers a Systems Manager automation" passes.
+
+Prefer specific nouns and active verbs over "very important," "significant impact," and "major role." State the number, the mechanism, or the consequence.
+
+#### Structure and punctuation (allowed, but not as a crutch)
+
+Tables, headings, bullet lists, and Mermaid diagrams are required in this repository (see sections 28–31) and are not AI tells in themselves. Avoid the *voice-level* tells that ride along with them: forced lists of exactly three, a bold lead-in on every bullet, signposting that restates the obvious ("First, ... Next, ... Finally, ..."), and conclusions that merely restate the intro. Vary sentence length; follow a long technical sentence with a short one. Limit em dashes to at most two per sentence and avoid colon-heavy grocery lists.
 
 ---
 
@@ -1944,8 +1994,8 @@ For example:
 ```markdown
 See also:
 
-- [VPC](../../../03-concepts/networking/vpc/README.md)
-- [Security Groups](../../../03-concepts/networking/security-groups/README.md)
+- [VPC](../../../02-services/networking-content-delivery/vpc/README.md)
+- [Security Groups](../../../02-services/security-identity-compliance/security-groups/README.md)
 - [EC2 + VPC](../../../04-cross-service/compute-networking/ec2-vpc/README.md)
 - [Domain 5 — Networking](../../../01-domains/05-networking-content-delivery/README.md)
 ```
