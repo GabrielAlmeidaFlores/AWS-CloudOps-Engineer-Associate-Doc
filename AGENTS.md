@@ -626,7 +626,8 @@ aws-cloudops-soa-c03/
 │   │   ├── 14-security-groups/
 │   │   ├── 15-nat-gateway/
 │   │   ├── 16-internet-gateway/
-│   │   └── 17-egress-only-internet-gateway/
+│   │   ├── 17-egress-only-internet-gateway/
+│   │   └── 18-elastic-load-balancing/
 │   │
 │   └── 14-storage/
 │       ├── 01-s3/
@@ -848,7 +849,187 @@ When you add a new topic, assign it the next number in its folder's read order. 
 
 ---
 
-# 11. WHY THERE ARE BOTH SERVICES AND CONCEPTS
+# 11. STUDY ROADMAP
+
+This is the fixed sequence in which we document the repository. Work it top to bottom, one topic per session. Each step lists the canonical path, its type, the steps it depends on, and its status (`✅` done, `⬜` pending). Major services get the full multi-file structure (§20); minor services get a single consolidated document. Concepts are interleaved as prerequisites; cross-service documents are produced only after both parent services exist.
+
+## Phase 1 — Networking & IP fundamentals
+
+| # | Topic | Canonical path | Type | Depends | Status |
+|---|-------|----------------|------|---------|--------|
+| 1 | IP addressing / CIDR | `02-concepts/01-networking/01-ip-addressing/` | Concept | — | ⬜ |
+| 2 | IPv4 vs IPv6 | `02-concepts/01-networking/02-ipv4-ipv6/` | Concept | 1 | ⬜ |
+| 3 | VPC | `01-services/12-networking-content-delivery/01-vpc/` | Service | 1, 2 | ⬜ |
+| 4 | Internet Gateway | `01-services/13-security-identity-compliance/16-internet-gateway/` | Service | 3 | ⬜ |
+| 5 | NAT Gateway | `01-services/13-security-identity-compliance/15-nat-gateway/` | Service | 3, 4 | ⬜ |
+| 6 | Egress-only IGW | `01-services/13-security-identity-compliance/17-egress-only-internet-gateway/` | Service | 3, 4 | ⬜ |
+| 7 | Security Groups | `01-services/13-security-identity-compliance/14-security-groups/` | Service | 3 | ⬜ |
+| 8 | Network ACLs | `01-services/13-security-identity-compliance/13-nacls/` | Service | 3, 7 | ⬜ |
+| 9 | VPC Endpoints | `01-services/12-networking-content-delivery/02-vpc-endpoints/` | Service | 3 | ⬜ |
+| 10 | PrivateLink | `01-services/12-networking-content-delivery/05-private-link/` | Service | 9 | ⬜ |
+| 11 | VPC Peering | `01-services/12-networking-content-delivery/03-vpc-peering/` | Service | 3 | ⬜ |
+| 12 | Transit Gateway | `01-services/12-networking-content-delivery/04-transit-gateway/` | Service | 11 | ⬜ |
+| 13 | VPC Flow Logs | `01-services/12-networking-content-delivery/13-vpc-flow-logs/` | Service | 3 | ⬜ |
+| 14 | VPC Reachability Analyzer | `01-services/12-networking-content-delivery/14-vpc-reachability-analyzer/` | Service | 3, 13 | ⬜ |
+| 15 | Routing | `02-concepts/01-networking/04-routing/` | Concept | 3, 4, 5 | ⬜ |
+| 16 | DNS | `02-concepts/01-networking/03-dns/` | Concept | — | ⬜ |
+| 17 | Private connectivity | `02-concepts/01-networking/05-private-connectivity/` | Concept | 9–12 | ⬜ |
+| 18 | Hybrid connectivity | `02-concepts/01-networking/06-hybrid-connectivity/` | Concept | 17 | ⬜ |
+
+## Phase 2 — Compute & block storage
+
+| 19 | EC2 | `01-services/05-compute/01-ec2/` | Service | 3, 7 | ⬜ |
+| 20 | EBS | `01-services/14-storage/02-ebs/` | Service | 19 | ⬜ |
+| 21 | EC2 Image Builder | `01-services/05-compute/02-ec2-image-builder/` | Service | 19, 20 | ⬜ |
+| 22 | EC2 + VPC | `03-cross-service/01-compute-networking/01-ec2-vpc/` | Relationship | 3, 19 | ⬜ |
+| 23 | EC2 + Security Groups | `03-cross-service/01-compute-networking/02-ec2-security-groups/` | Relationship | 7, 19 | ⬜ |
+| 24 | Elastic IP | `01-services/12-networking-content-delivery/12-elastic-ip/` | Service | 3, 19 | ⬜ |
+
+## Phase 3 — Object & shared storage
+
+| 25 | S3 | `01-services/14-storage/01-s3/` | Service | — | ⬜ |
+| 26 | EFS | `01-services/14-storage/03-efs/` | Service | 3, 19 | ⬜ |
+| 27 | FSx | `01-services/14-storage/04-fsx/` | Service | 19, 26 | ⬜ |
+| 28 | Encryption (concept) | `02-concepts/02-security/06-encryption/` | Concept | — | ⬜ |
+
+## Phase 4 — Observability (Domain 1)
+
+| 29 | Metrics | `02-concepts/03-observability/01-metrics/` | Concept | — | ⬜ |
+| 30 | CloudWatch | `01-services/10-management-governance/05-cloudwatch/` | Service | 19, 29 | ⬜ |
+| 31 | Logs | `02-concepts/03-observability/02-logs/` | Concept | 30 | ⬜ |
+| 32 | Events | `02-concepts/03-observability/03-events/` | Concept | 30 | ⬜ |
+| 33 | Alarms | `02-concepts/03-observability/04-alarms/` | Concept | 30 | ⬜ |
+| 34 | Dashboards | `02-concepts/03-observability/05-dashboards/` | Concept | 30, 33 | ⬜ |
+| 35 | Tracing | `02-concepts/03-observability/06-tracing/` | Concept | 30 | ⬜ |
+| 36 | Remediation | `02-concepts/03-observability/07-remediation/` | Concept | 33 | ⬜ |
+| 37 | CloudTrail | `01-services/10-management-governance/04-cloudtrail/` | Service | 30 | ⬜ |
+| 38 | EC2 + CloudWatch | `03-cross-service/02-compute-monitoring/01-ec2-cloudwatch/` | Relationship | 19, 30 | ⬜ |
+
+## Phase 5 — Reliability & scaling (Domain 2)
+
+| 39 | High availability | `02-concepts/04-reliability/01-high-availability/` | Concept | 3, 19 | ⬜ |
+| 40 | Fault tolerance | `02-concepts/04-reliability/02-fault-tolerance/` | Concept | 39 | ⬜ |
+| 41 | Elasticity | `02-concepts/04-reliability/03-elasticity/` | Concept | 39 | ⬜ |
+| 42 | Auto Scaling | `01-services/10-management-governance/01-auto-scaling/` | Service | 19, 41 | ⬜ |
+| 43 | ELB (ALB/NLB) | `01-services/13-security-identity-compliance/18-elastic-load-balancing/` | Service | 19, 42 | ⬜ |
+| 44 | EC2 + Auto Scaling + ELB | `03-cross-service/06-reliability/01-ec2-auto-scaling-elb/` | Relationship | 42, 43 | ⬜ |
+| 45 | Route 53 | `01-services/12-networking-content-delivery/08-route53/` | Service | 16, 43 | ⬜ |
+| 46 | Route 53 failover | `03-cross-service/06-reliability/04-route53-failover/` | Relationship | 45 | ⬜ |
+| 47 | Backup | `01-services/14-storage/05-backup/` | Service | 20, 25 | ⬜ |
+| 48 | Disaster recovery / RTO / RPO | `02-concepts/04-reliability/06-disaster-recovery/`, `07-rto-rpo/` | Concept | 39, 47 | ⬜ |
+| 49 | Failover | `02-concepts/04-reliability/08-failover/` | Concept | 40, 46 | ⬜ |
+
+## Phase 6 — Databases
+
+| 50 | RDS | `01-services/07-database/06-rds/` | Service | 3, 20, 28 | ⬜ |
+| 51 | RDS Multi-AZ | `03-cross-service/06-reliability/02-rds-multi-az/` | Relationship | 50 | ⬜ |
+| 52 | RDS Proxy | `01-services/07-database/07-rds-proxy/` | Service | 50 | ⬜ |
+| 53 | Aurora | `01-services/07-database/01-aurora/` | Service | 50 | ⬜ |
+| 54 | Aurora Serverless v2 | `01-services/07-database/02-aurora-serverless-v2/` | Service | 53 | ⬜ |
+| 55 | DynamoDB | `01-services/07-database/03-dynamodb/` | Service | 28 | ⬜ |
+| 56 | DAX | `01-services/07-database/04-dax/` | Service | 55 | ⬜ |
+| 57 | ElastiCache | `01-services/07-database/05-elasticache/` | Service | 50, 55 | ⬜ |
+
+## Phase 7 — Application integration & serverless
+
+| 58 | SNS | `01-services/02-application-integration/02-sns/` | Service | — | ⬜ |
+| 59 | SQS | `01-services/02-application-integration/03-sqs/` | Service | — | ⬜ |
+| 60 | EventBridge | `01-services/02-application-integration/01-eventbridge/` | Service | 30, 32 | ⬜ |
+| 61 | Step Functions | `01-services/02-application-integration/04-step-functions/` | Service | 60 | ⬜ |
+| 62 | Lambda | `01-services/05-compute/03-lambda/` | Service | 3, 60 | ⬜ |
+| 63 | CloudWatch + EventBridge | `03-cross-service/05-monitoring-automation/01-cloudwatch-eventbridge/` | Relationship | 30, 60 | ⬜ |
+| 64 | CloudWatch + SNS | `03-cross-service/05-monitoring-automation/02-cloudwatch-sns/` | Relationship | 30, 58 | ⬜ |
+| 65 | EventBridge + Lambda | `03-cross-service/05-monitoring-automation/04-eventbridge-lambda/` | Relationship | 60, 62 | ⬜ |
+| 66 | Lambda + VPC | `03-cross-service/01-compute-networking/05-lambda-vpc/` | Relationship | 3, 62 | ⬜ |
+
+## Phase 8 — Deployment & automation (Domain 3)
+
+| 67 | Infrastructure as Code | `02-concepts/05-automation/01-infrastructure-as-code/` | Concept | — | ⬜ |
+| 68 | CloudFormation | `01-services/10-management-governance/02-cloudformation/` | Service | 67 | ⬜ |
+| 69 | CDK | `01-services/10-management-governance/03-cdk/` | Service | 68 | ⬜ |
+| 70 | CloudFormation + IAM | `03-cross-service/07-deployment-automation/01-cloudformation-iam/` | Relationship | 0, 68 | ⬜ |
+| 71 | Systems Manager | `01-services/10-management-governance/15-systems-manager/` | Service | 19, 30 | ⬜ |
+| 72 | Systems Manager + EventBridge | `03-cross-service/07-deployment-automation/03-systems-manager-eventbridge/` | Relationship | 60, 71 | ⬜ |
+| 73 | CloudWatch + Systems Manager | `03-cross-service/05-monitoring-automation/03-cloudwatch-systems-manager/` | Relationship | 30, 71 | ⬜ |
+| 74 | RAM | `01-services/10-management-governance/13-ram/` | Service | — | ⬜ |
+| 75 | Service Catalog | `01-services/10-management-governance/14-service-catalog/` | Service | 68 | ⬜ |
+| 76 | Organizations | `01-services/10-management-governance/12-organizations/` | Service | 0 | ⬜ |
+| 77 | CloudFormation StackSets + Organizations | `03-cross-service/07-deployment-automation/02-cloudformation-stacksets-organizations/` | Relationship | 68, 76 | ⬜ |
+
+## Phase 9 — Security & compliance (Domain 4, beyond IAM)
+
+| 78 | Least privilege | `02-concepts/02-security/05-least-privilege/` | Concept | 0 | ⬜ |
+| 79 | KMS | `01-services/13-security-identity-compliance/04-kms/` | Service | 28 | ⬜ |
+| 80 | Secrets Manager | `01-services/13-security-identity-compliance/09-secrets-manager/` | Service | 79 | ⬜ |
+| 81 | ACM | `01-services/13-security-identity-compliance/05-acm/` | Service | — | ⬜ |
+| 82 | IAM + KMS | `03-cross-service/04-identity-security/01-iam-kms/` | Relationship | 0, 79 | ⬜ |
+| 83 | IAM Identity Center | `01-services/13-security-identity-compliance/03-iam-identity-center/` | Service | 0, 76 | ⬜ |
+| 84 | SCPs | `02-concepts/02-security/10-compliance/` | Concept | 76 | ⬜ |
+| 85 | Config | `01-services/10-management-governance/07-config/` | Service | 37 | ⬜ |
+| 86 | GuardDuty | `01-services/13-security-identity-compliance/06-guardduty/` | Service | 85 | ⬜ |
+| 87 | Inspector | `01-services/13-security-identity-compliance/07-inspector/` | Service | 19 | ⬜ |
+| 88 | Security Hub | `01-services/13-security-identity-compliance/08-security-hub/` | Service | 85–87 | ⬜ |
+| 89 | IAM Access Analyzer | `01-services/13-security-identity-compliance/02-iam-access-analyzer/` | Service | 0 | ⬜ |
+| 90 | Trusted Advisor | `01-services/10-management-governance/16-trusted-advisor/` | Service | — | ⬜ |
+| 91 | Network Firewall | `01-services/13-security-identity-compliance/10-network-firewall/` | Service | 3, 8 | ⬜ |
+| 92 | WAF | `01-services/13-security-identity-compliance/11-waf/` | Service | 62 | ⬜ |
+| 93 | Shield | `01-services/13-security-identity-compliance/12-shield/` | Service | 92 | ⬜ |
+
+## Phase 10 — Content delivery & edge
+
+| 94 | CloudFront | `01-services/12-networking-content-delivery/10-cloudfront/` | Service | 45, 81 | ⬜ |
+| 95 | Global Accelerator | `01-services/12-networking-content-delivery/11-global-accelerator/` | Service | 43 | ⬜ |
+| 96 | CloudFront + WAF + Shield | `03-cross-service/03-networking-security/03-cloudfront-waf-shield/` | Relationship | 92–94 | ⬜ |
+| 97 | Route 53 Resolver DNS Firewall | `01-services/12-networking-content-delivery/09-route53-resolver-dns-firewall/` | Service | 45 | ⬜ |
+| 98 | VPC Security Groups + NACL | `03-cross-service/03-networking-security/01-vpc-security-groups-nacl/` | Relationship | 7, 8 | ⬜ |
+
+## Phase 11 — Cost & optimization
+
+| 99 | Cost Explorer | `01-services/04-cloud-financial-management/01-cost-explorer/` | Service | 37 | ⬜ |
+| 100 | Cost & Usage Reports | `01-services/04-cloud-financial-management/02-cost-and-usage-reports/` | Service | 99 | ⬜ |
+| 101 | Savings Plans | `01-services/04-cloud-financial-management/03-savings-plans/` | Service | 99 | ⬜ |
+| 102 | Compute Optimizer | `01-services/10-management-governance/06-compute-optimizer/` | Service | 19, 30 | ⬜ |
+
+## Phase 12 — Containers
+
+| 103 | ECR | `01-services/06-containers/01-ecr/` | Service | 19 | ⬜ |
+| 104 | ECS | `01-services/06-containers/02-ecs/` | Service | 62, 103 | ⬜ |
+| 105 | EKS | `01-services/06-containers/03-eks/` | Service | 104 | ⬜ |
+| 106 | ECS + CloudWatch | `03-cross-service/02-compute-monitoring/02-ecs-cloudwatch/` | Relationship | 30, 104 | ⬜ |
+| 107 | EKS + CloudWatch | `03-cross-service/02-compute-monitoring/03-eks-cloudwatch/` | Relationship | 30, 105 | ⬜ |
+
+## Phase 13 — Remaining niche services (single consolidated doc each)
+
+| 108 | Athena | `01-services/01-analytics/01-athena/` | Service | 25 | ⬜ |
+| 109 | Data Firehose | `01-services/01-analytics/02-data-firehose/` | Service | 25 | ⬜ |
+| 110 | SES | `01-services/03-business-applications/01-ses/` | Service | — | ⬜ |
+| 111 | DataSync | `01-services/11-migration-transfer/01-datasync/` | Service | 25, 26 | ⬜ |
+| 112 | X-Ray | `01-services/08-developer-tools/01-x-ray/` | Service | 30, 35 | ⬜ |
+| 113 | Storage Gateway | `01-services/14-storage/06-storage-gateway/` | Service | 25 | ⬜ |
+| 114 | Bedrock | `01-services/09-machine-learning-ai/01-bedrock/` | Service | — | ⬜ |
+| 115 | Kiro | `01-services/08-developer-tools/02-kiro/` | Service | — | ⬜ |
+| 116 | Health Dashboard | `01-services/10-management-governance/09-health-dashboard/` | Service | 30 | ⬜ |
+| 117 | Control Tower | `01-services/10-management-governance/08-control-tower/` | Service | 76 | ⬜ |
+| 118 | Managed Grafana / Prometheus | `01-services/10-management-governance/10-managed-grafana/`, `11-managed-prometheus/` | Service | 30 | ⬜ |
+| 119 | IPAM | `01-services/10-management-governance/17-ipam/` | Service | 3 | ⬜ |
+
+## Phase 0 — done
+
+| # | Topic | Canonical path | Status |
+|---|-------|----------------|--------|
+| 0 | IAM | `01-services/13-security-identity-compliance/01-iam/` | ✅ |
+
+## Cross-service documents — produced on demand once both parents exist
+
+The remaining `03-cross-service/` entries are created opportunistically as soon as their two parent services are done: `ec2-elb`, `ec2-auto-scaling` (43, 44), `lambda-cloudwatch` (30, 62), `vpc-network-firewall` (3, 91), `route53-dns-firewall` (45, 97), `iam-organizations` (0, 76), `iam-ec2` (0, 19), `iam-cloudformation` (0, 68), `rds-multi-az` (51), `backup-ec2-ebs-rds` (20, 25, 50), `ec2-image-builder-systems-manager` (21, 71).
+
+## Domain pages (`04-domains/`)
+
+Written once the services feeding a domain are done: Domain 1 after Phase 4, Domain 2 after Phase 5, Domain 3 after Phase 8, Domain 4 after Phase 9, Domain 5 after Phases 1 + 10.
+
+---
+
+# 12. WHY THERE ARE BOTH SERVICES AND CONCEPTS
 
 This distinction is fundamental.
 
@@ -888,7 +1069,7 @@ It should not become a service manual.
 
 ---
 
-# 12. CANONICAL KNOWLEDGE RULE
+# 13. CANONICAL KNOWLEDGE RULE
 
 Every major concept should have **one canonical source of truth** in the repository.
 
@@ -898,7 +1079,7 @@ For example:
 01-services/12-networking-content-delivery/01-vpc/
 ```
 
-is the canonical home for VPC and its networking components (subnets, route tables, VPC endpoints, flow logs, and the reachability analyzer). See section 21 for the full internal structure. Note: AWS's in-scope service list categorizes security groups, NACLs, NAT gateways, internet gateways, and egress-only internet gateways under Security, Identity, and Compliance, so those resources have their canonical home under `01-services/13-security-identity-compliance/` (see section 23).
+is the canonical home for VPC and its networking components (subnets, route tables, VPC endpoints, flow logs, and the reachability analyzer). See section 22 for the full internal structure. Note: AWS's in-scope service list categorizes security groups, NACLs, NAT gateways, internet gateways, and egress-only internet gateways under Security, Identity, and Compliance, so those resources have their canonical home under `01-services/13-security-identity-compliance/` (see section 24).
 
 **Canonical-home resolution rule:** a named AWS resource that you provision and operate (VPC, EC2, RDS, NAT gateway, security group, etc.) has its canonical home under `01-services/`. The `02-concepts/` layer holds only cross-cutting principles that are not tied to a single resource (CIDR/IP addressing, IPv4 vs IPv6, DNS, routing, encryption, high availability, elasticity, etc.). When a subject could be either, ask: *is this a resource I create in the console/API, or a principle that spans many resources?* Resources go to `01-services/`, principles go to `02-concepts/`.
 
@@ -938,7 +1119,7 @@ which explains:
 
 ---
 
-# 13. THE EC2 + VPC EXAMPLE
+# 14. THE EC2 + VPC EXAMPLE
 
 When documenting EC2, do not duplicate the entire VPC explanation.
 
@@ -984,7 +1165,7 @@ This creates **context without duplication**.
 
 ---
 
-# 14. DOMAIN DOCUMENTS ARE ALSO CONTEXTUAL
+# 15. DOMAIN DOCUMENTS ARE ALSO CONTEXTUAL
 
 The `04-domains/` directory should NOT duplicate service documentation.
 
@@ -1022,7 +1203,7 @@ Therefore the domain page should explain the **relationships among those concept
 
 ---
 
-# 15. RELATIONSHIP DOCUMENTS
+# 16. RELATIONSHIP DOCUMENTS
 
 `03-cross-service/` exists specifically for concepts that become meaningful only when two or more AWS services interact.
 
@@ -1067,7 +1248,7 @@ Do not repeat the entire underlying service documentation.
 
 ---
 
-# 16. AUTOMATIC REPOSITORY PLACEMENT
+# 17. AUTOMATIC REPOSITORY PLACEMENT
 
 For every new service/topic, determine its best location dynamically.
 
@@ -1174,7 +1355,7 @@ Canonical home:
 
 ---
 
-# 17. DO NOT CREATE DUPLICATE KNOWLEDGE
+# 18. DO NOT CREATE DUPLICATE KNOWLEDGE
 
 Before creating a new file, determine whether the concept already exists.
 
@@ -1194,7 +1375,7 @@ Do not recreate the same explanation.
 
 ---
 
-# 18. CREATE A NEW FILE WHEN THE CONTEXT IS ACTUALLY DIFFERENT
+# 19. CREATE A NEW FILE WHEN THE CONTEXT IS ACTUALLY DIFFERENT
 
 A separate document is justified when it explains a meaningful relationship or context.
 
@@ -1230,7 +1411,7 @@ These are not duplicates if they focus on the relationship rather than redefinin
 
 ---
 
-# 19. SERVICE DIRECTORY STRUCTURE
+# 20. SERVICE DIRECTORY STRUCTURE
 
 When creating a service, prefer this internal structure:
 
@@ -1271,7 +1452,7 @@ For complex services such as EC2, VPC, CloudWatch, IAM, S3, RDS, ECS, and EKS, u
 
 ---
 
-# 20. LARGE SERVICE RULE
+# 21. LARGE SERVICE RULE
 
 Some services are effectively entire ecosystems.
 
@@ -1314,7 +1495,7 @@ The same principle applies to VPC, CloudWatch, IAM, and other large services.
 
 ---
 
-# 21. VPC EXAMPLE STRUCTURE
+# 22. VPC EXAMPLE STRUCTURE
 
 VPC should be treated as a major knowledge area.
 
@@ -1365,7 +1546,7 @@ This is the architecture you should use throughout the repository.
 
 ---
 
-# 22. CERTIFICATION-FIRST KNOWLEDGE MAPPING
+# 23. CERTIFICATION-FIRST KNOWLEDGE MAPPING
 
 For every document, identify the relationship between:
 
@@ -1406,7 +1587,7 @@ The current SOA-C03 Domain 1 explicitly includes monitoring/logging configuratio
 
 ---
 
-# 23. SERVICE-CATEGORY PLACEMENT
+# 24. SERVICE-CATEGORY PLACEMENT
 
 For service placement, use the **current AWS SOA-C03 in-scope service categorization** as the default organizational taxonomy.
 
@@ -1435,7 +1616,7 @@ A service's **organizational home** and its **exam-domain relationships** are se
 
 ---
 
-# 24. SERVICE VS DOMAIN
+# 25. SERVICE VS DOMAIN
 
 This distinction is mandatory.
 
@@ -1467,7 +1648,7 @@ Instead link EC2 from those domains.
 
 ---
 
-# 25. DOMAIN PAGES SHOULD BE KNOWLEDGE MAPS
+# 26. DOMAIN PAGES SHOULD BE KNOWLEDGE MAPS
 
 Each domain page should answer:
 
@@ -1509,7 +1690,7 @@ This corresponds closely to the kinds of capabilities AWS identifies in current 
 
 ---
 
-# 26. CROSS-SERVICE KNOWLEDGE IS FIRST-CLASS
+# 27. CROSS-SERVICE KNOWLEDGE IS FIRST-CLASS
 
 Treat cross-service knowledge as a first-class part of the certification.
 
@@ -1563,7 +1744,7 @@ Document these relationships explicitly.
 
 ---
 
-# 27. TECHNICAL DOCUMENTATION STANDARD
+# 28. TECHNICAL DOCUMENTATION STANDARD
 
 Write like a senior AWS CloudOps engineer writing documentation for another engineer.
 
@@ -1623,7 +1804,7 @@ Prefer specific nouns and active verbs over "very important," "significant impac
 
 #### Structure and punctuation (allowed, but not as a crutch)
 
-Tables, headings, bullet lists, and Mermaid diagrams are required in this repository (see sections 28–31) and are not AI tells in themselves. Avoid the *voice-level* tells that ride along with them: forced lists of exactly three, a bold lead-in on every bullet, signposting that restates the obvious ("First, ... Next, ... Finally, ..."), and conclusions that merely restate the intro. Vary sentence length; follow a long technical sentence with a short one. Limit em dashes to at most two per sentence and avoid colon-heavy grocery lists.
+Tables, headings, bullet lists, and Mermaid diagrams are required in this repository (see sections 29–32) and are not AI tells in themselves. Avoid the *voice-level* tells that ride along with them: forced lists of exactly three, a bold lead-in on every bullet, signposting that restates the obvious ("First, ... Next, ... Finally, ..."), and conclusions that merely restate the intro. Vary sentence length; follow a long technical sentence with a short one. Limit em dashes to at most two per sentence and avoid colon-heavy grocery lists.
 
 #### Notes and callouts
 
@@ -1643,7 +1824,7 @@ Apply this same standard to every section: prose must teach the full concept, no
 
 ---
 
-# 28. MANDATORY DOCUMENTATION CONTENT
+# 29. MANDATORY DOCUMENTATION CONTENT
 
 For every service/topic, investigate the following concepts where relevant:
 
@@ -1681,7 +1862,7 @@ Only include sections that are technically relevant.
 
 ---
 
-# 29. DIAGRAM STRATEGY
+# 30. DIAGRAM STRATEGY
 
 Visual documentation is a required part of this project.
 
@@ -1707,7 +1888,7 @@ Every diagram must explain something.
 
 ---
 
-# 30. OFFICIAL IMAGE RESEARCH
+# 31. OFFICIAL IMAGE RESEARCH
 
 When relevant, actively search for official diagrams in:
 
@@ -1727,7 +1908,7 @@ For external diagrams:
 
 ---
 
-# 31. MERMAID DIAGRAMS
+# 32. MERMAID DIAGRAMS
 
 When no useful official image exists, create an original Mermaid diagram.
 
@@ -1768,7 +1949,7 @@ All Mermaid syntax must be valid.
 
 ---
 
-# 32. IMAGE AND DIAGRAM REFERENCES
+# 33. IMAGE AND DIAGRAM REFERENCES
 
 Whenever an external image/diagram is used, include:
 
@@ -1782,7 +1963,7 @@ When a Mermaid diagram is original, label it appropriately.
 
 ---
 
-# 33. TROUBLESHOOTING FIRST-PRINCIPLES
+# 34. TROUBLESHOOTING FIRST-PRINCIPLES
 
 Troubleshooting content should teach a methodology.
 
@@ -1818,7 +1999,7 @@ Teach the diagnostic reasoning.
 
 ---
 
-# 34. EXAM SCENARIO REASONING
+# 35. EXAM SCENARIO REASONING
 
 For important topics, create original scenarios.
 
@@ -1851,7 +2032,7 @@ Focus on questions involving:
 
 ---
 
-# 35. IMPORTANT COMPARISONS
+# 36. IMPORTANT COMPARISONS
 
 Every large service should contain relevant comparisons.
 
@@ -1878,7 +2059,7 @@ Create comparisons where confusion could affect an operational decision or exam 
 
 ---
 
-# 36. EXAM TRAPS
+# 37. EXAM TRAPS
 
 For every major service, investigate common misunderstandings.
 
@@ -1900,7 +2081,7 @@ Community research is especially valuable here because it can reveal recurring m
 
 ---
 
-# 37. NUMBERS AND DEFAULTS
+# 38. NUMBERS AND DEFAULTS
 
 Create a dedicated section for:
 
@@ -1932,7 +2113,7 @@ Never invent values.
 
 ---
 
-# 38. PRICING
+# 39. PRICING
 
 Do not rely on model memory for pricing.
 
@@ -1950,7 +2131,7 @@ When a price is likely to change, explain the **pricing mechanism** instead of h
 
 ---
 
-# 39. COMMUNITY RESEARCH
+# 40. COMMUNITY RESEARCH
 
 Community research should answer questions such as:
 
@@ -1972,7 +2153,7 @@ Do not turn Reddit or other communities into authoritative AWS documentation.
 
 ---
 
-# 40. RELATIONSHIP DISCOVERY
+# 41. RELATIONSHIP DISCOVERY
 
 For every service, explicitly discover:
 
@@ -2016,7 +2197,7 @@ This relationship map should inform `03-cross-service/`.
 
 ---
 
-# 41. KNOWLEDGE GRAPH LINKING
+# 42. KNOWLEDGE GRAPH LINKING
 
 Where appropriate, include Markdown links between documents.
 
@@ -2037,7 +2218,7 @@ Do not create broken links.
 
 ---
 
-# 42. FRONT MATTER
+# 43. FRONT MATTER
 
 For substantial documents, use front matter when appropriate:
 
@@ -2064,7 +2245,7 @@ Do not invent mappings.
 
 ---
 
-# 43. CANONICAL FLAG
+# 44. CANONICAL FLAG
 
 A document may be marked:
 
@@ -2084,7 +2265,7 @@ or omit the field when front matter is unnecessary.
 
 ---
 
-# 44. DOCUMENT DEPENDENCIES
+# 45. DOCUMENT DEPENDENCIES
 
 When a document requires another concept to be understood, explicitly reference it.
 
@@ -2108,7 +2289,7 @@ This allows the repository to become an ordered learning graph without forcing e
 
 ---
 
-# 45. LEARNING ORDER VS FILE LOCATION
+# 46. LEARNING ORDER VS FILE LOCATION
 
 Do not confuse repository organization with study order.
 
@@ -2139,7 +2320,7 @@ Prerequisites:
 
 ---
 
-# 46. DOMAIN CONTEXT SHOULD NOT DUPLICATE SERVICE CONTENT
+# 47. DOMAIN CONTEXT SHOULD NOT DUPLICATE SERVICE CONTENT
 
 For example:
 
@@ -2170,7 +2351,7 @@ Do not copy the entire VPC explanation into Domain 5.
 
 ---
 
-# 47. SCENARIO LIBRARY
+# 48. SCENARIO LIBRARY
 
 The repository should eventually contain a scenario library organized independently from services.
 
@@ -2200,7 +2381,7 @@ This is important because operational problems are often **multi-service problem
 
 ---
 
-# 48. HANDS-ON LAB LIBRARY
+# 49. HANDS-ON LAB LIBRARY
 
 Labs should similarly be independent from service documentation.
 
@@ -2228,7 +2409,7 @@ Each lab should identify:
 
 ---
 
-# 49. QUICK REVIEW SYSTEM
+# 50. QUICK REVIEW SYSTEM
 
 Every major service should have a quick-review file.
 
@@ -2257,7 +2438,7 @@ Do not copy the entire documentation.
 
 ---
 
-# 50. MASTER CHEATSHEETS
+# 51. MASTER CHEATSHEETS
 
 The `07-cheatsheets/` directory should eventually provide cross-service revision material.
 
@@ -2279,7 +2460,7 @@ These should reference canonical service/concept documentation.
 
 ---
 
-# 51. README AND NAVIGATION
+# 52. README AND NAVIGATION
 
 Maintain a useful root `README.md`.
 
@@ -2305,7 +2486,7 @@ to track which services/domains have been researched.
 
 ---
 
-# 52. AUTOMATIC SERVICE INVENTORY
+# 53. AUTOMATIC SERVICE INVENTORY
 
 When generating or updating repository metadata, compare the current AWS in-scope service list with the repository.
 
@@ -2323,7 +2504,7 @@ AWS explicitly states the in-scope service list can change.
 
 ---
 
-# 53. CURRENT EXAM CHANGES
+# 54. CURRENT EXAM CHANGES
 
 When researching the certification, pay attention to changes introduced by SOA-C03.
 
@@ -2340,7 +2521,7 @@ Do not blindly recycle old SysOps study material.
 
 ---
 
-# 54. SECURITY DOMAIN
+# 55. SECURITY DOMAIN
 
 When a service touches security, map it to concepts such as:
 
@@ -2366,7 +2547,7 @@ Current SOA-C03 Domain 4 specifically includes IAM implementation, access troubl
 
 ---
 
-# 55. RELIABILITY DOMAIN
+# 56. RELIABILITY DOMAIN
 
 When a service touches reliability, investigate:
 
@@ -2391,7 +2572,7 @@ These concepts are directly represented in the current Domain 2 tasks and skills
 
 ---
 
-# 56. DEPLOYMENT AND AUTOMATION DOMAIN
+# 57. DEPLOYMENT AND AUTOMATION DOMAIN
 
 When a service touches deployment, investigate:
 
@@ -2411,7 +2592,7 @@ Current Domain 3 explicitly includes provisioning/maintaining cloud resources, C
 
 ---
 
-# 57. NETWORKING DOMAIN
+# 58. NETWORKING DOMAIN
 
 When a service touches networking, investigate:
 
@@ -2439,7 +2620,7 @@ The current Domain 5 explicitly includes these areas and network troubleshooting
 
 ---
 
-# 58. MONITORING DOMAIN
+# 59. MONITORING DOMAIN
 
 When a service touches monitoring, investigate:
 
@@ -2463,7 +2644,7 @@ Current SOA-C03 Domain 1 specifically includes these operational capabilities.
 
 ---
 
-# 59. DO NOT FORCE EVERY SECTION
+# 60. DO NOT FORCE EVERY SECTION
 
 The repository architecture is standardized.
 
@@ -2479,7 +2660,7 @@ Use the smallest structure that preserves complete and useful knowledge.
 
 ---
 
-# 60. RESEARCH BEFORE FILE CREATION
+# 61. RESEARCH BEFORE FILE CREATION
 
 Before creating files, determine:
 
@@ -2503,7 +2684,7 @@ Only then decide which files to create.
 
 ---
 
-# 61. RESEARCH COMPLETENESS CHECK
+# 62. RESEARCH COMPLETENESS CHECK
 
 Before finalizing documentation, verify:
 
@@ -2565,7 +2746,7 @@ Only after this process should the final documentation be generated.
 
 ---
 
-# 62. FINAL DOCUMENT QUALITY STANDARD
+# 63. FINAL DOCUMENT QUALITY STANDARD
 
 The final result should feel like:
 
@@ -2584,7 +2765,7 @@ The repository should progressively become a coherent technical reference.
 
 ---
 
-# 63. FINAL RESEARCH PRINCIPLE
+# 64. FINAL RESEARCH PRINCIPLE
 
 Always remember:
 
@@ -2592,7 +2773,7 @@ Always remember:
 
 ---
 
-# 64. INPUT
+# 65. INPUT
 
 I will provide one subject at a time:
 
@@ -2628,7 +2809,7 @@ RELATIONSHIP: EC2 + VPC
 
 ---
 
-# 65. EXPECTED BEHAVIOR AFTER INPUT
+# 66. EXPECTED BEHAVIOR AFTER INPUT
 
 When I provide the subject:
 
@@ -2686,7 +2867,7 @@ The repository structure should remain consistent.
 
 ---
 
-# 66. FINAL PRINCIPLE
+# 67. FINAL PRINCIPLE
 
 **Research broadly.**
 
