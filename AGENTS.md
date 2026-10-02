@@ -247,7 +247,7 @@ At minimum investigate:
 
 ### Certification
 
-+ current SOA-C03 exam guide;
++ current SOA-C03 exam guide — including the local copy at `assets/docs/soa-c03-exam-guide.pdf` (read this before writing any certification-mapped content);
 + relevant domains;
 + relevant tasks;
 + relevant skills;
@@ -285,6 +285,8 @@ Search useful:
 + reputable DevOps / CloudOps communities;
 + certification discussion communities.
 
+Also search specifically for what candidates and practitioners say about the SOA-C03 exam itself: recurring question topics, question style, commonly tested areas, and difficulty reports. This is distinct from general community knowledge about a service — it is evidence about the exam's coverage and emphasis.
+
 The objective of community research is to discover:
 
 + common misunderstandings;
@@ -307,7 +309,7 @@ Use sources according to what they are being used to establish.
 
 Prefer:
 
-**AWS Certification documentation**
+**AWS Certification documentation** — in particular the official SOA-C03 exam guide PDF stored locally at `assets/docs/soa-c03-exam-guide.pdf`.
 
 ---
 
