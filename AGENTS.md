@@ -2218,50 +2218,22 @@ Do not create broken links.
 
 ---
 
-# 43. FRONT MATTER
+# 43. NO FRONT MATTER
 
-For substantial documents, use front matter when appropriate:
+Do not add YAML front matter to any document. Every document starts directly with its `# Title` heading — no `---` metadata block at the top.
 
-```yaml
----
-title: Amazon EC2
-type: service
-aws_category: compute
-soa_c03_relevance:
-  - domain-1
-  - domain-2
-  - domain-3
-  - domain-4
-  - domain-5
-canonical: true
-status: active
-last_verified: YYYY-MM-DD
----
-```
+The information front matter would have carried is expressed elsewhere, so nothing is lost:
 
-Use only verified domain mappings.
-
-Do not invent mappings.
+- **Topic identity** — the title heading and the document's position in the numbered directory tree.
+- **AWS category** — the category folder the service lives in under `01-services/` (e.g. `13-security-identity-compliance/`).
+- **SOA-C03 relevance** — stated in prose in the document's "SOA-C03 relevance" section.
+- **Canonical status** — established by file location (§13), never by a `canonical:` flag.
 
 ---
 
-# 44. CANONICAL FLAG
+# 44. CANONICAL SOURCE OF TRUTH
 
-A document may be marked:
-
-```yaml
-canonical: true
-```
-
-only when it is the primary source of truth for that topic in the repository.
-
-Relationship documents should normally be:
-
-```yaml
-canonical: false
-```
-
-or omit the field when front matter is unnecessary.
+A topic has exactly one canonical home (§13). Do not mark it with a flag; the numbered path under `01-services/` or `02-concepts/` is the marker. Relationship documents under `03-cross-service/` are context, not canonical homes.
 
 ---
 

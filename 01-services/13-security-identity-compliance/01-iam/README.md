@@ -1,14 +1,3 @@
----
-title: AWS Identity and Access Management (IAM)
-type: service
-aws_category: 13-security-identity-compliance
-soa_c03_relevance:
-  - domain-4
-canonical: true
-status: active
-last_verified: 2026-10-02
----
-
 # AWS Identity and Access Management (IAM)
 
 IAM is the AWS service that controls *who* (identity) can do *what* (permission) on *which* resources. Every other service in this repository assumes IAM in some form: an EC2 instance assumes a role to read an S3 bucket, a CloudFormation stack assumes a role to create resources, a user assumes a role to reach a database. It is the dependency that precedes everything else, which is why it is documented first.
