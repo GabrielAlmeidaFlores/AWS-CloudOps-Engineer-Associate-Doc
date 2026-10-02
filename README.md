@@ -36,13 +36,14 @@ The goal is to understand **how AWS services actually behave** and **how to reas
 
 > The in-scope AWS service list is non-exhaustive and changes over time. Never treat a static list as the complete exam definition.
 
+**Exam guide:** [AWS Certified CloudOps Engineer – Associate (SOA-C03), official exam guide (PDF)](assets/docs/soa-c03-exam-guide.pdf) — scope, tasks, skills, and the in-scope service list. This is the authoritative reference for certification scope; it is not rewritten in the repository.
+
 ---
 
 ## 📁 Repository structure
 
 ```
 aws-cloudops-soa-c03/
-├── 00-certification/     Exam guide, domains, tasks, skills, in/out-of-scope services
 ├── 01-services/          Canonical documentation for individual AWS services
 ├── 02-concepts/          Cross-cutting principles (networking, security, reliability…)
 ├── 03-cross-service/     Service + service relationship documents
@@ -51,11 +52,11 @@ aws-cloudops-soa-c03/
 ├── 06-labs/              Hands-on exercises and walkthroughs
 ├── 07-cheatsheets/       Quick-review material for last-minute revision
 ├── 08-reference/         Whitepapers, prescriptive guidance, glossary
-├── assets/               Images, diagrams, and Mermaid sources
+├── assets/               Certification badge, exam guide PDF, images, diagrams
 └── 99-archive/           Deprecated, historical, and SOA-C02 material
 ```
 
-Folders and files carry numeric prefixes that encode the read sequence (e.g. `01-services/13-security-identity-compliance/01-iam/`). `README.md` is the only file without a prefix — it is the entry point of its folder.
+Folders and files carry numeric prefixes that encode the read sequence (e.g. `01-services/13-security-identity-compliance/01-iam/`). `README.md` is the only file without a prefix — it is the entry point of its folder. Directories are created progressively as each topic is documented.
 
 ### How the layers relate
 
@@ -70,13 +71,25 @@ Each major concept has **one canonical home**. Related documents link to it rath
 
 ## 🧭 How to use this repository
 
-1. Start with [`00-certification/`](00-certification/) for the exam overview and study strategy.
-2. Study a service or concept from `01-services/` or `02-concepts/`.
-3. Reinforce it through the corresponding `03-cross-service/` relationship and `04-domains/` context.
+1. Read the [SOA-C03 exam guide](assets/docs/soa-c03-exam-guide.pdf) for scope, domains, tasks, and skills.
+2. Study a topic from [`01-services/`](01-services/) (a service) or [`02-concepts/`](02-concepts/) (a principle).
+3. Reinforce it through the matching `03-cross-service/` relationship and `04-domains/` context.
 4. Test your reasoning with `05-scenarios/` and build muscle memory in `06-labs/`.
 5. Before the exam, review with `07-cheatsheets/`.
 
 The complete research, architecture, and writing methodology is defined in [`AGENTS.md`](AGENTS.md).
+
+---
+
+## 📈 Progress
+
+Documentation proceeds one topic at a time, following the [study roadmap in `AGENTS.md`](AGENTS.md) (§11).
+
+| Status | Topic | Location |
+|--------|-------|----------|
+| ✅ | IAM | [`01-services/13-security-identity-compliance/01-iam/`](01-services/13-security-identity-compliance/01-iam/) |
+| ✅ | IP addressing / CIDR | [`02-concepts/01-networking/01-ip-addressing/`](02-concepts/01-networking/01-ip-addressing/) |
+| ⬜ | IPv4 vs IPv6 *(next)* | `02-concepts/01-networking/02-ipv4-ipv6/` |
 
 ---
 
