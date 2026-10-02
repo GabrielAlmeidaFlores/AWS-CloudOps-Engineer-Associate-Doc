@@ -43,10 +43,10 @@ The goal is to understand **how AWS services actually behave** and **how to reas
 ```
 aws-cloudops-soa-c03/
 ├── 00-certification/     Exam guide, domains, tasks, skills, in/out-of-scope services
-├── 01-domains/           Knowledge maps for the five exam domains
-├── 02-services/          Canonical documentation for individual AWS services
-├── 03-concepts/          Cross-cutting principles (networking, security, reliability…)
-├── 04-cross-service/     Service + service relationship documents
+├── 01-services/          Canonical documentation for individual AWS services
+├── 02-concepts/          Cross-cutting principles (networking, security, reliability…)
+├── 03-cross-service/     Service + service relationship documents
+├── 04-domains/           Knowledge maps for the five exam domains
 ├── 05-scenarios/         Original scenario-based reasoning exercises
 ├── 06-labs/              Hands-on exercises and walkthroughs
 ├── 07-cheatsheets/       Quick-review material for last-minute revision
@@ -55,12 +55,14 @@ aws-cloudops-soa-c03/
 └── 99-archive/           Deprecated, historical, and SOA-C02 material
 ```
 
+Folders and files carry numeric prefixes that encode the read sequence (e.g. `01-services/13-security-identity-compliance/01-iam/`). `README.md` is the only file without a prefix — it is the entry point of its folder.
+
 ### How the layers relate
 
-- **`02-services/`** answers *"What is this AWS service and how do I operate it?"*
-- **`03-concepts/`** answers *"What is this fundamental CloudOps principle across AWS?"*
-- **`04-cross-service/`** answers *"What happens when two or more services interact?"*
-- **`01-domains/`** maps that knowledge onto the exam's tasks and skills.
+- **`01-services/`** answers *"What is this AWS service and how do I operate it?"*
+- **`02-concepts/`** answers *"What is this fundamental CloudOps principle across AWS?"*
+- **`03-cross-service/`** answers *"What happens when two or more services interact?"*
+- **`04-domains/`** maps that knowledge onto the exam's tasks and skills.
 
 Each major concept has **one canonical home**. Related documents link to it rather than duplicating it.
 
@@ -69,8 +71,8 @@ Each major concept has **one canonical home**. Related documents link to it rath
 ## 🧭 How to use this repository
 
 1. Start with [`00-certification/`](00-certification/) for the exam overview and study strategy.
-2. Study a service or concept from `02-services/` or `03-concepts/`.
-3. Reinforce it through the corresponding `04-cross-service/` relationship and `01-domains/` context.
+2. Study a service or concept from `01-services/` or `02-concepts/`.
+3. Reinforce it through the corresponding `03-cross-service/` relationship and `04-domains/` context.
 4. Test your reasoning with `05-scenarios/` and build muscle memory in `06-labs/`.
 5. Before the exam, review with `07-cheatsheets/`.
 

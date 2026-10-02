@@ -511,313 +511,314 @@ Use this as the default repository architecture:
 aws-cloudops-soa-c03/
 │
 ├── README.md
+├── AGENTS.md
 ├── ROADMAP.md
 ├── PROGRESS.md
 │
 ├── 00-certification/
-│   ├── soa-c03-overview.md
-│   ├── exam-domains.md
-│   ├── exam-tasks.md
-│   ├── exam-skills.md
-│   ├── in-scope-services.md
-│   ├── out-of-scope-services.md
-│   ├── soa-c02-vs-soa-c03.md
-│   └── exam-strategy.md
+│   ├── 01-soa-c03-overview.md
+│   ├── 02-exam-domains.md
+│   ├── 03-exam-tasks.md
+│   ├── 04-exam-skills.md
+│   ├── 05-in-scope-services.md
+│   ├── 06-out-of-scope-services.md
+│   ├── 07-soa-c02-vs-soa-c03.md
+│   └── 08-exam-strategy.md
 │
-├── 01-domains/
+├── 01-services/
+│   │
+│   ├── 01-analytics/
+│   │   ├── 01-athena/
+│   │   └── 02-data-firehose/
+│   │
+│   ├── 02-application-integration/
+│   │   ├── 01-eventbridge/
+│   │   ├── 02-sns/
+│   │   ├── 03-sqs/
+│   │   └── 04-step-functions/
+│   │
+│   ├── 03-business-applications/
+│   │   └── 01-ses/
+│   │
+│   ├── 04-cloud-financial-management/
+│   │   ├── 01-cost-explorer/
+│   │   ├── 02-cost-and-usage-reports/
+│   │   └── 03-savings-plans/
+│   │
+│   ├── 05-compute/
+│   │   ├── 01-ec2/
+│   │   ├── 02-ec2-image-builder/
+│   │   └── 03-lambda/
+│   │
+│   ├── 06-containers/
+│   │   ├── 01-ecr/
+│   │   ├── 02-ecs/
+│   │   └── 03-eks/
+│   │
+│   ├── 07-database/
+│   │   ├── 01-aurora/
+│   │   ├── 02-aurora-serverless-v2/
+│   │   ├── 03-dynamodb/
+│   │   ├── 04-dax/
+│   │   ├── 05-elasticache/
+│   │   ├── 06-rds/
+│   │   └── 07-rds-proxy/
+│   │
+│   ├── 08-developer-tools/
+│   │   ├── 01-x-ray/
+│   │   └── 02-kiro/
+│   │
+│   ├── 09-machine-learning-ai/
+│   │   └── 01-bedrock/
+│   │
+│   ├── 10-management-governance/
+│   │   ├── 01-auto-scaling/
+│   │   ├── 02-cloudformation/
+│   │   ├── 03-cdk/
+│   │   ├── 04-cloudtrail/
+│   │   ├── 05-cloudwatch/
+│   │   ├── 06-compute-optimizer/
+│   │   ├── 07-config/
+│   │   ├── 08-control-tower/
+│   │   ├── 09-health-dashboard/
+│   │   ├── 10-managed-grafana/
+│   │   ├── 11-managed-prometheus/
+│   │   ├── 12-organizations/
+│   │   ├── 13-ram/
+│   │   ├── 14-service-catalog/
+│   │   ├── 15-systems-manager/
+│   │   ├── 16-trusted-advisor/
+│   │   └── 17-ipam/
+│   │
+│   ├── 11-migration-transfer/
+│   │   └── 01-datasync/
+│   │
+│   ├── 12-networking-content-delivery/
+│   │   ├── 01-vpc/
+│   │   ├── 02-vpc-endpoints/
+│   │   ├── 03-vpc-peering/
+│   │   ├── 04-transit-gateway/
+│   │   ├── 05-private-link/
+│   │   ├── 06-client-vpn/
+│   │   ├── 07-site-to-site-vpn/
+│   │   ├── 08-route53/
+│   │   ├── 09-route53-resolver-dns-firewall/
+│   │   ├── 10-cloudfront/
+│   │   ├── 11-global-accelerator/
+│   │   ├── 12-elastic-ip/
+│   │   ├── 13-vpc-flow-logs/
+│   │   └── 14-vpc-reachability-analyzer/
+│   │
+│   ├── 13-security-identity-compliance/
+│   │   ├── 01-iam/
+│   │   ├── 02-iam-access-analyzer/
+│   │   ├── 03-iam-identity-center/
+│   │   ├── 04-kms/
+│   │   ├── 05-acm/
+│   │   ├── 06-guardduty/
+│   │   ├── 07-inspector/
+│   │   ├── 08-security-hub/
+│   │   ├── 09-secrets-manager/
+│   │   ├── 10-network-firewall/
+│   │   ├── 11-waf/
+│   │   ├── 12-shield/
+│   │   ├── 13-nacls/
+│   │   ├── 14-security-groups/
+│   │   ├── 15-nat-gateway/
+│   │   ├── 16-internet-gateway/
+│   │   └── 17-egress-only-internet-gateway/
+│   │
+│   └── 14-storage/
+│       ├── 01-s3/
+│       ├── 02-ebs/
+│       ├── 03-efs/
+│       ├── 04-fsx/
+│       ├── 05-backup/
+│       └── 06-storage-gateway/
+│
+├── 02-concepts/
+│   │
+│   ├── 01-networking/
+│   │   ├── 01-ip-addressing/
+│   │   ├── 02-ipv4-ipv6/
+│   │   ├── 03-dns/
+│   │   ├── 04-routing/
+│   │   ├── 05-private-connectivity/
+│   │   ├── 06-hybrid-connectivity/
+│   │   └── 07-network-troubleshooting/
+│   │
+│   ├── 02-security/
+│   │   ├── 01-iam/
+│   │   ├── 02-policies/
+│   │   ├── 03-roles/
+│   │   ├── 04-resource-policies/
+│   │   ├── 05-least-privilege/
+│   │   ├── 06-encryption/
+│   │   ├── 07-kms/
+│   │   ├── 08-certificates/
+│   │   ├── 09-secrets/
+│   │   └── 10-compliance/
+│   │
+│   ├── 03-observability/
+│   │   ├── 01-metrics/
+│   │   ├── 02-logs/
+│   │   ├── 03-events/
+│   │   ├── 04-alarms/
+│   │   ├── 05-dashboards/
+│   │   ├── 06-tracing/
+│   │   └── 07-remediation/
+│   │
+│   ├── 04-reliability/
+│   │   ├── 01-high-availability/
+│   │   ├── 02-fault-tolerance/
+│   │   ├── 03-elasticity/
+│   │   ├── 04-scalability/
+│   │   ├── 05-backups/
+│   │   ├── 06-disaster-recovery/
+│   │   ├── 07-rto-rpo/
+│   │   └── 08-failover/
+│   │
+│   ├── 05-automation/
+│   │   ├── 01-infrastructure-as-code/
+│   │   ├── 02-cloudformation/
+│   │   ├── 03-cdk/
+│   │   ├── 04-systems-manager/
+│   │   ├── 05-event-driven-automation/
+│   │   └── 06-operational-automation/
+│   │
+│   ├── 06-performance/
+│   │   ├── 01-compute/
+│   │   ├── 02-storage/
+│   │   ├── 03-databases/
+│   │   ├── 04-caching/
+│   │   └── 05-network-performance/
+│   │
+│   └── 07-cost/
+│       ├── 01-pricing-models/
+│       ├── 02-cost-optimization/
+│       ├── 03-network-costs/
+│       ├── 04-storage-costs/
+│       └── 05-compute-costs/
+│
+├── 03-cross-service/
+│   │
+│   ├── 01-compute-networking/
+│   │   ├── 01-ec2-vpc/
+│   │   ├── 02-ec2-security-groups/
+│   │   ├── 03-ec2-elb/
+│   │   ├── 04-ec2-auto-scaling/
+│   │   └── 05-lambda-vpc/
+│   │
+│   ├── 02-compute-monitoring/
+│   │   ├── 01-ec2-cloudwatch/
+│   │   ├── 02-ecs-cloudwatch/
+│   │   ├── 03-eks-cloudwatch/
+│   │   └── 04-lambda-cloudwatch/
+│   │
+│   ├── 03-networking-security/
+│   │   ├── 01-vpc-security-groups-nacl/
+│   │   ├── 02-vpc-network-firewall/
+│   │   ├── 03-cloudfront-waf-shield/
+│   │   └── 04-route53-dns-firewall/
+│   │
+│   ├── 04-identity-security/
+│   │   ├── 01-iam-kms/
+│   │   ├── 02-iam-organizations/
+│   │   ├── 03-iam-ec2/
+│   │   └── 04-iam-cloudformation/
+│   │
+│   ├── 05-monitoring-automation/
+│   │   ├── 01-cloudwatch-eventbridge/
+│   │   ├── 02-cloudwatch-sns/
+│   │   ├── 03-cloudwatch-systems-manager/
+│   │   └── 04-eventbridge-lambda/
+│   │
+│   ├── 06-reliability/
+│   │   ├── 01-ec2-auto-scaling-elb/
+│   │   ├── 02-rds-multi-az/
+│   │   ├── 03-backup-ec2-ebs-rds/
+│   │   └── 04-route53-failover/
+│   │
+│   └── 07-deployment-automation/
+│       ├── 01-cloudformation-iam/
+│       ├── 02-cloudformation-stacksets-organizations/
+│       ├── 03-systems-manager-eventbridge/
+│       └── 04-ec2-image-builder-systems-manager/
+│
+├── 04-domains/
 │   │
 │   ├── 01-monitoring-logging-analysis-remediation-performance/
 │   │   ├── README.md
-│   │   ├── task-1-1-monitoring-logging.md
-│   │   ├── task-1-2-remediation.md
-│   │   ├── task-1-3-performance.md
+│   │   ├── 01-task-1-1-monitoring-logging.md
+│   │   ├── 02-task-1-2-remediation.md
+│   │   ├── 03-task-1-3-performance.md
 │   │   └── contexts/
 │   │
 │   ├── 02-reliability-business-continuity/
 │   │   ├── README.md
-│   │   ├── task-2-1-scalability-elasticity.md
-│   │   ├── task-2-2-high-availability-resilience.md
-│   │   ├── task-2-3-backup-restore.md
+│   │   ├── 01-task-2-1-scalability-elasticity.md
+│   │   ├── 02-task-2-2-high-availability-resilience.md
+│   │   ├── 03-task-2-3-backup-restore.md
 │   │   └── contexts/
 │   │
 │   ├── 03-deployment-provisioning-automation/
 │   │   ├── README.md
-│   │   ├── task-3-1-provision-maintain.md
-│   │   ├── task-3-2-automation.md
+│   │   ├── 01-task-3-1-provision-maintain.md
+│   │   ├── 02-task-3-2-automation.md
 │   │   └── contexts/
 │   │
 │   ├── 04-security-compliance/
 │   │   ├── README.md
-│   │   ├── task-4-1-security-compliance-tools.md
-│   │   ├── task-4-2-data-infrastructure-protection.md
+│   │   ├── 01-task-4-1-security-compliance-tools.md
+│   │   ├── 02-task-4-2-data-infrastructure-protection.md
 │   │   └── contexts/
 │   │
 │   └── 05-networking-content-delivery/
 │       ├── README.md
-│       ├── task-5-1-networking-connectivity.md
-│       ├── task-5-2-dns-content-delivery.md
-│       ├── task-5-3-network-troubleshooting.md
+│       ├── 01-task-5-1-networking-connectivity.md
+│       ├── 02-task-5-2-dns-content-delivery.md
+│       ├── 03-task-5-3-network-troubleshooting.md
 │       └── contexts/
 │
-├── 02-services/
-│   │
-│   ├── analytics/
-│   │   ├── athena/
-│   │   └── data-firehose/
-│   │
-│   ├── application-integration/
-│   │   ├── eventbridge/
-│   │   ├── sns/
-│   │   ├── sqs/
-│   │   └── step-functions/
-│   │
-│   ├── business-applications/
-│   │   └── ses/
-│   │
-│   ├── cloud-financial-management/
-│   │   ├── cost-explorer/
-│   │   ├── cost-and-usage-reports/
-│   │   └── savings-plans/
-│   │
-│   ├── compute/
-│   │   ├── ec2/
-│   │   ├── ec2-image-builder/
-│   │   └── lambda/
-│   │
-│   ├── containers/
-│   │   ├── ecr/
-│   │   ├── ecs/
-│   │   └── eks/
-│   │
-│   ├── database/
-│   │   ├── aurora/
-│   │   ├── aurora-serverless-v2/
-│   │   ├── dynamodb/
-│   │   ├── dax/
-│   │   ├── elasticache/
-│   │   ├── rds/
-│   │   └── rds-proxy/
-│   │
-│   ├── developer-tools/
-│   │   ├── x-ray/
-│   │   └── kiro/
-│   │
-│   ├── machine-learning-ai/
-│   │   └── bedrock/
-│   │
-│   ├── management-governance/
-│   │   ├── auto-scaling/
-│   │   ├── cloudformation/
-│   │   ├── cdk/
-│   │   ├── cloudtrail/
-│   │   ├── cloudwatch/
-│   │   ├── compute-optimizer/
-│   │   ├── config/
-│   │   ├── control-tower/
-│   │   ├── health-dashboard/
-│   │   ├── managed-grafana/
-│   │   ├── managed-prometheus/
-│   │   ├── organizations/
-│   │   ├── ram/
-│   │   ├── service-catalog/
-│   │   ├── systems-manager/
-│   │   ├── trusted-advisor/
-│   │   └── ipam/
-│   │
-│   ├── migration-transfer/
-│   │   └── datasync/
-│   │
-│   ├── networking-content-delivery/
-│   │   ├── vpc/
-│   │   ├── vpc-endpoints/
-│   │   ├── vpc-peering/
-│   │   ├── transit-gateway/
-│   │   ├── private-link/
-│   │   ├── client-vpn/
-│   │   ├── site-to-site-vpn/
-│   │   ├── route53/
-│   │   ├── route53-resolver-dns-firewall/
-│   │   ├── cloudfront/
-│   │   ├── global-accelerator/
-│   │   ├── elastic-ip/
-│   │   ├── vpc-flow-logs/
-│   │   └── vpc-reachability-analyzer/
-│   │
-│   ├── security-identity-compliance/
-│   │   ├── iam/
-│   │   ├── iam-access-analyzer/
-│   │   ├── iam-identity-center/
-│   │   ├── kms/
-│   │   ├── acm/
-│   │   ├── guardduty/
-│   │   ├── inspector/
-│   │   ├── security-hub/
-│   │   ├── secrets-manager/
-│   │   ├── network-firewall/
-│   │   ├── waf/
-│   │   ├── shield/
-│   │   ├── nacls/
-│   │   ├── security-groups/
-│   │   ├── nat-gateway/
-│   │   ├── internet-gateway/
-│   │   └── egress-only-internet-gateway/
-│   │
-│   └── storage/
-│       ├── s3/
-│       ├── ebs/
-│       ├── efs/
-│       ├── fsx/
-│       ├── backup/
-│       └── storage-gateway/
-│
-├── 03-concepts/
-│   │
-│   ├── networking/
-│   │   ├── ip-addressing/
-│   │   ├── ipv4-ipv6/
-│   │   ├── dns/
-│   │   ├── routing/
-│   │   ├── private-connectivity/
-│   │   ├── hybrid-connectivity/
-│   │   └── network-troubleshooting/
-│   │
-│   ├── security/
-│   │   ├── iam/
-│   │   ├── policies/
-│   │   ├── roles/
-│   │   ├── resource-policies/
-│   │   ├── least-privilege/
-│   │   ├── encryption/
-│   │   ├── kms/
-│   │   ├── certificates/
-│   │   ├── secrets/
-│   │   └── compliance/
-│   │
-│   ├── observability/
-│   │   ├── metrics/
-│   │   ├── logs/
-│   │   ├── events/
-│   │   ├── alarms/
-│   │   ├── dashboards/
-│   │   ├── tracing/
-│   │   └── remediation/
-│   │
-│   ├── reliability/
-│   │   ├── high-availability/
-│   │   ├── fault-tolerance/
-│   │   ├── elasticity/
-│   │   ├── scalability/
-│   │   ├── backups/
-│   │   ├── disaster-recovery/
-│   │   ├── rto-rpo/
-│   │   └── failover/
-│   │
-│   ├── automation/
-│   │   ├── infrastructure-as-code/
-│   │   ├── cloudformation/
-│   │   ├── cdk/
-│   │   ├── systems-manager/
-│   │   ├── event-driven-automation/
-│   │   └── operational-automation/
-│   │
-│   ├── performance/
-│   │   ├── compute/
-│   │   ├── storage/
-│   │   ├── databases/
-│   │   ├── caching/
-│   │   └── network-performance/
-│   │
-│   └── cost/
-│       ├── pricing-models/
-│       ├── cost-optimization/
-│       ├── network-costs/
-│       ├── storage-costs/
-│       └── compute-costs/
-│
-├── 04-cross-service/
-│   │
-│   ├── compute-networking/
-│   │   ├── ec2-vpc/
-│   │   ├── ec2-security-groups/
-│   │   ├── ec2-elb/
-│   │   ├── ec2-auto-scaling/
-│   │   └── lambda-vpc/
-│   │
-│   ├── compute-monitoring/
-│   │   ├── ec2-cloudwatch/
-│   │   ├── ecs-cloudwatch/
-│   │   ├── eks-cloudwatch/
-│   │   └── lambda-cloudwatch/
-│   │
-│   ├── networking-security/
-│   │   ├── vpc-security-groups-nacl/
-│   │   ├── vpc-network-firewall/
-│   │   ├── cloudfront-waf-shield/
-│   │   └── route53-dns-firewall/
-│   │
-│   ├── identity-security/
-│   │   ├── iam-kms/
-│   │   ├── iam-organizations/
-│   │   ├── iam-ec2/
-│   │   └── iam-cloudformation/
-│   │
-│   ├── monitoring-automation/
-│   │   ├── cloudwatch-eventbridge/
-│   │   ├── cloudwatch-sns/
-│   │   ├── cloudwatch-systems-manager/
-│   │   └── eventbridge-lambda/
-│   │
-│   ├── reliability/
-│   │   ├── ec2-auto-scaling-elb/
-│   │   ├── rds-multi-az/
-│   │   ├── backup-ec2-ebs-rds/
-│   │   └── route53-failover/
-│   │
-│   └── deployment-automation/
-│       ├── cloudformation-iam/
-│       ├── cloudformation-stacksets-organizations/
-│       ├── systems-manager-eventbridge/
-│       └── ec2-image-builder-systems-manager/
-│
 ├── 05-scenarios/
-│   ├── monitoring/
-│   ├── troubleshooting/
-│   ├── networking/
-│   ├── security/
-│   ├── reliability/
-│   ├── automation/
-│   ├── performance/
-│   ├── cost/
-│   └── mixed-service/
+│   ├── 01-monitoring/
+│   ├── 02-troubleshooting/
+│   ├── 03-networking/
+│   ├── 04-security/
+│   ├── 05-reliability/
+│   ├── 06-automation/
+│   ├── 07-performance/
+│   ├── 08-cost/
+│   └── 09-mixed-service/
 │
 ├── 06-labs/
-│   ├── ec2/
-│   ├── vpc/
-│   ├── cloudwatch/
-│   ├── iam/
-│   ├── cloudformation/
-│   ├── systems-manager/
-│   └── mixed-architecture/
+│   ├── 01-ec2/
+│   ├── 02-vpc/
+│   ├── 03-cloudwatch/
+│   ├── 04-iam/
+│   ├── 05-cloudformation/
+│   ├── 06-systems-manager/
+│   └── 07-mixed-architecture/
 │
 ├── 07-cheatsheets/
-│   ├── services.md
-│   ├── networking.md
-│   ├── security.md
-│   ├── monitoring.md
-│   ├── reliability.md
-│   ├── automation.md
-│   ├── performance.md
-│   ├── cost.md
-│   ├── limits-and-defaults.md
-│   └── common-comparisons.md
+│   ├── 01-services.md
+│   ├── 02-networking.md
+│   ├── 03-security.md
+│   ├── 04-monitoring.md
+│   ├── 05-reliability.md
+│   ├── 06-automation.md
+│   ├── 07-performance.md
+│   ├── 08-cost.md
+│   ├── 09-limits-and-defaults.md
+│   └── 10-common-comparisons.md
 │
 ├── 08-reference/
-│   ├── aws-documentation.md
-│   ├── aws-architecture-diagrams.md
-│   ├── aws-whitepapers.md
-│   ├── aws-prescriptive-guidance.md
-│   ├── community-resources.md
-│   └── glossary.md
+│   ├── 01-aws-documentation.md
+│   ├── 02-aws-architecture-diagrams.md
+│   ├── 03-aws-whitepapers.md
+│   ├── 04-aws-prescriptive-guidance.md
+│   ├── 05-community-resources.md
+│   └── 06-glossary.md
 │
 ├── assets/
 │   ├── images/
@@ -825,14 +826,25 @@ aws-cloudops-soa-c03/
 │   └── mermaid/
 │
 └── 99-archive/
-    ├── deprecated/
-    ├── historical/
-    └── soa-c02/
+    ├── 01-deprecated/
+    ├── 02-historical/
+    └── 03-soa-c02/
 ```
 
 This is the **default architecture**, not a requirement that every directory must immediately contain files.
 
 Create directories progressively as they become necessary.
+
+### Numbering and read sequence
+
+Every directory and every documentation file carries a numeric prefix that encodes the recommended reading order. The only exception is `README.md`, which never has a numeric prefix — it is the entry point for its folder, both at the repo root and inside every subfolder.
+
+- **Top-level layers** use a two-digit prefix in study order: `00-certification`, `01-services`, `02-concepts`, `03-cross-service`, `04-domains`, `05-scenarios`, `06-labs`, `07-cheatsheets`, `08-reference`, `99-archive`.
+- **Category folders** under `01-services/` use a two-digit prefix in AWS's in-scope category order (`01-analytics` … `14-storage`).
+- **Service, concept, and relationship folders** under a category use a two-digit prefix for study order within that category (`13-security-identity-compliance/01-iam/`).
+- **Files** inside a folder use a two-digit prefix for read order (`01-concepts.md`, `02-security.md`, … `07-quick-review.md`).
+
+When you add a new topic, assign it the next number in its folder's read order. `README.md` remains unnumbered and lists the folder's files in their numbered read order.
 
 ---
 
@@ -842,14 +854,14 @@ This distinction is fundamental.
 
 ## Services
 
-`02-services/` answers:
+`01-services/` answers:
 
 > **What is this AWS service and how do I operate it?**
 
 Example:
 
 ```text
-02-services/compute/ec2/
+01-services/05-compute/01-ec2/
 ```
 
 contains the canonical EC2 knowledge.
@@ -858,14 +870,14 @@ contains the canonical EC2 knowledge.
 
 ## Concepts
 
-`03-concepts/` answers:
+`02-concepts/` answers:
 
 > **What is this fundamental CloudOps concept across AWS?**
 
 For example:
 
 ```text
-03-concepts/networking/ip-addressing/
+02-concepts/01-networking/01-ip-addressing/
 ```
 
 contains the canonical CIDR / IP addressing concept.
@@ -883,12 +895,12 @@ Every major concept should have **one canonical source of truth** in the reposit
 For example:
 
 ```text
-02-services/networking-content-delivery/vpc/
+01-services/12-networking-content-delivery/01-vpc/
 ```
 
-is the canonical home for VPC and its networking components (subnets, route tables, VPC endpoints, flow logs, and the reachability analyzer). See section 21 for the full internal structure. Note: AWS's in-scope service list categorizes security groups, NACLs, NAT gateways, internet gateways, and egress-only internet gateways under Security, Identity, and Compliance, so those resources have their canonical home under `02-services/security-identity-compliance/` (see section 23).
+is the canonical home for VPC and its networking components (subnets, route tables, VPC endpoints, flow logs, and the reachability analyzer). See section 21 for the full internal structure. Note: AWS's in-scope service list categorizes security groups, NACLs, NAT gateways, internet gateways, and egress-only internet gateways under Security, Identity, and Compliance, so those resources have their canonical home under `01-services/13-security-identity-compliance/` (see section 23).
 
-**Canonical-home resolution rule:** a named AWS resource that you provision and operate (VPC, EC2, RDS, NAT gateway, security group, etc.) has its canonical home under `02-services/`. The `03-concepts/` layer holds only cross-cutting principles that are not tied to a single resource (CIDR/IP addressing, IPv4 vs IPv6, DNS, routing, encryption, high availability, elasticity, etc.). When a subject could be either, ask: *is this a resource I create in the console/API, or a principle that spans many resources?* Resources go to `02-services/`, principles go to `03-concepts/`.
+**Canonical-home resolution rule:** a named AWS resource that you provision and operate (VPC, EC2, RDS, NAT gateway, security group, etc.) has its canonical home under `01-services/`. The `02-concepts/` layer holds only cross-cutting principles that are not tied to a single resource (CIDR/IP addressing, IPv4 vs IPv6, DNS, routing, encryption, high availability, elasticity, etc.). When a subject could be either, ask: *is this a resource I create in the console/API, or a principle that spans many resources?* Resources go to `01-services/`, principles go to `02-concepts/`.
 
 Do NOT create three independent full VPC documents:
 
@@ -903,7 +915,7 @@ because that will create duplicated information and eventually conflicting expla
 Instead:
 
 ```text
-02-services/networking-content-delivery/vpc/
+01-services/12-networking-content-delivery/01-vpc/
         │
         ├── README.md
         ├── vpc-fundamentals.md
@@ -917,7 +929,7 @@ Instead:
 Then create context-specific knowledge:
 
 ```text
-04-cross-service/compute-networking/ec2-vpc/
+03-cross-service/01-compute-networking/01-ec2-vpc/
 ```
 
 which explains:
@@ -945,7 +957,7 @@ EC2
 ├── Networking
 │
 └── See:
-     └── 04-cross-service/compute-networking/ec2-vpc/
+     └── 03-cross-service/01-compute-networking/01-ec2-vpc/
 ```
 
 The EC2/VPC relationship document can explain:
@@ -965,7 +977,7 @@ The EC2/VPC relationship document can explain:
 The canonical VPC documentation remains here:
 
 ```text
-02-services/networking-content-delivery/vpc/
+01-services/12-networking-content-delivery/01-vpc/
 ```
 
 This creates **context without duplication**.
@@ -974,7 +986,7 @@ This creates **context without duplication**.
 
 # 14. DOMAIN DOCUMENTS ARE ALSO CONTEXTUAL
 
-The `01-domains/` directory should NOT duplicate service documentation.
+The `04-domains/` directory should NOT duplicate service documentation.
 
 Instead, it should answer:
 
@@ -983,7 +995,7 @@ Instead, it should answer:
 For example:
 
 ```text
-01-domains/05-networking-content-delivery/
+04-domains/05-networking-content-delivery/
 ```
 
 may reference:
@@ -1012,7 +1024,7 @@ Therefore the domain page should explain the **relationships among those concept
 
 # 15. RELATIONSHIP DOCUMENTS
 
-`04-cross-service/` exists specifically for concepts that become meaningful only when two or more AWS services interact.
+`03-cross-service/` exists specifically for concepts that become meaningful only when two or more AWS services interact.
 
 Examples:
 
@@ -1059,7 +1071,7 @@ Do not repeat the entire underlying service documentation.
 
 For every new service/topic, determine its best location dynamically.
 
-Do not assume every input belongs in `02-services/`.
+Do not assume every input belongs in `01-services/`.
 
 Use the following logic:
 
@@ -1068,14 +1080,14 @@ Use the following logic:
 Canonical home:
 
 ```text
-02-services/<aws-category>/<service>/
+01-services/<aws-category>/<service>/
 ```
 
 Example:
 
 ```text
 Amazon EC2
-→ 02-services/compute/ec2/
+→ 01-services/05-compute/01-ec2/
 ```
 
 ---
@@ -1085,14 +1097,14 @@ Amazon EC2
 Canonical home:
 
 ```text
-03-concepts/<concept-category>/<concept>/
+02-concepts/<concept-category>/<concept>/
 ```
 
 Example:
 
 ```text
 CIDR / IP addressing model
-→ 03-concepts/networking/ip-addressing/
+→ 02-concepts/01-networking/01-ip-addressing/
 ```
 
 ---
@@ -1102,14 +1114,14 @@ CIDR / IP addressing model
 Canonical home:
 
 ```text
-04-cross-service/<relationship-category>/<service-a-service-b>/
+03-cross-service/<relationship-category>/<service-a-service-b>/
 ```
 
 Example:
 
 ```text
 EC2 + VPC
-→ 04-cross-service/compute-networking/ec2-vpc/
+→ 03-cross-service/01-compute-networking/01-ec2-vpc/
 ```
 
 ---
@@ -1119,13 +1131,13 @@ EC2 + VPC
 Canonical home:
 
 ```text
-01-domains/<domain>/
+04-domains/<domain>/
 ```
 
 or:
 
 ```text
-01-domains/<domain>/contexts/
+04-domains/<domain>/contexts/
 ```
 
 Use this to explain how multiple services/concepts combine to satisfy a particular certification task.
@@ -1191,13 +1203,13 @@ For example:
 ### Existing
 
 ```text
-02-services/networking-content-delivery/vpc/
+01-services/12-networking-content-delivery/01-vpc/
 ```
 
 ### New
 
 ```text
-04-cross-service/compute-networking/ec2-vpc/
+03-cross-service/01-compute-networking/01-ec2-vpc/
 ```
 
 is valid because the second file explains:
@@ -1207,7 +1219,7 @@ is valid because the second file explains:
 Similarly:
 
 ```text
-04-cross-service/database-networking/rds-vpc/
+03-cross-service/08-database-networking/01-rds-vpc/
 ```
 
 could explain:
@@ -1244,11 +1256,12 @@ When creating a service, prefer this internal structure:
 ├── hands-on.md
 ├── cli-api-iac.md
 ├── cross-service.md
-├── quick-review.md
-└── sources.md
+└── quick-review.md
 ```
 
 Do not create empty files.
+
+Do not create a separate `sources.md`. Every document ends with a `## Sources` section listing the references it drew on.
 
 Only create files that contain meaningful information.
 
@@ -1308,7 +1321,7 @@ VPC should be treated as a major knowledge area.
 A possible structure is:
 
 ```text
-02-services/networking-content-delivery/vpc/
+01-services/12-networking-content-delivery/01-vpc/
 │
 ├── README.md
 ├── vpc-fundamentals.md
@@ -1327,7 +1340,7 @@ A possible structure is:
 Then:
 
 ```text
-04-cross-service/compute-networking/ec2-vpc/
+03-cross-service/01-compute-networking/01-ec2-vpc/
 ```
 
 explains the EC2/VPC relationship.
@@ -1335,7 +1348,7 @@ explains the EC2/VPC relationship.
 And:
 
 ```text
-04-cross-service/database-networking/rds-vpc/
+03-cross-service/08-database-networking/01-rds-vpc/
 ```
 
 explains RDS/VPC.
@@ -1343,7 +1356,7 @@ explains RDS/VPC.
 And:
 
 ```text
-01-domains/05-networking-content-delivery/contexts/
+04-domains/05-networking-content-delivery/contexts/
 ```
 
 can explain how the VPC knowledge maps to SOA-C03 Domain 5.
@@ -1612,6 +1625,22 @@ Prefer specific nouns and active verbs over "very important," "significant impac
 
 Tables, headings, bullet lists, and Mermaid diagrams are required in this repository (see sections 28–31) and are not AI tells in themselves. Avoid the *voice-level* tells that ride along with them: forced lists of exactly three, a bold lead-in on every bullet, signposting that restates the obvious ("First, ... Next, ... Finally, ..."), and conclusions that merely restate the intro. Vary sentence length; follow a long technical sentence with a short one. Limit em dashes to at most two per sentence and avoid colon-heavy grocery lists.
 
+#### Notes and callouts
+
+Use blockquoted callouts (`> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!CAUTION]`, `[!WARNING]`) to flag what the user must remember. A callout is not a one-liner. It must stand on its own: name the concept, explain why it matters for the exam, and state the consequence of getting it wrong. The reader must grasp the point without reading the surrounding section. Do not write a two-word hint — write what the concept means, where it applies, and the scenario where it decides the answer.
+
+Too thin:
+
+> [!TIP]
+> Deny wins.
+
+Complete:
+
+> [!IMPORTANT]
+> An explicit `Deny` overrides every `Allow` in any applicable policy — identity, resource, permissions boundary, and SCP. This decides most "why is access denied" questions: even when an `Allow` is present, a single `Deny` anywhere in the evaluation chain blocks the action. Check boundaries and SCPs first, because that is where candidates overlook a deny.
+
+Apply this same standard to every section: prose must teach the full concept, not gesture at it.
+
 ---
 
 # 28. MANDATORY DOCUMENTATION CONTENT
@@ -1646,7 +1675,7 @@ For every service/topic, investigate the following concepts where relevant:
 26. CLI/API/IaC
 27. Key takeaways
 28. Quick review
-29. Sources
+29. Sources — a `## Sources` section at the end of each document (no separate `sources.md` file)
 
 Only include sections that are technically relevant.
 
@@ -1983,7 +2012,7 @@ Which scaling mechanisms interact with it?
 
 Which resiliency mechanisms are relevant?
 
-This relationship map should inform `04-cross-service/`.
+This relationship map should inform `03-cross-service/`.
 
 ---
 
@@ -1996,10 +2025,10 @@ For example:
 ```markdown
 See also:
 
-- [VPC](../../../02-services/networking-content-delivery/vpc/README.md)
-- [Security Groups](../../../02-services/security-identity-compliance/security-groups/README.md)
-- [EC2 + VPC](../../../04-cross-service/compute-networking/ec2-vpc/README.md)
-- [Domain 5 — Networking](../../../01-domains/05-networking-content-delivery/README.md)
+- [VPC](../../../01-services/12-networking-content-delivery/01-vpc/README.md)
+- [Security Groups](../../../01-services/13-security-identity-compliance/14-security-groups/README.md)
+- [EC2 + VPC](../../../03-cross-service/01-compute-networking/01-ec2-vpc/README.md)
+- [Domain 5 — Networking](../../../04-domains/05-networking-content-delivery/README.md)
 ```
 
 Use repository-relative links.
@@ -2086,7 +2115,7 @@ Do not confuse repository organization with study order.
 A VPC document may live under:
 
 ```text
-02-services/networking-content-delivery/vpc/
+01-services/12-networking-content-delivery/01-vpc/
 ```
 
 while being required to understand:
@@ -2115,7 +2144,7 @@ Prerequisites:
 For example:
 
 ```text
-01-domains/05-networking-content-delivery/task-5-1-networking-connectivity.md
+04-domains/05-networking-content-delivery/task-5-1-networking-connectivity.md
 ```
 
 should say:
@@ -2206,13 +2235,13 @@ Every major service should have a quick-review file.
 Example:
 
 ```text
-02-services/compute/ec2/exam-review.md
+01-services/05-compute/01-ec2/exam-review.md
 ```
 
 or:
 
 ```text
-02-services/compute/ec2/quick-review.md
+01-services/05-compute/01-ec2/quick-review.md
 ```
 
 It should contain only:
