@@ -2,11 +2,15 @@
 
 <img src="assets/images/cert/logo.png" alt="AWS Certified CloudOps Engineer – Associate (SOA-C03)" width="520" />
 
-# ☁️ AWS CloudOps Engineer – Associate (SOA-C03) 🚀
+# ☁️ AWS CloudOps Engineer – Associate (SOA-C03)
 
-**A certification-focused knowledge base for operating workloads on AWS.** 🔧
+**A certification-focused knowledge base for operating workloads on AWS.**
 
-*🔍 Research. ✅ Verify. 📝 Document. 🧠 Reason like a CloudOps engineer.*
+*Research. Verify. Document. Reason like a CloudOps engineer.*
+
+![Certification](https://img.shields.io/badge/AWS-CloudOps%20Engineer%20Associate-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
+![Exam](https://img.shields.io/badge/Exam-SOA--C03-232F3E?style=flat-square&logo=amazonaws&logoColor=white)
+![Domains](https://img.shields.io/badge/Domains-5-232F3E?style=flat-square)
 
 </div>
 
@@ -51,7 +55,7 @@ aws-cloudops-soa-c03/
 └── 99-archive/           Deprecated, historical, and SOA-C02 material
 ```
 
-### How the layers relate 🔗
+### How the layers relate
 
 - **`02-services/`** answers *"What is this AWS service and how do I operate it?"*
 - **`03-concepts/`** answers *"What is this fundamental CloudOps principle across AWS?"*
