@@ -857,7 +857,7 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 | # | Topic | Canonical path | Type | Depends | Status |
 |---|-------|----------------|------|---------|--------|
-| 1 | IP addressing / CIDR | `02-concepts/01-networking/01-ip-addressing/` | Concept | — | ⬜ |
+| 1 | IP addressing / CIDR | `02-concepts/01-networking/01-ip-addressing/` | Concept | — | ✅ |
 | 2 | IPv4 vs IPv6 | `02-concepts/01-networking/02-ipv4-ipv6/` | Concept | 1 | ⬜ |
 | 3 | VPC | `01-services/12-networking-content-delivery/01-vpc/` | Service | 1, 2 | ⬜ |
 | 4 | Internet Gateway | `01-services/13-security-identity-compliance/16-internet-gateway/` | Service | 3 | ⬜ |
