@@ -1805,6 +1805,8 @@ A document is finished when it has taught its subject, not when it has reached a
 
 A `README.md` index is the one exception. It is a map, not a lesson, and stays short by design.
 
+**Explain in full, never just name it.** A concept, feature, or mechanism must be explained in complete prose, not a one-line label. For each, state what it is, why it exists, how it behaves, where you create or apply it, how it differs from the adjacent feature a reader will confuse it with, and a concrete example. A sentence that names something without explaining it — "RCP caps permissions on resources across accounts" — teaches nothing the reader can act on. If a reader would still ask *what does that actually mean, where do I work with it, or how is it different from X*, the explanation is not finished.
+
 **Shallow-content triggers.** A document is incomplete — fix it before moving on — when any of these is true:
 
 - It reads as a definition or summary with no operational detail.
