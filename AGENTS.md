@@ -424,11 +424,11 @@ Create original scenarios based on legitimate, publicly documented AWS knowledge
 
 # 9. REPOSITORY ARCHITECTURE
 
-The repository must be organized around **four layers**:
+The repository must be organized around **five layers**:
 
 ```mermaid
 flowchart TD
-    A[CERTIFICATION] --> B[DOMAINS] --> C["CANONICAL SERVICES & CONCEPTS"] --> D["CROSS-SERVICE RELATIONSHIPS"]
+    A[CERTIFICATION] --> B[CONCEPTS] --> C[SERVICES] --> D["CROSS-SERVICE RELATIONSHIPS"] --> E[DOMAINS]
 ```
 
 With additional supporting layers for:
@@ -457,17 +457,71 @@ aws-cloudops-soa-c03/
 ├── ROADMAP.md
 ├── PROGRESS.md
 │
-├── 00-certification/
-│   ├── 01-soa-c03-overview.md
-│   ├── 02-exam-domains.md
-│   ├── 03-exam-tasks.md
-│   ├── 04-exam-skills.md
-│   ├── 05-in-scope-services.md
-│   ├── 06-out-of-scope-services.md
-│   ├── 07-soa-c02-vs-soa-c03.md
-│   └── 08-exam-strategy.md
+├── 01-concepts/
+│   │
+│   ├── 01-networking/
+│   │   ├── 01-ip-addressing/
+│   │   ├── 02-ipv4-ipv6/
+│   │   ├── 03-dns/
+│   │   ├── 04-routing/
+│   │   ├── 05-private-connectivity/
+│   │   ├── 06-hybrid-connectivity/
+│   │   └── 07-network-troubleshooting/
+│   │
+│   ├── 02-security/
+│   │   ├── 01-iam/
+│   │   ├── 02-policies/
+│   │   ├── 03-roles/
+│   │   ├── 04-resource-policies/
+│   │   ├── 05-least-privilege/
+│   │   ├── 06-encryption/
+│   │   ├── 07-kms/
+│   │   ├── 08-certificates/
+│   │   ├── 09-secrets/
+│   │   └── 10-compliance/
+│   │
+│   ├── 03-observability/
+│   │   ├── 01-metrics/
+│   │   ├── 02-logs/
+│   │   ├── 03-events/
+│   │   ├── 04-alarms/
+│   │   ├── 05-dashboards/
+│   │   ├── 06-tracing/
+│   │   └── 07-remediation/
+│   │
+│   ├── 04-reliability/
+│   │   ├── 01-high-availability/
+│   │   ├── 02-fault-tolerance/
+│   │   ├── 03-elasticity/
+│   │   ├── 04-scalability/
+│   │   ├── 05-backups/
+│   │   ├── 06-disaster-recovery/
+│   │   ├── 07-rto-rpo/
+│   │   └── 08-failover/
+│   │
+│   ├── 05-automation/
+│   │   ├── 01-infrastructure-as-code/
+│   │   ├── 02-cloudformation/
+│   │   ├── 03-cdk/
+│   │   ├── 04-systems-manager/
+│   │   ├── 05-event-driven-automation/
+│   │   └── 06-operational-automation/
+│   │
+│   ├── 06-performance/
+│   │   ├── 01-compute/
+│   │   ├── 02-storage/
+│   │   ├── 03-databases/
+│   │   ├── 04-caching/
+│   │   └── 05-network-performance/
+│   │
+│   └── 07-cost/
+│       ├── 01-pricing-models/
+│       ├── 02-cost-optimization/
+│       ├── 03-network-costs/
+│       ├── 04-storage-costs/
+│       └── 05-compute-costs/
 │
-├── 01-services/
+├── 02-services/
 │   │
 │   ├── 01-analytics/
 │   │   ├── 01-athena/
@@ -579,70 +633,6 @@ aws-cloudops-soa-c03/
 │       ├── 05-backup/
 │       └── 06-storage-gateway/
 │
-├── 02-concepts/
-│   │
-│   ├── 01-networking/
-│   │   ├── 01-ip-addressing/
-│   │   ├── 02-ipv4-ipv6/
-│   │   ├── 03-dns/
-│   │   ├── 04-routing/
-│   │   ├── 05-private-connectivity/
-│   │   ├── 06-hybrid-connectivity/
-│   │   └── 07-network-troubleshooting/
-│   │
-│   ├── 02-security/
-│   │   ├── 01-iam/
-│   │   ├── 02-policies/
-│   │   ├── 03-roles/
-│   │   ├── 04-resource-policies/
-│   │   ├── 05-least-privilege/
-│   │   ├── 06-encryption/
-│   │   ├── 07-kms/
-│   │   ├── 08-certificates/
-│   │   ├── 09-secrets/
-│   │   └── 10-compliance/
-│   │
-│   ├── 03-observability/
-│   │   ├── 01-metrics/
-│   │   ├── 02-logs/
-│   │   ├── 03-events/
-│   │   ├── 04-alarms/
-│   │   ├── 05-dashboards/
-│   │   ├── 06-tracing/
-│   │   └── 07-remediation/
-│   │
-│   ├── 04-reliability/
-│   │   ├── 01-high-availability/
-│   │   ├── 02-fault-tolerance/
-│   │   ├── 03-elasticity/
-│   │   ├── 04-scalability/
-│   │   ├── 05-backups/
-│   │   ├── 06-disaster-recovery/
-│   │   ├── 07-rto-rpo/
-│   │   └── 08-failover/
-│   │
-│   ├── 05-automation/
-│   │   ├── 01-infrastructure-as-code/
-│   │   ├── 02-cloudformation/
-│   │   ├── 03-cdk/
-│   │   ├── 04-systems-manager/
-│   │   ├── 05-event-driven-automation/
-│   │   └── 06-operational-automation/
-│   │
-│   ├── 06-performance/
-│   │   ├── 01-compute/
-│   │   ├── 02-storage/
-│   │   ├── 03-databases/
-│   │   ├── 04-caching/
-│   │   └── 05-network-performance/
-│   │
-│   └── 07-cost/
-│       ├── 01-pricing-models/
-│       ├── 02-cost-optimization/
-│       ├── 03-network-costs/
-│       ├── 04-storage-costs/
-│       └── 05-compute-costs/
-│
 ├── 03-cross-service/
 │   │
 │   ├── 01-compute-networking/
@@ -744,7 +734,7 @@ aws-cloudops-soa-c03/
 │   └── 07-mixed-architecture/
 │
 ├── 07-cheatsheets/
-│   ├── 01-services.md
+│   ├── 02-services.md
 │   ├── 02-networking.md
 │   ├── 03-security.md
 │   ├── 04-monitoring.md
@@ -782,8 +772,8 @@ Create directories progressively as they become necessary.
 
 Every directory and every documentation file carries a numeric prefix that encodes the recommended reading order. The only exception is `README.md`, which never has a numeric prefix — it is the entry point for its folder, both at the repo root and inside every subfolder.
 
-- **Top-level layers** use a two-digit prefix in study order: `00-certification`, `01-services`, `02-concepts`, `03-cross-service`, `04-domains`, `05-scenarios`, `06-labs`, `07-cheatsheets`, `08-reference`, `99-archive`.
-- **Category folders** under `01-services/` use a two-digit prefix in AWS's in-scope category order (`01-analytics` … `14-storage`).
+- **Top-level layers** use a two-digit prefix in study order: `01-concepts`, `02-services`, `03-cross-service`, `04-domains`, `05-scenarios`, `06-labs`, `07-cheatsheets`, `08-reference`, `99-archive`.
+- **Category folders** under `02-services/` use a two-digit prefix in AWS's in-scope category order (`01-analytics` … `14-storage`).
 - **Service, concept, and relationship folders** under a category use a two-digit prefix for study order within that category (`13-security-identity-compliance/01-iam/`).
 - **Files** inside a folder use a two-digit prefix for read order (`01-concepts.md`, `02-security.md`, … `07-quick-review.md`).
 
@@ -799,86 +789,86 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 | # | Topic | Canonical path | Type | Depends | Status |
 |---|-------|----------------|------|---------|--------|
-| 1 | IP addressing / CIDR | `02-concepts/01-networking/01-ip-addressing/` | Concept | — | ✅ |
-| 2 | IPv4 vs IPv6 | `02-concepts/01-networking/02-ipv4-ipv6/` | Concept | 1 | ⬜ |
-| 3 | VPC | `01-services/12-networking-content-delivery/01-vpc/` | Service | 1, 2 | ⬜ |
-| 4 | Internet Gateway | `01-services/13-security-identity-compliance/16-internet-gateway/` | Service | 3 | ⬜ |
-| 5 | NAT Gateway | `01-services/13-security-identity-compliance/15-nat-gateway/` | Service | 3, 4 | ⬜ |
-| 6 | Egress-only IGW | `01-services/13-security-identity-compliance/17-egress-only-internet-gateway/` | Service | 3, 4 | ⬜ |
-| 7 | Security Groups | `01-services/13-security-identity-compliance/14-security-groups/` | Service | 3 | ⬜ |
-| 8 | Network ACLs | `01-services/13-security-identity-compliance/13-nacls/` | Service | 3, 7 | ⬜ |
-| 9 | VPC Endpoints | `01-services/12-networking-content-delivery/02-vpc-endpoints/` | Service | 3 | ⬜ |
-| 10 | PrivateLink | `01-services/12-networking-content-delivery/05-private-link/` | Service | 9 | ⬜ |
-| 11 | VPC Peering | `01-services/12-networking-content-delivery/03-vpc-peering/` | Service | 3 | ⬜ |
-| 12 | Transit Gateway | `01-services/12-networking-content-delivery/04-transit-gateway/` | Service | 11 | ⬜ |
-| 13 | VPC Flow Logs | `01-services/12-networking-content-delivery/13-vpc-flow-logs/` | Service | 3 | ⬜ |
-| 14 | VPC Reachability Analyzer | `01-services/12-networking-content-delivery/14-vpc-reachability-analyzer/` | Service | 3, 13 | ⬜ |
-| 15 | Routing | `02-concepts/01-networking/04-routing/` | Concept | 3, 4, 5 | ⬜ |
-| 16 | DNS | `02-concepts/01-networking/03-dns/` | Concept | — | ⬜ |
-| 17 | Private connectivity | `02-concepts/01-networking/05-private-connectivity/` | Concept | 9–12 | ⬜ |
-| 18 | Hybrid connectivity | `02-concepts/01-networking/06-hybrid-connectivity/` | Concept | 17 | ⬜ |
+| 1 | IP addressing / CIDR | `01-concepts/01-networking/01-ip-addressing/` | Concept | — | ✅ |
+| 2 | IPv4 vs IPv6 | `01-concepts/01-networking/02-ipv4-ipv6/` | Concept | 1 | ⬜ |
+| 3 | VPC | `02-services/12-networking-content-delivery/01-vpc/` | Service | 1, 2 | ⬜ |
+| 4 | Internet Gateway | `02-services/13-security-identity-compliance/16-internet-gateway/` | Service | 3 | ⬜ |
+| 5 | NAT Gateway | `02-services/13-security-identity-compliance/15-nat-gateway/` | Service | 3, 4 | ⬜ |
+| 6 | Egress-only IGW | `02-services/13-security-identity-compliance/17-egress-only-internet-gateway/` | Service | 3, 4 | ⬜ |
+| 7 | Security Groups | `02-services/13-security-identity-compliance/14-security-groups/` | Service | 3 | ⬜ |
+| 8 | Network ACLs | `02-services/13-security-identity-compliance/13-nacls/` | Service | 3, 7 | ⬜ |
+| 9 | VPC Endpoints | `02-services/12-networking-content-delivery/02-vpc-endpoints/` | Service | 3 | ⬜ |
+| 10 | PrivateLink | `02-services/12-networking-content-delivery/05-private-link/` | Service | 9 | ⬜ |
+| 11 | VPC Peering | `02-services/12-networking-content-delivery/03-vpc-peering/` | Service | 3 | ⬜ |
+| 12 | Transit Gateway | `02-services/12-networking-content-delivery/04-transit-gateway/` | Service | 11 | ⬜ |
+| 13 | VPC Flow Logs | `02-services/12-networking-content-delivery/13-vpc-flow-logs/` | Service | 3 | ⬜ |
+| 14 | VPC Reachability Analyzer | `02-services/12-networking-content-delivery/14-vpc-reachability-analyzer/` | Service | 3, 13 | ⬜ |
+| 15 | Routing | `01-concepts/01-networking/04-routing/` | Concept | 3, 4, 5 | ⬜ |
+| 16 | DNS | `01-concepts/01-networking/03-dns/` | Concept | — | ⬜ |
+| 17 | Private connectivity | `01-concepts/01-networking/05-private-connectivity/` | Concept | 9–12 | ⬜ |
+| 18 | Hybrid connectivity | `01-concepts/01-networking/06-hybrid-connectivity/` | Concept | 17 | ⬜ |
 
 ## Phase 2 — Compute & block storage
 
-| 19 | EC2 | `01-services/05-compute/01-ec2/` | Service | 3, 7 | ⬜ |
-| 20 | EBS | `01-services/14-storage/02-ebs/` | Service | 19 | ⬜ |
-| 21 | EC2 Image Builder | `01-services/05-compute/02-ec2-image-builder/` | Service | 19, 20 | ⬜ |
+| 19 | EC2 | `02-services/05-compute/01-ec2/` | Service | 3, 7 | ⬜ |
+| 20 | EBS | `02-services/14-storage/02-ebs/` | Service | 19 | ⬜ |
+| 21 | EC2 Image Builder | `02-services/05-compute/02-ec2-image-builder/` | Service | 19, 20 | ⬜ |
 | 22 | EC2 + VPC | `03-cross-service/01-compute-networking/01-ec2-vpc/` | Relationship | 3, 19 | ⬜ |
 | 23 | EC2 + Security Groups | `03-cross-service/01-compute-networking/02-ec2-security-groups/` | Relationship | 7, 19 | ⬜ |
-| 24 | Elastic IP | `01-services/12-networking-content-delivery/12-elastic-ip/` | Service | 3, 19 | ⬜ |
+| 24 | Elastic IP | `02-services/12-networking-content-delivery/12-elastic-ip/` | Service | 3, 19 | ⬜ |
 
 ## Phase 3 — Object & shared storage
 
-| 25 | S3 | `01-services/14-storage/01-s3/` | Service | — | ⬜ |
-| 26 | EFS | `01-services/14-storage/03-efs/` | Service | 3, 19 | ⬜ |
-| 27 | FSx | `01-services/14-storage/04-fsx/` | Service | 19, 26 | ⬜ |
-| 28 | Encryption (concept) | `02-concepts/02-security/06-encryption/` | Concept | — | ⬜ |
+| 25 | S3 | `02-services/14-storage/01-s3/` | Service | — | ⬜ |
+| 26 | EFS | `02-services/14-storage/03-efs/` | Service | 3, 19 | ⬜ |
+| 27 | FSx | `02-services/14-storage/04-fsx/` | Service | 19, 26 | ⬜ |
+| 28 | Encryption (concept) | `01-concepts/02-security/06-encryption/` | Concept | — | ⬜ |
 
 ## Phase 4 — Observability (Domain 1)
 
-| 29 | Metrics | `02-concepts/03-observability/01-metrics/` | Concept | — | ⬜ |
-| 30 | CloudWatch | `01-services/10-management-governance/05-cloudwatch/` | Service | 19, 29 | ⬜ |
-| 31 | Logs | `02-concepts/03-observability/02-logs/` | Concept | 30 | ⬜ |
-| 32 | Events | `02-concepts/03-observability/03-events/` | Concept | 30 | ⬜ |
-| 33 | Alarms | `02-concepts/03-observability/04-alarms/` | Concept | 30 | ⬜ |
-| 34 | Dashboards | `02-concepts/03-observability/05-dashboards/` | Concept | 30, 33 | ⬜ |
-| 35 | Tracing | `02-concepts/03-observability/06-tracing/` | Concept | 30 | ⬜ |
-| 36 | Remediation | `02-concepts/03-observability/07-remediation/` | Concept | 33 | ⬜ |
-| 37 | CloudTrail | `01-services/10-management-governance/04-cloudtrail/` | Service | 30 | ⬜ |
+| 29 | Metrics | `01-concepts/03-observability/01-metrics/` | Concept | — | ⬜ |
+| 30 | CloudWatch | `02-services/10-management-governance/05-cloudwatch/` | Service | 19, 29 | ⬜ |
+| 31 | Logs | `01-concepts/03-observability/02-logs/` | Concept | 30 | ⬜ |
+| 32 | Events | `01-concepts/03-observability/03-events/` | Concept | 30 | ⬜ |
+| 33 | Alarms | `01-concepts/03-observability/04-alarms/` | Concept | 30 | ⬜ |
+| 34 | Dashboards | `01-concepts/03-observability/05-dashboards/` | Concept | 30, 33 | ⬜ |
+| 35 | Tracing | `01-concepts/03-observability/06-tracing/` | Concept | 30 | ⬜ |
+| 36 | Remediation | `01-concepts/03-observability/07-remediation/` | Concept | 33 | ⬜ |
+| 37 | CloudTrail | `02-services/10-management-governance/04-cloudtrail/` | Service | 30 | ⬜ |
 | 38 | EC2 + CloudWatch | `03-cross-service/02-compute-monitoring/01-ec2-cloudwatch/` | Relationship | 19, 30 | ⬜ |
 
 ## Phase 5 — Reliability & scaling (Domain 2)
 
-| 39 | High availability | `02-concepts/04-reliability/01-high-availability/` | Concept | 3, 19 | ⬜ |
-| 40 | Fault tolerance | `02-concepts/04-reliability/02-fault-tolerance/` | Concept | 39 | ⬜ |
-| 41 | Elasticity | `02-concepts/04-reliability/03-elasticity/` | Concept | 39 | ⬜ |
-| 42 | Auto Scaling | `01-services/10-management-governance/01-auto-scaling/` | Service | 19, 41 | ⬜ |
-| 43 | ELB (ALB/NLB) | `01-services/13-security-identity-compliance/18-elastic-load-balancing/` | Service | 19, 42 | ⬜ |
+| 39 | High availability | `01-concepts/04-reliability/01-high-availability/` | Concept | 3, 19 | ⬜ |
+| 40 | Fault tolerance | `01-concepts/04-reliability/02-fault-tolerance/` | Concept | 39 | ⬜ |
+| 41 | Elasticity | `01-concepts/04-reliability/03-elasticity/` | Concept | 39 | ⬜ |
+| 42 | Auto Scaling | `02-services/10-management-governance/01-auto-scaling/` | Service | 19, 41 | ⬜ |
+| 43 | ELB (ALB/NLB) | `02-services/13-security-identity-compliance/18-elastic-load-balancing/` | Service | 19, 42 | ⬜ |
 | 44 | EC2 + Auto Scaling + ELB | `03-cross-service/06-reliability/01-ec2-auto-scaling-elb/` | Relationship | 42, 43 | ⬜ |
-| 45 | Route 53 | `01-services/12-networking-content-delivery/08-route53/` | Service | 16, 43 | ⬜ |
+| 45 | Route 53 | `02-services/12-networking-content-delivery/08-route53/` | Service | 16, 43 | ⬜ |
 | 46 | Route 53 failover | `03-cross-service/06-reliability/04-route53-failover/` | Relationship | 45 | ⬜ |
-| 47 | Backup | `01-services/14-storage/05-backup/` | Service | 20, 25 | ⬜ |
-| 48 | Disaster recovery / RTO / RPO | `02-concepts/04-reliability/06-disaster-recovery/`, `07-rto-rpo/` | Concept | 39, 47 | ⬜ |
-| 49 | Failover | `02-concepts/04-reliability/08-failover/` | Concept | 40, 46 | ⬜ |
+| 47 | Backup | `02-services/14-storage/05-backup/` | Service | 20, 25 | ⬜ |
+| 48 | Disaster recovery / RTO / RPO | `01-concepts/04-reliability/06-disaster-recovery/`, `07-rto-rpo/` | Concept | 39, 47 | ⬜ |
+| 49 | Failover | `01-concepts/04-reliability/08-failover/` | Concept | 40, 46 | ⬜ |
 
 ## Phase 6 — Databases
 
-| 50 | RDS | `01-services/07-database/06-rds/` | Service | 3, 20, 28 | ⬜ |
+| 50 | RDS | `02-services/07-database/06-rds/` | Service | 3, 20, 28 | ⬜ |
 | 51 | RDS Multi-AZ | `03-cross-service/06-reliability/02-rds-multi-az/` | Relationship | 50 | ⬜ |
-| 52 | RDS Proxy | `01-services/07-database/07-rds-proxy/` | Service | 50 | ⬜ |
-| 53 | Aurora | `01-services/07-database/01-aurora/` | Service | 50 | ⬜ |
-| 54 | Aurora Serverless v2 | `01-services/07-database/02-aurora-serverless-v2/` | Service | 53 | ⬜ |
-| 55 | DynamoDB | `01-services/07-database/03-dynamodb/` | Service | 28 | ⬜ |
-| 56 | DAX | `01-services/07-database/04-dax/` | Service | 55 | ⬜ |
-| 57 | ElastiCache | `01-services/07-database/05-elasticache/` | Service | 50, 55 | ⬜ |
+| 52 | RDS Proxy | `02-services/07-database/07-rds-proxy/` | Service | 50 | ⬜ |
+| 53 | Aurora | `02-services/07-database/01-aurora/` | Service | 50 | ⬜ |
+| 54 | Aurora Serverless v2 | `02-services/07-database/02-aurora-serverless-v2/` | Service | 53 | ⬜ |
+| 55 | DynamoDB | `02-services/07-database/03-dynamodb/` | Service | 28 | ⬜ |
+| 56 | DAX | `02-services/07-database/04-dax/` | Service | 55 | ⬜ |
+| 57 | ElastiCache | `02-services/07-database/05-elasticache/` | Service | 50, 55 | ⬜ |
 
 ## Phase 7 — Application integration & serverless
 
-| 58 | SNS | `01-services/02-application-integration/02-sns/` | Service | — | ⬜ |
-| 59 | SQS | `01-services/02-application-integration/03-sqs/` | Service | — | ⬜ |
-| 60 | EventBridge | `01-services/02-application-integration/01-eventbridge/` | Service | 30, 32 | ⬜ |
-| 61 | Step Functions | `01-services/02-application-integration/04-step-functions/` | Service | 60 | ⬜ |
-| 62 | Lambda | `01-services/05-compute/03-lambda/` | Service | 3, 60 | ⬜ |
+| 58 | SNS | `02-services/02-application-integration/02-sns/` | Service | — | ⬜ |
+| 59 | SQS | `02-services/02-application-integration/03-sqs/` | Service | — | ⬜ |
+| 60 | EventBridge | `02-services/02-application-integration/01-eventbridge/` | Service | 30, 32 | ⬜ |
+| 61 | Step Functions | `02-services/02-application-integration/04-step-functions/` | Service | 60 | ⬜ |
+| 62 | Lambda | `02-services/05-compute/03-lambda/` | Service | 3, 60 | ⬜ |
 | 63 | CloudWatch + EventBridge | `03-cross-service/05-monitoring-automation/01-cloudwatch-eventbridge/` | Relationship | 30, 60 | ⬜ |
 | 64 | CloudWatch + SNS | `03-cross-service/05-monitoring-automation/02-cloudwatch-sns/` | Relationship | 30, 58 | ⬜ |
 | 65 | EventBridge + Lambda | `03-cross-service/05-monitoring-automation/04-eventbridge-lambda/` | Relationship | 60, 62 | ⬜ |
@@ -886,80 +876,80 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 ## Phase 8 — Deployment & automation (Domain 3)
 
-| 67 | Infrastructure as Code | `02-concepts/05-automation/01-infrastructure-as-code/` | Concept | — | ⬜ |
-| 68 | CloudFormation | `01-services/10-management-governance/02-cloudformation/` | Service | 67 | ⬜ |
-| 69 | CDK | `01-services/10-management-governance/03-cdk/` | Service | 68 | ⬜ |
+| 67 | Infrastructure as Code | `01-concepts/05-automation/01-infrastructure-as-code/` | Concept | — | ⬜ |
+| 68 | CloudFormation | `02-services/10-management-governance/02-cloudformation/` | Service | 67 | ⬜ |
+| 69 | CDK | `02-services/10-management-governance/03-cdk/` | Service | 68 | ⬜ |
 | 70 | CloudFormation + IAM | `03-cross-service/07-deployment-automation/01-cloudformation-iam/` | Relationship | 0, 68 | ⬜ |
-| 71 | Systems Manager | `01-services/10-management-governance/15-systems-manager/` | Service | 19, 30 | ⬜ |
+| 71 | Systems Manager | `02-services/10-management-governance/15-systems-manager/` | Service | 19, 30 | ⬜ |
 | 72 | Systems Manager + EventBridge | `03-cross-service/07-deployment-automation/03-systems-manager-eventbridge/` | Relationship | 60, 71 | ⬜ |
 | 73 | CloudWatch + Systems Manager | `03-cross-service/05-monitoring-automation/03-cloudwatch-systems-manager/` | Relationship | 30, 71 | ⬜ |
-| 74 | RAM | `01-services/10-management-governance/13-ram/` | Service | — | ⬜ |
-| 75 | Service Catalog | `01-services/10-management-governance/14-service-catalog/` | Service | 68 | ⬜ |
-| 76 | Organizations | `01-services/10-management-governance/12-organizations/` | Service | 0 | ⬜ |
+| 74 | RAM | `02-services/10-management-governance/13-ram/` | Service | — | ⬜ |
+| 75 | Service Catalog | `02-services/10-management-governance/14-service-catalog/` | Service | 68 | ⬜ |
+| 76 | Organizations | `02-services/10-management-governance/12-organizations/` | Service | 0 | ⬜ |
 | 77 | CloudFormation StackSets + Organizations | `03-cross-service/07-deployment-automation/02-cloudformation-stacksets-organizations/` | Relationship | 68, 76 | ⬜ |
 
 ## Phase 9 — Security & compliance (Domain 4, beyond IAM)
 
-| 78 | Least privilege | `02-concepts/02-security/05-least-privilege/` | Concept | 0 | ⬜ |
-| 79 | KMS | `01-services/13-security-identity-compliance/04-kms/` | Service | 28 | ⬜ |
-| 80 | Secrets Manager | `01-services/13-security-identity-compliance/09-secrets-manager/` | Service | 79 | ⬜ |
-| 81 | ACM | `01-services/13-security-identity-compliance/05-acm/` | Service | — | ⬜ |
+| 78 | Least privilege | `01-concepts/02-security/05-least-privilege/` | Concept | 0 | ⬜ |
+| 79 | KMS | `02-services/13-security-identity-compliance/04-kms/` | Service | 28 | ⬜ |
+| 80 | Secrets Manager | `02-services/13-security-identity-compliance/09-secrets-manager/` | Service | 79 | ⬜ |
+| 81 | ACM | `02-services/13-security-identity-compliance/05-acm/` | Service | — | ⬜ |
 | 82 | IAM + KMS | `03-cross-service/04-identity-security/01-iam-kms/` | Relationship | 0, 79 | ⬜ |
-| 83 | IAM Identity Center | `01-services/13-security-identity-compliance/03-iam-identity-center/` | Service | 0, 76 | ⬜ |
-| 84 | SCPs | `02-concepts/02-security/10-compliance/` | Concept | 76 | ⬜ |
-| 85 | Config | `01-services/10-management-governance/07-config/` | Service | 37 | ⬜ |
-| 86 | GuardDuty | `01-services/13-security-identity-compliance/06-guardduty/` | Service | 85 | ⬜ |
-| 87 | Inspector | `01-services/13-security-identity-compliance/07-inspector/` | Service | 19 | ⬜ |
-| 88 | Security Hub | `01-services/13-security-identity-compliance/08-security-hub/` | Service | 85–87 | ⬜ |
-| 89 | IAM Access Analyzer | `01-services/13-security-identity-compliance/02-iam-access-analyzer/` | Service | 0 | ⬜ |
-| 90 | Trusted Advisor | `01-services/10-management-governance/16-trusted-advisor/` | Service | — | ⬜ |
-| 91 | Network Firewall | `01-services/13-security-identity-compliance/10-network-firewall/` | Service | 3, 8 | ⬜ |
-| 92 | WAF | `01-services/13-security-identity-compliance/11-waf/` | Service | 62 | ⬜ |
-| 93 | Shield | `01-services/13-security-identity-compliance/12-shield/` | Service | 92 | ⬜ |
+| 83 | IAM Identity Center | `02-services/13-security-identity-compliance/03-iam-identity-center/` | Service | 0, 76 | ⬜ |
+| 84 | SCPs | `01-concepts/02-security/10-compliance/` | Concept | 76 | ⬜ |
+| 85 | Config | `02-services/10-management-governance/07-config/` | Service | 37 | ⬜ |
+| 86 | GuardDuty | `02-services/13-security-identity-compliance/06-guardduty/` | Service | 85 | ⬜ |
+| 87 | Inspector | `02-services/13-security-identity-compliance/07-inspector/` | Service | 19 | ⬜ |
+| 88 | Security Hub | `02-services/13-security-identity-compliance/08-security-hub/` | Service | 85–87 | ⬜ |
+| 89 | IAM Access Analyzer | `02-services/13-security-identity-compliance/02-iam-access-analyzer/` | Service | 0 | ⬜ |
+| 90 | Trusted Advisor | `02-services/10-management-governance/16-trusted-advisor/` | Service | — | ⬜ |
+| 91 | Network Firewall | `02-services/13-security-identity-compliance/10-network-firewall/` | Service | 3, 8 | ⬜ |
+| 92 | WAF | `02-services/13-security-identity-compliance/11-waf/` | Service | 62 | ⬜ |
+| 93 | Shield | `02-services/13-security-identity-compliance/12-shield/` | Service | 92 | ⬜ |
 
 ## Phase 10 — Content delivery & edge
 
-| 94 | CloudFront | `01-services/12-networking-content-delivery/10-cloudfront/` | Service | 45, 81 | ⬜ |
-| 95 | Global Accelerator | `01-services/12-networking-content-delivery/11-global-accelerator/` | Service | 43 | ⬜ |
+| 94 | CloudFront | `02-services/12-networking-content-delivery/10-cloudfront/` | Service | 45, 81 | ⬜ |
+| 95 | Global Accelerator | `02-services/12-networking-content-delivery/11-global-accelerator/` | Service | 43 | ⬜ |
 | 96 | CloudFront + WAF + Shield | `03-cross-service/03-networking-security/03-cloudfront-waf-shield/` | Relationship | 92–94 | ⬜ |
-| 97 | Route 53 Resolver DNS Firewall | `01-services/12-networking-content-delivery/09-route53-resolver-dns-firewall/` | Service | 45 | ⬜ |
+| 97 | Route 53 Resolver DNS Firewall | `02-services/12-networking-content-delivery/09-route53-resolver-dns-firewall/` | Service | 45 | ⬜ |
 | 98 | VPC Security Groups + NACL | `03-cross-service/03-networking-security/01-vpc-security-groups-nacl/` | Relationship | 7, 8 | ⬜ |
 
 ## Phase 11 — Cost & optimization
 
-| 99 | Cost Explorer | `01-services/04-cloud-financial-management/01-cost-explorer/` | Service | 37 | ⬜ |
-| 100 | Cost & Usage Reports | `01-services/04-cloud-financial-management/02-cost-and-usage-reports/` | Service | 99 | ⬜ |
-| 101 | Savings Plans | `01-services/04-cloud-financial-management/03-savings-plans/` | Service | 99 | ⬜ |
-| 102 | Compute Optimizer | `01-services/10-management-governance/06-compute-optimizer/` | Service | 19, 30 | ⬜ |
+| 99 | Cost Explorer | `02-services/04-cloud-financial-management/01-cost-explorer/` | Service | 37 | ⬜ |
+| 100 | Cost & Usage Reports | `02-services/04-cloud-financial-management/02-cost-and-usage-reports/` | Service | 99 | ⬜ |
+| 101 | Savings Plans | `02-services/04-cloud-financial-management/03-savings-plans/` | Service | 99 | ⬜ |
+| 102 | Compute Optimizer | `02-services/10-management-governance/06-compute-optimizer/` | Service | 19, 30 | ⬜ |
 
 ## Phase 12 — Containers
 
-| 103 | ECR | `01-services/06-containers/01-ecr/` | Service | 19 | ⬜ |
-| 104 | ECS | `01-services/06-containers/02-ecs/` | Service | 62, 103 | ⬜ |
-| 105 | EKS | `01-services/06-containers/03-eks/` | Service | 104 | ⬜ |
+| 103 | ECR | `02-services/06-containers/01-ecr/` | Service | 19 | ⬜ |
+| 104 | ECS | `02-services/06-containers/02-ecs/` | Service | 62, 103 | ⬜ |
+| 105 | EKS | `02-services/06-containers/03-eks/` | Service | 104 | ⬜ |
 | 106 | ECS + CloudWatch | `03-cross-service/02-compute-monitoring/02-ecs-cloudwatch/` | Relationship | 30, 104 | ⬜ |
 | 107 | EKS + CloudWatch | `03-cross-service/02-compute-monitoring/03-eks-cloudwatch/` | Relationship | 30, 105 | ⬜ |
 
 ## Phase 13 — Remaining niche services (single consolidated doc each)
 
-| 108 | Athena | `01-services/01-analytics/01-athena/` | Service | 25 | ⬜ |
-| 109 | Data Firehose | `01-services/01-analytics/02-data-firehose/` | Service | 25 | ⬜ |
-| 110 | SES | `01-services/03-business-applications/01-ses/` | Service | — | ⬜ |
-| 111 | DataSync | `01-services/11-migration-transfer/01-datasync/` | Service | 25, 26 | ⬜ |
-| 112 | X-Ray | `01-services/08-developer-tools/01-x-ray/` | Service | 30, 35 | ⬜ |
-| 113 | Storage Gateway | `01-services/14-storage/06-storage-gateway/` | Service | 25 | ⬜ |
-| 114 | Bedrock | `01-services/09-machine-learning-ai/01-bedrock/` | Service | — | ⬜ |
-| 115 | Kiro | `01-services/08-developer-tools/02-kiro/` | Service | — | ⬜ |
-| 116 | Health Dashboard | `01-services/10-management-governance/09-health-dashboard/` | Service | 30 | ⬜ |
-| 117 | Control Tower | `01-services/10-management-governance/08-control-tower/` | Service | 76 | ⬜ |
-| 118 | Managed Grafana / Prometheus | `01-services/10-management-governance/10-managed-grafana/`, `11-managed-prometheus/` | Service | 30 | ⬜ |
-| 119 | IPAM | `01-services/10-management-governance/17-ipam/` | Service | 3 | ⬜ |
+| 108 | Athena | `02-services/01-analytics/01-athena/` | Service | 25 | ⬜ |
+| 109 | Data Firehose | `02-services/01-analytics/02-data-firehose/` | Service | 25 | ⬜ |
+| 110 | SES | `02-services/03-business-applications/01-ses/` | Service | — | ⬜ |
+| 111 | DataSync | `02-services/11-migration-transfer/01-datasync/` | Service | 25, 26 | ⬜ |
+| 112 | X-Ray | `02-services/08-developer-tools/01-x-ray/` | Service | 30, 35 | ⬜ |
+| 113 | Storage Gateway | `02-services/14-storage/06-storage-gateway/` | Service | 25 | ⬜ |
+| 114 | Bedrock | `02-services/09-machine-learning-ai/01-bedrock/` | Service | — | ⬜ |
+| 115 | Kiro | `02-services/08-developer-tools/02-kiro/` | Service | — | ⬜ |
+| 116 | Health Dashboard | `02-services/10-management-governance/09-health-dashboard/` | Service | 30 | ⬜ |
+| 117 | Control Tower | `02-services/10-management-governance/08-control-tower/` | Service | 76 | ⬜ |
+| 118 | Managed Grafana / Prometheus | `02-services/10-management-governance/10-managed-grafana/`, `11-managed-prometheus/` | Service | 30 | ⬜ |
+| 119 | IPAM | `02-services/10-management-governance/17-ipam/` | Service | 3 | ⬜ |
 
 ## Phase 0 — done
 
 | # | Topic | Canonical path | Status |
 |---|-------|----------------|--------|
-| 0 | IAM | `01-services/13-security-identity-compliance/01-iam/` | ✅ |
+| 0 | IAM | `02-services/13-security-identity-compliance/01-iam/` | ✅ |
 
 ## Cross-service documents — produced on demand once both parents exist
 
@@ -971,36 +961,20 @@ Written once the services feeding a domain are done: Domain 1 after Phase 4, Dom
 
 ---
 
-# 12. WHY THERE ARE BOTH SERVICES AND CONCEPTS
+# 12. WHY THERE ARE BOTH CONCEPTS AND SERVICES
 
-This distinction is fundamental.
-
-## Services
-
-`01-services/` answers:
-
-> **What is this AWS service and how do I operate it?**
-
-Example:
-
-```text
-01-services/05-compute/01-ec2/
-```
-
-contains the canonical EC2 knowledge.
-
----
+This distinction is fundamental, and the order matters: **concepts come first** because they are the core knowledge that the services build on.
 
 ## Concepts
 
-`02-concepts/` answers:
+`01-concepts/` answers:
 
 > **What is this fundamental CloudOps concept across AWS?**
 
 For example:
 
 ```text
-02-concepts/01-networking/01-ip-addressing/
+01-concepts/01-networking/01-ip-addressing/
 ```
 
 contains the canonical CIDR / IP addressing concept.
@@ -1011,6 +985,22 @@ It should not become a service manual.
 
 ---
 
+## Services
+
+`02-services/` answers:
+
+> **What is this AWS service and how do I operate it?**
+
+Example:
+
+```text
+02-services/05-compute/01-ec2/
+```
+
+contains the canonical EC2 knowledge.
+
+---
+
 # 13. CANONICAL KNOWLEDGE RULE
 
 Every major concept should have **one canonical source of truth** in the repository.
@@ -1018,12 +1008,12 @@ Every major concept should have **one canonical source of truth** in the reposit
 For example:
 
 ```text
-01-services/12-networking-content-delivery/01-vpc/
+02-services/12-networking-content-delivery/01-vpc/
 ```
 
-is the canonical home for VPC and its networking components (subnets, route tables, VPC endpoints, flow logs, and the reachability analyzer). See section 22 for the full internal structure. Note: AWS's in-scope service list categorizes security groups, NACLs, NAT gateways, internet gateways, and egress-only internet gateways under Security, Identity, and Compliance, so those resources have their canonical home under `01-services/13-security-identity-compliance/` (see section 24).
+is the canonical home for VPC and its networking components (subnets, route tables, VPC endpoints, flow logs, and the reachability analyzer). See section 22 for the full internal structure. Note: AWS's in-scope service list categorizes security groups, NACLs, NAT gateways, internet gateways, and egress-only internet gateways under Security, Identity, and Compliance, so those resources have their canonical home under `02-services/13-security-identity-compliance/` (see section 24).
 
-**Canonical-home resolution rule:** a named AWS resource that you provision and operate (VPC, EC2, RDS, NAT gateway, security group, etc.) has its canonical home under `01-services/`. The `02-concepts/` layer holds only cross-cutting principles that are not tied to a single resource (CIDR/IP addressing, IPv4 vs IPv6, DNS, routing, encryption, high availability, elasticity, etc.). When a subject could be either, ask: *is this a resource I create in the console/API, or a principle that spans many resources?* Resources go to `01-services/`, principles go to `02-concepts/`.
+**Canonical-home resolution rule:** a named AWS resource that you provision and operate (VPC, EC2, RDS, NAT gateway, security group, etc.) has its canonical home under `02-services/`. The `01-concepts/` layer holds only cross-cutting principles that are not tied to a single resource (CIDR/IP addressing, IPv4 vs IPv6, DNS, routing, encryption, high availability, elasticity, etc.). When a subject could be either, ask: *is this a resource I create in the console/API, or a principle that spans many resources?* Resources go to `02-services/`, principles go to `01-concepts/`.
 
 Do NOT create three independent full VPC documents:
 
@@ -1038,7 +1028,7 @@ because that will create duplicated information and eventually conflicting expla
 Instead:
 
 ```text
-01-services/12-networking-content-delivery/01-vpc/
+02-services/12-networking-content-delivery/01-vpc/
         │
         ├── README.md
         ├── vpc-fundamentals.md
@@ -1100,7 +1090,7 @@ The EC2/VPC relationship document can explain:
 The canonical VPC documentation remains here:
 
 ```text
-01-services/12-networking-content-delivery/01-vpc/
+02-services/12-networking-content-delivery/01-vpc/
 ```
 
 This creates **context without duplication**.
@@ -1194,7 +1184,7 @@ Do not repeat the entire underlying service documentation.
 
 For every new service/topic, determine its best location dynamically.
 
-Do not assume every input belongs in `01-services/`.
+Do not assume every input belongs in `02-services/`.
 
 Use the following logic:
 
@@ -1203,14 +1193,14 @@ Use the following logic:
 Canonical home:
 
 ```text
-01-services/<aws-category>/<service>/
+02-services/<aws-category>/<service>/
 ```
 
 Example:
 
 ```text
 Amazon EC2
-→ 01-services/05-compute/01-ec2/
+→ 02-services/05-compute/01-ec2/
 ```
 
 ---
@@ -1220,14 +1210,14 @@ Amazon EC2
 Canonical home:
 
 ```text
-02-concepts/<concept-category>/<concept>/
+01-concepts/<concept-category>/<concept>/
 ```
 
 Example:
 
 ```text
 CIDR / IP addressing model
-→ 02-concepts/01-networking/01-ip-addressing/
+→ 01-concepts/01-networking/01-ip-addressing/
 ```
 
 ---
@@ -1326,7 +1316,7 @@ For example:
 ### Existing
 
 ```text
-01-services/12-networking-content-delivery/01-vpc/
+02-services/12-networking-content-delivery/01-vpc/
 ```
 
 ### New
@@ -1444,7 +1434,7 @@ VPC should be treated as a major knowledge area.
 A possible structure is:
 
 ```text
-01-services/12-networking-content-delivery/01-vpc/
+02-services/12-networking-content-delivery/01-vpc/
 │
 ├── README.md
 ├── vpc-fundamentals.md
@@ -2152,8 +2142,8 @@ For example:
 ```markdown
 See also:
 
-- [VPC](../../../01-services/12-networking-content-delivery/01-vpc/README.md)
-- [Security Groups](../../../01-services/13-security-identity-compliance/14-security-groups/README.md)
+- [VPC](../../../02-services/12-networking-content-delivery/01-vpc/README.md)
+- [Security Groups](../../../02-services/13-security-identity-compliance/14-security-groups/README.md)
 - [EC2 + VPC](../../../03-cross-service/01-compute-networking/01-ec2-vpc/README.md)
 - [Domain 5 — Networking](../../../04-domains/05-networking-content-delivery/README.md)
 ```
@@ -2171,7 +2161,7 @@ Do not add YAML front matter to any document. Every document starts directly wit
 The information front matter would have carried is expressed elsewhere, so nothing is lost:
 
 - **Topic identity** — the title heading and the document's position in the numbered directory tree.
-- **AWS category** — the category folder the service lives in under `01-services/` (e.g. `13-security-identity-compliance/`).
+- **AWS category** — the category folder the service lives in under `02-services/` (e.g. `13-security-identity-compliance/`).
 - **SOA-C03 relevance** — stated in prose in the document's "SOA-C03 relevance" section.
 - **Canonical status** — established by file location (§13), never by a `canonical:` flag.
 
@@ -2179,7 +2169,7 @@ The information front matter would have carried is expressed elsewhere, so nothi
 
 # 44. CANONICAL SOURCE OF TRUTH
 
-A topic has exactly one canonical home (§13). Do not mark it with a flag; the numbered path under `01-services/` or `02-concepts/` is the marker. Relationship documents under `03-cross-service/` are context, not canonical homes.
+A topic has exactly one canonical home (§13). Do not mark it with a flag; the numbered path under `02-services/` or `01-concepts/` is the marker. Relationship documents under `03-cross-service/` are context, not canonical homes.
 
 ---
 
@@ -2206,7 +2196,7 @@ Do not confuse repository organization with study order.
 A VPC document may live under:
 
 ```text
-01-services/12-networking-content-delivery/01-vpc/
+02-services/12-networking-content-delivery/01-vpc/
 ```
 
 while being required to understand:
@@ -2326,13 +2316,13 @@ Every major service should have a quick-review file.
 Example:
 
 ```text
-01-services/05-compute/01-ec2/exam-review.md
+02-services/05-compute/01-ec2/exam-review.md
 ```
 
 or:
 
 ```text
-01-services/05-compute/01-ec2/quick-review.md
+02-services/05-compute/01-ec2/quick-review.md
 ```
 
 It should contain only:

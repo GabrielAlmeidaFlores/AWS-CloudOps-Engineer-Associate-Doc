@@ -40,5 +40,5 @@ Each document ends with its own `Sources` section; there is no separate `sources
 
 See also:
 
-- [VPC](../../../01-services/12-networking-content-delivery/01-vpc/README.md)
+- [VPC](../../../02-services/12-networking-content-delivery/01-vpc/README.md)
 - [Domain 5 — Networking and Content Delivery](../../../04-domains/05-networking-content-delivery/README.md)

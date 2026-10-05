@@ -44,8 +44,8 @@ The goal is to understand **how AWS services actually behave** and **how to reas
 
 ```
 aws-cloudops-soa-c03/
-├── 01-services/          Canonical documentation for individual AWS services
-├── 02-concepts/          Cross-cutting principles (networking, security, reliability…)
+├── 01-concepts/          Cross-cutting principles (networking, security, reliability…)
+├── 02-services/          Canonical documentation for individual AWS services
 ├── 03-cross-service/     Service + service relationship documents
 ├── 04-domains/           Knowledge maps for the five exam domains
 ├── 05-scenarios/         Original scenario-based reasoning exercises
@@ -56,12 +56,12 @@ aws-cloudops-soa-c03/
 └── 99-archive/           Deprecated, historical, and SOA-C02 material
 ```
 
-Folders and files carry numeric prefixes that encode the read sequence (e.g. `01-services/13-security-identity-compliance/01-iam/`). `README.md` is the only file without a prefix — it is the entry point of its folder. Directories are created progressively as each topic is documented.
+Folders and files carry numeric prefixes that encode the read sequence (e.g. `01-concepts/01-networking/01-ip-addressing/`). `README.md` is the only file without a prefix — it is the entry point of its folder. Directories are created progressively as each topic is documented.
 
 ### How the layers relate
 
-- **`01-services/`** answers *"What is this AWS service and how do I operate it?"*
-- **`02-concepts/`** answers *"What is this fundamental CloudOps principle across AWS?"*
+- **`01-concepts/`** answers *"What is this fundamental CloudOps principle across AWS?"* — the core knowledge, read first.
+- **`02-services/`** answers *"What is this AWS service and how do I operate it?"*
 - **`03-cross-service/`** answers *"What happens when two or more services interact?"*
 - **`04-domains/`** maps that knowledge onto the exam's tasks and skills.
 
@@ -72,7 +72,7 @@ Each major concept has **one canonical home**. Related documents link to it rath
 ## 🧭 How to use this repository
 
 1. Read the [SOA-C03 exam guide](assets/docs/soa-c03-exam-guide.pdf) for scope, domains, tasks, and skills.
-2. Study a topic from [`01-services/`](01-services/) (a service) or [`02-concepts/`](02-concepts/) (a principle).
+2. Study a topic from [`01-concepts/`](01-concepts/) (a principle) or [`02-services/`](02-services/) (a service).
 3. Reinforce it through the matching `03-cross-service/` relationship and `04-domains/` context.
 4. Test your reasoning with `05-scenarios/` and build muscle memory in `06-labs/`.
 5. Before the exam, review with `07-cheatsheets/`.
@@ -87,9 +87,9 @@ Documentation proceeds one topic at a time, following the [study roadmap in `AGE
 
 | Status | Topic | Location |
 |--------|-------|----------|
-| ✅ | IAM | [`01-services/13-security-identity-compliance/01-iam/`](01-services/13-security-identity-compliance/01-iam/) |
-| ✅ | IP addressing / CIDR | [`02-concepts/01-networking/01-ip-addressing/`](02-concepts/01-networking/01-ip-addressing/) |
-| ⬜ | IPv4 vs IPv6 *(next)* | `02-concepts/01-networking/02-ipv4-ipv6/` |
+| ✅ | IAM | [`02-services/13-security-identity-compliance/01-iam/`](02-services/13-security-identity-compliance/01-iam/) |
+| ✅ | IP addressing / CIDR | [`01-concepts/01-networking/01-ip-addressing/`](01-concepts/01-networking/01-ip-addressing/) |
+| ⬜ | IPv4 vs IPv6 *(next)* | `01-concepts/01-networking/02-ipv4-ipv6/` |
 
 ---
 
