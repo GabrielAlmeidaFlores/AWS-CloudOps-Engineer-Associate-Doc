@@ -17,16 +17,16 @@ A subnet's range is a subset of the VPC CIDR. Subnets in the same VPC cannot ove
 
 AWS reserves **five** addresses in every IPv4 subnet: the first four and the last. For `10.0.0.0/24`:
 
-| Address | Reserved for |
-|---------|--------------|
-| `10.0.0.0` | Network address |
-| `10.0.0.1` | VPC router |
-| `10.0.0.2` | DNS (base of the subnet range + 2) |
-| `10.0.0.3` | Future use |
-| `10.0.0.255` | Broadcast (AWS does not support broadcast; the address is still held) |
+| Address | Reserved for | Purpose |
+|---------|--------------|---------|
+| `10.0.0.0` | Network address | Identifies the subnet block itself; never assigned to a resource. |
+| `10.0.0.1` | VPC router | The subnet's default gateway; routes traffic into and out of the VPC. |
+| `10.0.0.2` | DNS | Amazon Route 53 Resolver — the VPC's DNS server, located at the VPC range base + 2. |
+| `10.0.0.3` | Future use | Held by AWS for future functionality; not assignable. |
+| `10.0.0.255` | Broadcast | AWS does not support broadcast; the address is held but never used. |
 
 > [!IMPORTANT]
-> AWS reserves **five** addresses in every IPv4 subnet: the network address, the VPC router (`.1`), the DNS server (base of the subnet range + 2, i.e. `.2`), one for future use (`.3`), and the broadcast address (the last address). Usable addresses therefore equal `2^(32 − n) − 5`, not the `− 2` you may have learned for plain IPv4. A `/28` gives 11 usable addresses, not 14. Any sizing question that ignores the extra three AWS reservations will get the wrong answer.
+> AWS reserves **five** addresses in every IPv4 subnet: the network address, the VPC router (`.1`), the DNS server (VPC range base + 2, i.e. `.2`), one for future use (`.3`), and the broadcast address (the last address). Usable addresses therefore equal `2^(32 − n) − 5`, not the `− 2` you may have learned for plain IPv4. A `/28` gives 11 usable addresses, not 14. Any sizing question that ignores the extra three AWS reservations will get the wrong answer.
 
 So a `/24` subnet yields `256 − 5 = 251` usable addresses, and a `/28` yields `16 − 5 = 11`.
 

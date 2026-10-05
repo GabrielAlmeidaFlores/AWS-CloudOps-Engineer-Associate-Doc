@@ -20,7 +20,7 @@ Example subnet `10.0.0.0/24`:
 |---------|--------------|
 | `10.0.0.0` | Network address |
 | `10.0.0.1` | VPC router |
-| `10.0.0.2` | DNS (base + 2) |
+| `10.0.0.2` | DNS (VPC base + 2) |
 | `10.0.0.3` | Future use |
 | `10.0.0.255` | Broadcast |
 
