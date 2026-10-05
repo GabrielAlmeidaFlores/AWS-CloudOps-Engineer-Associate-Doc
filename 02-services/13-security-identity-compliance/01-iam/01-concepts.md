@@ -21,6 +21,22 @@ A policy is a JSON document with a list of statements. Each statement has:
 - **Resource** — the ARN the action applies to, or `*`.
 - **Condition** (optional) — when the statement applies, e.g. `aws:SourceIp`, `aws:PrincipalOrgID`.
 
+A complete statement that lets an application read objects under one bucket prefix, but only when the request arrives through a specific VPC endpoint:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::example-bucket/reports/*",
+    "Condition": { "StringEquals": { "aws:SourceVpce": "vpce-0abc123" } }
+  }]
+}
+```
+
+Reading it element by element: `Effect: Allow` grants the action; `Action` names one operation (`s3:GetObject`) rather than `s3:*`; `Resource` scopes the grant to the `reports/` prefix, where the trailing `/*` matches every object under it; and `Condition` narrows the grant to traffic that arrives through that VPC endpoint, so the same role used over the public internet is denied. That last clause is what makes this a least-privilege statement and not a broad one.
+
 Three policy types matter most:
 
 | Type | Attached to | Scope |
@@ -58,6 +74,21 @@ A role has two halves:
 
 - **Trust policy** — who may assume the role (the principal). Written as a resource-based policy on the role.
 - **Permissions policy** — what the assumed role may do.
+
+A trust policy that lets the EC2 service assume the role — the trust half of an instance role:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": { "Service": "ec2.amazonaws.com" },
+    "Action": "sts:AssumeRole"
+  }]
+}
+```
+
+The `Principal` names `ec2.amazonaws.com`, so only the EC2 service can assume it; swap that for an account ID (`"AWS": "arn:aws:iam::123456789012:root"`) to enable cross-account access. Note there is no `Resource` element — on a role's trust policy the role itself is the resource.
 
 Common trust principals: an AWS service (`ec2.amazonaws.com`), another account ID, or a federated IdP. When you attach a role to an EC2 instance via an **instance profile**, the instance metadata service (IMDS) rotates temporary credentials so the instance never stores long-lived keys.
 

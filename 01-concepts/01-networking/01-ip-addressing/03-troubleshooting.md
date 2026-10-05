@@ -26,6 +26,20 @@ flowchart TD
 
 When a subnet is full, confirm the real usable count before rebuilding. A `/28` holds 16 addresses and only 11 usable; a `/24` holds 251 usable. The five reserved addresses are gone before any instance is launched, so a subnet that reports "full" at 251 instances on a `/24` is behaving correctly. Because a subnet cannot be resized, the fixes are to place the resource in a different subnet, or to build a larger subnet from a secondary VPC CIDR block.
 
+Inspect the numbers directly with the Amazon EC2 CLI:
+
+```bash
+# The VPC's IPv4 CIDR blocks
+aws ec2 describe-vpcs --vpc-ids vpc-0abc123 \
+  --query 'Vpcs[].CidrBlockAssociationSet[].CidrBlock'
+
+# A subnet's CIDR and how many addresses remain
+aws ec2 describe-subnets --subnet-ids subnet-0abc123 \
+  --query 'Subnets[].[CidrBlock,AvailableIpAddressCount]'
+```
+
+`AvailableIpAddressCount` already excludes the five reserved addresses, so it is the number of addresses you can actually assign — not the raw `2^(32−n)` total.
+
 ## The connectivity check
 
 When peering or a Transit Gateway attachment fails to connect, compare the two CIDRs for overlap before anything else. Any overlap is fatal: the request fails rather than connecting partially, and it fails at the control plane, so nothing appears in flow logs. Because neither VPC's CIDR can be resized, the fix is to re-address one side — which is why address planning precedes provisioning.

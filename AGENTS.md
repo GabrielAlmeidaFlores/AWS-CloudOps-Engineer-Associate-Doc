@@ -734,7 +734,7 @@ aws-cloudops-soa-c03/
 │   └── 07-mixed-architecture/
 │
 ├── 07-cheatsheets/
-│   ├── 02-services.md
+│   ├── 01-services.md
 │   ├── 02-networking.md
 │   ├── 03-security.md
 │   ├── 04-monitoring.md
@@ -1721,6 +1721,37 @@ Complete:
 > An explicit `Deny` overrides every `Allow` in any applicable policy — identity, resource, permissions boundary, and SCP. This decides most "why is access denied" questions: even when an `Allow` is present, a single `Deny` anywhere in the evaluation chain blocks the action. Check boundaries and SCPs first, because that is where candidates overlook a deny.
 
 Apply this same standard to every section: prose must teach the full concept, not gesture at it.
+
+#### Always include examples
+
+Every document must show, not only describe. When a section explains an abstract structure — a JSON policy, a config file, a CLI command, a role trust relationship, a CloudFormation snippet — follow the description with a minimal, correct, real example. A schema with no instance is a partial explanation: the reader learns the shape of the thing but not how it looks in practice.
+
+- Give the example a short lead-in that says what it does ("Allow an EC2 instance to read one S3 prefix").
+- Keep it minimal but complete and valid — copy-pasteable, never a skeleton with `...`.
+- Annotate the non-obvious line with a comment or a follow-up sentence.
+- Prefer a realistic example to a toy one (`s3:GetObject` on a bucket ARN, not `Action: "*"`).
+
+Too thin:
+
+> A policy statement has `Effect`, `Action`, `Resource`, and an optional `Condition`.
+
+Complete:
+
+> A statement that lets an application read objects under one S3 prefix, only when the request arrives through a specific VPC endpoint:
+>
+> ```json
+> {
+>   "Version": "2012-10-17",
+>   "Statement": [{
+>     "Effect": "Allow",
+>     "Action": "s3:GetObject",
+>     "Resource": "arn:aws:s3:::example-bucket/reports/*",
+>     "Condition": { "StringEquals": { "aws:SourceVpce": "vpce-0abc123" } }
+>   }]
+> }
+> ```
+
+The same applies to CLI commands (`aws ...`), IAM trust policies, security-group rules, route-table entries, and container definitions.
 
 ---
 

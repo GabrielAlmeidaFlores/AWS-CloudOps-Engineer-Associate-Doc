@@ -24,6 +24,22 @@ The two policy types answer different questions. An identity-based policy says w
 - **Resource-based** — attaches to a resource; a `Principal` element is required.
 - Same account: the two **combine** (union). An action allowed by either is allowed.
 
+An S3 bucket policy that grants one specific role read access — note the `Principal` element, which is what makes it resource-based:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": { "AWS": "arn:aws:iam::123456789012:role/read-reports" },
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::example-bucket/reports/*"
+  }]
+}
+```
+
+Written instead on that role's identity policy, the identical statement would simply omit `Principal` — the identity is implied by where the policy is attached.
+
 For cross-account access the distinction matters: a resource-based policy can grant another account access directly, whereas identity-based access requires the other account to assume a role.
 
 ## Managed vs inline policy

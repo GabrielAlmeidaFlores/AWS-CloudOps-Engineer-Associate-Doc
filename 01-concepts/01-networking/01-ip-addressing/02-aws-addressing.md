@@ -30,6 +30,18 @@ AWS reserves **five** addresses in every IPv4 subnet: the first four and the las
 
 So a `/24` subnet yields `256 − 5 = 251` usable addresses, and a `/28` yields `16 − 5 = 11`.
 
+Creating the range and a subnet inside it, as CLI calls:
+
+```bash
+# VPC with a /16 (65,536 addresses)
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+
+# A /24 subnet carved from it — 251 usable addresses after the 5 reservations
+aws ec2 create-subnet --vpc-id vpc-0abc123 --cidr-block 10.0.1.0/24
+```
+
+The subnet CIDR (`10.0.1.0/24`) sits entirely inside the VPC CIDR (`10.0.0.0/16`) and does not overlap any other subnet. AWS rejects a subnet outside the VPC range, and rejects one that overlaps an existing subnet in the same VPC.
+
 ## Private vs public IP
 
 - **Private IP** — an address inside your VPC CIDR, typically from the RFC 1918 ranges. Not routable on the internet.
