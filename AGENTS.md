@@ -152,69 +152,24 @@ You are a **research and synthesis agent**.
 
 Do not simply:
 
-```text
-Search AWS
-→ summarize AWS
-→ finish
+```mermaid
+flowchart LR
+    A[Search AWS] --> B[Summarize AWS] --> C[Finish]
 ```
 
 Instead:
 
-```text
-                 ┌──────────────────────┐
-                 │   SOA-C03 Exam Guide │
-                 └──────────┬───────────┘
-                            │
-                            ▼
-                ┌───────────────────────┐
-                │ Official AWS Docs     │
-                └──────────┬────────────┘
-                           │
-                           ▼
-                ┌───────────────────────┐
-                │ AWS Architecture /    │
-                │ Prescriptive Guidance │
-                └──────────┬────────────┘
-                           │
-                           ▼
-                ┌───────────────────────┐
-                │ AWS re:Post / Blogs   │
-                └──────────┬────────────┘
-                           │
-                           ▼
-                ┌───────────────────────┐
-                │ Practitioner /        │
-                │ Community Knowledge   │
-                └──────────┬────────────┘
-                           │
-                           ▼
-                ┌───────────────────────┐
-                │ Cross-check claims    │
-                │ and conflicts         │
-                └──────────┬────────────┘
-                           │
-                           ▼
-                ┌───────────────────────┐
-                │ Map knowledge to      │
-                │ SOA-C03 requirements  │
-                └──────────┬────────────┘
-                           │
-                           ▼
-                ┌───────────────────────┐
-                │ Identify relationships│
-                │ and dependencies      │
-                └──────────┬────────────┘
-                           │
-                           ▼
-                ┌───────────────────────┐
-                │ Determine repository  │
-                │ placement             │
-                └──────────┬────────────┘
-                           │
-                           ▼
-                ┌───────────────────────┐
-                │ Generate documentation│
-                └───────────────────────┘
+```mermaid
+flowchart TD
+    A["SOA-C03 Exam Guide"] --> B["Official AWS Docs"]
+    B --> C["AWS Architecture / Prescriptive Guidance"]
+    C --> D["AWS re:Post / Blogs"]
+    D --> E["Practitioner / Community Knowledge"]
+    E --> F["Cross-check claims and conflicts"]
+    F --> G["Map knowledge to SOA-C03 requirements"]
+    G --> H["Identify relationships and dependencies"]
+    H --> I["Determine repository placement"]
+    I --> J["Generate documentation"]
 ```
 
 The research process should be **iterative**.
@@ -387,20 +342,15 @@ For important claims, compare information across sources.
 
 Think in terms of:
 
-```text
-Claim
-  ↓
-Source A
-  ↓
-Source B
-  ↓
-Source C
-  ↓
-Does the evidence agree?
-  ↓
-If not → investigate why
-  ↓
-Determine the authoritative/current interpretation
+```mermaid
+flowchart TD
+    A[Claim] --> B[Source A]
+    B --> C[Source B]
+    C --> D[Source C]
+    D --> E{"Does the evidence agree?"}
+    E -->|No| F[Investigate why]
+    E -->|Yes| G["Determine the authoritative/current interpretation"]
+    F --> G
 ```
 
 Possible explanations for conflicts include:
@@ -476,17 +426,9 @@ Create original scenarios based on legitimate, publicly documented AWS knowledge
 
 The repository must be organized around **four layers**:
 
-```text
-CERTIFICATION
-     │
-     ▼
-DOMAINS
-     │
-     ▼
-CANONICAL SERVICES & CONCEPTS
-     │
-     ▼
-CROSS-SERVICE RELATIONSHIPS
+```mermaid
+flowchart TD
+    A[CERTIFICATION] --> B[DOMAINS] --> C["CANONICAL SERVICES & CONCEPTS"] --> D["CROSS-SERVICE RELATIONSHIPS"]
 ```
 
 With additional supporting layers for:
@@ -1550,37 +1492,28 @@ This is the architecture you should use throughout the repository.
 
 For every document, identify the relationship between:
 
-```text
-Service
-   ↓
-Concepts
-   ↓
-SOA-C03 Tasks
-   ↓
-SOA-C03 Skills
-   ↓
-Operational Scenarios
-   ↓
-Related Services
+```mermaid
+flowchart TD
+    A[Service] --> B[Concepts] --> C["SOA-C03 Tasks"] --> D["SOA-C03 Skills"] --> E["Operational Scenarios"] --> F["Related Services"]
 ```
 
 For example:
 
-```text
-CloudWatch
-    │
-    ├── Metrics
-    ├── Logs
-    ├── Alarms
-    ├── Agent
-    └── Dashboards
-          │
-          ▼
-SOA-C03 Domain 1
-          │
-          ├── Task 1.1
-          ├── Task 1.2
-          └── Task 1.3
+```mermaid
+flowchart TD
+    CW[CloudWatch] --> M[Metrics]
+    CW --> L[Logs]
+    CW --> AL[Alarms]
+    CW --> AG[Agent]
+    CW --> DB[Dashboards]
+    M --> D1["SOA-C03 Domain 1"]
+    L --> D1
+    AL --> D1
+    AG --> D1
+    DB --> D1
+    D1 --> T1["Task 1.1"]
+    D1 --> T2["Task 1.2"]
+    D1 --> T3["Task 1.3"]
 ```
 
 The current SOA-C03 Domain 1 explicitly includes monitoring/logging configuration, CloudWatch agent management, alarms, dashboards, notifications, remediation, EventBridge, Systems Manager automation, and performance analysis.
@@ -1698,46 +1631,23 @@ Do not assume that learning services individually is sufficient.
 
 The exam frequently requires understanding interactions such as:
 
-```text
-CloudWatch
-    ↓
-Alarm
-    ↓
-EventBridge
-    ↓
-Systems Manager
-    ↓
-Remediation
+```mermaid
+flowchart LR
+    CW[CloudWatch] --> Alarm[Alarm] --> EB[EventBridge] --> SSM["Systems Manager"] --> R[Remediation]
 ```
 
 or:
 
-```text
-Route 53
-    ↓
-Health Check
-    ↓
-ELB
-    ↓
-EC2
-    ↓
-Multi-AZ
+```mermaid
+flowchart LR
+    RN["Route 53"] --> HC["Health Check"] --> ELB[ELB] --> EC2[EC2] --> MAZ["Multi-AZ"]
 ```
 
 or:
 
-```text
-EC2
-    ↓
-VPC
-    ↓
-Subnet
-    ↓
-Route Table
-    ↓
-NAT Gateway
-    ↓
-Internet Gateway
+```mermaid
+flowchart LR
+    EC2[EC2] --> VPC[VPC] --> SN[Subnet] --> RT["Route Table"] --> NAT["NAT Gateway"] --> IGW["Internet Gateway"]
 ```
 
 Document these relationships explicitly.
@@ -1910,39 +1820,47 @@ For external diagrams:
 
 # 32. MERMAID DIAGRAMS
 
-When no useful official image exists, create an original Mermaid diagram.
+## Always Mermaid, never ASCII art
 
-Use Mermaid for:
+Every diagram that represents a flow, process, pipeline, decision, architecture, request flow, data flow, network flow, relationship, or dependency MUST be a Mermaid diagram. Never draw a diagram as ASCII art — no vertical arrow chains (`↓`, `▼`), no box drawings, no `A → B → C` arrow chains. If a subject needs a diagram, it gets a Mermaid block.
 
-+ architecture;
-+ request flow;
-+ data flow;
-+ network flow;
-+ authentication;
-+ authorization;
-+ monitoring;
-+ remediation;
-+ deployment;
-+ automation;
-+ failover;
-+ recovery;
-+ service integration.
+Use Mermaid for architecture, request flow, data flow, network flow, authentication, authorization, monitoring, remediation, deployment, automation, failover, recovery, and service integration.
 
-Example:
+## Consistent patterns
+
+Every Mermaid diagram in the repository follows the same patterns. Do not invent a new style per document.
+
+| Diagram kind | Pattern |
+|--------------|---------|
+| Process, troubleshooting, decision flow | `flowchart TD` (top-down); decisions are `{Question?}` nodes |
+| Pipeline, request flow, data flow, service interaction | `flowchart LR` (left-to-right) |
+| Layered architecture, hierarchy, dependency chain | `flowchart TD` |
+| Sequence of calls between actors | `sequenceDiagram` |
+| State transitions | `stateDiagram-v2` |
+
+Rules that apply to every diagram:
+
+- Quote any node label that contains spaces or punctuation: `A["Check quotas/limits"]`, `RN["Route 53"]`. Never leave `(`, `)`, `/`, `&`, or `?` in an unquoted label — it breaks Mermaid.
+- Use short, stable node IDs (`A`, `EC2`, `VPC`); put the human-readable text in the label.
+- Solid arrows `-->`; label an arrow with `-->|label|` only when the relationship needs a word.
+- One idea per diagram; split anything past roughly 15 nodes.
+
+Example — process flow (`flowchart TD`):
 
 ```mermaid
 flowchart TD
-    EC2[EC2 Instance]
-    CW[CloudWatch]
-    Alarm[CloudWatch Alarm]
-    EB[EventBridge]
-    SSM[Systems Manager Automation]
+    A["Symptom"] --> B["Check metrics/logs/events"]
+    B --> C["Check configuration"]
+    C --> D{"Allowed?"}
+    D -->|No| E["Fix permission or route"]
+    D -->|Yes| F["Verify recovery"]
+```
 
-    EC2 --> CW
-    CW --> Alarm
-    Alarm --> EB
-    EB --> SSM
-    SSM --> EC2
+Example — service interaction (`flowchart LR`):
+
+```mermaid
+flowchart LR
+    EC2[EC2] --> CW[CloudWatch] --> Alarm["CloudWatch Alarm"] --> EB[EventBridge] --> SSM["Systems Manager"]
 ```
 
 All Mermaid syntax must be valid.
@@ -1969,28 +1887,9 @@ Troubleshooting content should teach a methodology.
 
 For example:
 
-```text
-Symptom
-  ↓
-Observe
-  ↓
-Check metrics/logs/events
-  ↓
-Identify affected component
-  ↓
-Check configuration
-  ↓
-Check permissions
-  ↓
-Check network path
-  ↓
-Check dependencies
-  ↓
-Check quotas/limits
-  ↓
-Apply remediation
-  ↓
-Verify recovery
+```mermaid
+flowchart TD
+    A[Symptom] --> B[Observe] --> C["Check metrics/logs/events"] --> D["Identify affected component"] --> E["Check configuration"] --> F["Check permissions"] --> G["Check network path"] --> H["Check dependencies"] --> I["Check quotas/limits"] --> J["Apply remediation"] --> K["Verify recovery"]
 ```
 
 Do not only list symptoms and fixes.
@@ -2243,18 +2142,10 @@ When a document requires another concept to be understood, explicitly reference 
 
 Example:
 
-```text
-EC2 networking
-        ↓
-requires understanding of
-        ↓
-VPC
-        ↓
-Subnets
-        ↓
-Route Tables
-        ↓
-Security Groups
+```mermaid
+flowchart TD
+    A["EC2 networking"] -->|"requires understanding of"| B[VPC]
+    B --> C[Subnets] --> D["Route Tables"] --> E["Security Groups"]
 ```
 
 This allows the repository to become an ordered learning graph without forcing every document into a rigid research order.
@@ -2636,20 +2527,9 @@ Use the smallest structure that preserves complete and useful knowledge.
 
 Before creating files, determine:
 
-```text
-What is this?
-        ↓
-Is it a service?
-        ↓
-Is it a concept?
-        ↓
-Is it a relationship?
-        ↓
-Is it a domain-context topic?
-        ↓
-Does an existing canonical document already cover it?
-        ↓
-What additional context is actually missing?
+```mermaid
+flowchart TD
+    A["What is this?"] --> B["Is it a service?"] --> C["Is it a concept?"] --> D["Is it a relationship?"] --> E["Is it a domain-context topic?"] --> F["Does an existing canonical document already cover it?"] --> G["What additional context is actually missing?"]
 ```
 
 Only then decide which files to create.

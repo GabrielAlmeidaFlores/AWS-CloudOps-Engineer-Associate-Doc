@@ -5,20 +5,14 @@ Access-denied is the most common IAM failure. Work it as a chain, not a guess.
 > [!TIP]
 > Start with the **IAM policy simulator** before any live call. It evaluates the effective permissions of a principal against a specific action and resource ARN and reports allow or deny plus the reason, without you triggering the real request or waiting for CloudTrail. Only when the simulator says "allowed" but the live call still fails do you reach for CloudTrail, the boundary/SCP, and `DecodeAuthorizationMessage`.
 
-```text
-Access denied on action X
-   ↓
-Confirm the principal actually running the call (get-caller-identity)
-   ↓
-Check the explicit Deny first (Deny overrides Allow)
-   ↓
-Is the action allowed by identity-based OR resource-based policy? (union)
-   ↓
-Is there a permissions boundary or SCP capping it? (intersection)
-   ↓
-Is a condition blocking it? (aws:RequestedRegion, aws:SourceIp, MFA, tag)
-   ↓
-Check the resource ARN the action targets
+```mermaid
+flowchart TD
+    A["Access denied on action X"] --> B["Confirm the principal actually running the call (get-caller-identity)"]
+    B --> C["Check the explicit Deny first (Deny overrides Allow)"]
+    C --> D["Is the action allowed by identity-based OR resource-based policy? (union)"]
+    D --> E["Is there a permissions boundary or SCP capping it? (intersection)"]
+    E --> F["Is a condition blocking it? (aws:RequestedRegion, aws:SourceIp, MFA, tag)"]
+    F --> G["Check the resource ARN the action targets"]
 ```
 
 ## Tools

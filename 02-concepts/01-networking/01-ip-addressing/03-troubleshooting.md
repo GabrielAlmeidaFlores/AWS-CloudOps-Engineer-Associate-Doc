@@ -2,18 +2,13 @@
 
 Most CIDR problems surface as one of two symptoms: a subnet runs out of addresses, or two networks cannot connect.
 
-```text
-Can't place a resource in a subnet
-   ↓
-Check subnet free addresses (usable = 2^(32−n) − 5)
-   ↓
-Check if the subnet is /28 (only 11 usable)
-   ↓
-Is the range inside the VPC CIDR and non-overlapping?
-   ↓
-Does the resource need a public IP but the subnet routes nowhere?
-   ↓
-Add a secondary VPC CIDR or create a larger subnet
+```mermaid
+flowchart TD
+    A["Can't place a resource in a subnet"] --> B["Check subnet free addresses (usable = 2^(32−n) − 5)"]
+    B --> C["Check if the subnet is /28 (only 11 usable)"]
+    C --> D["Is the range inside the VPC CIDR and non-overlapping?"]
+    D --> E["Does the resource need a public IP but the subnet routes nowhere?"]
+    E --> F["Add a secondary VPC CIDR or create a larger subnet"]
 ```
 
 ## Symptom table

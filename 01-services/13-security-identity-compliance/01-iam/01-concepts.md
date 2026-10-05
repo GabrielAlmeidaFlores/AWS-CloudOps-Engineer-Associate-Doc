@@ -43,9 +43,9 @@ This is the single most testable fact about IAM. When a principal requests an ac
 ```mermaid
 flowchart TD
     R[Request] --> A[Authenticate principal]
-    A --> E{Explicit Deny\nin any policy?}
+    A --> E{"Explicit Deny<br/>in any policy?"}
     E -->|yes| D[Deny]
-    E -->|no| U{Allowed by\nidentity or resource policy?}
+    E -->|no| U{"Allowed by<br/>identity or resource policy?"}
     U -->|no| D2[Implicit Deny]
     U -->|yes| AL[Allow]
 ```
