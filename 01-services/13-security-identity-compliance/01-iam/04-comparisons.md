@@ -5,6 +5,8 @@
 
 ## IAM user vs IAM role
 
+The core difference is credential lifetime. A user has permanent credentials (a password and/or access keys) that live until deleted or rotated. A role has none of its own — it is assumed, and the caller receives temporary STS credentials that expire. That lifetime difference is why a role is the safe choice for anything automated.
+
 | | IAM user | IAM role |
 |--|----------|----------|
 | Credentials | long-lived (password / access keys) | temporary (STS tokens) |
@@ -16,11 +18,17 @@ The exam's default answer for "a service or workload needs access" is **role**, 
 
 ## Identity-based vs resource-based policy
 
-- **Identity-based** attaches to a principal; no `Principal` element needed.
-- **Resource-based** attaches to a resource; a `Principal` element is required.
+The two policy types answer different questions. An identity-based policy says what a principal may do; a resource-based policy says who may touch the resource. For same-account access they combine as a union — either one can grant the action.
+
+- **Identity-based** — attaches to a principal; no `Principal` element needed.
+- **Resource-based** — attaches to a resource; a `Principal` element is required.
 - Same account: the two **combine** (union). An action allowed by either is allowed.
 
+For cross-account access the distinction matters: a resource-based policy can grant another account access directly, whereas identity-based access requires the other account to assume a role.
+
 ## Managed vs inline policy
+
+Managed policies are standalone documents you attach to many identities and version independently. Inline policies are embedded in a single identity and are deleted with it. Managed policies are the right default for anything shared; inline policies suit a one-off, tightly scoped grant that should not be reused.
 
 | | Managed | Inline |
 |--|---------|--------|
@@ -31,7 +39,9 @@ The exam's default answer for "a service or workload needs access" is **role**, 
 
 Prefer managed policies for anything reusable or shared.
 
-## IAM vs IAM Identity Center
+## IAM user vs IAM Identity Center
+
+IAM was built for one account. For an organization with many accounts and human users, IAM Identity Center provides a single sign-on portal backed by a directory or external IdP, and assigns access through permission sets mapped to accounts. This replaces the old pattern of creating a separate IAM user in every account.
 
 | | IAM | IAM Identity Center (SSO) |
 |--|-----|---------------------------|
@@ -44,10 +54,10 @@ For an organization with many accounts and human users, Identity Center (with pe
 
 ## Permissions boundary vs SCP
 
-Both cap permissions, at different scopes:
+Both cap permissions, but at different scopes and under different administration.
 
-- **Boundary** — attached to one user/role, within an account.
-- **SCP** — applied to an account (or OU) from Organizations, caps every principal in that account.
+- **Boundary** — attached to one user/role, inside an account; administered by whoever manages that identity.
+- **SCP** — applied to an account or OU from Organizations; caps every principal in that account, including the root user.
 
 Both are **intersections**: they reduce, never expand, effective permissions.
 

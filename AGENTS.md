@@ -1770,6 +1770,53 @@ For every service/topic, investigate the following concepts where relevant:
 
 Only include sections that are technically relevant.
 
+### Content depth and anti-shallow rule
+
+A document is finished when it has taught its subject, not when it has reached a length. Length is a byproduct of substance and never the goal. A thin document is a defect, and padding it is not the fix.
+
+**Substance floor.** Every substantive document — service, concept, or relationship; everything except a `README.md` index — must, where relevant to its role, contain:
+
+- the AWS-verified behavior: what actually happens, when, and under which configuration — not just a definition;
+- at least one concrete, verifiable value (limit, default, quota, interval, size, timeout, or pricing mechanism);
+- the operational reality: how it is configured, how it fails, and how that failure is diagnosed;
+- at least one exam-relevant distinction or trap;
+- the cross-service relationships that decide exam questions.
+
+A `README.md` index is the one exception. It is a map, not a lesson, and stays short by design.
+
+**Shallow-content triggers.** A document is incomplete — fix it before moving on — when any of these is true:
+
+- It reads as a definition or summary with no operational detail.
+- It contains no concrete number, limit, default, or CLI/API command.
+- A reader who already knew the title would learn nothing new.
+- It is a bare list of terms with no explanation of how or why.
+- It repeats, in different words, a point already made earlier in the same document.
+- Its sentences would fit unchanged in another service's documentation (the transplant test, §28).
+- Its tables restate one fact across several rows instead of adding new facts.
+- It is a "quick review" or "limits" file with only a handful of distinct facts.
+
+**Never pad.** Do not lengthen a document by:
+
+- rephrasing or restating a point already made;
+- adding introduction, summary, or transition sentences that carry no information;
+- restating the title or the obvious;
+- vague generality ("it is important to understand that…");
+- copying content that belongs to a sibling document — link to it instead.
+
+**How to deepen a document.** Add *new, verified, exam-relevant* content from these sources:
+
+- deeper AWS behavior and edge cases — what the console hides, what the docs bury in a note;
+- exact limits, defaults, and quotas, with units;
+- concrete CLI/API/IaC examples;
+- operational failure modes and the diagnostic path for each;
+- the cross-service interactions that decide exam questions;
+- comparisons where the distinction changes an answer;
+- original scenario reasoning (Scenario → Problem → Reasoning → Answer);
+- community misconceptions, corrected against AWS documentation;
+- pricing mechanisms and common cost traps, when relevant.
+
+Every added sentence must answer: *what does the reader now know that they did not before?* If it does not, cut it. A 600-word document of new facts beats a 1,200-word document that says the same things twice.
+
 ---
 
 # 30. DIAGRAM STRATEGY
@@ -2521,6 +2568,8 @@ If the service is simple, do not artificially create 15 Markdown files.
 
 Use the smallest structure that preserves complete and useful knowledge.
 
+"The smallest structure" means the fewest files that hold complete knowledge — never the thinnest content. Depth comes from relevant, verified facts (§29), not from file count. A single well-filled file beats five thin ones.
+
 ---
 
 # 61. RESEARCH BEFORE FILE CREATION
@@ -2593,6 +2642,13 @@ Before finalizing documentation, verify:
 + External sources clearly identified.
 + URLs are valid.
 + No fabricated citations.
+
+### Content depth
+
++ Every substantive document meets the substance floor (§29): verified behavior, at least one concrete value, operational detail, an exam trap, and cross-service links.
++ No document trips a shallow-content trigger (§29).
++ No document was lengthened by padding, rephrasing, or restating (the padding ban, §29).
++ Each document adds facts a reader could not infer from its title.
 
 Only after this process should the final documentation be generated.
 
