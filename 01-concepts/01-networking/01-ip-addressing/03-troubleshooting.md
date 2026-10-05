@@ -1,6 +1,6 @@
 # IP addressing troubleshooting
 
-Most CIDR problems surface as one of two symptoms: a subnet runs out of addresses, or two networks cannot connect. Work the first as a capacity problem and the second as an overlap problem — they have different causes and different fixes.
+Most CIDR problems surface as one of two symptoms: a subnet runs out of addresses, or two networks cannot connect. Work the first as a capacity problem and the second as an overlap problem; they have different causes and different fixes.
 
 ```mermaid
 flowchart TD
@@ -15,7 +15,7 @@ flowchart TD
 
 | Symptom | Likely cause | Fix |
 |---------|--------------|-----|
-| "Insufficient free addresses" in a subnet | The subnet exhausted its usable range — the 5 reserved addresses are gone first | Launch in another subnet, or build a larger subnet from a secondary VPC CIDR |
+| "Insufficient free addresses" in a subnet | The subnet exhausted its usable range, the 5 reserved addresses are gone first | Launch in another subnet, or build a larger subnet from a secondary VPC CIDR |
 | VPC peering or Transit Gateway attach fails | The two CIDRs overlap | Re-address one side (CIDRs cannot be resized) |
 | Can't add a secondary CIDR | It overlaps an existing block, or equals a route-table destination of the same size | Pick a non-overlapping range |
 | Resource can't be created in a range | The CIDR is a prohibited block (`127.0.0.0/8`, `169.254.0.0/16`, etc.) | Choose an RFC 1918 range |
@@ -38,11 +38,11 @@ aws ec2 describe-subnets --subnet-ids subnet-0abc123 \
   --query 'Subnets[].[CidrBlock,AvailableIpAddressCount]'
 ```
 
-`AvailableIpAddressCount` already excludes the five reserved addresses, so it is the number of addresses you can actually assign — not the raw `2^(32−n)` total.
+`AvailableIpAddressCount` already excludes the five reserved addresses, so it is the number of addresses you can actually assign, not the raw `2^(32−n)` total.
 
 ## The connectivity check
 
-When peering or a Transit Gateway attachment fails to connect, compare the two CIDRs for overlap before anything else. Any overlap is fatal: the request fails rather than connecting partially, and it fails at the control plane, so nothing appears in flow logs. Because neither VPC's CIDR can be resized, the fix is to re-address one side — which is why address planning precedes provisioning.
+When peering or a Transit Gateway attachment fails to connect, compare the two CIDRs for overlap before anything else. Any overlap is fatal: the request fails rather than connecting partially, and it fails at the control plane, so nothing appears in flow logs. Because neither VPC's CIDR can be resized, the fix is to re-address one side, which is why address planning precedes provisioning.
 
 ## The gateway check
 
@@ -50,6 +50,6 @@ A resource that is correctly addressed but still cannot reach the internet is us
 
 ## Sources
 
-- AWS — *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
-- AWS — *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
-- AWS — *Amazon VPC quotas*. https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+- AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
+- AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
+- AWS: *Amazon VPC quotas*. https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html

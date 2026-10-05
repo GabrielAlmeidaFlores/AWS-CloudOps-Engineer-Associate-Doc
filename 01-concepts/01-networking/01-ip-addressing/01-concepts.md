@@ -13,7 +13,7 @@ Subnetting works on the binary form. Each octet is 8 bits; four octets make 32.
 
 ## CIDR notation
 
-CIDR (Classless Inter-Domain Routing) writes a network as `a.b.c.d/n`, where `n` is the **prefix length** — the count of leading bits that identify the *network*. The remaining `32 − n` bits identify *hosts* in that network.
+CIDR (Classless Inter-Domain Routing) writes a network as `a.b.c.d/n`, where `n` is the **prefix length**, the count of leading bits that identify the *network*. The remaining `32 − n` bits identify *hosts* in that network.
 
 - `/24` → 24 network bits, 8 host bits.
 - `/16` → 16 network bits, 16 host bits.
@@ -32,7 +32,7 @@ The number of addresses in a block is `2^(32 − n)`:
 
 ## Network and broadcast
 
-The first address in a block — all host bits `0` — is the **network address**. The last — all host bits `1` — is the **broadcast address**. Classic IPv4 reserves both, so a plain network has `2^(32−n) − 2` usable addresses. AWS is stricter and reserves **five** per subnet (see [02-aws-addressing.md](02-aws-addressing.md)).
+The first address in a block (all host bits `0`) is the **network address**. The last (all host bits `1`) is the **broadcast address**. Classic IPv4 reserves both, so a plain network has `2^(32−n) − 2` usable addresses. AWS is stricter and reserves **five** per subnet (see [02-aws-addressing.md](02-aws-addressing.md)).
 
 ## Subnet math (worked)
 
@@ -57,9 +57,9 @@ A `/28` (`10.0.0.0/28`) has `2^4 = 16` addresses, `10.0.0.0` to `10.0.0.15`. Tha
 To size a subnet, count the resources you need, add the 5 reserved, and round **up** to the next power of two. Need 20 instances? 20 + 5 = 25, so take a `/27` (32 addresses), not a `/28` (16).
 
 > [!CAUTION]
-> Address space is global to your network, not local to one VPC. VPC CIDR blocks **must not overlap** for VPC peering, Transit Gateway attachments, or a Direct Connect gateway, and an overlapping block makes the peering request fail outright rather than connecting partway. Plan non-overlapping ranges across every VPC and account before provisioning — once an overlap exists, the only fix is to rebuild one side, because neither VPC's CIDR can be resized.
+> Address space is global to your network, not local to one VPC. VPC CIDR blocks **must not overlap** for VPC peering, Transit Gateway attachments, or a Direct Connect gateway, and an overlapping block makes the peering request fail outright rather than connecting partway. Plan non-overlapping ranges across every VPC and account before provisioning, once an overlap exists, the only fix is to rebuild one side, because neither VPC's CIDR can be resized.
 
 ## Sources
 
-- AWS — *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
-- AWS — *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
+- AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
+- AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html

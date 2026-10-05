@@ -1,7 +1,7 @@
 # IAM concepts
 
 > [!IMPORTANT]
-> The policy evaluation logic is the highest-yield IAM topic on the exam. Learn three rules cold: (1) **explicit `Deny` always wins** — a single deny in any policy overrides every allow; (2) **identity + resource policies are a union** — an action allowed by either succeeds, so a resource-based grant can work even when the identity policy is empty; (3) **permissions boundaries and SCPs are intersections** — they cap what an otherwise-allowed identity can do. Most "why is access denied" questions hinge on misreading which of these three applies.
+> The policy evaluation logic is the highest-yield IAM topic on the exam. Learn three rules cold: (1) **explicit `Deny` always wins**, because a single deny in any policy overrides every allow. (2) **Identity + resource policies are a union**, so an action allowed by either succeeds, and a resource-based grant can work even when the identity policy is empty. (3) **Permissions boundaries and SCPs are intersections**, so they cap what an otherwise-allowed identity can do. Most "why is access denied" questions hinge on misreading which of these three applies.
 
 ## Principals
 
@@ -16,10 +16,10 @@ A principal is an entity that can make authenticated requests to AWS.
 
 A policy is a JSON document with a list of statements. Each statement has:
 
-- **Effect** — `Allow` or `Deny`.
-- **Action** — the service operations (e.g. `s3:GetObject`).
-- **Resource** — the ARN the action applies to, or `*`.
-- **Condition** (optional) — when the statement applies, e.g. `aws:SourceIp`, `aws:PrincipalOrgID`.
+- **Effect**, `Allow` or `Deny`.
+- **Action**, the service operations (e.g. `s3:GetObject`).
+- **Resource**, the ARN the action applies to, or `*`.
+- **Condition** (optional), when the statement applies, e.g. `aws:SourceIp`, `aws:PrincipalOrgID`.
 
 A complete statement that lets an application read objects under one bucket prefix, but only when the request arrives through a specific VPC endpoint:
 
@@ -72,10 +72,10 @@ If no policy explicitly allows an action, the default is **implicit deny**. IAM 
 
 A role has two halves:
 
-- **Trust policy** — who may assume the role (the principal). Written as a resource-based policy on the role.
-- **Permissions policy** — what the assumed role may do.
+- **Trust policy**, who may assume the role (the principal). Written as a resource-based policy on the role.
+- **Permissions policy**, what the assumed role may do.
 
-A trust policy that lets the EC2 service assume the role — the trust half of an instance role:
+A trust policy that lets the EC2 service assume the role, the trust half of an instance role:
 
 ```json
 {
@@ -88,7 +88,7 @@ A trust policy that lets the EC2 service assume the role — the trust half of a
 }
 ```
 
-The `Principal` names `ec2.amazonaws.com`, so only the EC2 service can assume it; swap that for an account ID (`"AWS": "arn:aws:iam::123456789012:root"`) to enable cross-account access. Note there is no `Resource` element — on a role's trust policy the role itself is the resource.
+The `Principal` names `ec2.amazonaws.com`, so only the EC2 service can assume it; swap that for an account ID (`"AWS": "arn:aws:iam::123456789012:root"`) to enable cross-account access. Note there is no `Resource` element, on a role's trust policy the role itself is the resource.
 
 Common trust principals: an AWS service (`ec2.amazonaws.com`), another account ID, or a federated IdP. When you attach a role to an EC2 instance via an **instance profile**, the instance metadata service (IMDS) rotates temporary credentials so the instance never stores long-lived keys.
 
@@ -97,6 +97,6 @@ Common trust principals: an AWS service (`ec2.amazonaws.com`), another account I
 
 ## Sources
 
-- AWS — *Policy evaluation logic*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
-- AWS — *What is IAM?*. https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
-- AWS — *SOA-C03 exam guide, Content Domain 4*. https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03-domain4.html
+- AWS: *Policy evaluation logic*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+- AWS: *What is IAM?*. https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
+- AWS: *SOA-C03 exam guide, Content Domain 4*. https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03-domain4.html

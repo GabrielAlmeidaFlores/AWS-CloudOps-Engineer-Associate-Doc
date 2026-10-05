@@ -10,7 +10,7 @@ AWS reserves **five** addresses in every subnet: the network address, the VPC ro
 
 ### Why It Matters
 
-Sizing questions hinge on this single subtraction. A subnet with 16 addresses answers "how many instances fit?" with 11, and a scenario that needs 12 instances fails on a `/28` — it needs at least a `/27`.
+Sizing questions hinge on this single subtraction. A subnet with 16 addresses answers "how many instances fit?" with 11, and a scenario that needs 12 instances fails on a `/28`; it needs at least a `/27`.
 
 ---
 
@@ -24,7 +24,7 @@ A CIDR block cannot be made larger or smaller after creation. You can only attac
 
 ### Why It Matters
 
-"Fix the undersized VPC" scenarios reward attaching a secondary CIDR, not resizing. Because the primary block is permanent, address planning must happen before the VPC is created — a wrong choice at creation is only ever mitigated, never undone.
+"Fix the undersized VPC" scenarios reward attaching a secondary CIDR, not resizing. Because the primary block is permanent, address planning must happen before the VPC is created, a wrong choice at creation is only ever mitigated, never undone.
 
 ---
 
@@ -48,7 +48,7 @@ A `/28` is too small to be worth using.
 
 ### Actual AWS Behavior
 
-`/28` is the *minimum* subnet size AWS allows. It provides 16 addresses and 11 usable — enough for a few instances or a small interface-endpoint subnet.
+`/28` is the *minimum* subnet size AWS allows. It provides 16 addresses and 11 usable, enough for a few instances or a small interface-endpoint subnet.
 
 ### Why It Matters
 
@@ -84,7 +84,7 @@ Cost-optimization questions now include "release unused Elastic IPs" as a correc
 
 ## Sources
 
-- AWS — *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
-- AWS — *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
-- AWS — *Amazon VPC quotas*. https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
-- AWS — *SOA-C03 exam guide, Content Domain 5*. https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03-domain5.html
+- AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
+- AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
+- AWS: *Amazon VPC quotas*. https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+- AWS: *SOA-C03 exam guide, Content Domain 5*. https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03-domain5.html

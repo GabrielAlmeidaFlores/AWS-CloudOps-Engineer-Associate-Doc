@@ -1,11 +1,11 @@
 # IAM security
 
 > [!IMPORTANT]
-> Permissions boundaries and SCPs never *grant* access — they only narrow it. Each is an intersection: the effective permission is what the identity policy allows *and* the boundary or SCP does not exclude. So if a scenario asks how to give a user more access, a boundary or SCP is the wrong answer; adding one can only remove access that was already allowed. Candidates repeatedly pick "add a permissions boundary" to fix an over-permissioned user, when the boundary restricts rather than expands.
+> Permissions boundaries and SCPs never *grant* access; they only narrow it. Each is an intersection: the effective permission is what the identity policy allows *and* the boundary or SCP does not exclude. So if a scenario asks how to give a user more access, a boundary or SCP is the wrong answer; adding one can only remove access that was already allowed. Candidates repeatedly pick "add a permissions boundary" to fix an over-permissioned user, when the boundary restricts rather than expands.
 
 ## Root user protection
 
-The root user — the email address and password that created the account — has unrestricted access, including billing and account closure, and cannot be limited by IAM policies or SCPs. Protect it before anything else:
+The root user (the email address and password that created the account) has unrestricted access, including billing and account closure, and cannot be limited by IAM policies or SCPs. Protect it before anything else:
 
 - Enable MFA on the root user immediately.
 - Delete any root access keys; the root user should have none.
@@ -16,7 +16,7 @@ The root user — the email address and password that created the account — ha
 
 Grant only the actions and resources a principal needs.
 
-- Role over a long-lived user for any workload or cross-account access — a role yields temporary credentials, so a leaked credential expires on its own.
+- Role over a long-lived user for any workload or cross-account access, a role yields temporary credentials, so a leaked credential expires on its own.
 - Resource-based policies where the resource should be the point of control (S3 buckets, KMS keys, SQS queues), because access then travels with the resource rather than the caller.
 - Condition keys to narrow a broad action instead of adding a `Deny` (`aws:RequestedRegion`, `aws:SourceVpce`, `aws:PrincipalOrgID`).
 - Start from no permissions and add what is required, rather than starting from `*` and pruning. IAM Access Analyzer generates a policy from CloudTrail-observed access, which is a defensible starting point.
@@ -32,7 +32,7 @@ The IAM credential report is a downloadable CSV that lists every user and the st
 
 ## Permissions boundaries
 
-A permissions boundary is an IAM policy that sets the **maximum** permissions an identity can have. It attaches to a user or role, and the identity's effective permissions are the intersection of its identity-based policies and the boundary — the boundary can only take permissions away, never add them.
+A permissions boundary is an IAM policy that sets the **maximum** permissions an identity can have. It attaches to a user or role, and the identity's effective permissions are the intersection of its identity-based policies and the boundary, the boundary can only take permissions away, never add them.
 
 Boundaries exist so a trusted administrator can safely delegate identity *creation*. In a large account, a developer may be allowed to create roles, but a boundary on those roles caps what the roles can ever do, so the developer cannot escalate to full administrator by creating an over-permissioned role.
 
@@ -53,7 +53,7 @@ The boundary is written as an `Allow` policy, which is what confuses people: it 
 
 ## SCPs and RCPs
 
-AWS Organizations has two kinds of authorization policy that set guardrails across your accounts. Both are **intersections** in policy evaluation — they can only remove access, never grant it, and an action must pass them as well as the identity and resource policies. They differ in what they govern: an SCP governs what your principals may do; an RCP governs who may reach your resources.
+AWS Organizations has two kinds of authorization policy that set guardrails across your accounts. Both are **intersections** in policy evaluation; they can only remove access, never grant it, and an action must pass them as well as the identity and resource policies. They differ in what they govern: an SCP governs what your principals may do; an RCP governs who may reach your resources.
 
 ### Service control policy (SCP)
 
@@ -67,7 +67,7 @@ An SCP caps the maximum permissions for **IAM users and roles in a member accoun
 
 You work with SCPs in the AWS Organizations console under **Policies → Service control policies**, attached to the root, an OU, or an account, or with `aws organizations create-policy --type SERVICE_CONTROL_POLICY`. Control Tower and CloudFormation can deploy them at scale.
 
-An SCP that blocks every action outside two approved Regions — everything inside them stays allowed because `FullAWSAccess` still applies:
+An SCP that blocks every action outside two approved Regions, everything inside them stays allowed because `FullAWSAccess` still applies:
 
 ```json
 {
@@ -84,7 +84,7 @@ An SCP that blocks every action outside two approved Regions — everything insi
 
 ### Resource control policy (RCP)
 
-An RCP caps the maximum permissions for **resources in a member account**. It is the tool for controlling who can reach your resources — including principals from accounts outside your organization, which SCPs cannot touch.
+An RCP caps the maximum permissions for **resources in a member account**. It is the tool for controlling who can reach your resources, including principals from accounts outside your organization, which SCPs cannot touch.
 
 - Applies to a subset of services (for example Amazon S3, DynamoDB, SQS, KMS, and CloudWatch Logs), not all of them.
 - Is evaluated based on the **resource owner's** account, so it restricts external callers, not just your own principals.
@@ -93,7 +93,7 @@ An RCP caps the maximum permissions for **resources in a member account**. It is
 
 You work with RCPs in the AWS Organizations console under **Policies → Resource control policies**, or with `aws organizations create-policy --type RESOURCE_CONTROL_POLICY`.
 
-An RCP that denies access to an S3 bucket unless the caller belongs to your organization — the external-account protection SCPs cannot provide:
+An RCP that denies access to an S3 bucket unless the caller belongs to your organization, the external-account protection SCPs cannot provide:
 
 ```json
 {
@@ -125,12 +125,12 @@ An SCP limits what *your* principals can do; an RCP limits who can do things to 
 ## Rotation and credentials
 
 - Rotate access keys on a schedule; never commit them to a repository.
-- Give EC2, Lambda, and ECS workloads roles, not keys — via an instance profile or execution role.
+- Give EC2, Lambda, and ECS workloads roles, not keys, via an instance profile or execution role.
 - Use `aws sts get-caller-identity` to confirm which principal is acting in a session before debugging a permission error.
 
 ## Sources
 
-- AWS — *IAM security best practices*. https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
-- AWS — *Permissions boundaries for IAM entities*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
-- AWS — *Service control policies*. https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
-- AWS — *Resource control policies*. https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
+- AWS: *IAM security best practices*. https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
+- AWS: *Permissions boundaries for IAM entities*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+- AWS: *Service control policies*. https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
+- AWS: *Resource control policies*. https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html

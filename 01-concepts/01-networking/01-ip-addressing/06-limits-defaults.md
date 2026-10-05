@@ -65,7 +65,7 @@ The IPv4 CIDR-blocks limit is the one candidates miss: the primary block and eve
 
 ## Good to know
 
-- **RFC 1918:** `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` — the private ranges AWS recommends for VPCs.
+- **RFC 1918:** `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, the private ranges AWS recommends for VPCs.
 - **Prohibited VPC ranges:** `0.0.0.0/8`, `127.0.0.0/8`, `169.254.0.0/16`, `224.0.0.0/4` (multicast).
 - **Service-reserved range to avoid:** `172.17.0.0/16` (used internally by Cloud9 and SageMaker AI).
 - **IPv6 (VPC):** an Amazon-provided `/56` per VPC, with subnets typically `/64` (covered in [IPv4 vs IPv6](../02-ipv4-ipv6/README.md)).
@@ -74,7 +74,7 @@ The IPv4 CIDR-blocks limit is the one candidates miss: the primary block and eve
 
 ## Sources
 
-- AWS — *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
-- AWS — *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
-- AWS — *Amazon VPC quotas*. https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
-- AWS — *New – AWS Public IPv4 Address Charge + Public IP Insights*. https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/
+- AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
+- AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
+- AWS: *Amazon VPC quotas*. https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+- AWS: *New – AWS Public IPv4 Address Charge + Public IP Insights*. https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/

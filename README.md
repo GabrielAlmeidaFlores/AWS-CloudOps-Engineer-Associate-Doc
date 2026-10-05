@@ -18,7 +18,7 @@
 
 ## 🎯 What this is
 
-This repository is a study system for the **AWS Certified CloudOps Engineer – Associate (SOA-C03)** exam — formerly the *AWS Certified SysOps Administrator – Associate*. It is not a collection of copied AWS documentation. It is a knowledge graph that connects the exam's requirements, official AWS behavior, real-world operational practice, and cross-service relationships into one navigable reference.
+This repository is a study system for the **AWS Certified CloudOps Engineer – Associate (SOA-C03)** exam, formerly the *AWS Certified SysOps Administrator – Associate*. It is not a collection of copied AWS documentation. It is a knowledge graph that connects the exam's requirements, official AWS behavior, real-world operational practice, and cross-service relationships into one navigable reference.
 
 The goal is to understand **how AWS services actually behave** and **how to reason about them as an operator**, not just to memorize feature lists.
 
@@ -36,7 +36,7 @@ The goal is to understand **how AWS services actually behave** and **how to reas
 
 > The in-scope AWS service list is non-exhaustive and changes over time. Never treat a static list as the complete exam definition.
 
-**Exam guide:** [AWS Certified CloudOps Engineer – Associate (SOA-C03), official exam guide (PDF)](assets/docs/soa-c03-exam-guide.pdf) — scope, tasks, skills, and the in-scope service list. This is the authoritative reference for certification scope; it is not rewritten in the repository.
+**Exam guide:** [AWS Certified CloudOps Engineer – Associate (SOA-C03), official exam guide (PDF)](assets/docs/soa-c03-exam-guide.pdf): scope, tasks, skills, and the in-scope service list. This is the authoritative reference for certification scope; it is not rewritten in the repository.
 
 ---
 
@@ -56,11 +56,11 @@ aws-cloudops-soa-c03/
 └── 99-archive/           Deprecated, historical, and SOA-C02 material
 ```
 
-Folders and files carry numeric prefixes that encode the read sequence (e.g. `01-concepts/01-networking/01-ip-addressing/`). `README.md` is the only file without a prefix — it is the entry point of its folder. Directories are created progressively as each topic is documented.
+Folders and files carry numeric prefixes that encode the read sequence (e.g. `01-concepts/01-networking/01-ip-addressing/`). `README.md` is the only file without a prefix; it is the entry point of its folder. Directories are created progressively as each topic is documented.
 
 ### How the layers relate
 
-- **`01-concepts/`** answers *"What is this fundamental CloudOps principle across AWS?"* — the core knowledge, read first.
+- **`01-concepts/`** answers *"What is this fundamental CloudOps principle across AWS?"*, the core knowledge, read first.
 - **`02-services/`** answers *"What is this AWS service and how do I operate it?"*
 - **`03-cross-service/`** answers *"What happens when two or more services interact?"*
 - **`04-domains/`** maps that knowledge onto the exam's tasks and skills.
@@ -95,11 +95,11 @@ Documentation proceeds one topic at a time, following the [study roadmap in `AGE
 
 ## 💡 Key principles
 
-- **Canonical knowledge** — one source of truth per concept, linked, never duplicated.
-- **Certification-first** — every document maps to a specific SOA-C03 domain, task, or skill.
-- **Verified facts** — defaults, limits, and quotas are checked against current AWS documentation, never invented.
-- **Original scenarios** — no exam dumps; reasoning exercises built from public AWS knowledge.
-- **Cross-service thinking** — the exam rewards understanding how services compose, not isolated memorization.
+- **Canonical knowledge**, one source of truth per concept, linked, never duplicated.
+- **Certification-first**, every document maps to a specific SOA-C03 domain, task, or skill.
+- **Verified facts**, defaults, limits, and quotas are checked against current AWS documentation, never invented.
+- **Original scenarios**, no exam dumps; reasoning exercises built from public AWS knowledge.
+- **Cross-service thinking**, the exam rewards understanding how services compose, not isolated memorization.
 
 ---
 

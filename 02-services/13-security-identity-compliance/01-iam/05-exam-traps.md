@@ -7,7 +7,7 @@ Recurring mistakes candidates make, and what AWS actually does.
 
 ### "Roles are people too"
 
-**Mistake:** Treating a role like a user — signing in with it, giving it a password.
+**Mistake:** Treating a role like a user, signing in with it, giving it a password.
 
 **Actual behavior:** A role has no password and no long-lived keys. It is assumed, and it returns temporary credentials through STS.
 
@@ -25,7 +25,7 @@ Recurring mistakes candidates make, and what AWS actually does.
 
 **Mistake:** Expecting identity and resource policies to intersect.
 
-**Actual behavior:** Identity-based + resource-based policies are a **union** — either can allow. Boundaries and SCPs are the intersections.
+**Actual behavior:** Identity-based + resource-based policies are a **union**, either can allow. Boundaries and SCPs are the intersections.
 
 **Why it matters:** Cross-account and same-account S3 scenarios hinge on knowing which combination is union and which is intersection.
 
@@ -47,7 +47,7 @@ Recurring mistakes candidates make, and what AWS actually does.
 
 **Mistake:** Confusing "no allow" with an explicit deny.
 
-**Actual behavior:** Absence of an allow is **implicit deny** — distinct from an explicit `Deny` statement, which overrides allows. Implicit deny does not override an allow.
+**Actual behavior:** Absence of an allow is **implicit deny**, distinct from an explicit `Deny` statement, which overrides allows. Implicit deny does not override an allow.
 
 ### "A permissions boundary grants permissions"
 
@@ -63,6 +63,6 @@ Recurring mistakes candidates make, and what AWS actually does.
 
 ## Sources
 
-- AWS — *SOA-C03 exam guide, Content Domain 4*. https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03-domain4.html
-- AWS — *Policy evaluation logic*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
-- Community — candidate reports on SOA-C03 IAM misconceptions (re:Post, Reddit r/AWSCertifications).
+- AWS: *SOA-C03 exam guide, Content Domain 4*. https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03-domain4.html
+- AWS: *Policy evaluation logic*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+- Community: candidate reports on SOA-C03 IAM misconceptions (re:Post, Reddit r/AWSCertifications).

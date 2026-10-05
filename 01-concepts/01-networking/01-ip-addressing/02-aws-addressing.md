@@ -7,7 +7,7 @@ How AWS applies CIDR when you create VPCs and subnets, and the reserved addresse
 A VPC must have an IPv4 CIDR block, with a size between `/16` (65,536 addresses) and `/28` (16 addresses). You can add secondary IPv4 blocks and IPv6 blocks later.
 
 > [!IMPORTANT]
-> A VPC's IPv4 CIDR must be between `/16` (65,536 addresses) and `/28` (16 addresses); a subnet must be between `/28` and `/16`. Critically, **you cannot resize a CIDR block after creation** — not larger, not smaller. To grow address space you add a *secondary* non-overlapping CIDR block, and you cannot remove or shrink the primary block. A scenario that says "the VPC ran out of addresses" expects "add a secondary CIDR", not "resize the VPC".
+> A VPC's IPv4 CIDR must be between `/16` (65,536 addresses) and `/28` (16 addresses); a subnet must be between `/28` and `/16`. Critically, **you cannot resize a CIDR block after creation**, not larger, not smaller. To grow address space you add a *secondary* non-overlapping CIDR block, and you cannot remove or shrink the primary block. A scenario that says "the VPC ran out of addresses" expects "add a secondary CIDR", not "resize the VPC".
 
 Additional blocks must be non-overlapping, and a block can't equal or exceed an existing route-table destination of the same size. The primary CIDR cannot be disassociated.
 
@@ -21,7 +21,7 @@ AWS reserves **five** addresses in every IPv4 subnet: the first four and the las
 |---------|--------------|---------|
 | `10.0.0.0` | Network address | Identifies the subnet block itself; never assigned to a resource. |
 | `10.0.0.1` | VPC router | The subnet's default gateway; routes traffic into and out of the VPC. |
-| `10.0.0.2` | DNS | Amazon Route 53 Resolver — the VPC's DNS server, located at the VPC range base + 2. |
+| `10.0.0.2` | DNS | Amazon Route 53 Resolver, the VPC's DNS server, located at the VPC range base + 2. |
 | `10.0.0.3` | Future use | Held by AWS for future functionality; not assignable. |
 | `10.0.0.255` | Broadcast | AWS does not support broadcast; the address is held but never used. |
 
@@ -36,7 +36,7 @@ Creating the range and a subnet inside it, as CLI calls:
 # VPC with a /16 (65,536 addresses)
 aws ec2 create-vpc --cidr-block 10.0.0.0/16
 
-# A /24 subnet carved from it — 251 usable addresses after the 5 reservations
+# A /24 subnet carved from it, 251 usable addresses after the 5 reservations
 aws ec2 create-subnet --vpc-id vpc-0abc123 --cidr-block 10.0.1.0/24
 ```
 
@@ -44,9 +44,9 @@ The subnet CIDR (`10.0.1.0/24`) sits entirely inside the VPC CIDR (`10.0.0.0/16`
 
 ## Private vs public IP
 
-- **Private IP** — an address inside your VPC CIDR, typically from the RFC 1918 ranges. Not routable on the internet.
-- **Public IP** — a globally routable address attached to an instance or NAT gateway. AWS assigns it from its pool, either auto-assigned (changes on stop/start) or an Elastic IP you keep.
-- The private-to-public mapping is done by NAT — the internet gateway for an instance's own public IP, or a NAT gateway for outbound traffic from private subnets. Instances in private subnets never hold a public IP.
+- **Private IP**, an address inside your VPC CIDR, typically from the RFC 1918 ranges. Not routable on the internet.
+- **Public IP**, a globally routable address attached to an instance or NAT gateway. AWS assigns it from its pool, either auto-assigned (changes on stop/start) or an Elastic IP you keep.
+- The private-to-public mapping is done by NAT, the internet gateway for an instance's own public IP, or a NAT gateway for outbound traffic from private subnets. Instances in private subnets never hold a public IP.
 
 ## Allowed and prohibited ranges
 
@@ -64,6 +64,6 @@ AWS stores a CIDR in canonical form: `100.68.0.18/18` becomes `100.68.0.0/18`. I
 
 ## Sources
 
-- AWS — *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
-- AWS — *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
-- AWS — *IP addressing for your VPCs and subnets*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html
+- AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
+- AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
+- AWS: *IP addressing for your VPCs and subnets*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html

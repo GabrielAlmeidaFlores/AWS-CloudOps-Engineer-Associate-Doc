@@ -17,19 +17,19 @@ flowchart TD
 
 ## Diagnose in order
 
-1. **Confirm the principal.** `aws sts get-caller-identity` shows which identity and account the call is actually using. It is often not the one you assumed — a stale `AWS_PROFILE`, an environment variable access key overriding a role, or an instance role instead of a user.
-2. **Look for an explicit deny.** A `Deny` anywhere — identity policy, resource policy, permissions boundary, or SCP — overrides every `Allow`. This is the most common cause of a request that "should" be allowed but isn't.
+1. **Confirm the principal.** `aws sts get-caller-identity` shows which identity and account the call is actually using. It is often not the one you assumed, a stale `AWS_PROFILE`, an environment variable access key overriding a role, or an instance role instead of a user.
+2. **Look for an explicit deny.** A `Deny` anywhere (identity policy, resource policy, permissions boundary, or SCP) overrides every `Allow`. This is the most common cause of a request that "should" be allowed but isn't.
 3. **Check for an allow.** If nothing explicitly allows the action, the implicit deny applies. Remember that identity and resource policies combine as a union for same-account access, so an allow in either one is enough.
 4. **Check the boundary and SCP.** These are intersections: even with a valid allow, the action must also be permitted by the permissions boundary and by any SCP on the account.
-5. **Check conditions.** A condition that fails blocks an otherwise-allowed action — `aws:RequestedRegion`, `aws:SourceIp`, `aws:MultiFactorAuthPresent`, or a resource tag condition.
+5. **Check conditions.** A condition that fails blocks an otherwise-allowed action, `aws:RequestedRegion`, `aws:SourceIp`, `aws:MultiFactorAuthPresent`, or a resource tag condition.
 6. **Check the resource ARN.** A policy that allows `s3:GetObject` but names the wrong bucket ARN will deny the real request.
 
 ## Tools
 
-- **IAM policy simulator** — evaluates a policy set against a specific action and resource without making a live call. First stop for "why is this denied."
-- **CloudTrail** — records the API call, the principal, and whether access was denied. Search for the error code (`AccessDenied`) and the caller identity.
-- **IAM Access Analyzer** — finds policies that grant external access to a resource; it also validates policy syntax and IAM grammar.
-- **`DecodeAuthorizationMessage`** — decodes the encoded authorization failure in an `AccessDenied` response into the reason and the matched policy, which is faster than reproducing the call.
+- **IAM policy simulator**, evaluates a policy set against a specific action and resource without making a live call. First stop for "why is this denied."
+- **CloudTrail**, records the API call, the principal, and whether access was denied. Search for the error code (`AccessDenied`) and the caller identity.
+- **IAM Access Analyzer**, finds policies that grant external access to a resource; it also validates policy syntax and IAM grammar.
+- **`DecodeAuthorizationMessage`**, decodes the encoded authorization failure in an `AccessDenied` response into the reason and the matched policy, which is faster than reproducing the call.
 
 ## Common causes
 
@@ -47,6 +47,6 @@ When two policies disagree, **deny wins**. If you see an allow and a deny for th
 
 ## Sources
 
-- AWS — *IAM policy simulator*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
-- AWS — *IAM Access Analyzer*. https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html
-- AWS — *Logging IAM and AWS STS API calls with CloudTrail*. https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html
+- AWS: *IAM policy simulator*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
+- AWS: *IAM Access Analyzer*. https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html
+- AWS: *Logging IAM and AWS STS API calls with CloudTrail*. https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html

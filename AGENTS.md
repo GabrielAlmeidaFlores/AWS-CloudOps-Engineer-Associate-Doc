@@ -128,11 +128,11 @@ Older SOA-C02 material may be used as historical or supporting material when a c
 
 AWS currently organizes SOA-C03 into five content domains:
 
-1. Monitoring, Logging, Analysis, Remediation, and Performance Optimization — 22%
-2. Reliability and Business Continuity — 22%
-3. Deployment, Provisioning, and Automation — 22%
-4. Security and Compliance — 16%
-5. Networking and Content Delivery — 18%
+1. Monitoring, Logging, Analysis, Remediation, and Performance Optimization: 22%
+2. Reliability and Business Continuity: 22%
+3. Deployment, Provisioning, and Automation: 22%
+4. Security and Compliance: 16%
+5. Networking and Content Delivery: 18%
 
 Always verify the current exam guide because AWS can revise certification content.
 
@@ -202,7 +202,7 @@ At minimum investigate:
 
 ### Certification
 
-+ current SOA-C03 exam guide — including the local copy at `assets/docs/soa-c03-exam-guide.pdf` (read this before writing any certification-mapped content);
++ current SOA-C03 exam guide, including the local copy at `assets/docs/soa-c03-exam-guide.pdf` (read this before writing any certification-mapped content);
 + relevant domains;
 + relevant tasks;
 + relevant skills;
@@ -240,7 +240,7 @@ Search useful:
 + reputable DevOps / CloudOps communities;
 + certification discussion communities.
 
-Also search specifically for what candidates and practitioners say about the SOA-C03 exam itself: recurring question topics, question style, commonly tested areas, and difficulty reports. This is distinct from general community knowledge about a service — it is evidence about the exam's coverage and emphasis.
+Also search specifically for what candidates and practitioners say about the SOA-C03 exam itself: recurring question topics, question style, commonly tested areas, and difficulty reports. This is distinct from general community knowledge about a service; it is evidence about the exam's coverage and emphasis.
 
 The objective of community research is to discover:
 
@@ -264,7 +264,7 @@ Use sources according to what they are being used to establish.
 
 Prefer:
 
-**AWS Certification documentation** — in particular the official SOA-C03 exam guide PDF stored locally at `assets/docs/soa-c03-exam-guide.pdf`.
+**AWS Certification documentation**, in particular the official SOA-C03 exam guide PDF stored locally at `assets/docs/soa-c03-exam-guide.pdf`.
 
 ---
 
@@ -323,16 +323,16 @@ Do not automatically consider the highest-ranked search result the best source.
 
 ## AI-Detection and Writing-Integrity Sources
 
-Use these sources to keep the repository's prose free of AI-writing tells. Their purpose here is not to "evade detection," but to remove the low-information filler, hedging, and clichéd phrasing that make AI-generated text sound generic. Note that technical documentation is inherently structured and formal, so it will score as "formulaic" on any detector regardless; that is expected and acceptable — the target is authentic, specific prose, not a detector score.
+Use these sources to keep the repository's prose free of AI-writing tells. Their purpose here is not to "evade detection," but to remove the low-information filler, hedging, and clichéd phrasing that make AI-generated text sound generic. Note that technical documentation is inherently structured and formal, so it will score as "formulaic" on any detector regardless; that is expected and acceptable, the target is authentic, specific prose, not a detector score.
 
-- PERPLEXITY — *How AI detectors work and why a score alone can't prove authorship* (2026). https://www.perplexity.ai/hub/blog/ai-detector
-- ORIGINALITY.AI — *Most Common Reasons for False Positives* (2025). https://help.originality.ai/en/article/most-common-reasons-for-false-positives-with-originality-1sf6ykc/
-- UTRGV — *How to avoid false positives when using Turnitin AI detection*. https://support.utrgv.edu/TDClient/1849/Portal/KB/ArticleDet?ID=164019
-- U-M — *Guidance for Faculty/Instructors* (does not recommend detectors). https://genai.umich.edu/resources/faculty
-- GRAMMARLY — *Common Words and Phrases in AI-Generated Text* (2026). https://www.grammarly.com/blog/ai/common-ai-words/
-- A16Z CRYPTO — *Habits of AI writing, and what to do about them* (2026). https://a16zcrypto.com/posts/article/ai-writing-hallmarks-for-founders/
-- OLIVIA CAL — *How to Spot AI Writing Tells [+AI Words Blacklist 2026]* (2026). https://www.oliviacal.com/post/ai-writing-tells
-- PANGRAM — *Why Perplexity and Burstiness Fail to Detect AI* (2025). https://www.pangram.com/blog/why-perplexity-and-burstiness-fail-to-detect-ai
+- PERPLEXITY: *How AI detectors work and why a score alone can't prove authorship* (2026). https://www.perplexity.ai/hub/blog/ai-detector
+- ORIGINALITY.AI: *Most Common Reasons for False Positives* (2025). https://help.originality.ai/en/article/most-common-reasons-for-false-positives-with-originality-1sf6ykc/
+- UTRGV: *How to avoid false positives when using Turnitin AI detection*. https://support.utrgv.edu/TDClient/1849/Portal/KB/ArticleDet?ID=164019
+- U-M: *Guidance for Faculty/Instructors* (does not recommend detectors). https://genai.umich.edu/resources/faculty
+- GRAMMARLY: *Common Words and Phrases in AI-Generated Text* (2026). https://www.grammarly.com/blog/ai/common-ai-words/
+- A16Z CRYPTO: *Habits of AI writing, and what to do about them* (2026). https://a16zcrypto.com/posts/article/ai-writing-hallmarks-for-founders/
+- OLIVIA CAL: *How to Spot AI Writing Tells [+AI Words Blacklist 2026]* (2026). https://www.oliviacal.com/post/ai-writing-tells
+- PANGRAM: *Why Perplexity and Burstiness Fail to Detect AI* (2025). https://www.pangram.com/blog/why-perplexity-and-burstiness-fail-to-detect-ai
 
 ---
 
@@ -770,7 +770,7 @@ Create directories progressively as they become necessary.
 
 ### Numbering and read sequence
 
-Every directory and every documentation file carries a numeric prefix that encodes the recommended reading order. The only exception is `README.md`, which never has a numeric prefix — it is the entry point for its folder, both at the repo root and inside every subfolder.
+Every directory and every documentation file carries a numeric prefix that encodes the recommended reading order. The only exception is `README.md`, which never has a numeric prefix; it is the entry point for its folder, both at the repo root and inside every subfolder.
 
 - **Top-level layers** use a two-digit prefix in study order: `01-concepts`, `02-services`, `03-cross-service`, `04-domains`, `05-scenarios`, `06-labs`, `07-cheatsheets`, `08-reference`, `99-archive`.
 - **Category folders** under `02-services/` use a two-digit prefix in AWS's in-scope category order (`01-analytics` … `14-storage`).
@@ -785,11 +785,11 @@ When you add a new topic, assign it the next number in its folder's read order. 
 
 This is the fixed sequence in which we document the repository. Work it top to bottom, one topic per session. Each step lists the canonical path, its type, the steps it depends on, and its status (`✅` done, `⬜` pending). Major services get the full multi-file structure (§20); minor services get a single consolidated document. Concepts are interleaved as prerequisites; cross-service documents are produced only after both parent services exist.
 
-## Phase 1 — Networking & IP fundamentals
+## Phase 1: Networking & IP fundamentals
 
 | # | Topic | Canonical path | Type | Depends | Status |
 |---|-------|----------------|------|---------|--------|
-| 1 | IP addressing / CIDR | `01-concepts/01-networking/01-ip-addressing/` | Concept | — | ✅ |
+| 1 | IP addressing / CIDR | `01-concepts/01-networking/01-ip-addressing/` | Concept | - | ✅ |
 | 2 | IPv4 vs IPv6 | `01-concepts/01-networking/02-ipv4-ipv6/` | Concept | 1 | ⬜ |
 | 3 | VPC | `02-services/12-networking-content-delivery/01-vpc/` | Service | 1, 2 | ⬜ |
 | 4 | Internet Gateway | `02-services/13-security-identity-compliance/16-internet-gateway/` | Service | 3 | ⬜ |
@@ -804,11 +804,11 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 13 | VPC Flow Logs | `02-services/12-networking-content-delivery/13-vpc-flow-logs/` | Service | 3 | ⬜ |
 | 14 | VPC Reachability Analyzer | `02-services/12-networking-content-delivery/14-vpc-reachability-analyzer/` | Service | 3, 13 | ⬜ |
 | 15 | Routing | `01-concepts/01-networking/04-routing/` | Concept | 3, 4, 5 | ⬜ |
-| 16 | DNS | `01-concepts/01-networking/03-dns/` | Concept | — | ⬜ |
+| 16 | DNS | `01-concepts/01-networking/03-dns/` | Concept | - | ⬜ |
 | 17 | Private connectivity | `01-concepts/01-networking/05-private-connectivity/` | Concept | 9–12 | ⬜ |
 | 18 | Hybrid connectivity | `01-concepts/01-networking/06-hybrid-connectivity/` | Concept | 17 | ⬜ |
 
-## Phase 2 — Compute & block storage
+## Phase 2: Compute & block storage
 
 | 19 | EC2 | `02-services/05-compute/01-ec2/` | Service | 3, 7 | ⬜ |
 | 20 | EBS | `02-services/14-storage/02-ebs/` | Service | 19 | ⬜ |
@@ -817,16 +817,16 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 23 | EC2 + Security Groups | `03-cross-service/01-compute-networking/02-ec2-security-groups/` | Relationship | 7, 19 | ⬜ |
 | 24 | Elastic IP | `02-services/12-networking-content-delivery/12-elastic-ip/` | Service | 3, 19 | ⬜ |
 
-## Phase 3 — Object & shared storage
+## Phase 3: Object & shared storage
 
-| 25 | S3 | `02-services/14-storage/01-s3/` | Service | — | ⬜ |
+| 25 | S3 | `02-services/14-storage/01-s3/` | Service | - | ⬜ |
 | 26 | EFS | `02-services/14-storage/03-efs/` | Service | 3, 19 | ⬜ |
 | 27 | FSx | `02-services/14-storage/04-fsx/` | Service | 19, 26 | ⬜ |
-| 28 | Encryption (concept) | `01-concepts/02-security/06-encryption/` | Concept | — | ⬜ |
+| 28 | Encryption (concept) | `01-concepts/02-security/06-encryption/` | Concept | - | ⬜ |
 
-## Phase 4 — Observability (Domain 1)
+## Phase 4: Observability (Domain 1)
 
-| 29 | Metrics | `01-concepts/03-observability/01-metrics/` | Concept | — | ⬜ |
+| 29 | Metrics | `01-concepts/03-observability/01-metrics/` | Concept | - | ⬜ |
 | 30 | CloudWatch | `02-services/10-management-governance/05-cloudwatch/` | Service | 19, 29 | ⬜ |
 | 31 | Logs | `01-concepts/03-observability/02-logs/` | Concept | 30 | ⬜ |
 | 32 | Events | `01-concepts/03-observability/03-events/` | Concept | 30 | ⬜ |
@@ -837,7 +837,7 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 37 | CloudTrail | `02-services/10-management-governance/04-cloudtrail/` | Service | 30 | ⬜ |
 | 38 | EC2 + CloudWatch | `03-cross-service/02-compute-monitoring/01-ec2-cloudwatch/` | Relationship | 19, 30 | ⬜ |
 
-## Phase 5 — Reliability & scaling (Domain 2)
+## Phase 5: Reliability & scaling (Domain 2)
 
 | 39 | High availability | `01-concepts/04-reliability/01-high-availability/` | Concept | 3, 19 | ⬜ |
 | 40 | Fault tolerance | `01-concepts/04-reliability/02-fault-tolerance/` | Concept | 39 | ⬜ |
@@ -851,7 +851,7 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 48 | Disaster recovery / RTO / RPO | `01-concepts/04-reliability/06-disaster-recovery/`, `07-rto-rpo/` | Concept | 39, 47 | ⬜ |
 | 49 | Failover | `01-concepts/04-reliability/08-failover/` | Concept | 40, 46 | ⬜ |
 
-## Phase 6 — Databases
+## Phase 6: Databases
 
 | 50 | RDS | `02-services/07-database/06-rds/` | Service | 3, 20, 28 | ⬜ |
 | 51 | RDS Multi-AZ | `03-cross-service/06-reliability/02-rds-multi-az/` | Relationship | 50 | ⬜ |
@@ -862,10 +862,10 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 56 | DAX | `02-services/07-database/04-dax/` | Service | 55 | ⬜ |
 | 57 | ElastiCache | `02-services/07-database/05-elasticache/` | Service | 50, 55 | ⬜ |
 
-## Phase 7 — Application integration & serverless
+## Phase 7: Application integration & serverless
 
-| 58 | SNS | `02-services/02-application-integration/02-sns/` | Service | — | ⬜ |
-| 59 | SQS | `02-services/02-application-integration/03-sqs/` | Service | — | ⬜ |
+| 58 | SNS | `02-services/02-application-integration/02-sns/` | Service | - | ⬜ |
+| 59 | SQS | `02-services/02-application-integration/03-sqs/` | Service | - | ⬜ |
 | 60 | EventBridge | `02-services/02-application-integration/01-eventbridge/` | Service | 30, 32 | ⬜ |
 | 61 | Step Functions | `02-services/02-application-integration/04-step-functions/` | Service | 60 | ⬜ |
 | 62 | Lambda | `02-services/05-compute/03-lambda/` | Service | 3, 60 | ⬜ |
@@ -874,26 +874,26 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 65 | EventBridge + Lambda | `03-cross-service/05-monitoring-automation/04-eventbridge-lambda/` | Relationship | 60, 62 | ⬜ |
 | 66 | Lambda + VPC | `03-cross-service/01-compute-networking/05-lambda-vpc/` | Relationship | 3, 62 | ⬜ |
 
-## Phase 8 — Deployment & automation (Domain 3)
+## Phase 8: Deployment & automation (Domain 3)
 
-| 67 | Infrastructure as Code | `01-concepts/05-automation/01-infrastructure-as-code/` | Concept | — | ⬜ |
+| 67 | Infrastructure as Code | `01-concepts/05-automation/01-infrastructure-as-code/` | Concept | - | ⬜ |
 | 68 | CloudFormation | `02-services/10-management-governance/02-cloudformation/` | Service | 67 | ⬜ |
 | 69 | CDK | `02-services/10-management-governance/03-cdk/` | Service | 68 | ⬜ |
 | 70 | CloudFormation + IAM | `03-cross-service/07-deployment-automation/01-cloudformation-iam/` | Relationship | 0, 68 | ⬜ |
 | 71 | Systems Manager | `02-services/10-management-governance/15-systems-manager/` | Service | 19, 30 | ⬜ |
 | 72 | Systems Manager + EventBridge | `03-cross-service/07-deployment-automation/03-systems-manager-eventbridge/` | Relationship | 60, 71 | ⬜ |
 | 73 | CloudWatch + Systems Manager | `03-cross-service/05-monitoring-automation/03-cloudwatch-systems-manager/` | Relationship | 30, 71 | ⬜ |
-| 74 | RAM | `02-services/10-management-governance/13-ram/` | Service | — | ⬜ |
+| 74 | RAM | `02-services/10-management-governance/13-ram/` | Service | - | ⬜ |
 | 75 | Service Catalog | `02-services/10-management-governance/14-service-catalog/` | Service | 68 | ⬜ |
 | 76 | Organizations | `02-services/10-management-governance/12-organizations/` | Service | 0 | ⬜ |
 | 77 | CloudFormation StackSets + Organizations | `03-cross-service/07-deployment-automation/02-cloudformation-stacksets-organizations/` | Relationship | 68, 76 | ⬜ |
 
-## Phase 9 — Security & compliance (Domain 4, beyond IAM)
+## Phase 9: Security & compliance (Domain 4, beyond IAM)
 
 | 78 | Least privilege | `01-concepts/02-security/05-least-privilege/` | Concept | 0 | ⬜ |
 | 79 | KMS | `02-services/13-security-identity-compliance/04-kms/` | Service | 28 | ⬜ |
 | 80 | Secrets Manager | `02-services/13-security-identity-compliance/09-secrets-manager/` | Service | 79 | ⬜ |
-| 81 | ACM | `02-services/13-security-identity-compliance/05-acm/` | Service | — | ⬜ |
+| 81 | ACM | `02-services/13-security-identity-compliance/05-acm/` | Service | - | ⬜ |
 | 82 | IAM + KMS | `03-cross-service/04-identity-security/01-iam-kms/` | Relationship | 0, 79 | ⬜ |
 | 83 | IAM Identity Center | `02-services/13-security-identity-compliance/03-iam-identity-center/` | Service | 0, 76 | ⬜ |
 | 84 | SCPs | `01-concepts/02-security/10-compliance/` | Concept | 76 | ⬜ |
@@ -902,12 +902,12 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 87 | Inspector | `02-services/13-security-identity-compliance/07-inspector/` | Service | 19 | ⬜ |
 | 88 | Security Hub | `02-services/13-security-identity-compliance/08-security-hub/` | Service | 85–87 | ⬜ |
 | 89 | IAM Access Analyzer | `02-services/13-security-identity-compliance/02-iam-access-analyzer/` | Service | 0 | ⬜ |
-| 90 | Trusted Advisor | `02-services/10-management-governance/16-trusted-advisor/` | Service | — | ⬜ |
+| 90 | Trusted Advisor | `02-services/10-management-governance/16-trusted-advisor/` | Service | - | ⬜ |
 | 91 | Network Firewall | `02-services/13-security-identity-compliance/10-network-firewall/` | Service | 3, 8 | ⬜ |
 | 92 | WAF | `02-services/13-security-identity-compliance/11-waf/` | Service | 62 | ⬜ |
 | 93 | Shield | `02-services/13-security-identity-compliance/12-shield/` | Service | 92 | ⬜ |
 
-## Phase 10 — Content delivery & edge
+## Phase 10: Content delivery & edge
 
 | 94 | CloudFront | `02-services/12-networking-content-delivery/10-cloudfront/` | Service | 45, 81 | ⬜ |
 | 95 | Global Accelerator | `02-services/12-networking-content-delivery/11-global-accelerator/` | Service | 43 | ⬜ |
@@ -915,14 +915,14 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 97 | Route 53 Resolver DNS Firewall | `02-services/12-networking-content-delivery/09-route53-resolver-dns-firewall/` | Service | 45 | ⬜ |
 | 98 | VPC Security Groups + NACL | `03-cross-service/03-networking-security/01-vpc-security-groups-nacl/` | Relationship | 7, 8 | ⬜ |
 
-## Phase 11 — Cost & optimization
+## Phase 11: Cost & optimization
 
 | 99 | Cost Explorer | `02-services/04-cloud-financial-management/01-cost-explorer/` | Service | 37 | ⬜ |
 | 100 | Cost & Usage Reports | `02-services/04-cloud-financial-management/02-cost-and-usage-reports/` | Service | 99 | ⬜ |
 | 101 | Savings Plans | `02-services/04-cloud-financial-management/03-savings-plans/` | Service | 99 | ⬜ |
 | 102 | Compute Optimizer | `02-services/10-management-governance/06-compute-optimizer/` | Service | 19, 30 | ⬜ |
 
-## Phase 12 — Containers
+## Phase 12: Containers
 
 | 103 | ECR | `02-services/06-containers/01-ecr/` | Service | 19 | ⬜ |
 | 104 | ECS | `02-services/06-containers/02-ecs/` | Service | 62, 103 | ⬜ |
@@ -930,28 +930,28 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 106 | ECS + CloudWatch | `03-cross-service/02-compute-monitoring/02-ecs-cloudwatch/` | Relationship | 30, 104 | ⬜ |
 | 107 | EKS + CloudWatch | `03-cross-service/02-compute-monitoring/03-eks-cloudwatch/` | Relationship | 30, 105 | ⬜ |
 
-## Phase 13 — Remaining niche services (single consolidated doc each)
+## Phase 13: Remaining niche services (single consolidated doc each)
 
 | 108 | Athena | `02-services/01-analytics/01-athena/` | Service | 25 | ⬜ |
 | 109 | Data Firehose | `02-services/01-analytics/02-data-firehose/` | Service | 25 | ⬜ |
-| 110 | SES | `02-services/03-business-applications/01-ses/` | Service | — | ⬜ |
+| 110 | SES | `02-services/03-business-applications/01-ses/` | Service | - | ⬜ |
 | 111 | DataSync | `02-services/11-migration-transfer/01-datasync/` | Service | 25, 26 | ⬜ |
 | 112 | X-Ray | `02-services/08-developer-tools/01-x-ray/` | Service | 30, 35 | ⬜ |
 | 113 | Storage Gateway | `02-services/14-storage/06-storage-gateway/` | Service | 25 | ⬜ |
-| 114 | Bedrock | `02-services/09-machine-learning-ai/01-bedrock/` | Service | — | ⬜ |
-| 115 | Kiro | `02-services/08-developer-tools/02-kiro/` | Service | — | ⬜ |
+| 114 | Bedrock | `02-services/09-machine-learning-ai/01-bedrock/` | Service | - | ⬜ |
+| 115 | Kiro | `02-services/08-developer-tools/02-kiro/` | Service | - | ⬜ |
 | 116 | Health Dashboard | `02-services/10-management-governance/09-health-dashboard/` | Service | 30 | ⬜ |
 | 117 | Control Tower | `02-services/10-management-governance/08-control-tower/` | Service | 76 | ⬜ |
 | 118 | Managed Grafana / Prometheus | `02-services/10-management-governance/10-managed-grafana/`, `11-managed-prometheus/` | Service | 30 | ⬜ |
 | 119 | IPAM | `02-services/10-management-governance/17-ipam/` | Service | 3 | ⬜ |
 
-## Phase 0 — done
+## Phase 0: done
 
 | # | Topic | Canonical path | Status |
 |---|-------|----------------|--------|
 | 0 | IAM | `02-services/13-security-identity-compliance/01-iam/` | ✅ |
 
-## Cross-service documents — produced on demand once both parents exist
+## Cross-service documents, produced on demand once both parents exist
 
 The remaining `03-cross-service/` entries are created opportunistically as soon as their two parent services are done: `ec2-elb`, `ec2-auto-scaling` (43, 44), `lambda-cloudwatch` (30, 62), `vpc-network-firewall` (3, 91), `route53-dns-firewall` (45, 97), `iam-organizations` (0, 76), `iam-ec2` (0, 19), `iam-cloudformation` (0, 68), `rds-multi-az` (51), `backup-ec2-ebs-rds` (20, 25, 50), `ec2-image-builder-systems-manager` (21, 71).
 
@@ -1188,7 +1188,7 @@ Do not assume every input belongs in `02-services/`.
 
 Use the following logic:
 
-### Case A — AWS Service
+### Case A, AWS Service
 
 Canonical home:
 
@@ -1205,7 +1205,7 @@ Amazon EC2
 
 ---
 
-### Case B — General AWS Concept
+### Case B, General AWS Concept
 
 Canonical home:
 
@@ -1222,7 +1222,7 @@ CIDR / IP addressing model
 
 ---
 
-### Case C — Service + Service Relationship
+### Case C, Service + Service Relationship
 
 Canonical home:
 
@@ -1239,7 +1239,7 @@ EC2 + VPC
 
 ---
 
-### Case D — Exam Domain Context
+### Case D, Exam Domain Context
 
 Canonical home:
 
@@ -1257,7 +1257,7 @@ Use this to explain how multiple services/concepts combine to satisfy a particul
 
 ---
 
-### Case E — Scenario
+### Case E, Scenario
 
 Canonical home:
 
@@ -1267,7 +1267,7 @@ Canonical home:
 
 ---
 
-### Case F — Hands-On Exercise
+### Case F, Hands-On Exercise
 
 Canonical home:
 
@@ -1277,7 +1277,7 @@ Canonical home:
 
 ---
 
-### Case G — Quick Review
+### Case G, Quick Review
 
 Canonical home:
 
@@ -1558,11 +1558,11 @@ Compute
 but may be relevant to:
 
 ```text
-Domain 1 — Monitoring
-Domain 2 — Reliability
-Domain 3 — Deployment
-Domain 4 — Security
-Domain 5 — Networking
+Domain 1: Monitoring
+Domain 2: Reliability
+Domain 3: Deployment
+Domain 4: Security
+Domain 5: Networking
 ```
 
 Do not move the EC2 canonical document between these domains.
@@ -1685,7 +1685,7 @@ Do not use these AI-hallmark words. Replace them with concrete verbs, concrete n
 
 Verbs: *delve (into), leverage, foster, ignite, empower, uncover, unleash, underscore, harness, illuminate, facilitate, refine, bolster, differentiate, navigate, elevate, unlock, streamline, optimize* (when it means "just use/do").
 
-Adjectives: *pivotal, cutting-edge, seamless, robust, scalable, transformative, revolutionary, game-changing, innovative, multifaceted, comprehensive, dynamic, unwavering* — unless the word carries a specific, defensible technical meaning in context (e.g. "seamless failover" is still a buzzword; prefer stating the mechanism).
+Adjectives: *pivotal, cutting-edge, seamless, robust, scalable, transformative, revolutionary, game-changing, innovative, multifaceted, comprehensive, dynamic, unwavering*, unless the word carries a specific, defensible technical meaning in context (e.g. "seamless failover" is still a buzzword; prefer stating the mechanism).
 
 Abstract nouns and vague metaphors: *realm, landscape, tapestry, testament, beacon, journey, ecosystem, space, symphony*. Prefer the concrete object: say "the VPC" not "the networking realm."
 
@@ -1697,18 +1697,20 @@ Filler transitions and clichéd openers/summaries: *furthermore, moreover, addit
 
 Apply these two tests to any sentence that feels off:
 
-1. **Transplant test (fungibility).** Could this sentence be dropped unchanged into a different service's documentation without anyone noticing? If yes, it is too generic — rewrite with specifics.
+1. **Transplant test (fungibility).** Could this sentence be dropped unchanged into a different service's documentation without anyone noticing? If yes, it is too generic, rewrite with specifics.
 2. **Pub test (read-aloud).** Would you say it to a colleague? "We empower users to optimize workflows" fails; "This alarm triggers a Systems Manager automation" passes.
 
 Prefer specific nouns and active verbs over "very important," "significant impact," and "major role." State the number, the mechanism, or the consequence.
 
 #### Structure and punctuation (allowed, but not as a crutch)
 
-Tables, headings, bullet lists, and Mermaid diagrams are required in this repository (see sections 29–32) and are not AI tells in themselves. Avoid the *voice-level* tells that ride along with them: forced lists of exactly three, a bold lead-in on every bullet, signposting that restates the obvious ("First, ... Next, ... Finally, ..."), and conclusions that merely restate the intro. Vary sentence length; follow a long technical sentence with a short one. Limit em dashes to at most two per sentence and avoid colon-heavy grocery lists.
+Tables, headings, bullet lists, and Mermaid diagrams are required in this repository (see sections 29–32) and are not AI tells in themselves. Avoid the *voice-level* tells that ride along with them: forced lists of exactly three, a bold lead-in on every bullet, signposting that restates the obvious ("First, ... Next, ... Finally, ..."), and conclusions that merely restate the intro. Vary sentence length; follow a long technical sentence with a short one.
+
+Never use the em dash. It is one of the most reliable signals of machine-written text, and it is banned outright. Rewrite the sentence with a comma, a colon, a semicolon, or parentheses, or split it into two sentences. Do not substitute a hyphen, an en dash, or a spaced hyphen for it; use real punctuation. Also avoid colon-heavy grocery lists.
 
 #### Notes and callouts
 
-Use blockquoted callouts (`> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!CAUTION]`, `[!WARNING]`) to flag what the user must remember. A callout is not a one-liner. It must stand on its own: name the concept, explain why it matters for the exam, and state the consequence of getting it wrong. The reader must grasp the point without reading the surrounding section. Do not write a two-word hint — write what the concept means, where it applies, and the scenario where it decides the answer.
+Use blockquoted callouts (`> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!CAUTION]`, `[!WARNING]`) to flag what the user must remember. A callout is not a one-liner. It must stand on its own: name the concept, explain why it matters for the exam, and state the consequence of getting it wrong. The reader must grasp the point without reading the surrounding section. Do not write a two-word hint, write what the concept means, where it applies, and the scenario where it decides the answer.
 
 Too thin:
 
@@ -1718,16 +1720,16 @@ Too thin:
 Complete:
 
 > [!IMPORTANT]
-> An explicit `Deny` overrides every `Allow` in any applicable policy — identity, resource, permissions boundary, and SCP. This decides most "why is access denied" questions: even when an `Allow` is present, a single `Deny` anywhere in the evaluation chain blocks the action. Check boundaries and SCPs first, because that is where candidates overlook a deny.
+> An explicit `Deny` overrides every `Allow` in any applicable policy, identity, resource, permissions boundary, and SCP. This decides most "why is access denied" questions: even when an `Allow` is present, a single `Deny` anywhere in the evaluation chain blocks the action. Check boundaries and SCPs first, because that is where candidates overlook a deny.
 
 Apply this same standard to every section: prose must teach the full concept, not gesture at it.
 
 #### Always include examples
 
-Every document must show, not only describe. When a section explains an abstract structure — a JSON policy, a config file, a CLI command, a role trust relationship, a CloudFormation snippet — follow the description with a minimal, correct, real example. A schema with no instance is a partial explanation: the reader learns the shape of the thing but not how it looks in practice.
+Every document must show, not only describe. When a section explains an abstract structure (a JSON policy, a config file, a CLI command, a role trust relationship, or a CloudFormation snippet), follow the description with a minimal, correct, real example. A schema with no instance is a partial explanation: the reader learns the shape of the thing but not how it looks in practice.
 
 - Give the example a short lead-in that says what it does ("Allow an EC2 instance to read one S3 prefix").
-- Keep it minimal but complete and valid — copy-pasteable, never a skeleton with `...`.
+- Keep it minimal but complete and valid, copy-pasteable, never a skeleton with `...`.
 - Annotate the non-obvious line with a comment or a follow-up sentence.
 - Prefer a realistic example to a toy one (`s3:GetObject` on a bucket ARN, not `Action: "*"`).
 
@@ -1787,7 +1789,7 @@ For every service/topic, investigate the following concepts where relevant:
 26. CLI/API/IaC
 27. Key takeaways
 28. Quick review
-29. Sources — a `## Sources` section at the end of each document (no separate `sources.md` file)
+29. Sources, a `## Sources` section at the end of each document (no separate `sources.md` file)
 
 Only include sections that are technically relevant.
 
@@ -1795,9 +1797,9 @@ Only include sections that are technically relevant.
 
 A document is finished when it has taught its subject, not when it has reached a length. Length is a byproduct of substance and never the goal. A thin document is a defect, and padding it is not the fix.
 
-**Substance floor.** Every substantive document — service, concept, or relationship; everything except a `README.md` index — must, where relevant to its role, contain:
+**Substance floor.** Every substantive document (service, concept, or relationship; everything except a `README.md` index) must, where relevant to its role, contain:
 
-- the AWS-verified behavior: what actually happens, when, and under which configuration — not just a definition;
+- the AWS-verified behavior: what actually happens, when, and under which configuration, not just a definition;
 - at least one concrete, verifiable value (limit, default, quota, interval, size, timeout, or pricing mechanism);
 - the operational reality: how it is configured, how it fails, and how that failure is diagnosed;
 - at least one exam-relevant distinction or trap;
@@ -1805,9 +1807,9 @@ A document is finished when it has taught its subject, not when it has reached a
 
 A `README.md` index is the one exception. It is a map, not a lesson, and stays short by design.
 
-**Explain in full, never just name it.** A concept, feature, or mechanism must be explained in complete prose, not a one-line label. For each, state what it is, why it exists, how it behaves, where you create or apply it, how it differs from the adjacent feature a reader will confuse it with, and a concrete example. A sentence that names something without explaining it — "RCP caps permissions on resources across accounts" — teaches nothing the reader can act on. If a reader would still ask *what does that actually mean, where do I work with it, or how is it different from X*, the explanation is not finished.
+**Explain in full, never just name it.** A concept, feature, or mechanism must be explained in complete prose, not a one-line label. For each, state what it is, why it exists, how it behaves, where you create or apply it, how it differs from the adjacent feature a reader will confuse it with, and a concrete example. A sentence that names something without explaining it ("RCP caps permissions on resources across accounts") teaches nothing the reader can act on. If a reader would still ask *what does that actually mean, where do I work with it, or how is it different from X*, the explanation is not finished.
 
-**Shallow-content triggers.** A document is incomplete — fix it before moving on — when any of these is true:
+**Shallow-content triggers.** A document is incomplete (fix it before moving on) when any of these is true:
 
 - It reads as a definition or summary with no operational detail.
 - It contains no concrete number, limit, default, or CLI/API command.
@@ -1824,11 +1826,11 @@ A `README.md` index is the one exception. It is a map, not a lesson, and stays s
 - adding introduction, summary, or transition sentences that carry no information;
 - restating the title or the obvious;
 - vague generality ("it is important to understand that…");
-- copying content that belongs to a sibling document — link to it instead.
+- copying content that belongs to a sibling document, link to it instead.
 
 **How to deepen a document.** Add *new, verified, exam-relevant* content from these sources:
 
-- deeper AWS behavior and edge cases — what the console hides, what the docs bury in a note;
+- deeper AWS behavior and edge cases, what the console hides, what the docs bury in a note;
 - exact limits, defaults, and quotas, with units;
 - concrete CLI/API/IaC examples;
 - operational failure modes and the diagnostic path for each;
@@ -1892,7 +1894,7 @@ For external diagrams:
 
 ## Always Mermaid, never ASCII art
 
-Every diagram that represents a flow, process, pipeline, decision, architecture, request flow, data flow, network flow, relationship, or dependency MUST be a Mermaid diagram. Never draw a diagram as ASCII art — no vertical arrow chains (`↓`, `▼`), no box drawings, no `A → B → C` arrow chains. If a subject needs a diagram, it gets a Mermaid block.
+Every diagram that represents a flow, process, pipeline, decision, architecture, request flow, data flow, network flow, relationship, or dependency MUST be a Mermaid diagram. Never draw a diagram as ASCII art, no vertical arrow chains (`↓`, `▼`), no box drawings, no `A → B → C` arrow chains. If a subject needs a diagram, it gets a Mermaid block.
 
 Use Mermaid for architecture, request flow, data flow, network flow, authentication, authorization, monitoring, remediation, deployment, automation, failover, recovery, and service integration.
 
@@ -1910,12 +1912,12 @@ Every Mermaid diagram in the repository follows the same patterns. Do not invent
 
 Rules that apply to every diagram:
 
-- Quote any node label that contains spaces or punctuation: `A["Check quotas/limits"]`, `RN["Route 53"]`. Never leave `(`, `)`, `/`, `&`, or `?` in an unquoted label — it breaks Mermaid.
+- Quote any node label that contains spaces or punctuation: `A["Check quotas/limits"]`, `RN["Route 53"]`. Never leave `(`, `)`, `/`, `&`, or `?` in an unquoted label, it breaks Mermaid.
 - Use short, stable node IDs (`A`, `EC2`, `VPC`); put the human-readable text in the label.
 - Solid arrows `-->`; label an arrow with `-->|label|` only when the relationship needs a word.
 - One idea per diagram; split anything past roughly 15 nodes.
 
-Example — process flow (`flowchart TD`):
+Example, process flow (`flowchart TD`):
 
 ```mermaid
 flowchart TD
@@ -1926,7 +1928,7 @@ flowchart TD
     D -->|Yes| F["Verify recovery"]
 ```
 
-Example — service interaction (`flowchart LR`):
+Example, service interaction (`flowchart LR`):
 
 ```mermaid
 flowchart LR
@@ -2178,7 +2180,7 @@ See also:
 - [VPC](../../../02-services/12-networking-content-delivery/01-vpc/README.md)
 - [Security Groups](../../../02-services/13-security-identity-compliance/14-security-groups/README.md)
 - [EC2 + VPC](../../../03-cross-service/01-compute-networking/01-ec2-vpc/README.md)
-- [Domain 5 — Networking](../../../04-domains/05-networking-content-delivery/README.md)
+- [Domain 5: Networking](../../../04-domains/05-networking-content-delivery/README.md)
 ```
 
 Use repository-relative links.
@@ -2189,14 +2191,14 @@ Do not create broken links.
 
 # 43. NO FRONT MATTER
 
-Do not add YAML front matter to any document. Every document starts directly with its `# Title` heading — no `---` metadata block at the top.
+Do not add YAML front matter to any document. Every document starts directly with its `# Title` heading, no `---` metadata block at the top.
 
 The information front matter would have carried is expressed elsewhere, so nothing is lost:
 
-- **Topic identity** — the title heading and the document's position in the numbered directory tree.
-- **AWS category** — the category folder the service lives in under `02-services/` (e.g. `13-security-identity-compliance/`).
-- **SOA-C03 relevance** — stated in prose in the document's "SOA-C03 relevance" section.
-- **Canonical status** — established by file location (§13), never by a `canonical:` flag.
+- **Topic identity**, the title heading and the document's position in the numbered directory tree.
+- **AWS category**, the category folder the service lives in under `02-services/` (e.g. `13-security-identity-compliance/`).
+- **SOA-C03 relevance**, stated in prose in the document's "SOA-C03 relevance" section.
+- **Canonical status**, established by file location (§13), never by a `canonical:` flag.
 
 ---
 
@@ -2591,7 +2593,7 @@ If the service is simple, do not artificially create 15 Markdown files.
 
 Use the smallest structure that preserves complete and useful knowledge.
 
-"The smallest structure" means the fewest files that hold complete knowledge — never the thinnest content. Depth comes from relevant, verified facts (§29), not from file count. A single well-filled file beats five thin ones.
+"The smallest structure" means the fewest files that hold complete knowledge, never the thinnest content. Depth comes from relevant, verified facts (§29), not from file count. A single well-filled file beats five thin ones.
 
 ---
 
