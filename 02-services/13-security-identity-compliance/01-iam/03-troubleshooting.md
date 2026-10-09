@@ -5,6 +5,8 @@ Access-denied is the most common IAM failure, and almost every case reduces to o
 > [!TIP]
 > Start with the **IAM policy simulator** before any live call. It evaluates the effective permissions of a principal against a specific action and resource ARN and reports allow or deny plus the reason, without you triggering the real request or waiting for CloudTrail. Only when the simulator says "allowed" but the live call still fails do you reach for CloudTrail, the boundary/SCP, and `DecodeAuthorizationMessage`.
 
+The checklist below turns that chain into an ordered flow, so a denial is worked from the top until one step explains it.
+
 ```mermaid
 flowchart TD
     A["Access denied on action X"] --> B["Confirm the principal running the call (sts get-caller-identity)"]
@@ -18,6 +20,8 @@ flowchart TD
     class A deny
     class B,C,D,E,F,G step
 ```
+
+Following the flow from the top, you confirm which identity is really making the call, then eliminate the three causes that silently remove access: an explicit deny, a missing allow, and a boundary or SCP cap. The last two steps catch failures specific to one request rather than the whole principal, a condition that did not match and a resource ARN that points somewhere else.
 
 ## Diagnose in order
 
@@ -34,6 +38,8 @@ flowchart TD
 - **CloudTrail**, records the API call, the principal, and whether access was denied. Search for the error code (`AccessDenied`) and the caller identity.
 - **IAM Access Analyzer**, finds policies that grant external access to a resource; it also validates policy syntax and IAM grammar.
 - **`DecodeAuthorizationMessage`**, decodes the encoded authorization failure in an `AccessDenied` response into the reason and the matched policy, which is faster than reproducing the call.
+
+The policy simulator is a console tool rather than a CLI command, and it is usually the fastest way to answer an access question because it makes no live call. The screenshot below shows it loaded with a role as the principal and that role's applicable policies pulled in.
 
 ![IAM Policy simulator showing a role and the policies that apply to it](../../../assets/images/screenshots/iam/08-iam-policy-simulator-simulation.png)
 

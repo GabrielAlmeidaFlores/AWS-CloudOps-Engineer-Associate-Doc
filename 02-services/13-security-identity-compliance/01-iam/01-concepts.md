@@ -12,6 +12,8 @@ A principal is an entity that can make authenticated requests to AWS.
 - **IAM role.** An identity you assume, not one you sign in as. Grants *temporary* credentials via AWS STS. Roles are the correct way to give an EC2 instance, a Lambda function, or another AWS account access to resources.
 - **Federated identity.** Users from an external IdP (SAML 2.0, OIDC, or IAM Identity Center) that map to roles.
 
+The IAM Users console lists every long-lived identity in the account next to the columns you audit: MFA presence, password age, and last sign-in. The screenshot below is that list for the sandbox account, which holds a single user.
+
 ![IAM Users list showing the single playwright-tester user](../../../assets/images/screenshots/iam/02-iam-users-list-mfa-status.png)
 
 *The IAM Users console. Each row is one long-lived identity; the MFA and Password age columns are how you audit human users at a glance. A user with no MFA and an old, un-rotated password is the finding an attacker wants.*
@@ -41,6 +43,8 @@ A complete statement that lets an application read objects under one bucket pref
 
 Reading it element by element: `Effect: Allow` grants the action; `Action` names one operation (`s3:GetObject`) rather than `s3:*`; `Resource` scopes the grant to the `reports/` prefix, where the trailing `/*` matches every object under it; and `Condition` narrows the grant to traffic that arrives through that VPC endpoint, so the same role used over the public internet is denied. That last clause is what makes this a least-privilege statement and not a broad one.
 
+The console is where a policy is authored, and the Create policy screen offers two ways to build one. The screenshot below shows the editor with the JSON tab selected, holding the default single-statement template that every new policy starts from.
+
 ![IAM Create policy JSON editor showing a default Allow statement](../../../assets/images/screenshots/iam/03-iam-create-policy-json-editor.png)
 
 *The IAM policy editor. A statement can be hand-written in the JSON tab or assembled through the Visual builder (1); the side panel (2) adds services, actions, resources, and conditions without editing the JSON by hand. The editor validates the document and reports errors, warnings, and suggestions as you type.*
@@ -64,6 +68,8 @@ This is the single most testable fact about IAM. When a principal requests an ac
 - **Permissions boundary** → the **intersection**. The boundary caps the maximum the identity-based policy can grant.
 - **SCP / RCP (Organizations)** → another **intersection** that caps what member-account principals can do.
 
+The order in which those checks run is what the diagram below makes explicit.
+
 ```mermaid
 flowchart TD
     R(("Request")) --> A["Authenticate the principal"]
@@ -81,6 +87,8 @@ flowchart TD
     class D,D2 deny
     class AL ok
 ```
+
+The diagram walks one request through the rules in order: the explicit-deny check runs first, then the union of identity-based and resource-based allows, then the intersection of any permissions boundary or SCP. The request reaches Allow only by passing all three; a deny anywhere, or a missing allow, ends at Deny.
 
 If no policy explicitly allows an action, the default is **implicit deny**. IAM has no implicit allow.
 

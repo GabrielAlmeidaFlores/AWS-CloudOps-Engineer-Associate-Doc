@@ -46,6 +46,8 @@ Split it into two `/25` subnets. Each half moves the prefix one bit longer and h
 - `10.0.0.0/25` → `10.0.0.0` – `10.0.0.127`
 - `10.0.0.128/25` → `10.0.0.128` – `10.0.0.255`
 
+The diagram below shows that split, with the parent range at the top and the two halves below it.
+
 ```mermaid
 flowchart TD
     VPC["VPC 10.0.0.0/24<br/>256 addresses"] --> A["10.0.0.0/25<br/>.0 to .127<br/>network .0, broadcast .127"]
@@ -53,6 +55,8 @@ flowchart TD
     classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
     class VPC,A,B network
 ```
+
+The diagram shows the parent `/24` splitting into two equal `/25` halves, each with its own network and broadcast address. Lengthening the prefix by one bit is what halves the address count at every split, so each generation of subnets is half the size of the one above it.
 
 A `/28` (`10.0.0.0/28`) has `2^4 = 16` addresses, `10.0.0.0` to `10.0.0.15`. That is the smallest subnet AWS allows.
 

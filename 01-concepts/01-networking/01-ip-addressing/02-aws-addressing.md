@@ -42,6 +42,8 @@ aws ec2 create-subnet --vpc-id vpc-0abc123 --cidr-block 10.0.1.0/24
 
 The subnet CIDR (`10.0.1.0/24`) sits entirely inside the VPC CIDR (`10.0.0.0/16`) and does not overlap any other subnet. AWS rejects a subnet outside the VPC range, and rejects one that overlaps an existing subnet in the same VPC.
 
+The console enforces that containment while you fill in the form. The screenshot below shows the Create subnet screen, where the VPC's range is shown above the field for the subnet's own CIDR.
+
 ![Create subnet form showing the VPC CIDR block and the subnet CIDR block fields](../../../assets/images/screenshots/vpc/01-vpc-create-subnet-form-cidr.png)
 
 *The Create subnet form. The subnet's IPv4 CIDR block (2) must lie inside the VPC's IPv4 CIDR block (1). The console counts the addresses as you type, 256 IPs for the `/24` above, before the five AWS reservations are subtracted.*

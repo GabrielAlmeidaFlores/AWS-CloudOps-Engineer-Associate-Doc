@@ -11,11 +11,13 @@ IAM manages two concerns in one service:
 
 IAM is global, not regional. Users, roles, and policies exist account-wide; a role created in one Region is usable in all Regions.
 
+The IAM dashboard in the console is the first screen to open when reviewing an account. It summarizes the account's security posture and its IAM resource counts in a single view, which makes it the fastest orientation before drilling into users, roles, or policies.
+
 ![IAM dashboard showing security recommendations, resource counts, and the account sign-in URL](../../../assets/images/screenshots/iam/01-iam-dashboard-security-recommendations.png)
 
 *The IAM dashboard for the sandbox account. The Security recommendations panel and the resource counts on the left are the first things to check when auditing an account; the AWS Account panel on the right holds the account ID and the sign-in URL for IAM users.*
 
-The pieces fit together as principals, policies, and resources:
+The pieces fit together as principals, policies, and resources. The diagram below groups them and shows the arrows between the groups: each arrow is one of those relationships.
 
 ```mermaid
 flowchart LR
@@ -50,6 +52,8 @@ flowchart LR
     style POLICY fill:#ffffff,stroke:#00A4A6,stroke-width:2px,color:#147EBA
     style RES fill:#ffffff,stroke:#8C4FFF,stroke-width:2px,color:#8C4FFF
 ```
+
+Read it as three questions. An identity (who) has a policy attached; an identity-based policy grants what that identity may do; a resource-based policy grants who may touch a resource (which). The dashed arrow is different from the rest: a permissions boundary caps a role and can only remove access, never add it, which is why it points at the role rather than carrying a grant.
 
 ## SOA-C03 relevance
 

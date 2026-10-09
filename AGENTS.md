@@ -759,8 +759,7 @@ aws-cloudops-soa-c03/
 │   ├── 03-aws-whitepapers.md
 │   ├── 04-aws-prescriptive-guidance.md
 │   ├── 05-community-resources.md
-│   ├── 06-glossary.md
-│   └── 07-mermaid-aws-style.md
+│   └── 06-glossary.md
 │
 ├── assets/
 │   ├── images/
@@ -1961,10 +1960,64 @@ Rules that apply to every diagram:
 
 Every diagram must look like an AWS reference diagram, not a bare default flowchart. The same four ingredients are used in every diagram, so they all read alike.
 
-1. **Containers.** Nest `subgraph` blocks for the AWS Cloud, Region, account, VPC, and subnets, then style each with the AWS structural colors: navy `#232F3E` dashed for the cloud, teal `#00A4A6` for Region and account, purple `#8C4FFF` for the VPC, green `#248814` for public subnets, teal `#147EBA` for private subnets.
-2. **Category colors.** Fill every service node with its AWS category color and white text through `classDef`: Compute `#ED7100`, Storage `#7AA116`, Security `#DD344C`, Database `#C925D1`, Networking and Analytics `#8C4FFF`, Application Integration and Management & Governance `#E7157B`, AI `#01A88D`.
-3. **Fixed node styles.** Every node carries one of a small set of styles, so no node is left at the default theme: a service uses its category color, a process or step node uses the neutral `#F1F3F3` fill with navy text, a decision uses a white fill with a navy stroke, an actor uses a navy fill with white text, and an allow outcome uses Storage green while a deny outcome uses Security red.
+1. **Containers.** Nest `subgraph` blocks for the AWS Cloud, Region, account, VPC, and subnets, and style each with the AWS structural colors in the table below.
+2. **Category colors.** Fill every service node with its AWS category color and white text through `classDef`, using the table below.
+3. **Fixed node styles.** Every node carries one of a small set of styles, so no node is left at the default theme; the table below fixes them.
 4. **Semantic shapes.** Rectangle for a service or step, cylinder `[( )]` for a data store, `{ }` for a decision, `(( ))` for an actor.
+
+Structural colors (container `style` lines):
+
+| Boundary | Stroke | Font color | Style line |
+|----------|--------|-----------|------------|
+| AWS Cloud | `#232F3E` dashed | `#232F3E` | `style CLOUD fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E` |
+| Region | `#00A4A6` | `#147EBA` | `style REGION fill:#ffffff,stroke:#00A4A6,stroke-width:2px,color:#147EBA` |
+| Availability Zone | `#00A4A6` dashed | `#147EBA` | `style AZ fill:#ffffff,stroke:#00A4A6,stroke-dasharray:3 3,color:#147EBA` |
+| Account | `#00A4A6` | `#CD2264` | `style ACCT fill:#ffffff,stroke:#00A4A6,stroke-width:2px,color:#CD2264` |
+| VPC | `#8C4FFF` | `#8C4FFF` | `style VPC fill:#ffffff,stroke:#8C4FFF,stroke-width:2px,color:#8C4FFF` |
+| Public subnet | `#248814` | `#248814` | `style PUB fill:#ffffff,stroke:#248814,color:#248814` |
+| Private subnet | `#00A4A6` | `#147EBA` | `style PRIV fill:#ffffff,stroke:#00A4A6,color:#147EBA` |
+| Security group | `#DD3522` dashed | `#DD3522` | `style SG fill:#ffffff,stroke:#DD3522,stroke-dasharray:3 3,color:#DD3522` |
+| External / third party | `#7D8998` dashed | `#7D8998` | `style EXT fill:#ffffff,stroke:#7D8998,stroke-dasharray:3 3,color:#7D8998` |
+
+Nest the boundaries from largest to smallest: Cloud, then Region, then account, then VPC, then subnet. Keep container fills white so inner nodes stay readable.
+
+Category colors (service `classDef` fills, white text):
+
+| Category | Hex | Example services |
+|----------|-----|------------------|
+| Compute, Containers, Serverless | `#ED7100` | EC2, Lambda, ECS, EKS, Fargate |
+| Storage | `#7AA116` | S3, EBS, EFS, FSx, Backup |
+| Database | `#C925D1` | RDS, Aurora, DynamoDB, ElastiCache |
+| Networking and Content Delivery | `#8C4FFF` | VPC, ELB, Route 53, CloudFront, API Gateway |
+| Analytics | `#8C4FFF` | Athena, EMR, Kinesis, Data Firehose |
+| Security, Identity, and Compliance | `#DD344C` | IAM, KMS, GuardDuty, WAF, Secrets Manager |
+| Application Integration | `#E7157B` | SNS, SQS, EventBridge, Step Functions |
+| Management and Governance | `#E7157B` | CloudWatch, CloudTrail, CloudFormation, Config |
+| Artificial Intelligence | `#01A88D` | Bedrock, SageMaker |
+| Migration and Modernization | `#01A88D` | DataSync, Transfer Family |
+
+Analytics shares `#8C4FFF` with Networking, and Application Integration shares `#E7157B` with Management and Governance. Two categories sharing a hex is correct, they are grouped that way in the AWS palette.
+
+Node styles (non-service nodes):
+
+| Node | Fill | Stroke | Text |
+|------|------|--------|------|
+| Process or step | `#F1F3F3` | `#232F3E` | `#232F3E` |
+| Decision | `#ffffff` | `#232F3E` | `#232F3E` |
+| Actor or start | `#232F3E` | `#232F3E` | `#ffffff` |
+| Allow or success | `#7AA116` | `#7AA116` | `#ffffff` |
+| Deny or failure | `#DD344C` | `#DD344C` | `#ffffff` |
+
+Shapes:
+
+| Meaning | Syntax | Renders as |
+|---------|--------|-----------|
+| Service | `A["Label"]` | rectangle |
+| Service (rounded) | `A("Label")` | rounded rectangle |
+| Data store, database | `A[("Label")]` | cylinder |
+| Decision | `A{"Question?"}` | rhombus |
+| Actor, start, end | `A(("Label"))` | circle |
+| Subroutine, external system | `A[["Label"]]` | double-edged box |
 
 Worked example, an EC2 instance reading an S3 bucket through a role:
 
@@ -2016,11 +2069,36 @@ flowchart TD
     class G ok
 ```
 
+Copy-paste skeleton for a new diagram:
+
+```mermaid
+flowchart LR
+    ACTOR(("User"))
+    subgraph CLOUD["AWS Cloud"]
+      direction TB
+      subgraph ACCT["Account 111122223333"]
+        SVC["Service"]:::compute
+        STORE[("Data store")]:::storage
+        subgraph VPC["VPC 10.0.0.0/16"]
+          APP["EC2 instance"]:::compute
+        end
+      end
+    end
+    ACTOR -->|"action"| SVC
+    APP -->|"call"| STORE
+    SVC -->|"write"| STORE
+    classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
+    classDef storage fill:#7AA116,stroke:#7AA116,color:#ffffff
+    classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    class ACTOR actor
+    style CLOUD fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style ACCT fill:#ffffff,stroke:#00A4A6,stroke-width:2px,color:#CD2264
+    style VPC fill:#ffffff,stroke:#8C4FFF,stroke-width:2px,color:#8C4FFF
+```
+
 ## No icons, symbols, or emoji
 
-Do not put emoji, iconify icons (`logos:aws-*`), Font Awesome icons (`fa:fa-*`), or any other glyph in a node label. GitHub renders neither Font Awesome nor iconify, and emoji and symbols are not used in this repository's diagrams. The AWS look comes from the structural containers, the category colors, and the shapes alone. Do not write `architecture-beta`; it does not render on GitHub. The same diagrams can be upgraded to iconified `architecture-beta` diagrams on a renderer that supports icon packs (VS Code Mermaid preview, mermaid.live, Mermaid Chart); that path is documented in `08-reference/07-mermaid-aws-style.md`.
-
-The full palette, node styles, container styles, and copy-paste templates live in `08-reference/07-mermaid-aws-style.md`.
+Do not put emoji, iconify icons (`logos:aws-*`), Font Awesome icons (`fa:fa-*`), or any other glyph in a node label. GitHub renders neither Font Awesome nor iconify, and emoji and symbols are not used in this repository's diagrams. The AWS look comes from the structural containers, the category colors, and the shapes alone. Do not write `architecture-beta`; it does not render on GitHub. On a renderer that supports icon packs (VS Code Mermaid preview, mermaid.live, Mermaid Chart) the same topology could be redrawn as an `architecture-beta` diagram with `logos:aws-*` icons, but that is not used here because it does not render on GitHub.
 
 All Mermaid syntax must be valid.
 
@@ -2949,7 +3027,14 @@ When the screen is a wizard or a sequence, capture each step as its own image ra
 
 ## Annotate the screen
 
-Where a screenshot contains a field or value the prose refers to, mark it: a single-color arrow and a short numbered label pointing at the element. Numbered labels (1, 2, 3) let the caption explain each element without covering the screen. Keep arrows in one color, place labels over whitespace where possible, and never cover the value being pointed at. Annotate after capturing with a local image library (for example Pillow); do not modify the AWS page itself, and do not annotate marketing or purely informational screens.
+Where a screenshot contains a field or value the prose refers to, mark it with a highlight and a numbered label connected by an arrow. The geometry is exact, not approximate:
+
++ **Highlight box.** Outline the target element with a single-color rectangle that hugs it, so it is clear exactly which control the number refers to.
++ **Label box.** Draw each numbered label as a rectangle over whitespace, holding the number and a short phrase (for example `1. Choose the principal`). The label box must not cover the element it points at or any other value on the screen.
++ **Arrow endpoints.** The arrow starts at the edge of the label box and ends at the edge of the target's highlight box, leaving a few pixels of clearance at each end. The arrow must not start or end inside either box, must not overlap or cross the label text, and must not cross any other label.
++ **One arrow per number.** Every numbered label has exactly one arrow to exactly one target. Do not leave a label without an arrow, or an arrow without a label.
+
+Annotate after capturing with a local image library (for example Pillow); do not modify the AWS page itself, and do not annotate marketing or purely informational screens. Open the finished image and check it: if any arrow overlaps a label box or stops short of its target highlight, redraw it.
 
 ## Where to store and how to name
 
@@ -2964,15 +3049,27 @@ The name is `<NN>-<service>-<what the screen shows>.png`. The two-digit prefix f
 
 ## How to reference
 
-Embed with a relative path and a caption. These are self-captured images, so no external `Source` line is required (unlike §33):
+Embed with a lead-in paragraph, the image, and a caption paragraph. These are self-captured images, so no external `Source` line is required (unlike §33):
 
 ```markdown
+The IAM Users console lists every long-lived identity in the account next to the columns you audit: MFA presence, password age, and last sign-in.
+
 ![IAM Users list showing the playwright-tester user](assets/images/screenshots/iam/02-iam-users-list-mfa-status.png)
 
-*The IAM Users list. The MFA column shows whether each human user has a second factor.*
+*The IAM Users list. The MFA column shows whether each human user has a second factor; a user with no MFA and an old password is the finding an attacker wants.*
 ```
 
 Verify the relative path resolves from the document's own directory. A link that breaks is worse than no screenshot.
+
+## Explain every image
+
+Never drop an image into a document with no context. Every screenshot is surrounded by prose:
+
+- a paragraph immediately before it that introduces what the screen is and what to look at;
+- the image;
+- a paragraph immediately after it (the figure caption, set in italics) that gives the precise details: the exact values shown, what each numbered label points to, and what the reader should conclude.
+
+A bare image with no lead-in or no caption is incomplete. The lead-in orients the reader; the caption teaches the specifics. The same applies to a Mermaid diagram: introduce it in prose before the block and explain what it shows after it.
 
 ## Security
 

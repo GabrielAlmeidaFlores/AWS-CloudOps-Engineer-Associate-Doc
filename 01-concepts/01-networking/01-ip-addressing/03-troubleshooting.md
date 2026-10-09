@@ -2,6 +2,8 @@
 
 Most CIDR problems surface as one of two symptoms: a subnet runs out of addresses, or two networks cannot connect. Work the first as a capacity problem and the second as an overlap problem; they have different causes and different fixes.
 
+The diagram below traces the capacity path, the more common of the two.
+
 ```mermaid
 flowchart TD
     A["Can't place a resource in a subnet"] --> B["Check subnet free addresses (usable = 2^(32−n) − 5)"]
@@ -14,6 +16,8 @@ flowchart TD
     class A network
     class F ok
 ```
+
+The path runs from symptom to fix: check the usable count first (`2^(32−n) − 5`), flag a `/28` as the usual culprit, then rule out an overlap before concluding that the fix is a larger subnet or a secondary VPC CIDR. The overlap branch is the second symptom; it fails at connect time rather than at launch, so it is deferred until the capacity checks are exhausted.
 
 ## Symptom table
 
@@ -43,6 +47,8 @@ aws ec2 describe-subnets --subnet-ids subnet-0abc123 \
 ```
 
 `AvailableIpAddressCount` already excludes the five reserved addresses, so it is the number of addresses you can actually assign, not the raw `2^(32−n)` total.
+
+The console reports the same figure on a subnet's details page. The screenshot below shows one subnet's IPv4 CIDR next to its remaining address count, which is the number to check when a subnet is reported full.
 
 ![Subnet details page showing the IPv4 CIDR and the available IPv4 addresses](../../../assets/images/screenshots/vpc/02-vpc-subnet-details-available-ipv4.png)
 
