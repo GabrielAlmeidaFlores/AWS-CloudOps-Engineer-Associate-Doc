@@ -3027,16 +3027,173 @@ When the screen is a wizard or a sequence, capture each step as its own image ra
 
 ## Annotate the screen
 
-Where a screenshot contains a field or value the prose refers to, mark it with a highlight and a numbered label connected by an arrow. The geometry is exact, not approximate:
+Where a screenshot contains a field or value the prose refers to, mark it with a highlight and a numbered label connected by an arrow. Every annotated screenshot in the repository uses the same visual language, so the annotation looks identical across documents. The geometry is exact, not approximate.
+
+### Specification
+
+The values below are in CSS pixels of the original screenshot. Multiply each by the supersample factor before drawing.
+
+| Element | Value |
+|---------|-------|
+| Accent color | `#D32F2F` (211, 47, 47), for every border, label, and arrow |
+| Supersample factor | 3x the screenshot size, drawn then downscaled |
+| Highlight box | accent stroke, 4 px, optional 6 px rounded corners |
+| Label box | white fill, accent border 3 px, 8 px padding, Arial Bold 20 px (17-18 px only to fit a tight margin) |
+| Label text | the number, two spaces, a short phrase: `1.  Choose the principal` |
+| Arrow shaft | accent, 5 px wide |
+| Arrowhead | length 18 px; back width 3x the shaft (half-width 1.5x the shaft) |
+| Minimum arrow length | 70 px edge-to-edge (about 50 px of visible line after clearance) |
+| Clearance | 10 px between each arrow end and the box edge it meets |
+| Text font | `/System/Library/Fonts/Supplemental/Arial Bold.ttf` |
+
+### Rules
 
 + **Highlight box.** Outline the target element with a single-color rectangle that hugs it, so it is clear exactly which control the number refers to.
-+ **Label box.** Draw each numbered label as a rectangle over whitespace, holding the number and a short phrase (for example `1. Choose the principal`). The label box must not cover the element it points at or any other value on the screen.
-+ **Arrow endpoints.** The arrow starts at the edge of the label box and ends at the edge of the target's highlight box, leaving a few pixels of clearance at each end. The arrow must not start or end inside either box, must not overlap or cross the label text, and must not cross any other label.
-+ **Arrow length.** Give every arrow a minimum length, roughly 50 px, so it reads as an arrow and not a stub. A short arrow that barely leaves the label box is not acceptable. When the label sits close to its target, move the label farther away so the arrow can run horizontally, vertically, or diagonally to reach the target, whichever direction avoids crossing screen content.
++ **Label box.** Draw each numbered label as a rectangle over whitespace, holding the number and a short phrase (for example `1.  Choose the principal`). The label box must not cover the element it points at or any other value on the screen.
++ **Arrow endpoints.** The arrow starts at the edge of the label box and ends at the edge of the target's highlight box, leaving the clearance at each end. The arrow must not start or end inside either box, must not overlap or cross the label text, and must not cross any other label.
++ **Arrow length.** Give every arrow the minimum length so it reads as an arrow and not a stub. When the label sits close to its target, move the label farther away so the arrow can run horizontally, vertically, or diagonally to reach the target, whichever direction avoids crossing screen content.
++ **Arrowhead.** The shaft stops at the base of the arrowhead with a flat (butt) end; it never reaches the tip. The head's back is about three times the shaft width, so the wings read clearly.
++ **Render quality.** Draw on a supersampled canvas (3x) and downscale to the target size, so diagonal shafts and arrowheads are anti-aliased rather than pixelated. Never draw at 1:1 on the screenshot canvas.
 + **One arrow per number.** Every numbered label has exactly one arrow to exactly one target. Do not leave a label without an arrow, or an arrow without a label.
-+ **Render quality.** Draw annotations on a supersampled canvas (for example 3x the screenshot size) and downscale to the target size, so diagonal shafts and arrowheads are anti-aliased rather than pixelated. End the arrow shaft at the base of the arrowhead (a flat, butt cap), never at the tip, so the stroke does not bleed past the point. Make the arrowhead's back width roughly three times the shaft width, so the wings read clearly and do not look skinny. Never draw arrows at 1:1 on the screenshot canvas; the thin diagonal lines and the tip render blurry and distorted.
 
-Annotate after capturing with a local image library (for example Pillow); do not modify the AWS page itself, and do not annotate marketing or purely informational screens. Open the finished image and check it: if any arrow overlaps a label box or stops short of its target highlight, redraw it.
+### Procedure
+
+1. Capture the raw screen to a temporary file (for example under `.playwright-mcp/`) with no annotations.
+2. Open it with a local image library (Pillow), upscale it by the supersample factor with a smooth filter (Lanczos), and scale the font sizes and line widths by the same factor.
+3. For each numbered element: draw the highlight box around the target, place the label box in whitespace, then draw the arrow from the label box edge to the highlight box edge. If the arrow would be shorter than the minimum, push the label straight away from the target until it meets the minimum.
+4. Downscale the finished canvas by the supersample factor with the same smooth filter and save it to the destination path.
+5. Open the saved image and check it: every arrow meets its box edges, no arrow overlaps a label, and the arrowheads are crisp. Redraw if any of those fails.
+
+Do not modify the AWS page itself, and do not annotate marketing or purely informational screens.
+
+### Reference implementation
+
+This Pillow module encodes the specification above. Reproduce it exactly so every screenshot follows the same pattern.
+
+```python
+from PIL import Image, ImageDraw, ImageFont
+import math
+
+RED = (211, 47, 47)
+WHITE = (255, 255, 255)
+FONT = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+MIN_ARROW = 70   # minimum edge-to-edge arrow length in CSS px (visible line is this minus 2*GAP)
+GAP = 10         # clearance between an arrow end and a box edge, in CSS px
+HEAD = 18        # arrowhead length in CSS px
+
+_S = 3           # supersample factor
+
+
+def load(raw, scale=3):
+    global _S
+    _S = scale
+    im = Image.open(raw).convert("RGB")
+    w, h = im.size
+    im = im.resize((w * scale, h * scale), Image.LANCZOS)
+    d = ImageDraw.Draw(im)
+    return im, d
+
+
+def font(size):
+    return ImageFont.truetype(FONT, int(round(size * _S)))
+
+
+def save(im, path):
+    w, h = im.size
+    im = im.resize((w // _S, h // _S), Image.LANCZOS)
+    im.save(path)
+
+
+def highlight(d, rect, color=RED, width=4, radius=0):
+    rect = tuple(int(round(v * _S)) for v in rect)
+    width = max(1, int(round(width * _S)))
+    radius = int(round(radius * _S))
+    if radius:
+        d.rounded_rectangle(rect, radius=radius, outline=color, width=width)
+    else:
+        d.rectangle(rect, outline=color, width=width)
+
+
+def _bbox(d, fnt, x, y, text):
+    b = d.textbbox((x, y), text, font=fnt)
+    pad = int(round(8 * _S))
+    return (b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad)
+
+
+def _edge_point(rect, toward):
+    l, t, r, b = rect
+    cx, cy = (l + r) / 2, (t + b) / 2
+    dx, dy = toward[0] - cx, toward[1] - cy
+    if dx == 0 and dy == 0:
+        dx = 1
+    sx = (r - l) / 2 / abs(dx) if dx else 1e9
+    sy = (b - t) / 2 / abs(dy) if dy else 1e9
+    s = min(sx, sy)
+    return (cx + dx * s, cy + dy * s)
+
+
+def _move(a, b, dist):
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    L = math.hypot(dx, dy)
+    if L == 0:
+        return a
+    return (a[0] + dx / L * dist, a[1] + dy / L * dist)
+
+
+def _arrow(d, s, e, color, w, head):
+    """Shaft stops at the arrowhead base; a clean triangle forms the tip.
+    The head's back width is ~3x the shaft width so the wings read clearly."""
+    ang = math.atan2(e[1] - s[1], e[0] - s[0])
+    ux, uy = math.cos(ang), math.sin(ang)
+    px, py = -uy, ux
+    base = (e[0] - head * ux, e[1] - head * uy)
+    d.line([s, base], fill=color, width=w)          # butt-ended at the head base
+    hw = w * 1.5                                     # back half-width = 1.5x shaft width
+    d.polygon([e, (base[0] + px * hw, base[1] + py * hw), (base[0] - px * hw, base[1] - py * hw)], fill=color)
+
+
+def place(d, fnt, x, y, text, target, min_len=MIN_ARROW, gap=GAP, color=RED, w=5):
+    """Draw a numbered label at (x, y) in CSS px and an arrow to `target`.
+    Guarantees the arrow's edge-to-edge length is at least `min_len` by pushing
+    the label straight away from the target when it starts too close."""
+    x = int(round(x * _S))
+    y = int(round(y * _S))
+    target = tuple(int(round(v * _S)) for v in target)
+    min_len *= _S
+    gap *= _S
+    w = max(1, int(round(w * _S)))
+    head = max(6, int(round(HEAD * _S)))
+
+    rect = _bbox(d, fnt, x, y, text)
+    tc = ((target[0] + target[2]) / 2, (target[1] + target[3]) / 2)
+
+    for _ in range(3):
+        lc = ((rect[0] + rect[2]) / 2, (rect[1] + rect[3]) / 2)
+        p1 = _edge_point(rect, tc)
+        p2 = _edge_point(target, lc)
+        dist = math.hypot(p2[0] - p1[0], p2[1] - p1[1])
+        if dist >= min_len:
+            break
+        dx, dy = lc[0] - tc[0], lc[1] - tc[1]
+        L = math.hypot(dx, dy) or 1
+        shift = (min_len - dist) + 4 * _S
+        mx, my = dx / L * shift, dy / L * shift
+        x, y = x + mx, y + my
+        rect = _bbox(d, fnt, x, y, text)
+
+    d.rectangle(rect, fill=WHITE, outline=color, width=max(1, int(round(3 * _S))))
+    d.text((x, y), text, font=fnt, fill=color)
+
+    lc = ((rect[0] + rect[2]) / 2, (rect[1] + rect[3]) / 2)
+    p1 = _edge_point(rect, tc)
+    p2 = _edge_point(target, lc)
+    s = _move(p1, p2, gap)
+    e = _move(p2, p1, gap)
+    _arrow(d, s, e, color, w, head)
+    return rect
+```
+
+A usage example for one screenshot: `im, d = load(raw); highlight(d, (x1, y1, x2, y2), radius=6); place(d, font(20), label_x, label_y, "1.  Choose the principal", (x1, y1, x2, y2)); save(im, out)`.
 
 ## Where to store and how to name
 
