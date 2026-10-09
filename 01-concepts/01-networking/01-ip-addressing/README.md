@@ -38,7 +38,7 @@ Each document ends with its own `Sources` section; there is no separate `sources
 - **Prerequisite For**, VPC, subnets, route tables, security groups, NAT gateway, VPC peering, and every resource that holds an IP.
 - **Commonly Used With**, VPC, subnet, Elastic IP, NAT gateway, internet gateway.
 
-See also:
+See also (both documents are planned, not yet created):
 
-- [VPC](../../../02-services/12-networking-content-delivery/01-vpc/README.md)
-- [Domain 5: Networking and Content Delivery](../../../04-domains/05-networking-content-delivery/README.md)
+- VPC (service)
+- Domain 5: Networking and Content Delivery

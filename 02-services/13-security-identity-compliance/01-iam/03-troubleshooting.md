@@ -7,12 +7,16 @@ Access-denied is the most common IAM failure, and almost every case reduces to o
 
 ```mermaid
 flowchart TD
-    A["Access denied on action X"] --> B["Confirm the principal actually running the call (get-caller-identity)"]
-    B --> C["Check the explicit Deny first (Deny overrides Allow)"]
-    C --> D["Is the action allowed by identity-based OR resource-based policy? (union)"]
-    D --> E["Is there a permissions boundary or SCP capping it? (intersection)"]
-    E --> F["Is a condition blocking it? (aws:RequestedRegion, aws:SourceIp, MFA, tag)"]
+    A["Access denied on action X"] --> B["Confirm the principal running the call (sts get-caller-identity)"]
+    B --> C["Check the explicit Deny first (a Deny overrides every Allow)"]
+    C --> D["Check identity or resource policy allows it (union)"]
+    D --> E["Check a boundary or SCP caps it (intersection)"]
+    E --> F["Check conditions (Region, SourceIp, MFA, tag)"]
     F --> G["Check the resource ARN the action targets"]
+    classDef deny fill:#DD344C,stroke:#DD344C,color:#ffffff
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A deny
+    class B,C,D,E,F,G step
 ```
 
 ## Diagnose in order
@@ -30,6 +34,10 @@ flowchart TD
 - **CloudTrail**, records the API call, the principal, and whether access was denied. Search for the error code (`AccessDenied`) and the caller identity.
 - **IAM Access Analyzer**, finds policies that grant external access to a resource; it also validates policy syntax and IAM grammar.
 - **`DecodeAuthorizationMessage`**, decodes the encoded authorization failure in an `AccessDenied` response into the reason and the matched policy, which is faster than reproducing the call.
+
+![IAM Policy simulator showing a role and the policies that apply to it](../../../assets/images/screenshots/iam/08-iam-policy-simulator-simulation.png)
+
+*The IAM Policy simulator. Pick the principal (1); the simulator loads every policy that applies to it, identity-based, boundary, resource-based, and SCP (2). Add the actions and resources to test, then Simulate (3) to get an allow or deny with the reason, all without making a live call.*
 
 ## Common causes
 

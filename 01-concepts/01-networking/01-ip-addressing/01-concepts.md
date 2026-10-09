@@ -48,8 +48,10 @@ Split it into two `/25` subnets. Each half moves the prefix one bit longer and h
 
 ```mermaid
 flowchart TD
-    VPC["10.0.0.0/24<br/>256 addresses"] --> A["10.0.0.0/25<br/>.0 – .127<br/>network .0, broadcast .127"]
-    VPC --> B["10.0.0.128/25<br/>.128 – .255<br/>network .128, broadcast .255"]
+    VPC["VPC 10.0.0.0/24<br/>256 addresses"] --> A["10.0.0.0/25<br/>.0 to .127<br/>network .0, broadcast .127"]
+    VPC --> B["10.0.0.128/25<br/>.128 to .255<br/>network .128, broadcast .255"]
+    classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
+    class VPC,A,B network
 ```
 
 A `/28` (`10.0.0.0/28`) has `2^4 = 16` addresses, `10.0.0.0` to `10.0.0.15`. That is the smallest subnet AWS allows.

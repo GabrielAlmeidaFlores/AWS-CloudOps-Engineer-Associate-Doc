@@ -1,1 +1,12 @@
 .DS_Store
+
+# Local AWS console credentials for screenshot capture
+aws.credentials
+
+# Editor swap/backup files
+*.swp
+*.swo
+*~
+
+# Playwright MCP browser artifacts (snapshots, logs)
+.playwright-mcp/

@@ -68,7 +68,7 @@ The IPv4 CIDR-blocks limit is the one candidates miss: the primary block and eve
 - **RFC 1918:** `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, the private ranges AWS recommends for VPCs.
 - **Prohibited VPC ranges:** `0.0.0.0/8`, `127.0.0.0/8`, `169.254.0.0/16`, `224.0.0.0/4` (multicast).
 - **Service-reserved range to avoid:** `172.17.0.0/16` (used internally by Cloud9 and SageMaker AI).
-- **IPv6 (VPC):** an Amazon-provided `/56` per VPC, with subnets typically `/64` (covered in [IPv4 vs IPv6](../02-ipv4-ipv6/README.md)).
+- **IPv6 (VPC):** an Amazon-provided `/56` per VPC, with subnets typically `/64` (covered in the IPv4 vs IPv6 concept, planned).
 - **Public IPv4 cost:** every public IPv4 address is billed per hour whether attached or idle, so Elastic IPs are no longer free when unused.
 - **Canonicalization:** AWS stores `100.68.0.18/18` as `100.68.0.0/18`.
 

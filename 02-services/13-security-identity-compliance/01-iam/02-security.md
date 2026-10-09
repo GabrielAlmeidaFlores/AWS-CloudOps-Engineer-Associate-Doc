@@ -26,6 +26,10 @@ Grant only the actions and resources a principal needs.
 - **MFA** on the root user and on every human user. Virtual MFA (TOTP) or hardware (U2F) device. MFA protects console sign-in; it does not protect programmatic access keys, which is why human users should normally assume a role instead of holding keys.
 - **Password policy** is account-wide: minimum length, complexity, rotation, and reuse prevention. There is exactly one password policy per account, so it applies to every IAM user and cannot be set per user.
 
+![IAM Account settings showing the account-wide password policy](../../../assets/images/screenshots/iam/07-iam-account-password-policy.png)
+
+*The password policy lives in IAM Account settings and applies to the whole account (2); the Edit button (1) is where minimum length, the character-type requirement, expiry, and reuse rules are changed. There is no per-user password setting, which is why one policy governs every IAM user.*
+
 ## Credential report
 
 The IAM credential report is a downloadable CSV that lists every user and the state of their password, MFA, and access keys. It is the first artifact to pull during an access review because it surfaces users without MFA, unused passwords, and access keys that have never been rotated.

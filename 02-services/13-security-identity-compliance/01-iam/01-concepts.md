@@ -12,6 +12,10 @@ A principal is an entity that can make authenticated requests to AWS.
 - **IAM role.** An identity you assume, not one you sign in as. Grants *temporary* credentials via AWS STS. Roles are the correct way to give an EC2 instance, a Lambda function, or another AWS account access to resources.
 - **Federated identity.** Users from an external IdP (SAML 2.0, OIDC, or IAM Identity Center) that map to roles.
 
+![IAM Users list showing the single playwright-tester user](../../../assets/images/screenshots/iam/02-iam-users-list-mfa-status.png)
+
+*The IAM Users console. Each row is one long-lived identity; the MFA and Password age columns are how you audit human users at a glance. A user with no MFA and an old, un-rotated password is the finding an attacker wants.*
+
 ## Policies
 
 A policy is a JSON document with a list of statements. Each statement has:
@@ -37,6 +41,10 @@ A complete statement that lets an application read objects under one bucket pref
 
 Reading it element by element: `Effect: Allow` grants the action; `Action` names one operation (`s3:GetObject`) rather than `s3:*`; `Resource` scopes the grant to the `reports/` prefix, where the trailing `/*` matches every object under it; and `Condition` narrows the grant to traffic that arrives through that VPC endpoint, so the same role used over the public internet is denied. That last clause is what makes this a least-privilege statement and not a broad one.
 
+![IAM Create policy JSON editor showing a default Allow statement](../../../assets/images/screenshots/iam/03-iam-create-policy-json-editor.png)
+
+*The IAM policy editor. A statement can be hand-written in the JSON tab or assembled through the Visual builder (1); the side panel (2) adds services, actions, resources, and conditions without editing the JSON by hand. The editor validates the document and reports errors, warnings, and suggestions as you type.*
+
 Three policy types matter most:
 
 | Type | Attached to | Scope |
@@ -58,12 +66,20 @@ This is the single most testable fact about IAM. When a principal requests an ac
 
 ```mermaid
 flowchart TD
-    R[Request] --> A[Authenticate principal]
+    R(("Request")) --> A["Authenticate the principal"]
     A --> E{"Explicit Deny<br/>in any policy?"}
-    E -->|yes| D[Deny]
-    E -->|no| U{"Allowed by<br/>identity or resource policy?"}
-    U -->|no| D2[Implicit Deny]
-    U -->|yes| AL[Allow]
+    E -->|Yes| D["Deny"]
+    E -->|No| U{"Allowed by identity<br/>or resource policy?"}
+    U -->|No| D2["Implicit deny"]
+    U -->|Yes| C{"Capped by a boundary<br/>or an SCP?"}
+    C -->|Yes| D
+    C -->|No| AL["Allow"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef deny fill:#DD344C,stroke:#DD344C,color:#ffffff
+    classDef ok fill:#7AA116,stroke:#7AA116,color:#ffffff
+    class A step
+    class D,D2 deny
+    class AL ok
 ```
 
 If no policy explicitly allows an action, the default is **implicit deny**. IAM has no implicit allow.
@@ -91,6 +107,24 @@ A trust policy that lets the EC2 service assume the role, the trust half of an i
 The `Principal` names `ec2.amazonaws.com`, so only the EC2 service can assume it; swap that for an account ID (`"AWS": "arn:aws:iam::123456789012:root"`) to enable cross-account access. Note there is no `Resource` element, on a role's trust policy the role itself is the resource.
 
 Common trust principals: an AWS service (`ec2.amazonaws.com`), another account ID, or a federated IdP. When you attach a role to an EC2 instance via an **instance profile**, the instance metadata service (IMDS) rotates temporary credentials so the instance never stores long-lived keys.
+
+Creating a role in the console runs through three steps. First, choose who may assume it (the trusted entity):
+
+![IAM Create role, step 1, Select trusted entity, choosing AWS service and EC2](../../../assets/images/screenshots/iam/04-iam-create-role-step1-trusted-entity.png)
+
+*Step 1: Select trusted entity. Choosing AWS service (1) and the EC2 use case (2) writes a `Service` principal such as `ec2.amazonaws.com` into the trust policy.*
+
+Then attach what the assumed session may do (the permissions policy):
+
+![IAM Create role, step 2, Add permissions, selecting AmazonS3ReadOnlyAccess](../../../assets/images/screenshots/iam/05-iam-create-role-step2-add-permissions.png)
+
+*Step 2: Add permissions. Choose to attach an existing managed policy (1), tick the policy to attach (2); the permissions boundary (3) is optional and only ever caps the role.*
+
+Finally, name the role and review the generated trust policy before creating it:
+
+![IAM Create role, step 3, Name, review, and create, showing the generated trust policy](../../../assets/images/screenshots/iam/06-iam-create-role-step3-name-review.png)
+
+*Step 3: Name, review, and create. Type the role name (1) and review the trust policy (2) generated from step 1, where `Principal` is `ec2.amazonaws.com`, before creating the role.*
 
 > [!TIP]
 > When a scenario asks how a service or workload gets access, the answer is a **role**, never a long-lived user with static keys. Roles yield temporary STS credentials that AWS rotates automatically; static keys embedded in an instance or committed to a repo are a standing credential-leak risk. For EC2 the role attaches through an **instance profile**, and IMDSv2 should be enforced so the role credentials can't be fetched over the network by an attacker.

@@ -11,6 +11,46 @@ IAM manages two concerns in one service:
 
 IAM is global, not regional. Users, roles, and policies exist account-wide; a role created in one Region is usable in all Regions.
 
+![IAM dashboard showing security recommendations, resource counts, and the account sign-in URL](../../../assets/images/screenshots/iam/01-iam-dashboard-security-recommendations.png)
+
+*The IAM dashboard for the sandbox account. The Security recommendations panel and the resource counts on the left are the first things to check when auditing an account; the AWS Account panel on the right holds the account ID and the sign-in URL for IAM users.*
+
+The pieces fit together as principals, policies, and resources:
+
+```mermaid
+flowchart LR
+    subgraph IDENT["Identities (who)"]
+      USER["IAM user"]
+      ROLE["IAM role"]
+      FED["Federated identity"]
+    end
+    subgraph POLICY["Policies (what)"]
+      IDP["Identity-based policy"]
+      RBP["Resource-based policy"]
+      BND["Permissions boundary"]
+    end
+    subgraph RES["Resources (which)"]
+      S3[("S3 bucket")]
+      KMS[("KMS key")]
+    end
+    USER --> IDP
+    ROLE --> IDP
+    FED --> ROLE
+    IDP --> S3
+    RBP --> S3
+    RBP --> KMS
+    BND -.->|"caps"| ROLE
+    classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
+    classDef storage fill:#7AA116,stroke:#7AA116,color:#ffffff
+    classDef database fill:#C925D1,stroke:#C925D1,color:#ffffff
+    class USER,ROLE,FED,IDP,RBP,BND security
+    class S3 storage
+    class KMS database
+    style IDENT fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style POLICY fill:#ffffff,stroke:#00A4A6,stroke-width:2px,color:#147EBA
+    style RES fill:#ffffff,stroke:#8C4FFF,stroke-width:2px,color:#8C4FFF
+```
+
 ## SOA-C03 relevance
 
 IAM is the backbone of **Domain 4: Security and Compliance (16%)**. The exam guide names it directly in three skills:
@@ -40,8 +80,8 @@ Each document ends with its own `Sources` section; there is no separate `sources
 - **Commonly Used With**, AWS Organizations, IAM Identity Center, AWS STS, KMS.
 - **Automated By**, CloudFormation, CDK (provision roles and policies as code).
 
-See also:
+See also (cross-service and domain documents are planned, not yet created):
 
-- [Domain 4: Security and Compliance](../../../04-domains/04-security-compliance/README.md)
-- [IAM + KMS](../../../03-cross-service/04-identity-security/01-iam-kms/README.md)
-- [IAM + Organizations](../../../03-cross-service/04-identity-security/02-iam-organizations/README.md)
+- Domain 4: Security and Compliance
+- IAM + KMS (cross-service)
+- IAM + Organizations (cross-service)

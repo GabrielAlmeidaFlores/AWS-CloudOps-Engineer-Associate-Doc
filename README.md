@@ -52,7 +52,7 @@ aws-cloudops-soa-c03/
 ├── 06-labs/              Hands-on exercises and walkthroughs
 ├── 07-cheatsheets/       Quick-review material for last-minute revision
 ├── 08-reference/         Whitepapers, prescriptive guidance, glossary
-├── assets/               Certification badge, exam guide PDF, images, diagrams
+├── assets/               Certification badge, exam guide PDF, screenshot images, diagrams
 └── 99-archive/           Deprecated, historical, and SOA-C02 material
 ```
 

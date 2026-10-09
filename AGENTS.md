@@ -154,7 +154,9 @@ Do not simply:
 
 ```mermaid
 flowchart LR
-    A[Search AWS] --> B[Summarize AWS] --> C[Finish]
+    A["Search AWS"] --> B["Summarize AWS"] --> C["Finish"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A,B,C step
 ```
 
 Instead:
@@ -170,6 +172,8 @@ flowchart TD
     G --> H["Identify relationships and dependencies"]
     H --> I["Determine repository placement"]
     I --> J["Generate documentation"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A,B,C,D,E,F,G,H,I,J step
 ```
 
 The research process should be **iterative**.
@@ -344,13 +348,15 @@ Think in terms of:
 
 ```mermaid
 flowchart TD
-    A[Claim] --> B[Source A]
-    B --> C[Source B]
-    C --> D[Source C]
+    A["Claim"] --> B["Source A"]
+    B --> C["Source B"]
+    C --> D["Source C"]
     D --> E{"Does the evidence agree?"}
-    E -->|No| F[Investigate why]
+    E -->|No| F["Investigate why"]
     E -->|Yes| G["Determine the authoritative/current interpretation"]
     F --> G
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A,B,C,D,F,G step
 ```
 
 Possible explanations for conflicts include:
@@ -428,7 +434,9 @@ The repository must be organized around **five layers**:
 
 ```mermaid
 flowchart TD
-    A[CERTIFICATION] --> B[CONCEPTS] --> C[SERVICES] --> D["CROSS-SERVICE RELATIONSHIPS"] --> E[DOMAINS]
+    A["CERTIFICATION"] --> B["CONCEPTS"] --> C["SERVICES"] --> D["CROSS-SERVICE RELATIONSHIPS"] --> E["DOMAINS"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A,B,C,D,E step
 ```
 
 With additional supporting layers for:
@@ -751,10 +759,12 @@ aws-cloudops-soa-c03/
 │   ├── 03-aws-whitepapers.md
 │   ├── 04-aws-prescriptive-guidance.md
 │   ├── 05-community-resources.md
-│   └── 06-glossary.md
+│   ├── 06-glossary.md
+│   └── 07-mermaid-aws-style.md
 │
 ├── assets/
 │   ├── images/
+│   │   └── screenshots/
 │   ├── diagrams/
 │   └── mermaid/
 │
@@ -1484,18 +1494,20 @@ For every document, identify the relationship between:
 
 ```mermaid
 flowchart TD
-    A[Service] --> B[Concepts] --> C["SOA-C03 Tasks"] --> D["SOA-C03 Skills"] --> E["Operational Scenarios"] --> F["Related Services"]
+    A["Service"] --> B["Concepts"] --> C["SOA-C03 Tasks"] --> D["SOA-C03 Skills"] --> E["Operational Scenarios"] --> F["Related Services"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A,B,C,D,E,F step
 ```
 
 For example:
 
 ```mermaid
 flowchart TD
-    CW[CloudWatch] --> M[Metrics]
-    CW --> L[Logs]
-    CW --> AL[Alarms]
-    CW --> AG[Agent]
-    CW --> DB[Dashboards]
+    CW["CloudWatch"] --> M["Metrics"]
+    CW --> L["Logs"]
+    CW --> AL["Alarms"]
+    CW --> AG["Agent"]
+    CW --> DB["Dashboards"]
     M --> D1["SOA-C03 Domain 1"]
     L --> D1
     AL --> D1
@@ -1504,6 +1516,10 @@ flowchart TD
     D1 --> T1["Task 1.1"]
     D1 --> T2["Task 1.2"]
     D1 --> T3["Task 1.3"]
+    classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
+    classDef neutral fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class CW,M,L,AL,AG,DB mgmt
+    class D1,T1,T2,T3 neutral
 ```
 
 The current SOA-C03 Domain 1 explicitly includes monitoring/logging configuration, CloudWatch agent management, alarms, dashboards, notifications, remediation, EventBridge, Systems Manager automation, and performance analysis.
@@ -1623,21 +1639,33 @@ The exam frequently requires understanding interactions such as:
 
 ```mermaid
 flowchart LR
-    CW[CloudWatch] --> Alarm[Alarm] --> EB[EventBridge] --> SSM["Systems Manager"] --> R[Remediation]
+    CW["CloudWatch"] --> AL["Alarm"] --> EB["EventBridge"] --> SSM["Systems Manager"] --> R["Remediation"]
+    classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
+    classDef integ fill:#E7157B,stroke:#E7157B,color:#ffffff
+    class CW,AL,SSM,R mgmt
+    class EB integ
 ```
 
 or:
 
 ```mermaid
 flowchart LR
-    RN["Route 53"] --> HC["Health Check"] --> ELB[ELB] --> EC2[EC2] --> MAZ["Multi-AZ"]
+    RN["Route 53"] --> HC["Health check"] --> ELB["Elastic Load Balancing"] --> EC2["EC2"] --> MAZ["Multi-AZ"]
+    classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
+    classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
+    class RN,HC,ELB network
+    class EC2,MAZ compute
 ```
 
 or:
 
 ```mermaid
 flowchart LR
-    EC2[EC2] --> VPC[VPC] --> SN[Subnet] --> RT["Route Table"] --> NAT["NAT Gateway"] --> IGW["Internet Gateway"]
+    EC2["EC2"] --> VPC["VPC"] --> SN["Subnet"] --> RT["Route table"] --> NAT["NAT gateway"] --> IGW["Internet gateway"]
+    classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
+    classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
+    class EC2 compute
+    class VPC,SN,RT,NAT,IGW network
 ```
 
 Document these relationships explicitly.
@@ -1789,9 +1817,13 @@ For every service/topic, investigate the following concepts where relevant:
 26. CLI/API/IaC
 27. Key takeaways
 28. Quick review
-29. Sources, a `## Sources` section at the end of each document (no separate `sources.md` file)
+29. Diagrams, one or more Mermaid diagrams for every architecture, flow, request path, or relationship, following the AWS style of §32 (nested containers, AWS category colors, fixed node styles, no emoji or icons). A multi-step process is drawn as ordered steps.
+30. Console screenshots, the AWS Management Console screens a reader cannot picture from prose (a form to fill, a wizard step, a result table, a non-obvious setting), captured and annotated per §67. A multi-step console workflow is captured one screenshot per step.
+31. Sources, a `## Sources` section at the end of each document (no separate `sources.md` file)
 
 Only include sections that are technically relevant.
+
+Diagrams and console screenshots are part of the deliverable, not optional extras. If a document describes an architecture, a flow, or a relationship, it carries a diagram (§32). If it describes a console operation, a configuration form, or an audit result, it carries a screenshot (§67). Generate both while the document is written, not afterward.
 
 ### Content depth and anti-shallow rule
 
@@ -1896,7 +1928,15 @@ For external diagrams:
 
 Every diagram that represents a flow, process, pipeline, decision, architecture, request flow, data flow, network flow, relationship, or dependency MUST be a Mermaid diagram. Never draw a diagram as ASCII art, no vertical arrow chains (`↓`, `▼`), no box drawings, no `A → B → C` arrow chains. If a subject needs a diagram, it gets a Mermaid block.
 
+A diagram is part of the deliverable, not optional (§29): any subject with an architecture, a flow, a request path, or a relationship carries at least one diagram. Multi-step processes are drawn as ordered steps.
+
 Use Mermaid for architecture, request flow, data flow, network flow, authentication, authorization, monitoring, remediation, deployment, automation, failover, recovery, and service integration.
+
+Every diagram in the repository uses the single pattern defined in this section, so all diagrams look the same regardless of which document they appear in.
+
+## Viewer constraint (GitHub)
+
+These diagrams are rendered by GitHub's built-in Mermaid, which supports only a subset of Mermaid. It does not render `architecture-beta`, iconify icons (`logos:aws-*`), Font Awesome icons (`fa:fa-*`), tooltips, hyperlinks, or the expanded node shapes added in Mermaid v11.3 (`@{ shape: ... }`). A diagram that uses those features shows placeholder boxes or fails to render. Author only the GitHub-safe subset: `flowchart`, `sequenceDiagram`, `stateDiagram-v2`, `subgraph`, `classDef`, `style`, `linkStyle`, and the classic node shapes.
 
 ## Consistent patterns
 
@@ -1905,7 +1945,7 @@ Every Mermaid diagram in the repository follows the same patterns. Do not invent
 | Diagram kind | Pattern |
 |--------------|---------|
 | Process, troubleshooting, decision flow | `flowchart TD` (top-down); decisions are `{Question?}` nodes |
-| Pipeline, request flow, data flow, service interaction | `flowchart LR` (left-to-right) |
+| Architecture, pipeline, request flow, data flow, service interaction | `flowchart LR` (left-to-right) |
 | Layered architecture, hierarchy, dependency chain | `flowchart TD` |
 | Sequence of calls between actors | `sequenceDiagram` |
 | State transitions | `stateDiagram-v2` |
@@ -1917,23 +1957,70 @@ Rules that apply to every diagram:
 - Solid arrows `-->`; label an arrow with `-->|label|` only when the relationship needs a word.
 - One idea per diagram; split anything past roughly 15 nodes.
 
-Example, process flow (`flowchart TD`):
+## AWS-styled architecture diagrams
 
-```mermaid
-flowchart TD
-    A["Symptom"] --> B["Check metrics/logs/events"]
-    B --> C["Check configuration"]
-    C --> D{"Allowed?"}
-    D -->|No| E["Fix permission or route"]
-    D -->|Yes| F["Verify recovery"]
-```
+Every diagram must look like an AWS reference diagram, not a bare default flowchart. The same four ingredients are used in every diagram, so they all read alike.
 
-Example, service interaction (`flowchart LR`):
+1. **Containers.** Nest `subgraph` blocks for the AWS Cloud, Region, account, VPC, and subnets, then style each with the AWS structural colors: navy `#232F3E` dashed for the cloud, teal `#00A4A6` for Region and account, purple `#8C4FFF` for the VPC, green `#248814` for public subnets, teal `#147EBA` for private subnets.
+2. **Category colors.** Fill every service node with its AWS category color and white text through `classDef`: Compute `#ED7100`, Storage `#7AA116`, Security `#DD344C`, Database `#C925D1`, Networking and Analytics `#8C4FFF`, Application Integration and Management & Governance `#E7157B`, AI `#01A88D`.
+3. **Fixed node styles.** Every node carries one of a small set of styles, so no node is left at the default theme: a service uses its category color, a process or step node uses the neutral `#F1F3F3` fill with navy text, a decision uses a white fill with a navy stroke, an actor uses a navy fill with white text, and an allow outcome uses Storage green while a deny outcome uses Security red.
+4. **Semantic shapes.** Rectangle for a service or step, cylinder `[( )]` for a data store, `{ }` for a decision, `(( ))` for an actor.
+
+Worked example, an EC2 instance reading an S3 bucket through a role:
 
 ```mermaid
 flowchart LR
-    EC2[EC2] --> CW[CloudWatch] --> Alarm["CloudWatch Alarm"] --> EB[EventBridge] --> SSM["Systems Manager"]
+    USER(("User"))
+    subgraph CLOUD["AWS Cloud"]
+      direction TB
+      subgraph ACCT["Account 123456789012"]
+        ROLE["IAM role<br/>read-reports"]
+        S3[("S3 bucket<br/>reports/*")]
+        subgraph VPC["VPC 10.0.0.0/16"]
+          APP["EC2 instance"]
+        end
+      end
+    end
+    USER -->|"AssumeRole"| ROLE
+    APP -->|"instance profile"| ROLE
+    ROLE -->|"s3:GetObject"| S3
+    classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
+    classDef storage fill:#7AA116,stroke:#7AA116,color:#ffffff
+    classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
+    classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    class APP compute
+    class S3 storage
+    class ROLE security
+    class USER actor
+    style CLOUD fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style ACCT fill:#ffffff,stroke:#00A4A6,stroke-width:2px,color:#147EBA
+    style VPC fill:#ffffff,stroke:#8C4FFF,stroke-width:2px,color:#8C4FFF
 ```
+
+A pure logic or troubleshooting flow uses the same styles and drops the containers, because it is a sequence of steps rather than a deployed architecture:
+
+```mermaid
+flowchart TD
+    A["Request denied"] --> B{"Explicit deny in any policy?"}
+    B -->|Yes| C["Denied by the explicit deny"]
+    B -->|No| D{"Allowed by identity or resource policy?"}
+    D -->|No| E["Implicit deny"]
+    D -->|Yes| F{"Capped by a boundary or SCP?"}
+    F -->|Yes| E
+    F -->|No| G["Allow"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef deny fill:#DD344C,stroke:#DD344C,color:#ffffff
+    classDef ok fill:#7AA116,stroke:#7AA116,color:#ffffff
+    class A step
+    class C,E deny
+    class G ok
+```
+
+## No icons, symbols, or emoji
+
+Do not put emoji, iconify icons (`logos:aws-*`), Font Awesome icons (`fa:fa-*`), or any other glyph in a node label. GitHub renders neither Font Awesome nor iconify, and emoji and symbols are not used in this repository's diagrams. The AWS look comes from the structural containers, the category colors, and the shapes alone. Do not write `architecture-beta`; it does not render on GitHub. The same diagrams can be upgraded to iconified `architecture-beta` diagrams on a renderer that supports icon packs (VS Code Mermaid preview, mermaid.live, Mermaid Chart); that path is documented in `08-reference/07-mermaid-aws-style.md`.
+
+The full palette, node styles, container styles, and copy-paste templates live in `08-reference/07-mermaid-aws-style.md`.
 
 All Mermaid syntax must be valid.
 
@@ -1961,7 +2048,9 @@ For example:
 
 ```mermaid
 flowchart TD
-    A[Symptom] --> B[Observe] --> C["Check metrics/logs/events"] --> D["Identify affected component"] --> E["Check configuration"] --> F["Check permissions"] --> G["Check network path"] --> H["Check dependencies"] --> I["Check quotas/limits"] --> J["Apply remediation"] --> K["Verify recovery"]
+    A["Symptom"] --> B["Observe"] --> C["Check metrics/logs/events"] --> D["Identify affected component"] --> E["Check configuration"] --> F["Check permissions"] --> G["Check network path"] --> H["Check dependencies"] --> I["Check quotas/limits"] --> J["Apply remediation"] --> K["Verify recovery"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A,B,C,D,E,F,G,H,I,J,K step
 ```
 
 Do not only list symptoms and fixes.
@@ -2216,8 +2305,12 @@ Example:
 
 ```mermaid
 flowchart TD
-    A["EC2 networking"] -->|"requires understanding of"| B[VPC]
-    B --> C[Subnets] --> D["Route Tables"] --> E["Security Groups"]
+    A["EC2 networking"] -->|"requires understanding of"| B["VPC"]
+    B --> C["Subnets"] --> D["Route tables"] --> E["Security groups"]
+    classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
+    classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
+    class A,B,C,D network
+    class E security
 ```
 
 This allows the repository to become an ordered learning graph without forcing every document into a rigid research order.
@@ -2604,6 +2697,8 @@ Before creating files, determine:
 ```mermaid
 flowchart TD
     A["What is this?"] --> B["Is it a service?"] --> C["Is it a concept?"] --> D["Is it a relationship?"] --> E["Is it a domain-context topic?"] --> F["Does an existing canonical document already cover it?"] --> G["What additional context is actually missing?"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A,B,C,D,E,F,G step
 ```
 
 Only then decide which files to create.
@@ -2647,8 +2742,10 @@ Before finalizing documentation, verify:
 
 + Existing AWS diagram searched for.
 + Appropriate external diagram searched for.
-+ Mermaid created when useful.
-+ Diagram technically verified.
++ A Mermaid diagram created for every architecture, flow, request path, and relationship, in the AWS style of §32.
++ Diagram technically verified and GitHub-safe (no emoji, no icons, no `architecture-beta`).
++ Console screenshots captured for every screen that aids understanding, one image per step of a multi-step workflow, annotated and referenced per §67.
++ Every screenshot path resolves and no screenshot is orphaned.
 
 ### Repository
 
@@ -2674,6 +2771,7 @@ Before finalizing documentation, verify:
 + No document trips a shallow-content trigger (§29).
 + No document was lengthened by padding, rephrasing, or restating (the padding ban, §29).
 + Each document adds facts a reader could not infer from its title.
++ Diagrams and screenshots are present wherever the subject needs them (§29), and they follow the §32 style and the §67 rules.
 
 Only after this process should the final documentation be generated.
 
@@ -2756,7 +2854,7 @@ Research official AWS documentation.
 
 ### Step 3
 
-Research relevant diagrams and visual references.
+Research the relevant diagrams, architecture references, and console screens to capture.
 
 ### Step 4
 
@@ -2788,11 +2886,15 @@ Determine which existing documents should be linked instead of duplicated.
 
 ### Step 11
 
-Create or update the appropriate documentation.
+Create or update the documentation, including the AWS-styled Mermaid diagrams required by §32.
 
 ### Step 12
 
-Generate the final Markdown content.
+Capture the console screenshots the documentation needs, one image per step of a multi-step workflow, annotate them, and reference them per §67.
+
+### Step 13
+
+Generate the final Markdown content, with every diagram and screenshot embedded and linked.
 
 The research order itself should remain flexible.
 
@@ -2800,7 +2902,87 @@ The repository structure should remain consistent.
 
 ---
 
-# 67. FINAL PRINCIPLE
+# 67. CONSOLE SCREENSHOTS
+
+Screenshots are part of the documentation deliverable, generated whenever a service or operational topic is documented, not an optional add-on. A screenshot earns its place when it shows something prose and a Mermaid diagram cannot: a configuration form, a result table, a wizard step, or an overview page. Capture the screens that make the explanation easier to understand; do not add screenshots for decoration.
+
+## When to capture
+
+Capture a screen when at least one of these is true:
+
++ the reader must fill a specific form and needs to know which field does what;
++ a console result (a list, a status, an alarm state) proves the behavior the text describes;
++ the location of a setting in the console is not obvious from the text;
++ the topic involves a console workflow that is easier to follow as a sequence of screens.
+
+Do not capture marketing pages, screens that only repeat a definition, or another variant of a screenshot already present in the same document.
+
+## How to capture
+
+Use the Playwright MCP browser tools. The sandbox credentials live in `aws.credentials` at the repository root (account alias, sign-in URL, IAM user name, console password). Never commit that file; it is gitignored.
+
+The repeatable flow:
+
+```mermaid
+flowchart TD
+    A["Navigate to the sign-in URL"] --> B["Fill account alias, user name, password"]
+    B --> C["Submit and wait for the console"]
+    C --> D["Navigate to the target service screen"]
+    D --> E["Snapshot to locate the fields"]
+    E --> F["Fill or open the form as needed"]
+    F --> G["take_screenshot into assets/images/screenshots/service/"]
+    G --> H["Embed the image in the document"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class A,B,C,D,E,F,G,H step
+```
+
+Rules for the capture:
+
++ sign in with the credentials in `aws.credentials`, never hardcode the password anywhere else;
++ call `browser_snapshot` to get element references before clicking or typing;
++ use the region and resource names already used in the document so the screenshot matches the text;
++ capture at a readable viewport; the `device` scale is acceptable when detail matters.
+
+## Multi-step workflows
+
+When the screen is a wizard or a sequence, capture each step as its own image rather than a single composite shot, and keep the images in read order. Creating a role, for example, runs through three steps (Select trusted entity, Add permissions, Name and create), so it carries three images. One screenshot of the final review page does not show the reader how the trust policy was produced; the three-step sequence does. A workflow with two or three screens is worth the extra images when the alternative is prose describing screens the reader cannot see.
+
+## Annotate the screen
+
+Where a screenshot contains a field or value the prose refers to, mark it: a single-color arrow and a short numbered label pointing at the element. Numbered labels (1, 2, 3) let the caption explain each element without covering the screen. Keep arrows in one color, place labels over whitespace where possible, and never cover the value being pointed at. Annotate after capturing with a local image library (for example Pillow); do not modify the AWS page itself, and do not annotate marketing or purely informational screens.
+
+## Where to store and how to name
+
+Store screenshots under `assets/images/screenshots/<service>/`, for example:
+
+```text
+assets/images/screenshots/iam/02-iam-users-list-mfa-status.png
+assets/images/screenshots/iam/03-iam-create-policy-json-editor.png
+```
+
+The name is `<NN>-<service>-<what the screen shows>.png`. The two-digit prefix follows the read order of the document that references the image. The rest must make the file understandable from its name alone, with no surrounding context: name the service and the specific screen (`-mfa-status`, `-step1-trusted-entity`, `-json-editor`), not a vague word like `dashboard` or `form`. Keep it kebab-case.
+
+## How to reference
+
+Embed with a relative path and a caption. These are self-captured images, so no external `Source` line is required (unlike §33):
+
+```markdown
+![IAM Users list showing the playwright-tester user](assets/images/screenshots/iam/02-iam-users-list-mfa-status.png)
+
+*The IAM Users list. The MFA column shows whether each human user has a second factor.*
+```
+
+Verify the relative path resolves from the document's own directory. A link that breaks is worse than no screenshot.
+
+## Security
+
++ Never commit `aws.credentials` or any file that contains the console password.
++ The sandbox account ID, region, and resource ARNs may appear in screenshots; this repository accepts that for the sandbox account.
++ Before capturing, confirm the screen shows no secret, access key, or password value. If a form would reveal a secret, do not screenshot it.
+
+---
+
+# 68. FINAL PRINCIPLE
 
 **Research broadly.**
 

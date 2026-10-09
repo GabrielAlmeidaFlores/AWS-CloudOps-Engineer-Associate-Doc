@@ -9,6 +9,10 @@ flowchart TD
     C --> D["Is the range inside the VPC CIDR and non-overlapping?"]
     D --> E["Does the resource need a public IP but the subnet routes nowhere?"]
     E --> F["Add a secondary VPC CIDR or create a larger subnet"]
+    classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
+    classDef ok fill:#7AA116,stroke:#7AA116,color:#ffffff
+    class A network
+    class F ok
 ```
 
 ## Symptom table
@@ -40,13 +44,17 @@ aws ec2 describe-subnets --subnet-ids subnet-0abc123 \
 
 `AvailableIpAddressCount` already excludes the five reserved addresses, so it is the number of addresses you can actually assign, not the raw `2^(32−n)` total.
 
+![Subnet details page showing the IPv4 CIDR and the available IPv4 addresses](../../../assets/images/screenshots/vpc/02-vpc-subnet-details-available-ipv4.png)
+
+*A subnet's details page. The IPv4 CIDR (1) sets the block size, and Available IPv4 addresses (2) is what remains after the five reservations and any resources already placed. Here the `/20` holds 4,096 addresses (4,091 usable) and reports 4,087 free, because four are consumed.*
+
 ## The connectivity check
 
 When peering or a Transit Gateway attachment fails to connect, compare the two CIDRs for overlap before anything else. Any overlap is fatal: the request fails rather than connecting partially, and it fails at the control plane, so nothing appears in flow logs. Because neither VPC's CIDR can be resized, the fix is to re-address one side, which is why address planning precedes provisioning.
 
 ## The gateway check
 
-A resource that is correctly addressed but still cannot reach the internet is usually a routing problem, not a CIDR problem. Confirm the subnet's route table has a route to an internet gateway (for a public subnet) or a NAT gateway (for a private subnet), and that an internet gateway or NAT gateway is attached to the VPC at all. This is where IP addressing hands off to [Routing](../../01-networking/04-routing/README.md).
+A resource that is correctly addressed but still cannot reach the internet is usually a routing problem, not a CIDR problem. Confirm the subnet's route table has a route to an internet gateway (for a public subnet) or a NAT gateway (for a private subnet), and that an internet gateway or NAT gateway is attached to the VPC at all. This is where IP addressing hands off to the Routing concept (planned).
 
 ## Sources
 
