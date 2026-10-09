@@ -21,7 +21,7 @@ Resource groups turn tag conventions into reusable targets:
 - **Application Manager** imports resources grouped by CloudFormation stacks, AppRegistry, and clusters.
 - **Explorer and OpsCenter** can group and filter operational data by the tag keys you nominate (Explorer lets you set up to five reporting tag keys).
 
-The practical rule: define your tag schema first (for example `Environment`, `Layer`, `PatchGroup`), then build resource groups on top of it, then target Systems Manager operations at the group. Changing the tag membership changes the target set with no document edits.
+The practical rule: define your tag schema first (for example `Environment`, `Layer`, `PatchGroup`), then build resource groups on top of it, then target Systems Manager operations at the group. Changing the tag membership changes the target set with no document edits. The tag rules themselves (key/value case sensitivity, the 50-tag cap, the `Patch Group` key, and IAM tag conditions) are in [17-tagging.md](17-tagging.md).
 
 The Resource Groups console lists the groups in the current Region. The screenshot below shows two groups in the sandbox account, named by environment.
 

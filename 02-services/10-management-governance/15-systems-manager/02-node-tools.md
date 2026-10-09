@@ -13,6 +13,12 @@ Fleet Manager is a unified console for remotely managing nodes that run on AWS o
 
 The distinction worth remembering: Fleet Manager is the **console/GUI** path to a node, while Session Manager is the **shell/session** path. Both reach the same managed nodes, and both are governed by IAM rather than by open inbound ports.
 
+The Fleet Manager managed-nodes view is the operator's landing page. It lists every registered node with the columns you triage from: name, platform, ping status, and agent version.
+
+![Fleet Manager managed nodes list showing three Online Amazon Linux instances](../../../assets/images/screenshots/ssm/07-ssm-fleet-manager-managed-nodes.png)
+
+*The Fleet Manager managed-nodes list. The **Managed Nodes (3)** heading (1) is the registered-node count; the Ping status column (2) reads **Online** only when the agent is currently reaching the service; and the Agent version column (3) shows `3.3.5226.0` on each node. A node with `ConnectionLost` registered before but is not reaching the service now, and a node missing entirely was never managed.*
+
 ## Compliance
 
 Compliance scans managed nodes for **patch compliance and configuration inconsistencies** and aggregates the results so you can find non-compliant resources. It does not collect its own data; it surfaces what two other tools already produce.
@@ -65,6 +71,12 @@ flowchart LR
 ```
 
 The diagram shows where the cross-account, cross-Region reporting capability comes from: the resource data sync is the component that centralizes each node's metadata into one S3 bucket, and Athena is what turns that bucket into fleet-wide queries. Without the sync, inventory data is per-Region in the console and cannot be queried as one dataset.
+
+The Inventory dashboard puts those collected types into one view. It is the screen that answers "what data am I actually gathering, and from how many nodes".
+
+![Inventory dashboard showing enabled inventory and the coverage per metadata type](../../../assets/images/screenshots/ssm/08-ssm-inventory-dashboard.png)
+
+*The Inventory dashboard. The **Inventory coverage per type** chart (1) lists the metadata types collected in this account and Region, here `AWS:Application`, `AWS:InstanceDetailedInformation`, `AWS:Network`, and the rest, with the bar length being the number of nodes reporting each type; the **Resource Data Syncs** button (2) is where you configure the S3 aggregation that enables cross-account and cross-Region querying. The ring is labeled **Enabled**, meaning inventory is collecting on this account's managed nodes.*
 
 ## Hybrid Activations
 

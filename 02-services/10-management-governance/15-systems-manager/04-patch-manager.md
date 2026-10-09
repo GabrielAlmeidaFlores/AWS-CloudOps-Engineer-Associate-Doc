@@ -19,6 +19,12 @@ A **patch baseline** defines which patches are approved for installation and whi
 - **Auto-approval.** Predefined baselines typically auto-approve approved patches **7 days after release** (Debian and Ubuntu approve security patches immediately because reliable release dates are not available). A custom baseline can change the delay or approve specific patches.
 - **Approval rules.** Rules select patches by classification and severity (for example, all Security patches of Critical or Important severity), with an auto-approval delay.
 
+The baselines tab lists every baseline in the account and Region, both the AWS-provided ones and any you created, with the operating system and whether each is the OS default.
+
+![Patch Manager baselines tab listing AWS-provided default baselines per operating system](../../../assets/images/screenshots/ssm/14-ssm-patch-manager-baselines.png)
+
+*The Patch baselines tab, showing 17 predefined baselines, one per supported OS (`AWS-AmazonLinux2023DefaultPatchBaseline`, `AWS-CentOSDefaultPatchBaseline`, `AWS-DebianDefaultPatchBaseline`, and so on). The **Default baseline** column (1) marks the baseline a node falls back to when it has no `Patch Group` tag for that OS; a node resolves to exactly one. **Create patch baseline** (2) starts a custom baseline, which is what you do when you need real compliance levels or a different auto-approval delay. The banner notes that baselines managed by a Quick Setup patch policy are not shown here, which is the operational split between the legacy and recommended patching paths.*
+
 ## Patch groups
 
 A **patch group** associates a set of nodes with a specific baseline, so different environments can run different approval rules.
@@ -28,10 +34,19 @@ A **patch group** associates a set of nodes with a specific baseline, so differe
 - **Key nuance.** The `register-patch-baseline-for-patch-group` command treats the same *value* under `Patch Group` and `PatchGroup` as one group, but ordinary `send-command` targeting does not: `tag:PatchGroup` and `tag:Patch Group` select different node sets.
 - **Not used with patch policies.** Patch groups are a legacy mechanism; patching configured through *patch policies* in Quick Setup does not use them.
 
+> [!IMPORTANT]
+> The `Patch Group` key and generic tag targeting share the tag rules in [17-tagging.md](17-tagging.md): a `send-command` target array holds at most five key-value pairs, multiple keys combine with AND, and matching is case-sensitive. A common failure is a baseline registered for `Patch Group = PROD` while the node is tagged `PatchGroup = Prod` (or `Patch Group = Prod`): the value must match exactly and the target key spelling must match the tag spelling, or the node silently falls back to the default baseline.
+
 ## Running patching
 
 - **On demand.** A **Patch now** operation runs a scan or install immediately.
 - **On a schedule.** A `Scan` or `Install` task runs inside a Maintenance Windows window, or through a **patch policy** configured in Quick Setup. Patch policies are the recommended method: one policy can cover every account and Region in an organization, selected accounts and Regions, or a single account-Region pair.
+
+The Patch Manager dashboard is the compliance view: it summarizes how many nodes are compliant, why the noncompliant ones are out of compliance, and how fresh their reports are. The two entry points at the top are the two patching paths.
+
+![Patch Manager dashboard showing compliance summary and the tabbed tools](../../../assets/images/screenshots/ssm/13-ssm-patch-manager-dashboard.png)
+
+*The Patch Manager dashboard. The tabs (1) are the tools: Dashboard, Compliance reporting, Patch baselines, Patches, Patch groups, and Settings. The **Compliance summary** donut shows the compliant percentage across nodes that have previously reported patch data, here 100% compliant, with the legend separating Critical, High, and Other noncompliance. The two buttons (2) are the split this service is built around: **Patch now** runs an immediate ad hoc operation with Run Command, while **Create patch policy** sets up the scheduled, organization-wide method in Quick Setup.*
 
 The diagram shows how a node lands on a baseline and where results flow. The tag is the input; the baseline is the decision; compliance is the output, and it fans out to Security Hub and AWS Config.
 

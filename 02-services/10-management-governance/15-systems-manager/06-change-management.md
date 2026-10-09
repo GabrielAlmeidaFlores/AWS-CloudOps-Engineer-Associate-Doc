@@ -31,6 +31,12 @@ Automation runs **runbooks**, which are SSM documents of type `Automation`. Wher
 
 An Automation execution can be started four ways: manually (console, CLI, or SDK), by an EventBridge event, inside a Maintenance Window, or as AWS Config remediation.
 
+When you execute a runbook, you first choose *how* it runs. The mode decides whether a single target runs, or many run under concurrency and error limits.
+
+![Execute automation runbook page showing the four execution modes and the runbook input parameters](../../../assets/images/screenshots/ssm/18-ssm-automation-execute-modes.png)
+
+*The Execute automation runbook page. The four modes (1) are **Simple execution** (one target at a time), **Rate control** (many targets under concurrency and error thresholds), **Multi-account and Region** (fan out across an organization), and **Manual execution** (step through a runbook interactively). The mode is the rate-control choice, and it is the field a "roll this change out safely" scenario turns on. The **Minimum Permissions Required** section (2) lists the exact actions the runbook needs, here `dynamodb:DescribeTable` and `dynamodb:UpdateTable`, which is how you scope the role you pass to the execution instead of granting broad access.*
+
 The Automation console exposes the runbooks you can execute, grouped by purpose. The screenshot below is the runbook chooser for the sandbox account.
 
 ![Automation runbook chooser grouped by runbook category](../../../assets/images/screenshots/ssm/05-automation-runbooks.png)
@@ -41,10 +47,22 @@ The Automation console exposes the runbooks you can execute, grouped by purpose.
 
 A **Maintenance Window** defines a schedule for potentially disruptive actions. Each window has a schedule, a maximum duration, registered targets, and registered tasks.
 
+The console describes the workflow as four ordered steps, which is the cleanest way to reason about a window: you define the window first, then attach targets, then attach the tasks that run inside it, and finally read the results.
+
+![Maintenance Windows overview page showing the four-step workflow and task types](../../../assets/images/screenshots/ssm/15-ssm-maintenance-window-overview.png)
+
+*The Maintenance Windows overview. **How it works** (1) lists the four steps: create the window, assign targets, assign tasks, and review status after execution. The **Create Maintenance Window** button (2) starts step one. The **Run complex tasks** block (3) names what a task can be: Run Command, Automation workflows, AWS Step Functions state machines (Standard workflows only), or AWS Lambda functions.*
+
 - **Task types.** Run Command commands, Automation workflows, Lambda functions, and Step Functions state machines (Standard workflows only).
-- **Targets.** Managed nodes and many other AWS resource types (S3 buckets, SQS queues, KMS keys, and more). Offline nodes can be targeted through an AWS resource group.
+- **Targets.** Managed nodes and many other AWS resource types (S3 buckets, SQS queues, KMS keys, and more). Offline nodes can be targeted through an AWS resource group. A Maintenance Window target accepts up to five tag keys, and a node must carry **all** of them to be included; the AND semantics and case sensitivity are the same rules documented in [17-tagging.md](17-tagging.md).
 - **Scheduling.** Cron and rate expressions, a time zone, and cutoff and date restrictions to bound when work may run.
 - **Example uses.** Install or update applications, apply patches, update SSM Agent, build AMIs, or drain a node from a load balancer, patch it, and add it back.
+
+The create form is where the schedule and the target policy are set. Two fields decide behavior that scenarios test directly.
+
+![Create maintenance window form showing unregistered targets, schedule builders, and duration](../../../assets/images/screenshots/ssm/16-ssm-maintenance-window-create.png)
+
+*The Create maintenance window form. **Allow unregistered targets** (1) lets a task run against a target that is not yet registered with the window, which is how a drain-patch-return workflow still reaches a node that was offline when the window was defined. The **Schedule** section (2) offers a cron builder, a rate builder, or a raw cron/rate expression, with Default, Hourly, and Daily presets. **Duration** (3) caps the window at 1 to 24 hours; a task that starts inside the window may continue past the duration only up to the configured cutoff, which is a separate field on the finished window.*
 
 ## Change Calendar
 

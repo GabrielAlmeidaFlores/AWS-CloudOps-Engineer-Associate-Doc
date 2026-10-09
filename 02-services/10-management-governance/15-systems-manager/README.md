@@ -47,6 +47,7 @@ The canonical Systems Manager documentation lives here; domain and cross-service
 14. [14-exam-traps.md](14-exam-traps.md): recurring misconceptions.
 15. [15-limits-defaults.md](15-limits-defaults.md): quotas, defaults, and numbers that matter.
 16. [16-quick-review.md](16-quick-review.md): the must-know summary.
+17. [17-tagging.md](17-tagging.md): the tag model, `tag:` targeting, the `Patch Group` key, and taggable resources.
 
 Each document ends with its own `Sources` section; there is no separate `sources.md`.
 
@@ -69,4 +70,5 @@ See also (these documents are planned, not yet created):
 
 - AWS: *What is AWS Systems Manager?*. https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html
 - AWS: *Working with SSM Agent*. https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
-- AWS: *SOA-C03 exam guide, Content Domains 1, 3, and 4*. https://docs.aws.amazon.com/aws-certification/latest/cloudops-engineer-associate-03/cloudops-engineer-associate-03-domain1.html
+- AWS: *SOA-C03 exam guide (local copy)*, Content Domains 1, 3, and 4. `assets/docs/soa-c03-exam-guide.pdf`
+- AWS: *AWS Certified CloudOps Engineer - Associate*. https://aws.amazon.com/certification/certified-cloudops-engineer-associate/

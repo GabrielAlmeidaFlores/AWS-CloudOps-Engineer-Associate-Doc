@@ -14,6 +14,12 @@ Session Manager gives you an interactive shell or a one-shot command channel to 
 
 The security argument is the point: replacing inbound SSH (port 22) and RDP (port 3389) with IAM-authorized sessions removes the exposed attack surface, and every session is attributable to an IAM principal.
 
+Starting a session is a three-step workflow. Step 1 picks the target and records why the session is being opened, which is what makes the audit trail meaningful.
+
+![Session Manager start-session step 1, Specify target, with the reason field and node list](../../../assets/images/screenshots/ssm/09-ssm-session-manager-start-session.png)
+
+*The Session Manager **Start a session** workflow. The step indicator (1) shows the three steps: Specify target, Specify session document (optional), and Review and launch. The **Reason for session** field (2) is optional but is written into the CloudTrail event when the session starts, so it is how you record intent. The target table (3) lists the managed nodes; selecting one and choosing Next opens the shell with no inbound port and no SSH key.*
+
 ## Run Command
 
 Run Command runs commands on managed nodes remotely, at scale, for one-time changes. It is the "run this now" tool.
@@ -25,6 +31,18 @@ Run Command runs commands on managed nodes remotely, at scale, for one-time chan
 - **Consistency.** The Run Command API is eventually consistent, so a command that follows immediately after another may not yet see its effect.
 - **Events.** Supported as both an event type and a target type in EventBridge rules.
 
+The first thing Run Command asks for is the **document**, the definition of what to run. The picker shows the document name, owner, and the platforms each one supports, so you filter to something that matches your nodes before you get to parameters.
+
+![Run Command document picker showing AWS-managed command documents and platform types](../../../assets/images/screenshots/ssm/10-ssm-run-command-document.png)
+
+*The Run Command document picker. The table (1) lists documents by name, owner (`Amazon`), and Platform types; `AWS-RunShellScript` supports Linux and macOS, `AWS-ConfigureAWSPackage` supports Windows, Linux, and macOS, and a Windows-only document such as `AWS-ConfigureCloudWatch` cannot run on a Linux node. The **Document version** control (2) lets you pin a specific version instead of the default, which matters when a document has been edited and you need the behavior you tested.*
+
+Once the command runs, the execution page is where you watch it land. Each node reports its own status, so one failing node does not hide the ones that succeeded.
+
+![Run Command execution page showing command status and per-node Success results](../../../assets/images/screenshots/ssm/11-ssm-run-command-output.png)
+
+*The Run Command execution page. **Command status** (1) summarizes the whole invocation (overall status, detailed status, and counts for targets, completed, errors, and delivery timeouts). The **Targets and outputs** table (2) shows the result per node: here two nodes report **Success** and one is still **In Progress**, which is the eventual-consistency behavior described above. **View output** (3) opens the stdout for a single node; without it, the console truncates the output at 24,000 characters.*
+
 ## State Manager
 
 State Manager automates the process of keeping managed nodes and other AWS resources in a state you define. Where Run Command acts once, State Manager acts on a schedule until the state holds.
@@ -33,10 +51,16 @@ A **State Manager association** is a configuration assigned to targets. It names
 
 - **Examples of state.** Antivirus installed and running; specific ports closed; a configuration file present. If the state is not met, the association acts to reach it.
 - **Scheduling.** Cron and rate expressions, including the `#` (nth weekday of the month) and `L` (last day) modifiers, plus an *offset* in days (useful for running after a patch cycle). By default an association runs immediately on creation and then on schedule; set `ApplyOnlyAtCronInterval` to skip the immediate run. Months are not supported in cron expressions.
-- **Targeting.** Tags, AWS Resource Groups, individual node IDs, or all managed nodes in the current account and Region.
+- **Targeting.** Tags, AWS Resource Groups, individual node IDs, or all managed nodes in the current account and Region. When you target by tag in the console you can specify a maximum of five tag keys, and all of them must match a node for it to be included; see [17-tagging.md](17-tagging.md) for the tag rules that apply across Run Command, State Manager, and Maintenance Windows.
 - **Output.** Command output can be stored in S3.
 - **Automation.** To act on resources beyond nodes, State Manager schedules Automation runbooks: for example, attaching an SSM role to instances, enforcing security-group rules, creating DynamoDB backups or EBS snapshots, or starting and stopping instances and RDS databases.
 - **Events.** Supported as both an event type and a target type in EventBridge rules.
+
+Creating an association is where the three components come together: a document, the targets, and the schedule. The form states that contract explicitly and names the service-linked role State Manager uses to act on AWS resources.
+
+![Create Association form showing the document, name, and the AWSServiceRoleForAmazonSSM note](../../../assets/images/screenshots/ssm/12-ssm-state-manager-create-association.png)
+
+*The Create Association form. The overview (1) states that an association is a document, targets, and a schedule. The Name field (2) is optional but is what you search on later; an unnamed association appears only by its generated ID. The note about `AWSServiceRoleForAmazonSSM` (3) is the service-linked role State Manager assumes to manage AWS resources on your behalf, which is why some associations need no explicit role in the instance profile.*
 
 ## The shared access model
 
