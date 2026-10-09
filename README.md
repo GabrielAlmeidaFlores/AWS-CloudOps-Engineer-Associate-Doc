@@ -89,6 +89,7 @@ Documentation proceeds one topic at a time, following the [study roadmap in `AGE
 |--------|-------|----------|
 | ✅ | IAM | [`02-services/13-security-identity-compliance/01-iam/`](02-services/13-security-identity-compliance/01-iam/) |
 | ✅ | IP addressing / CIDR | [`01-concepts/01-networking/01-ip-addressing/`](01-concepts/01-networking/01-ip-addressing/) |
+| ✅ | Systems Manager | [`02-services/10-management-governance/15-systems-manager/`](02-services/10-management-governance/15-systems-manager/) |
 | ⬜ | IPv4 vs IPv6 *(next)* | `01-concepts/01-networking/02-ipv4-ipv6/` |
 
 ---

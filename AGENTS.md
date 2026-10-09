@@ -889,7 +889,7 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 68 | CloudFormation | `02-services/10-management-governance/02-cloudformation/` | Service | 67 | ⬜ |
 | 69 | CDK | `02-services/10-management-governance/03-cdk/` | Service | 68 | ⬜ |
 | 70 | CloudFormation + IAM | `03-cross-service/07-deployment-automation/01-cloudformation-iam/` | Relationship | 0, 68 | ⬜ |
-| 71 | Systems Manager | `02-services/10-management-governance/15-systems-manager/` | Service | 19, 30 | ⬜ |
+| 71 | Systems Manager | `02-services/10-management-governance/15-systems-manager/` | Service | 19, 30 | ✅ |
 | 72 | Systems Manager + EventBridge | `03-cross-service/07-deployment-automation/03-systems-manager-eventbridge/` | Relationship | 60, 71 | ⬜ |
 | 73 | CloudWatch + Systems Manager | `03-cross-service/05-monitoring-automation/03-cloudwatch-systems-manager/` | Relationship | 30, 71 | ⬜ |
 | 74 | RAM | `02-services/10-management-governance/13-ram/` | Service | - | ⬜ |
