@@ -41,7 +41,7 @@ Once the command runs, the execution page is where you watch it land. Each node 
 
 ![Run Command execution page showing command status and per-node Success results](../../../assets/images/screenshots/ssm/11-ssm-run-command-output.png)
 
-*The Run Command execution page. **Command status** (1) summarizes the whole invocation (overall status, detailed status, and counts for targets, completed, errors, and delivery timeouts). The **Targets and outputs** table (2) shows the result per node: here two nodes report **Success** and one is still **In Progress**, which is the eventual-consistency behavior described above. **View output** (3) opens the stdout for a single node; without it, the console truncates the output at 24,000 characters.*
+*The Run Command execution page. **Command status** (1) summarizes the whole invocation (overall status, detailed status, and counts for targets, completed, errors, and delivery timeouts). The per-node **Status** column (2) in Targets and outputs shows the result for each node: here two nodes report **Success** and one is still **In Progress**, which is the eventual-consistency behavior described above. **View output** (3) opens the stdout for a single node; without it, the console truncates the output at 24,000 characters.*
 
 ## State Manager
 
