@@ -16,7 +16,7 @@ The Documents console lists the documents you can run, filtered by who owns them
 
 ![Documents console showing document types and Amazon-owned documents](../../../assets/images/screenshots/ssm/04-documents-types.png)
 
-*The Documents console, filtered to Amazon-owned documents. The Categories panel on the left filters by document type (Automation, Command, Policy, Session, and Compliance Pack Template), and each card states its type, owner, platform types, and default version. `AWS-ASGEnterStandby` is an Automation document; `AWS-ApplyChefRecipes` below it is a Command document.*
+*The Documents console, filtered to `Owned by Amazon`. The **Categories** panel (1) filters the list by document type (Automation, Command, Policy, Session, and Compliance Pack Template), and each card states its own metadata (2): the type, the owner, the platform types, and a default version. The selected `AWS-ASGEnterStandby` declares `Document type: Automation`, and `AWS-ApplyChefRecipes` below it declares `Command`.*
 
 ## Automation
 
