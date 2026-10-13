@@ -2824,7 +2824,7 @@ Before finalizing documentation, verify:
 + Diagram technically verified and GitHub-safe (no emoji, no icons, no `architecture-beta`).
 + Console screenshots captured for every screen that aids understanding, one image per step of a multi-step workflow, annotated and referenced per §67.
 + Every screenshot path resolves and no screenshot is orphaned.
-+ The topic README carries a `## Topic mind map` (§68) listing every document in the folder, kept in sync with the `## Document index`.
++ The topic README carries a `## Topic mind map` (§68): a compact relationship map of the topic and the AWS services it connects to, with a short description per node and labeled edges.
 
 ### Repository
 
@@ -2977,7 +2977,7 @@ Generate the final Markdown content, with every diagram and screenshot embedded 
 
 ### Step 14
 
-Update the topic README: its `## Topic mind map` (§68) and its `## Document index`, so both list every document created or changed.
+Update the topic README: its `## Topic mind map` (§68) to reflect the topic's relationships, and its `## Document index`, so both reflect the documents created or changed.
 
 The research order itself should remain flexible.
 
@@ -3245,22 +3245,22 @@ A bare image with no lead-in or no caption is incomplete. The lead-in orients th
 
 # 68. README MIND MAPS
 
-Every topic README carries a **mind map**: one diagram that shows the whole folder at a glance, every document in it and how they group. The README is the entry point of its topic, and the mind map is the map of that entry point. It turns a flat numbered index into a structure the reader can hold in their head before reading a single document.
+Every topic README carries a **mind map**: one compact diagram that explains the topic and how it connects to the AWS services around it. It is not an index of the folder's documents; it is a picture of where the topic sits in the AWS landscape, so a reader sees the service and its neighbors in one glance before reading.
 
 ## Where it goes
 
-A `## Topic mind map` section sits after the topic's introduction and its *SOA-C03 relevance*, and immediately before the `## Document index`. The reader sees the shape of the topic first, then the linked list to walk it.
+A `## Topic mind map` section sits after the topic's introduction and its *SOA-C03 relevance*, and immediately before the `## Document index`. The reader sees the topic and its relationships first, then the linked list of documents to walk.
 
 ## What it contains
 
-- **One diagram per README.** A single Mermaid `flowchart` styled as a mind map, per §32. The root node is the topic (a service, concept, or relationship); branch `subgraph` groupings collect related documents; one leaf node per numbered document. The `README.md` is the container, not a leaf, because the map lives inside it.
-- **Every document.** The map is complete: a folder with seven numbered documents has seven leaves. A document added, renamed, or removed is reflected in the map in the same change, so the map never drifts from the index.
-- **Groupings, not a flat list.** Leaves sit under named branches that describe the reader's path (for example *Foundations*, *Hardening*, *Operate*, *Review*). The grouping is a judgment about how the topic is learned and used, not a restatement of the file numbers.
-- **The linked list beneath.** Mermaid nodes cannot be clickable on GitHub (§32), so the diagram is the visual and the `## Document index` directly below is the navigation: every leaf is mirrored by a linked bullet. The map shows structure; the list carries the links.
+- **One diagram per README.** A single Mermaid `flowchart`, per §32, centered on the topic (a service, concept, or relationship).
+- **The neighbors, not the documents.** One node per directly related AWS service (or, for a concept, the related construct), each carrying a short description of what it is or what it does in this context. The folder's own documents are not listed; the `## Document index` below carries the links.
+- **The relationships as edges.** Each edge is labeled with a short verb that states the relationship ("runs on", "emits to", "remediates via", "authorizes"), so the diagram teaches how the services interact.
+- **Compact and flat.** Roughly eight to twelve nodes including the root, with no `subgraph` grouping, so the whole map is readable in one view without zooming. A topic with many relationships shows the strongest ones, not all of them.
 
 ## Style
 
-The mind map follows the same rules as every other diagram in the repository (§32): quoted labels, no emoji or icons, the fixed node styles, and the topic's AWS category color on the nodes (the service's category, or the matching category for a concept). The root uses the actor style, so the topic reads as the origin of the map. Keep the structure one level deep: a root, named branches, and one leaf per document. The leaf count follows the folder, so a seventeen-document folder has seventeen leaves; the mind map is the one diagram exempt from §32's fifteen-node split guidance, because its purpose is to mirror the whole folder in a single view. A folder that outgrows a comfortable width groups its leaves under more branches rather than nesting a fourth level.
+The mind map follows the same rules as every other diagram in the repository (§32): quoted labels, no emoji or icons, the fixed node styles, and the AWS category color for each service node. The root uses the actor style, so the topic reads as the origin of the map. Keep each node label short: a service name and one short phrase.
 
 ## Prose around the diagram
 
@@ -3271,27 +3271,22 @@ Worked example, the mind map shape for a service README:
 ```mermaid
 flowchart LR
     ROOT(("Systems Manager"))
-    subgraph FOUND["Foundations"]
-      F1["Fundamentals"]:::mgmt
-      F2["Node tools"]:::mgmt
-    end
-    subgraph OPERATE["Operate"]
-      O1["Run Command"]:::mgmt
-      O2["Patch Manager"]:::mgmt
-    end
-    subgraph REVIEW["Review"]
-      R1["Exam traps"]:::mgmt
-      R2["Quick review"]:::mgmt
-    end
-    ROOT --> FOUND
-    ROOT --> OPERATE
-    ROOT --> REVIEW
+    EC2["EC2 instance<br/>managed node"]
+    IAM["IAM<br/>instance role"]
+    CW["CloudWatch<br/>metrics and logs"]
+    EB["EventBridge<br/>triggers"]
+    ROOT -->|"runs work on"| EC2
+    IAM -->|"authorizes"| EC2
+    ROOT -->|"emits"| CW
+    EB -->|"starts"| ROOT
     classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
+    classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
+    classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
     class ROOT actor
-    style FOUND fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style OPERATE fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style REVIEW fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    class CW,EB mgmt
+    class EC2 compute
+    class IAM security
 ```
 
 ---

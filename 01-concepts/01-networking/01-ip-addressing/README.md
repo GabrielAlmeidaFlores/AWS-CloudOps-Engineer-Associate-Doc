@@ -22,36 +22,30 @@ It precedes VPC (roadmap step 3): a VPC divides its CIDR into subnets, and later
 
 ## Topic mind map
 
-The topic maps in one view: the seven documents grouped by what you read first, what you reach for when subnet math goes wrong, and what you review last.
+The topic at a glance: CIDR is the addressing model every VPC construct is built from, and where two networks connect the ranges must not overlap.
 
 ```mermaid
 flowchart LR
-    ROOT(("IP addressing / CIDR"))
-    subgraph FOUND["Foundations"]
-      F1["IP and CIDR basics"]:::network
-      F2["AWS addressing"]:::network
-    end
-    subgraph DIAG["Diagnose"]
-      D1["Troubleshooting"]:::network
-    end
-    subgraph REVIEW["Review"]
-      R1["Comparisons"]:::network
-      R2["Exam traps"]:::network
-      R3["Limits and defaults"]:::network
-      R4["Quick review"]:::network
-    end
-    ROOT --> FOUND
-    ROOT --> DIAG
-    ROOT --> REVIEW
+    CIDR(("IP addressing / CIDR"))
+    VPC["VPC<br/>divides its CIDR into subnets"]
+    SN["Subnet<br/>a slice of the VPC range"]
+    EIP["Elastic IP<br/>a static public address"]
+    NAT["NAT gateway<br/>outbound from a subnet"]
+    IGW["Internet gateway<br/>routes public addresses"]
+    PEER["VPC peering<br/>needs non-overlapping CIDRs"]
+    CIDR -->|"sizes"| VPC
+    VPC -->|"splits into"| SN
+    SN -->|"hosts"| EIP
+    SN -->|"uses"| NAT
+    VPC -->|"attaches"| IGW
+    VPC -->|"peers via"| PEER
     classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
-    class ROOT actor
-    style FOUND fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style DIAG fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style REVIEW fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    class CIDR actor
+    class VPC,SN,EIP,NAT,IGW,PEER network
 ```
 
-Read the root as the topic and each branch as a stage: learn the notation and how AWS applies it, then diagnose exhaustion and overlap, then review the comparisons, traps, and numbers. The `## Document index` below carries the links for every leaf.
+Read the map outward from CIDR: the notation sizes a VPC, the VPC divides into subnets, and an address inside a subnet backs an Elastic IP or a NAT gateway. The VPC also attaches an internet gateway and peers with another VPC, which is where non-overlapping ranges matter most. The `## Document index` below carries the links to this topic's documents.
 
 ## Document index (read in this order)
 

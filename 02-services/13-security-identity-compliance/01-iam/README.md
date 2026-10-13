@@ -67,40 +67,34 @@ IAM is not confined to Domain 4. Roles and instance profiles underpin Domain 3 (
 
 ## Topic mind map
 
-IAM maps in one view: the policy model first, then how you harden it, how you diagnose an access failure, and the review pass before the exam.
+IAM at a glance: it decides who can do what, and it sits between every caller and every resource. The map shows the services that constrain it, audit it, and depend on it.
 
 ```mermaid
 flowchart LR
-    ROOT(("IAM"))
-    subgraph FOUND["Foundations"]
-      F1["Concepts and evaluation"]:::security
-    end
-    subgraph HARDEN["Hardening"]
-      H1["Security and least privilege"]:::security
-    end
-    subgraph DIAG["Diagnose"]
-      D1["Troubleshooting access"]:::security
-    end
-    subgraph REVIEW["Review"]
-      R1["Comparisons"]:::security
-      R2["Exam traps"]:::security
-      R3["Limits and defaults"]:::security
-      R4["Quick review"]:::security
-    end
-    ROOT --> FOUND
-    ROOT --> HARDEN
-    ROOT --> DIAG
-    ROOT --> REVIEW
+    IAM(("IAM"))
+    CT["CloudTrail<br/>records who did what"]
+    AA["IAM Access Analyzer<br/>finds over-broad access"]
+    ORG["Organizations<br/>SCPs cap member accounts"]
+    IC["IAM Identity Center<br/>workforce SSO"]
+    STS["STS<br/>temporary credentials"]
+    KMS["KMS<br/>key policies grant decrypt"]
+    EC2["EC2<br/>assumes a role via instance profile"]
+    IAM -->|"audited by"| CT
+    IAM -->|"analyzed by"| AA
+    ORG -->|"constrains"| IAM
+    IC -->|"federates into"| IAM
+    IAM -->|"issues via"| STS
+    IAM -->|"authorizes"| KMS
+    IAM -->|"grants roles to"| EC2
     classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
+    classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
-    class ROOT actor
-    style FOUND fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style HARDEN fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style DIAG fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style REVIEW fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    class IAM actor
+    class CT,AA,ORG,IC,STS,KMS security
+    class EC2 compute
 ```
 
-Read the root as the topic and each branch as a stage: understand principals, policies, and the evaluation order; apply least privilege and the guardrails; diagnose a denied request; then review the comparisons, distinctions, and numbers. The `## Document index` below carries the links for every leaf.
+Read the map outward from IAM: Organizations and its SCPs cap what the account itself may do, Identity Center federates human logins in, and STS issues the temporary credentials a role hands out. CloudTrail and Access Analyzer watch who used that access and where it is too broad, while KMS and a compute service such as EC2 depend on IAM to allow the call. The `## Document index` below carries the links to this topic's documents.
 
 ## Document index (read in this order)
 

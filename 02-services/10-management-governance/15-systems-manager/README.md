@@ -31,62 +31,39 @@ The canonical Systems Manager documentation lives here; domain and cross-service
 
 ## Topic mind map
 
-Systems Manager maps in one view: the foundations, the access and patching tools, the change and configuration tools, the operations documents, the review pass, and the cross-cutting tagging guide.
+Systems Manager at a glance: it operates your fleet, so it reads and writes through the surrounding AWS services. The map shows the ones that feed it, watch it, and the nodes it acts on.
 
 ```mermaid
 flowchart LR
-    ROOT(("Systems Manager"))
-    subgraph FOUND["Foundations"]
-      F1["Fundamentals"]:::mgmt
-      F2["Node tools"]:::mgmt
-    end
-    subgraph ACCESS["Access and state"]
-      A1["Session, Run Command, State"]:::mgmt
-    end
-    subgraph PATCH["Patch and package"]
-      P1["Patch Manager"]:::mgmt
-      P2["Distributor"]:::mgmt
-    end
-    subgraph CHANGE["Change and configuration"]
-      C1["Change management"]:::mgmt
-      C2["Parameter Store"]:::mgmt
-      C3["Application tools"]:::mgmt
-    end
-    subgraph OPS["Operations"]
-      O1["Resource Groups"]:::mgmt
-      O2["Operations tools"]:::mgmt
-      O3["Monitoring"]:::mgmt
-      O4["Troubleshooting"]:::mgmt
-    end
-    subgraph REVIEW["Review"]
-      R1["Comparisons"]:::mgmt
-      R2["Exam traps"]:::mgmt
-      R3["Limits and defaults"]:::mgmt
-      R4["Quick review"]:::mgmt
-    end
-    subgraph X["Cross-cutting"]
-      X1["Tagging"]:::mgmt
-    end
-    ROOT --> FOUND
-    ROOT --> ACCESS
-    ROOT --> PATCH
-    ROOT --> CHANGE
-    ROOT --> OPS
-    ROOT --> REVIEW
-    ROOT --> X
+    SSM(("Systems Manager"))
+    EC2["EC2 instance<br/>managed node"]
+    IAM["IAM<br/>instance role"]
+    CW["CloudWatch<br/>metrics and session logs"]
+    CT["CloudTrail<br/>API audit"]
+    CFG["AWS Config<br/>compliance and remediation"]
+    EB["EventBridge<br/>triggers and reactions"]
+    S3[("S3<br/>inventory and output")]
+    KMS["KMS<br/>SecureString decrypt"]
+    SSM -->|"runs work on"| EC2
+    IAM -->|"authorizes"| EC2
+    SSM -->|"emits"| CW
+    SSM -->|"logs to"| CT
+    CFG -->|"remediates via"| SSM
+    EB -->|"starts"| SSM
+    SSM -->|"writes"| S3
+    SSM -->|"reads"| KMS
     classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
+    classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
+    classDef storage fill:#7AA116,stroke:#7AA116,color:#ffffff
+    classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
-    class ROOT actor
-    style FOUND fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style ACCESS fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style PATCH fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style CHANGE fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style OPS fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style REVIEW fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
-    style X fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    class SSM,CFG,EB,CW,CT mgmt
+    class EC2 compute
+    class S3 storage
+    class IAM,KMS security
 ```
 
-Read the root as the topic and each branch as a stage: learn what a managed node is, then the access and patching tools, the change and configuration tools, the operations documents that tie them together, the cross-cutting tagging guide, and the review pass. The `## Document index` below carries the links for every leaf.
+Read the map outward from Systems Manager: it runs commands and patches on EC2 managed nodes that carry its agent, and an IAM instance role authorizes them to register. It emits metrics and session logs to CloudWatch and its API calls to CloudTrail, while AWS Config and EventBridge feed back in as remediation and triggers. It writes inventory and command output to S3 and reads KMS to decrypt a `SecureString`. The `## Document index` below carries the links to this topic's documents.
 
 ## Document index (read in this order)
 
