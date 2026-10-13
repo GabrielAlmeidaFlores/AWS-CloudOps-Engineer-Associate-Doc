@@ -2824,7 +2824,7 @@ Before finalizing documentation, verify:
 + Diagram technically verified and GitHub-safe (no emoji, no icons, no `architecture-beta`).
 + Console screenshots captured for every screen that aids understanding, one image per step of a multi-step workflow, annotated and referenced per §67.
 + Every screenshot path resolves and no screenshot is orphaned.
-+ The topic README carries a `## Topic mind map` (§68): a compact relationship map of the topic and the AWS services it connects to, with a short description per node and labeled edges.
++ The topic README carries a `## Topic mind map` (§68): a compact relationship map of the topic and the AWS services it connects to, with a short description per node, labeled edges, and `### Connection notes` that explain the significant links.
 
 ### Repository
 
@@ -3265,6 +3265,16 @@ The mind map follows the same rules as every other diagram in the repository (§
 ## Prose around the diagram
 
 Like every diagram (§32), the mind map is introduced by a sentence that says what it shows and followed by a sentence that explains how to read it. A bare diagram with no lead-in is incomplete.
+
+## Connection notes
+
+Below the diagram, the README explains the significant connections it draws, one short paragraph each. A connection note names the two nodes and states what passes between them and why it matters, so the reader learns the mechanism behind the edge, not just that an edge exists. The notes carry the detail a diagram cannot: the required permission, the direction of the dependency, the limit, or the failure mode.
+
+- One note per significant connection, not one per edge. A map with nine edges gets the four to six notes that carry real content; an obvious edge needs no note.
+- Each note is a single short paragraph of two or three sentences.
+- Lead the note with the two nodes in bold, joined by the relationship, for example **IAM and EC2** or **Systems Manager to S3**, then the explanation.
+
+The notes sit directly under the diagram, under a `### Connection notes` heading, so the reader can go from the picture to the detail without leaving the section.
 
 Worked example, the mind map shape for a service README:
 

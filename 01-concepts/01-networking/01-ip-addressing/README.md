@@ -45,7 +45,17 @@ flowchart LR
     class VPC,SN,EIP,NAT,IGW,PEER network
 ```
 
-Read the map outward from CIDR: the notation sizes a VPC, the VPC divides into subnets, and an address inside a subnet backs an Elastic IP or a NAT gateway. The VPC also attaches an internet gateway and peers with another VPC, which is where non-overlapping ranges matter most. The `## Document index` below carries the links to this topic's documents.
+Read the map outward from CIDR: the notation sizes a VPC, the VPC divides into subnets, and an address inside a subnet backs an Elastic IP or a NAT gateway. The VPC also attaches an internet gateway and peers with another VPC, which is where non-overlapping ranges matter most.
+
+### Connection notes
+
+- **CIDR and VPC.** A VPC is defined entirely by its CIDR block, from /16 to /28, and the block cannot be changed after creation. The size you choose is permanent and decides how many subnets fit.
+- **VPC and subnet.** The VPC divides its block into subnets, each in a single Availability Zone. Subnets cannot overlap, and AWS reserves five addresses in every subnet, so a /24 leaves 251 usable addresses.
+- **Subnet and NAT gateway.** A NAT gateway lives in a public subnet and holds an Elastic IP, so instances in private subnets reach the internet outbound with no inbound path.
+- **VPC and internet gateway.** An internet gateway attaches one per VPC, but it makes a subnet public only once that subnet's route table points `0.0.0.0/0` to it; the gateway alone is not enough.
+- **VPC and VPC peering.** Peering connects two VPCs privately, but their CIDR blocks must not overlap. An overlap makes the route ambiguous and the connection unusable, which is the most common peering failure.
+
+The `## Document index` below carries the links to this topic's documents.
 
 ## Document index (read in this order)
 

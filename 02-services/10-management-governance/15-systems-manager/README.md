@@ -63,7 +63,18 @@ flowchart LR
     class IAM,KMS security
 ```
 
-Read the map outward from Systems Manager: it runs commands and patches on EC2 managed nodes that carry its agent, and an IAM instance role authorizes them to register. It emits metrics and session logs to CloudWatch and its API calls to CloudTrail, while AWS Config and EventBridge feed back in as remediation and triggers. It writes inventory and command output to S3 and reads KMS to decrypt a `SecureString`. The `## Document index` below carries the links to this topic's documents.
+Read the map outward from Systems Manager: it runs commands and patches on EC2 managed nodes that carry its agent, and an IAM instance role authorizes them to register. It emits metrics and session logs to CloudWatch and its API calls to CloudTrail, while AWS Config and EventBridge feed back in as remediation and triggers. It writes inventory and command output to S3 and reads KMS to decrypt a `SecureString`.
+
+### Connection notes
+
+- **Systems Manager and EC2.** The agent on the node opens an outbound HTTPS connection to the service, and the service never dials in. That is why a private node needs a NAT route or VPC endpoints but no inbound security-group rule.
+- **IAM and EC2.** The instance role must allow `ssm:UpdateInstanceInformation`. Without it the agent runs but never registers, so the node stays invisible in Fleet Manager even though it looks healthy.
+- **Systems Manager and CloudWatch.** The agent publishes metrics and can stream session and command logs to CloudWatch Logs, which is how you watch a fleet without logging in to it.
+- **AWS Config and Systems Manager.** A Config rule detects a non-compliant resource and can invoke an Automation runbook as remediation, closing the loop from detection to fix with no human in the middle.
+- **EventBridge and Systems Manager.** An EventBridge event or schedule starts an Automation runbook, which is the event-driven automation pattern the exam tests under Domain 3.
+- **Systems Manager and KMS.** A `SecureString` parameter is encrypted with a KMS key, and a read needs both `ssm:GetParameter` and `kms:Decrypt`, so a missing KMS permission fails the read after the parameter is already found.
+
+The `## Document index` below carries the links to this topic's documents.
 
 ## Document index (read in this order)
 

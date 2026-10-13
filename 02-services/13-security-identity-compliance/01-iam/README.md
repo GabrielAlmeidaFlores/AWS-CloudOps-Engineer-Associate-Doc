@@ -94,7 +94,18 @@ flowchart LR
     class EC2 compute
 ```
 
-Read the map outward from IAM: Organizations and its SCPs cap what the account itself may do, Identity Center federates human logins in, and STS issues the temporary credentials a role hands out. CloudTrail and Access Analyzer watch who used that access and where it is too broad, while KMS and a compute service such as EC2 depend on IAM to allow the call. The `## Document index` below carries the links to this topic's documents.
+Read the map outward from IAM: Organizations and its SCPs cap what the account itself may do, Identity Center federates human logins in, and STS issues the temporary credentials a role hands out. CloudTrail and Access Analyzer watch who used that access and where it is too broad, while KMS and a compute service such as EC2 depend on IAM to allow the call.
+
+### Connection notes
+
+- **Organizations and IAM.** An SCP sets the maximum permissions for a member account and never grants access, only caps it. A policy that allows an action still fails if an SCP does not allow it, which is why a denied request can survive every `Allow` in the account.
+- **IAM Identity Center and IAM.** Identity Center federates workforce logins and maps them to permission sets that assume IAM roles in each account. People get short-lived role credentials instead of long-lived IAM users, which removes the access-key population you would otherwise rotate.
+- **IAM and STS.** A role is only useful because STS issues the temporary credentials a principal assumes. Those credentials expire, which is the core reason a role is safer than an access key.
+- **IAM and EC2.** An instance assumes a role through an instance profile, and the temporary credentials arrive through instance metadata. No keys are stored on the instance, so the role can be re-scoped without touching the host.
+- **IAM and KMS.** An identity policy and a key policy are both evaluated, but the key policy is the gate. An `Allow` for `kms:Decrypt` still fails if the key policy does not also grant the principal, which is the usual cause of a decrypt failure.
+- **IAM and CloudTrail.** IAM decides the request; CloudTrail records whether it was allowed or denied and by which principal. That record is the trail you read when an access question turns into an audit.
+
+The `## Document index` below carries the links to this topic's documents.
 
 ## Document index (read in this order)
 
