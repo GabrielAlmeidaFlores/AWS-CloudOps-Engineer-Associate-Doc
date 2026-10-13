@@ -2824,7 +2824,7 @@ Before finalizing documentation, verify:
 + Diagram technically verified and GitHub-safe (no emoji, no icons, no `architecture-beta`).
 + Console screenshots captured for every screen that aids understanding, one image per step of a multi-step workflow, annotated and referenced per §67.
 + Every screenshot path resolves and no screenshot is orphaned.
-+ The topic README carries a `## Topic mind map` (§68): a compact relationship map of the topic and the AWS services it connects to, with a short description per node, labeled edges, and `### Connection notes` that explain the significant links.
++ The topic README carries a `## Topic mind map` (§68): a compact relationship map of the topic and the AWS services it connects to, with a short description per node, labeled edges, and connection notes drawn as blocks on the links that need explaining.
 
 ### Repository
 
@@ -3253,7 +3253,7 @@ A `## Topic mind map` section sits after the topic's introduction and its *SOA-C
 
 ## What it contains
 
-- **One diagram per README.** A single Mermaid `flowchart`, per §32, centered on the topic (a service, concept, or relationship).
+- **One diagram per README.** A single Mermaid `flowchart TD` (root at the top, the neighbors branching below), per §32, centered on the topic (a service, concept, or relationship).
 - **The neighbors, not the documents.** One node per directly related AWS service (or, for a concept, the related construct), each carrying a short description of what it is or what it does in this context. The folder's own documents are not listed; the `## Document index` below carries the links.
 - **The relationships as edges.** Each edge is labeled with a short verb that states the relationship ("runs on", "emits to", "remediates via", "authorizes"), so the diagram teaches how the services interact.
 - **Compact and flat.** Roughly eight to twelve nodes including the root, with no `subgraph` grouping, so the whole map is readable in one view without zooming. A topic with many relationships shows the strongest ones, not all of them.
@@ -3268,31 +3268,31 @@ Like every diagram (§32), the mind map is introduced by a sentence that says wh
 
 ## Connection notes
 
-Below the diagram, the README explains the significant connections it draws, one short paragraph each. A connection note names the two nodes and states what passes between them and why it matters, so the reader learns the mechanism behind the edge, not just that an edge exists. The notes carry the detail a diagram cannot: the required permission, the direction of the dependency, the limit, or the failure mode.
+The significant connections are explained **inside the diagram**, as note blocks connected to the link they explain, not as a list below it. For a connection whose mechanism the edge label cannot state, insert a note block on the connection: draw the edge from the source service to the note, then from the note to the target, so the block reads as part of that link.
 
-- One note per significant connection, not one per edge. A map with nine edges gets the four to six notes that carry real content; an obvious edge needs no note.
-- Each note is a single short paragraph of two or three sentences.
-- Lead the note with the two nodes in bold, joined by the relationship, for example **IAM and EC2** or **Systems Manager to S3**, then the explanation.
-
-The notes sit directly under the diagram, under a `### Connection notes` heading, so the reader can go from the picture to the detail without leaving the section.
+- The note carries one short phrase stating the mechanism, such as the required permission, the direction of the dependency, or the limit. Keep it to a few words so the map stays readable in one view.
+- Not every edge needs a note. An edge whose verb already states the relationship stays plain; add a note only where it carries a fact the label cannot.
+- Style notes with the neutral fill `#F1F3F3` and `#232F3E` text, so they read as annotations rather than services.
+- The map and its notes are introduced by the sentence before the diagram and explained by the sentence after it, as with every diagram (§32).
 
 Worked example, the mind map shape for a service README:
 
 ```mermaid
-flowchart LR
+flowchart TD
     ROOT(("Systems Manager"))
     EC2["EC2 instance<br/>managed node"]
     IAM["IAM<br/>instance role"]
     CW["CloudWatch<br/>metrics and logs"]
     EB["EventBridge<br/>triggers"]
-    ROOT -->|"runs work on"| EC2
-    IAM -->|"authorizes"| EC2
+    ROOT -->|"runs work on"| N1["agent dials out, no inbound port"]:::note --> EC2
+    IAM -->|"authorizes"| N2["role needs UpdateInstanceInformation"]:::note --> EC2
     ROOT -->|"emits"| CW
     EB -->|"starts"| ROOT
     classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
     classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
     classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    classDef note fill:#F1F3F3,stroke:#232F3E,color:#232F3E
     class ROOT actor
     class CW,EB mgmt
     class EC2 compute

@@ -25,37 +25,28 @@ It precedes VPC (roadmap step 3): a VPC divides its CIDR into subnets, and later
 The topic at a glance: CIDR is the addressing model every VPC construct is built from, and where two networks connect the ranges must not overlap.
 
 ```mermaid
-flowchart LR
+flowchart TD
     CIDR(("IP addressing / CIDR"))
-    VPC["VPC<br/>divides its CIDR into subnets"]
-    SN["Subnet<br/>a slice of the VPC range"]
-    EIP["Elastic IP<br/>a static public address"]
-    NAT["NAT gateway<br/>outbound from a subnet"]
-    IGW["Internet gateway<br/>routes public addresses"]
-    PEER["VPC peering<br/>needs non-overlapping CIDRs"]
-    CIDR -->|"sizes"| VPC
-    VPC -->|"splits into"| SN
+    VPC["VPC"]
+    SN["Subnet"]
+    EIP["Elastic IP"]
+    NAT["NAT gateway"]
+    IGW["Internet gateway"]
+    PEER["VPC peering"]
+    CIDR -->|"sizes"| N1["/16 to /28, fixed at creation"]:::note --> VPC
+    VPC -->|"splits into"| N2["one AZ each, 5 addresses reserved"]:::note --> SN
     SN -->|"hosts"| EIP
-    SN -->|"uses"| NAT
-    VPC -->|"attaches"| IGW
-    VPC -->|"peers via"| PEER
+    SN -->|"uses"| N3["public subnet, holds an Elastic IP"]:::note --> NAT
+    VPC -->|"attaches"| N4["public only with a 0.0.0.0/0 route"]:::note --> IGW
+    VPC -->|"peers via"| N5["ranges must not overlap"]:::note --> PEER
     classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    classDef note fill:#F1F3F3,stroke:#232F3E,color:#232F3E
     class CIDR actor
     class VPC,SN,EIP,NAT,IGW,PEER network
 ```
 
-Read the map outward from CIDR: the notation sizes a VPC, the VPC divides into subnets, and an address inside a subnet backs an Elastic IP or a NAT gateway. The VPC also attaches an internet gateway and peers with another VPC, which is where non-overlapping ranges matter most.
-
-### Connection notes
-
-- **CIDR and VPC.** A VPC is defined entirely by its CIDR block, from /16 to /28, and the block cannot be changed after creation. The size you choose is permanent and decides how many subnets fit.
-- **VPC and subnet.** The VPC divides its block into subnets, each in a single Availability Zone. Subnets cannot overlap, and AWS reserves five addresses in every subnet, so a /24 leaves 251 usable addresses.
-- **Subnet and NAT gateway.** A NAT gateway lives in a public subnet and holds an Elastic IP, so instances in private subnets reach the internet outbound with no inbound path.
-- **VPC and internet gateway.** An internet gateway attaches one per VPC, but it makes a subnet public only once that subnet's route table points `0.0.0.0/0` to it; the gateway alone is not enough.
-- **VPC and VPC peering.** Peering connects two VPCs privately, but their CIDR blocks must not overlap. An overlap makes the route ambiguous and the connection unusable, which is the most common peering failure.
-
-The `## Document index` below carries the links to this topic's documents.
+Read the map outward from CIDR: the notation sizes a VPC, the VPC divides into subnets, and an address inside a subnet backs an Elastic IP or a NAT gateway. The note blocks call out the detail a line alone cannot, such as the range a VPC accepts, the addresses a subnet reserves, and the rule that two peered VPCs must not overlap. The `## Document index` below carries the links to this topic's documents.
 
 ## Document index (read in this order)
 

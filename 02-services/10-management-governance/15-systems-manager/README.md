@@ -34,47 +34,37 @@ The canonical Systems Manager documentation lives here; domain and cross-service
 Systems Manager at a glance: it operates your fleet, so it reads and writes through the surrounding AWS services. The map shows the ones that feed it, watch it, and the nodes it acts on.
 
 ```mermaid
-flowchart LR
+flowchart TD
     SSM(("Systems Manager"))
-    EC2["EC2 instance<br/>managed node"]
-    IAM["IAM<br/>instance role"]
-    CW["CloudWatch<br/>metrics and session logs"]
-    CT["CloudTrail<br/>API audit"]
-    CFG["AWS Config<br/>compliance and remediation"]
-    EB["EventBridge<br/>triggers and reactions"]
-    S3[("S3<br/>inventory and output")]
-    KMS["KMS<br/>SecureString decrypt"]
-    SSM -->|"runs work on"| EC2
-    IAM -->|"authorizes"| EC2
-    SSM -->|"emits"| CW
+    EC2["EC2 instance"]
+    IAM["IAM"]
+    CW["CloudWatch"]
+    CT["CloudTrail"]
+    CFG["AWS Config"]
+    EB["EventBridge"]
+    S3[("S3")]
+    KMS["KMS"]
+    SSM -->|"runs work on"| N1["agent dials out on 443, no inbound port"]:::note --> EC2
+    IAM -->|"authorizes"| N2["role needs ssm:UpdateInstanceInformation"]:::note --> EC2
+    SSM -->|"emits"| N3["metrics and session logs"]:::note --> CW
     SSM -->|"logs to"| CT
-    CFG -->|"remediates via"| SSM
-    EB -->|"starts"| SSM
+    CFG -->|"remediates via"| N4["Config rule runs an Automation runbook"]:::note --> SSM
+    EB -->|"starts"| N5["event or schedule runs a runbook"]:::note --> SSM
     SSM -->|"writes"| S3
-    SSM -->|"reads"| KMS
+    SSM -->|"reads"| N6["SecureString needs GetParameter and Decrypt"]:::note --> KMS
     classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
     classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
     classDef storage fill:#7AA116,stroke:#7AA116,color:#ffffff
     classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    classDef note fill:#F1F3F3,stroke:#232F3E,color:#232F3E
     class SSM,CFG,EB,CW,CT mgmt
     class EC2 compute
     class S3 storage
     class IAM,KMS security
 ```
 
-Read the map outward from Systems Manager: it runs commands and patches on EC2 managed nodes that carry its agent, and an IAM instance role authorizes them to register. It emits metrics and session logs to CloudWatch and its API calls to CloudTrail, while AWS Config and EventBridge feed back in as remediation and triggers. It writes inventory and command output to S3 and reads KMS to decrypt a `SecureString`.
-
-### Connection notes
-
-- **Systems Manager and EC2.** The agent on the node opens an outbound HTTPS connection to the service, and the service never dials in. That is why a private node needs a NAT route or VPC endpoints but no inbound security-group rule.
-- **IAM and EC2.** The instance role must allow `ssm:UpdateInstanceInformation`. Without it the agent runs but never registers, so the node stays invisible in Fleet Manager even though it looks healthy.
-- **Systems Manager and CloudWatch.** The agent publishes metrics and can stream session and command logs to CloudWatch Logs, which is how you watch a fleet without logging in to it.
-- **AWS Config and Systems Manager.** A Config rule detects a non-compliant resource and can invoke an Automation runbook as remediation, closing the loop from detection to fix with no human in the middle.
-- **EventBridge and Systems Manager.** An EventBridge event or schedule starts an Automation runbook, which is the event-driven automation pattern the exam tests under Domain 3.
-- **Systems Manager and KMS.** A `SecureString` parameter is encrypted with a KMS key, and a read needs both `ssm:GetParameter` and `kms:Decrypt`, so a missing KMS permission fails the read after the parameter is already found.
-
-The `## Document index` below carries the links to this topic's documents.
+Read the map outward from Systems Manager: it runs commands and patches on EC2 managed nodes that carry its agent, and an IAM instance role authorizes them to register. It emits metrics and session logs to CloudWatch and its API calls to CloudTrail, while AWS Config and EventBridge feed back in as remediation and triggers. The note blocks on the links mark the detail that decides an exam answer, such as the outbound-only agent channel, the registration permission a node must have, and the two permissions a `SecureString` read needs. The `## Document index` below carries the links to this topic's documents.
 
 ## Document index (read in this order)
 
