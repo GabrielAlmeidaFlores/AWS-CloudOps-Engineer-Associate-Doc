@@ -29,6 +29,65 @@ Systems Manager is in scope under **Management and Governance**, and it appears 
 
 The canonical Systems Manager documentation lives here; domain and cross-service pages link back rather than repeat it.
 
+## Topic mind map
+
+Systems Manager maps in one view: the foundations, the access and patching tools, the change and configuration tools, the operations documents, the review pass, and the cross-cutting tagging guide.
+
+```mermaid
+flowchart LR
+    ROOT(("Systems Manager"))
+    subgraph FOUND["Foundations"]
+      F1["Fundamentals"]:::mgmt
+      F2["Node tools"]:::mgmt
+    end
+    subgraph ACCESS["Access and state"]
+      A1["Session, Run Command, State"]:::mgmt
+    end
+    subgraph PATCH["Patch and package"]
+      P1["Patch Manager"]:::mgmt
+      P2["Distributor"]:::mgmt
+    end
+    subgraph CHANGE["Change and configuration"]
+      C1["Change management"]:::mgmt
+      C2["Parameter Store"]:::mgmt
+      C3["Application tools"]:::mgmt
+    end
+    subgraph OPS["Operations"]
+      O1["Resource Groups"]:::mgmt
+      O2["Operations tools"]:::mgmt
+      O3["Monitoring"]:::mgmt
+      O4["Troubleshooting"]:::mgmt
+    end
+    subgraph REVIEW["Review"]
+      R1["Comparisons"]:::mgmt
+      R2["Exam traps"]:::mgmt
+      R3["Limits and defaults"]:::mgmt
+      R4["Quick review"]:::mgmt
+    end
+    subgraph X["Cross-cutting"]
+      X1["Tagging"]:::mgmt
+    end
+    ROOT --> FOUND
+    ROOT --> ACCESS
+    ROOT --> PATCH
+    ROOT --> CHANGE
+    ROOT --> OPS
+    ROOT --> REVIEW
+    ROOT --> X
+    classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
+    classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    class ROOT actor
+    style FOUND fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style ACCESS fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style PATCH fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style CHANGE fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style OPS fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style REVIEW fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style X fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+```
+
+Read the root as the topic and each branch as a stage: learn what a managed node is, then the access and patching tools, the change and configuration tools, the operations documents that tie them together, the cross-cutting tagging guide, and the review pass. The `## Document index` below carries the links for every leaf.
+
 ## Document index (read in this order)
 
 1. [01-fundamentals.md](01-fundamentals.md): the SSM Agent, managed nodes, the instance IAM role, and Default Host Management Configuration.

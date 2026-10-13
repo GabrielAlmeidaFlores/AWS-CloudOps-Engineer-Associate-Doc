@@ -20,6 +20,39 @@ This is the foundation for **Domain 5: Networking and Content Delivery (18%)**:
 
 It precedes VPC (roadmap step 3): a VPC divides its CIDR into subnets, and later connectivity features (VPC peering (step 11), Transit Gateway (step 12)) fail if CIDR blocks overlap. This concept is documented once here; VPC, EC2, and peering link back to it instead of repeating it.
 
+## Topic mind map
+
+The topic maps in one view: the seven documents grouped by what you read first, what you reach for when subnet math goes wrong, and what you review last.
+
+```mermaid
+flowchart LR
+    ROOT(("IP addressing / CIDR"))
+    subgraph FOUND["Foundations"]
+      F1["IP and CIDR basics"]:::network
+      F2["AWS addressing"]:::network
+    end
+    subgraph DIAG["Diagnose"]
+      D1["Troubleshooting"]:::network
+    end
+    subgraph REVIEW["Review"]
+      R1["Comparisons"]:::network
+      R2["Exam traps"]:::network
+      R3["Limits and defaults"]:::network
+      R4["Quick review"]:::network
+    end
+    ROOT --> FOUND
+    ROOT --> DIAG
+    ROOT --> REVIEW
+    classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
+    classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    class ROOT actor
+    style FOUND fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style DIAG fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style REVIEW fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+```
+
+Read the root as the topic and each branch as a stage: learn the notation and how AWS applies it, then diagnose exhaustion and overlap, then review the comparisons, traps, and numbers. The `## Document index` below carries the links for every leaf.
+
 ## Document index (read in this order)
 
 1. [01-concepts.md](01-concepts.md): IP anatomy, CIDR notation, network/broadcast, and subnet math.

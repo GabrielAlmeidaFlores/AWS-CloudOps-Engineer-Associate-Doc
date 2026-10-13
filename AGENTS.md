@@ -2824,6 +2824,7 @@ Before finalizing documentation, verify:
 + Diagram technically verified and GitHub-safe (no emoji, no icons, no `architecture-beta`).
 + Console screenshots captured for every screen that aids understanding, one image per step of a multi-step workflow, annotated and referenced per §67.
 + Every screenshot path resolves and no screenshot is orphaned.
++ The topic README carries a `## Topic mind map` (§68) listing every document in the folder, kept in sync with the `## Document index`.
 
 ### Repository
 
@@ -2973,6 +2974,10 @@ Capture the console screenshots the documentation needs, one image per step of a
 ### Step 13
 
 Generate the final Markdown content, with every diagram and screenshot embedded and linked.
+
+### Step 14
+
+Update the topic README: its `## Topic mind map` (§68) and its `## Document index`, so both list every document created or changed.
 
 The research order itself should remain flexible.
 
@@ -3238,7 +3243,60 @@ A bare image with no lead-in or no caption is incomplete. The lead-in orients th
 
 ---
 
-# 68. FINAL PRINCIPLE
+# 68. README MIND MAPS
+
+Every topic README carries a **mind map**: one diagram that shows the whole folder at a glance, every document in it and how they group. The README is the entry point of its topic, and the mind map is the map of that entry point. It turns a flat numbered index into a structure the reader can hold in their head before reading a single document.
+
+## Where it goes
+
+A `## Topic mind map` section sits after the topic's introduction and its *SOA-C03 relevance*, and immediately before the `## Document index`. The reader sees the shape of the topic first, then the linked list to walk it.
+
+## What it contains
+
+- **One diagram per README.** A single Mermaid `flowchart` styled as a mind map, per §32. The root node is the topic (a service, concept, or relationship); branch `subgraph` groupings collect related documents; one leaf node per numbered document. The `README.md` is the container, not a leaf, because the map lives inside it.
+- **Every document.** The map is complete: a folder with seven numbered documents has seven leaves. A document added, renamed, or removed is reflected in the map in the same change, so the map never drifts from the index.
+- **Groupings, not a flat list.** Leaves sit under named branches that describe the reader's path (for example *Foundations*, *Hardening*, *Operate*, *Review*). The grouping is a judgment about how the topic is learned and used, not a restatement of the file numbers.
+- **The linked list beneath.** Mermaid nodes cannot be clickable on GitHub (§32), so the diagram is the visual and the `## Document index` directly below is the navigation: every leaf is mirrored by a linked bullet. The map shows structure; the list carries the links.
+
+## Style
+
+The mind map follows the same rules as every other diagram in the repository (§32): quoted labels, no emoji or icons, the fixed node styles, and the topic's AWS category color on the nodes (the service's category, or the matching category for a concept). The root uses the actor style, so the topic reads as the origin of the map. Keep the structure one level deep: a root, named branches, and one leaf per document. The leaf count follows the folder, so a seventeen-document folder has seventeen leaves; the mind map is the one diagram exempt from §32's fifteen-node split guidance, because its purpose is to mirror the whole folder in a single view. A folder that outgrows a comfortable width groups its leaves under more branches rather than nesting a fourth level.
+
+## Prose around the diagram
+
+Like every diagram (§32), the mind map is introduced by a sentence that says what it shows and followed by a sentence that explains how to read it. A bare diagram with no lead-in is incomplete.
+
+Worked example, the mind map shape for a service README:
+
+```mermaid
+flowchart LR
+    ROOT(("Systems Manager"))
+    subgraph FOUND["Foundations"]
+      F1["Fundamentals"]:::mgmt
+      F2["Node tools"]:::mgmt
+    end
+    subgraph OPERATE["Operate"]
+      O1["Run Command"]:::mgmt
+      O2["Patch Manager"]:::mgmt
+    end
+    subgraph REVIEW["Review"]
+      R1["Exam traps"]:::mgmt
+      R2["Quick review"]:::mgmt
+    end
+    ROOT --> FOUND
+    ROOT --> OPERATE
+    ROOT --> REVIEW
+    classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
+    classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    class ROOT actor
+    style FOUND fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style OPERATE fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style REVIEW fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+```
+
+---
+
+# 69. FINAL PRINCIPLE
 
 **Research broadly.**
 

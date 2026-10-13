@@ -65,6 +65,43 @@ IAM is the backbone of **Domain 4: Security and Compliance (16%)**. The exam gui
 
 IAM is not confined to Domain 4. Roles and instance profiles underpin Domain 3 (deployment/provisioning), and CloudTrail-based audit feeds Domain 1 (monitoring/logging). The canonical documentation lives here; those domains link back rather than repeat it.
 
+## Topic mind map
+
+IAM maps in one view: the policy model first, then how you harden it, how you diagnose an access failure, and the review pass before the exam.
+
+```mermaid
+flowchart LR
+    ROOT(("IAM"))
+    subgraph FOUND["Foundations"]
+      F1["Concepts and evaluation"]:::security
+    end
+    subgraph HARDEN["Hardening"]
+      H1["Security and least privilege"]:::security
+    end
+    subgraph DIAG["Diagnose"]
+      D1["Troubleshooting access"]:::security
+    end
+    subgraph REVIEW["Review"]
+      R1["Comparisons"]:::security
+      R2["Exam traps"]:::security
+      R3["Limits and defaults"]:::security
+      R4["Quick review"]:::security
+    end
+    ROOT --> FOUND
+    ROOT --> HARDEN
+    ROOT --> DIAG
+    ROOT --> REVIEW
+    classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
+    classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
+    class ROOT actor
+    style FOUND fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style HARDEN fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style DIAG fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+    style REVIEW fill:#ffffff,stroke:#232F3E,stroke-width:2px,stroke-dasharray:5 5,color:#232F3E
+```
+
+Read the root as the topic and each branch as a stage: understand principals, policies, and the evaluation order; apply least privilege and the guardrails; diagnose a denied request; then review the comparisons, distinctions, and numbers. The `## Document index` below carries the links for every leaf.
+
 ## Document index (read in this order)
 
 1. [01-concepts.md](01-concepts.md): principals, policy structure, and the policy evaluation logic.
