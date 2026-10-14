@@ -155,7 +155,7 @@ Do not simply:
 ```mermaid
 flowchart LR
     A["Search AWS"] --> B["Summarize AWS"] --> C["Finish"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class A,B,C step
 ```
 
@@ -172,7 +172,7 @@ flowchart TD
     G --> H["Identify relationships and dependencies"]
     H --> I["Determine repository placement"]
     I --> J["Generate documentation"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class A,B,C,D,E,F,G,H,I,J step
 ```
 
@@ -355,8 +355,10 @@ flowchart TD
     E -->|No| F["Investigate why"]
     E -->|Yes| G["Determine the authoritative/current interpretation"]
     F --> G
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
+    classDef decision fill:#FF9900,stroke:#FF9900,color:#232F3E
     class A,B,C,D,F,G step
+    class E decision
 ```
 
 Possible explanations for conflicts include:
@@ -449,7 +451,7 @@ The repository must be organized around **five layers**:
 ```mermaid
 flowchart TD
     A["CERTIFICATION"] --> B["CONCEPTS"] --> C["SERVICES"] --> D["CROSS-SERVICE RELATIONSHIPS"] --> E["DOMAINS"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class A,B,C,D,E step
 ```
 
@@ -1530,7 +1532,7 @@ For every document, identify the relationship between:
 ```mermaid
 flowchart TD
     A["Service"] --> B["Concepts"] --> C["SOA-C03 Tasks"] --> D["SOA-C03 Skills"] --> E["Operational Scenarios"] --> F["Related Services"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class A,B,C,D,E,F step
 ```
 
@@ -1552,7 +1554,7 @@ flowchart TD
     D1 --> T2["Task 1.2"]
     D1 --> T3["Task 1.3"]
     classDef mgmt fill:#E7157B,stroke:#E7157B,color:#ffffff
-    classDef neutral fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef neutral fill:#E6F2FB,stroke:#147EBA,color:#0B3D5C
     class CW,M,L,AL,AG,DB mgmt
     class D1,T1,T2,T3 neutral
 ```
@@ -2040,8 +2042,8 @@ Node styles (non-service nodes):
 
 | Node | Fill | Stroke | Text |
 |------|------|--------|------|
-| Process or step | `#F1F3F3` | `#232F3E` | `#232F3E` |
-| Decision | `#ffffff` | `#232F3E` | `#232F3E` |
+| Process or step | `#147EBA` | `#147EBA` | `#ffffff` |
+| Decision | `#FF9900` | `#FF9900` | `#232F3E` |
 | Actor or start | `#232F3E` | `#232F3E` | `#ffffff` |
 | Allow or success | `#7AA116` | `#7AA116` | `#ffffff` |
 | Deny or failure | `#DD344C` | `#DD344C` | `#ffffff` |
@@ -2099,10 +2101,12 @@ flowchart TD
     D -->|Yes| F{"Capped by a boundary or SCP?"}
     F -->|Yes| E
     F -->|No| G["Allow"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
+    classDef decision fill:#FF9900,stroke:#FF9900,color:#232F3E
     classDef deny fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef ok fill:#7AA116,stroke:#7AA116,color:#ffffff
     class A step
+    class B,D,F decision
     class C,E deny
     class G ok
 ```
@@ -2165,7 +2169,7 @@ For example:
 ```mermaid
 flowchart TD
     A["Symptom"] --> B["Observe"] --> C["Check metrics/logs/events"] --> D["Identify affected component"] --> E["Check configuration"] --> F["Check permissions"] --> G["Check network path"] --> H["Check dependencies"] --> I["Check quotas/limits"] --> J["Apply remediation"] --> K["Verify recovery"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class A,B,C,D,E,F,G,H,I,J,K step
 ```
 
@@ -2813,7 +2817,7 @@ Before creating files, determine:
 ```mermaid
 flowchart TD
     A["What is this?"] --> B["Is it a service?"] --> C["Is it a concept?"] --> D["Is it a relationship?"] --> E["Is it a domain-context topic?"] --> F["Does an existing canonical document already cover it?"] --> G["What additional context is actually missing?"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class A,B,C,D,E,F,G step
 ```
 
@@ -3062,7 +3066,7 @@ flowchart TD
     E --> F["Fill or open the form as needed"]
     F --> G["take_screenshot into assets/images/screenshots/service/"]
     G --> H["Embed the image in the document"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class A,B,C,D,E,F,G,H step
 ```
 
@@ -3319,7 +3323,7 @@ The significant connections are explained **inside the diagram**, as note blocks
 
 - The note carries one short phrase stating the mechanism, such as the required permission, the direction of the dependency, or the limit. Keep it to a few words so the map stays readable in one view.
 - Not every edge needs a note. An edge whose verb already states the relationship stays plain; add a note only where it carries a fact the label cannot.
-- Style notes with the neutral fill `#F1F3F3` and `#232F3E` text, so they read as annotations rather than services.
+- Style notes with the soft amber fill `#FFF4E5`, an `#FF9900` border, and `#232F3E` text, so they read as annotations rather than services.
 - The map and its notes are introduced by the sentence before the diagram and explained by the sentence after it, as with every diagram (§32).
 
 Worked example, the mind map shape for a service README:
@@ -3339,7 +3343,7 @@ flowchart TD
     classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
     classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
-    classDef note fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef note fill:#FFF4E5,stroke:#FF9900,color:#232F3E
     class ROOT actor
     class CW,EB mgmt
     class EC2 compute

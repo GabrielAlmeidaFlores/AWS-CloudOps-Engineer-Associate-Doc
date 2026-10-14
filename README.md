@@ -68,7 +68,7 @@ flowchart TD
     DOMAINS --> SCEN["05-scenarios<br/>original reasoning exercises"]
     SCEN --> LABS["06-labs<br/>hands-on builds"]
     LABS --> CHEAT["07-cheatsheets<br/>last-minute review"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class CERT,CONCEPTS,SERVICES,CROSS,DOMAINS,SCEN,LABS,CHEAT step
 ```
 

@@ -24,9 +24,11 @@ flowchart TD
     F -->|Yes| H{"IMDS reachable (IMDSv2 for DHMC)?"}
     H -->|No| I["Fix IMDS; Default Host Management needs IMDSv2"]
     H -->|Yes| J["Read the agent log and retry"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
+    classDef decision fill:#FF9900,stroke:#FF9900,color:#232F3E
     classDef fix fill:#DD344C,stroke:#DD344C,color:#ffffff
-    class A,B,D,F,H step
+    class A step
+    class B,D,F,H decision
     class C,E,G,I,J fix
 ```
 

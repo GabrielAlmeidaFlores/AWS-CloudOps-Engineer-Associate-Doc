@@ -57,7 +57,7 @@ flowchart TD
     classDef storage fill:#7AA116,stroke:#7AA116,color:#ffffff
     classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
-    classDef note fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef note fill:#FFF4E5,stroke:#FF9900,color:#232F3E
     class SSM,CFG,EB,CW,CT mgmt
     class EC2 compute
     class S3 storage

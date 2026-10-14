@@ -127,9 +127,11 @@ flowchart TD
     B -->|"Inside 10.0.0.0/16"| E["local route, stays in the VPC"]
     C --> F["NAT gateway uses its Elastic IP"]
     D --> G["Peering connection to VPC B"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
+    classDef decision fill:#FF9900,stroke:#FF9900,color:#232F3E
     classDef ok fill:#7AA116,stroke:#7AA116,color:#ffffff
-    class A,B,C,D,E step
+    class A,C,D,E step
+    class B decision
     class F,G ok
 ```
 

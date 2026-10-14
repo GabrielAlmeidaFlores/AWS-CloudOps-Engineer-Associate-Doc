@@ -89,7 +89,7 @@ flowchart TD
     classDef security fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef compute fill:#ED7100,stroke:#ED7100,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
-    classDef note fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef note fill:#FFF4E5,stroke:#FF9900,color:#232F3E
     class IAM actor
     class CT,AA,ORG,IC,STS,KMS security
     class EC2 compute

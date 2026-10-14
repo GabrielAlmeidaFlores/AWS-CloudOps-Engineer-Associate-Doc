@@ -41,7 +41,7 @@ flowchart TD
     VPC -->|"peers via"| N5["ranges must not overlap"]:::note --> PEER
     classDef network fill:#8C4FFF,stroke:#8C4FFF,color:#ffffff
     classDef actor fill:#232F3E,stroke:#232F3E,color:#ffffff
-    classDef note fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef note fill:#FFF4E5,stroke:#FF9900,color:#232F3E
     class CIDR actor
     class VPC,SN,EIP,NAT,IGW,PEER network
 ```

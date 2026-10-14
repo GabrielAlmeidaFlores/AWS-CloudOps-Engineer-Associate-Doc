@@ -156,10 +156,12 @@ flowchart TD
     H -->|No| E
     H -->|Yes| I["Allowed"]
     G -->|No| I
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
+    classDef decision fill:#FF9900,stroke:#FF9900,color:#232F3E
     classDef deny fill:#DD344C,stroke:#DD344C,color:#ffffff
     classDef ok fill:#7AA116,stroke:#7AA116,color:#ffffff
-    class A,B,D,F,G,H step
+    class A step
+    class B,D,F,G,H decision
     class C,E deny
     class I ok
 ```

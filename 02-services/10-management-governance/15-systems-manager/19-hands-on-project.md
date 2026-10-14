@@ -202,9 +202,11 @@ flowchart TD
     E --> G["Compliance report"]
     F --> G
     G --> H["Security Hub CSPM and AWS Config"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
+    classDef decision fill:#FF9900,stroke:#FF9900,color:#232F3E
     classDef ok fill:#7AA116,stroke:#7AA116,color:#ffffff
-    class A,B,C,D,E,F step
+    class A,B,C,E,F step
+    class D decision
     class G,H ok
 ```
 
@@ -216,7 +218,7 @@ flowchart LR
     TAG --> ST["State Manager association"]
     TAG --> PM["Patch Manager group"]
     TAG --> ARG["Resource group lab-fleet"]
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class TAG,RC,ST,PM,ARG step
 ```
 

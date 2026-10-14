@@ -16,7 +16,7 @@ flowchart TD
     E --> F["Check conditions (Region, SourceIp, MFA, tag)"]
     F --> G["Check the resource ARN the action targets"]
     classDef deny fill:#DD344C,stroke:#DD344C,color:#ffffff
-    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    classDef step fill:#147EBA,stroke:#147EBA,color:#ffffff
     class A deny
     class B,C,D,E,F,G step
 ```
