@@ -406,15 +406,16 @@ Never present one category as another.
 
 ---
 
-# 8. NO EXAM DUMPS
+# 8. EXAM QUESTION SOURCING
 
-Do not use:
+Public practice material, including community exam-dump and practice-test sites, may be consulted as **research input**: it shows which topics are emphasized and how the exam words its questions. It is a signal for what to cover, never a source to copy.
 
-+ leaked exam questions;
-+ exam dumps;
-+ unauthorized answer keys;
-+ reconstructed confidential questions;
-+ sources claiming to provide the actual question bank.
+Consulting a dump is allowed. Reproducing one is not. Do not:
+
++ copy a question, option, or answer verbatim from any source into the repository;
++ reproduce leaked or actual exam questions;
++ present an authored question as real exam content;
++ reuse an unauthorized answer key, or reconstruct a confidential question.
 
 Do not claim:
 
@@ -424,7 +425,20 @@ Do not claim:
 
 > "This exact wording is from the exam."
 
-Create original scenarios based on legitimate, publicly documented AWS knowledge.
+Every question in the repository is written originally, in the exam's style, grounded in public AWS documentation, even when a dump site suggested the topic or angle.
+
+## Reference practice sources
+
+These are consulted for coverage and question style, not copied. Verify each still resolves before relying on it.
+
++ CertEmpire: *Free SOA-C03 practice test questions*. https://certempire.com/practice-tests/free-soa-c03-exam-questions/
++ DummyExams: *CloudOps Engineer (SOA-C03) practice exam*. https://dummyexams.com/en/exam/soa-c03
++ ExamCert: *SOA-C03 free practice test*. https://www.examcert.app/exams/aws-soa-c03/free-practice-test/
++ DevOpsByMuh: *SOA-C03 practice exam*. https://www.devopsbymuh.com/mock-tests/aws/soa-c03
++ Mastery Exam Prep: *AWS SOA-C03 practice test*. https://masteryexamprep.com/exams/aws/soa-c03/
++ ExamItLab: *SOA-C03 practice test* (original questions, published skills outline). https://examitlab.com/exams/soa-c03
++ Open Exam Prep: *Free practice questions for AWS CloudOps Engineer (SOA-C03)*. https://open-exam-prep.com/practice/aws-cloudops-engineer-associate
++ soac03exam.com: *Free SOA-C03 practice questions with answers*. https://soac03exam.com/practice-questions/
 
 ---
 
@@ -785,6 +799,7 @@ Every directory and every documentation file carries a numeric prefix that encod
 - **Category folders** under `02-services/` use a two-digit prefix in AWS's in-scope category order (`01-analytics` … `14-storage`).
 - **Service, concept, and relationship folders** under a category use a two-digit prefix for study order within that category (`13-security-identity-compliance/01-iam/`).
 - **Files** inside a folder use a two-digit prefix for read order (`01-concepts.md`, `02-security.md`, … `07-quick-review.md`).
+- **Practice questions** live at `<topic>/<NN>-exam-questions.md`; the category folder carries an `exam-questions.md` index that links each topic's set (§69).
 
 When you add a new topic, assign it the next number in its folder's read order. `README.md` remains unnumbered and lists the folder's files in their numbered read order.
 
@@ -1378,6 +1393,7 @@ When creating a service, prefer this internal structure:
 ├── hands-on.md
 ├── cli-api-iac.md
 ├── cross-service.md
+├── exam-questions.md
 └── quick-review.md
 ```
 
@@ -1819,6 +1835,7 @@ For every service/topic, investigate the following concepts where relevant:
 29. Diagrams, one or more Mermaid diagrams for every architecture, flow, request path, or relationship, following the AWS style of §32 (nested containers, AWS category colors, fixed node styles, no emoji or icons). A multi-step process is drawn as ordered steps.
 30. Console screenshots, the AWS Management Console screens a reader cannot picture from prose (a form to fill, a wizard step, a result table, a non-obvious setting), captured and annotated per §67. A multi-step console workflow is captured one screenshot per step.
 31. Sources, a `## Sources` section at the end of each document (no separate `sources.md` file)
+32. Exam practice questions, at least ten original exam-style items per topic in `<topic>/<NN>-exam-questions.md`, with a per-option rationale in a collapsible answer (§69).
 
 Only include sections that are technically relevant.
 
@@ -2851,6 +2868,7 @@ Before finalizing documentation, verify:
 + No document was lengthened by padding, rephrasing, or restating (the padding ban, §29).
 + Each document adds facts a reader could not infer from its title.
 + Diagrams and screenshots are present wherever the subject needs them (§29), and they follow the §32 style and the §67 rules.
++ The topic carries a `<NN>-exam-questions.md` set with at least ten original exam-style questions, a rationale for every option, and a category `exam-questions.md` index (§69).
 
 Only after this process should the final documentation be generated.
 
@@ -2978,6 +2996,10 @@ Generate the final Markdown content, with every diagram and screenshot embedded 
 ### Step 14
 
 Update the topic README: its `## Topic mind map` (§68) to reflect the topic's relationships, and its `## Document index`, so both reflect the documents created or changed.
+
+### Step 15
+
+Add the topic's exam practice questions: at least ten original items in `<topic>/<NN>-exam-questions.md` and the set listed in the category `exam-questions.md` index (§69).
 
 The research order itself should remain flexible.
 
@@ -3301,7 +3323,54 @@ flowchart TD
 
 ---
 
-# 69. FINAL PRINCIPLE
+# 69. EXAM PRACTICE QUESTIONS
+
+Every documented topic carries a set of **exam practice questions**: original items that test the topic the way SOA-C03 tests it. The documentation teaches; the question set checks whether the knowledge holds under exam pressure. The questions live with the topic, and a category index links every set in that category.
+
+## Where they live
+
+- One set per topic, at `<topic>/<NN>-exam-questions.md`, numbered next in the folder's read order (`15-systems-manager/18-exam-questions.md`).
+- One index per category, at `<category>/exam-questions.md`, listing each topic in the category and linking its set.
+- The topic README's `## Document index` lists the set like any other document.
+
+## How many
+
+At least ten questions per topic. A broad service carries more.
+
+## Question style
+
+Match the exam: a short operational scenario, four options, single-answer or "Choose two" multiple-response, no giveaway in the option list. Every wrong option is plausible and reflects a real misconception, not filler. Mix the domains the topic touches rather than asking ten variations of one fact.
+
+## Answer format
+
+Each question ends with a collapsible `<details>` block, so the reader can self-test before revealing the answer:
+
+```markdown
+<details><summary>Answer</summary>
+
+**A and C.** One or two sentences on why the keyed options are correct.
+- **B.** Why it is wrong.
+- **D.** Why it is wrong.
+
+Reference: [01-fundamentals.md](01-fundamentals.md); AWS: <doc URL>.
+</details>
+```
+
+- State the keyed option(s) first, then one line for every option, correct and incorrect, so the reader learns why each distractor fails.
+- Link the canonical repository document that teaches the point, and the AWS source.
+- The answer sits with its question. Do not scatter an answer key elsewhere.
+
+## Sourcing
+
+Follow §8. Consult the reference practice sources for the topics and phrasing the exam uses, then write original questions grounded in this repository's documentation and AWS docs. Never copy a question, option, or answer.
+
+## Prose around the set
+
+Introduce the set with a sentence naming the topic, the domains it maps to, and the number of questions, then a short list of what it covers. A bare list of questions with no framing is incomplete.
+
+---
+
+# 70. FINAL PRINCIPLE
 
 **Research broadly.**
 

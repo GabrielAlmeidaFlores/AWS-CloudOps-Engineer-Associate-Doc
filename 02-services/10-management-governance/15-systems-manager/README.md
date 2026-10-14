@@ -85,6 +85,7 @@ Read the map outward from Systems Manager: it runs commands and patches on EC2 m
 15. [15-limits-defaults.md](15-limits-defaults.md): quotas, defaults, and numbers that matter.
 16. [16-quick-review.md](16-quick-review.md): the must-know summary.
 17. [17-tagging.md](17-tagging.md): the tag model, `tag:` targeting, the `Patch Group` key, and taggable resources.
+18. [18-exam-questions.md](18-exam-questions.md): twelve original SOA-C03 practice questions covering this topic.
 
 Each document ends with its own `Sources` section; there is no separate `sources.md`.
 

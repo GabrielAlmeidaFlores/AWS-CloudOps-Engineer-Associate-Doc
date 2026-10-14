@@ -106,6 +106,7 @@ Read the map outward from IAM: Organizations and its SCPs cap what the account i
 5. [05-exam-traps.md](05-exam-traps.md): recurring misconceptions.
 6. [06-limits-defaults.md](06-limits-defaults.md): quotas and defaults that matter.
 7. [07-quick-review.md](07-quick-review.md): the must-know summary.
+8. [08-exam-questions.md](08-exam-questions.md): eleven original SOA-C03 practice questions covering this topic.
 
 Each document ends with its own `Sources` section; there is no separate `sources.md`.
 
