@@ -6,7 +6,7 @@
 
 **A certification-focused knowledge base for operating workloads on AWS.**
 
-*Research. Verify. Document. Reason like a CloudOps engineer.*
+*Research it. Verify it. Write it down. Reason like a CloudOps engineer.*
 
 ![Certification](https://img.shields.io/badge/AWS-CloudOps%20Engineer%20Associate-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
 ![Exam](https://img.shields.io/badge/Exam-SOA--C03-232F3E?style=flat-square&logo=amazonaws&logoColor=white)
@@ -16,15 +16,78 @@
 
 ---
 
-## 🎯 What this is
+## What this is
 
-This repository is a study system for the **AWS Certified CloudOps Engineer – Associate (SOA-C03)** exam, formerly the *AWS Certified SysOps Administrator – Associate*. It is not a collection of copied AWS documentation. It is a knowledge graph that connects the exam's requirements, official AWS behavior, real-world operational practice, and cross-service relationships into one navigable reference.
+A study system for the **AWS Certified CloudOps Engineer – Associate (SOA-C03)** exam, formerly the *AWS Certified SysOps Administrator – Associate*. It is not copied AWS documentation. It is a knowledge graph that connects the exam's requirements, verified AWS behavior, real operations, and cross-service relationships into one navigable reference.
 
-The goal is to understand **how AWS services actually behave** and **how to reason about them as an operator**, not just to memorize feature lists.
+The goal is to understand **how AWS services actually behave** and **how to reason about them as an operator**, not to memorize feature lists.
 
----
+## Start here
 
-## 📊 Exam domains
+1. **Read the exam guide** for scope, domains, tasks, and skills: [SOA-C03 exam guide (PDF)](assets/docs/soa-c03-exam-guide.pdf).
+2. **Pick a topic** from [Documented topics](#documented-topics) and read its `README.md`, which maps the topic and links every document in order.
+3. **Work the closing triple** of each topic: answer its `exam-questions`, review its `exam-traps`, then build its `hands-on-project`.
+4. **Reinforce across services** through `03-cross-service` and the `04-domains` task maps as they are written.
+5. **Review before the exam** with `07-cheatsheets`.
+
+Every topic follows the same shape, so the method is the same everywhere.
+
+## Documented topics
+
+| Topic | Type | What it covers | Entry point |
+|-------|------|----------------|-------------|
+| IP addressing / CIDR | Concept | CIDR math, reserved addresses, subnets, public/private routing, NAT, peering | [README](01-concepts/01-networking/01-ip-addressing/README.md) |
+| AWS Identity and Access Management | Service | Principals, policy evaluation, roles, boundaries, SCPs, auditing | [README](02-services/13-security-identity-compliance/01-iam/README.md) |
+| AWS Systems Manager | Service | Managed nodes, patching, sessions, automation, Parameter Store, tagging | [README](02-services/10-management-governance/15-systems-manager/README.md) |
+
+See [Progress](#progress) for what is documented, what is next, and the full [roadmap in `AGENTS.md`](AGENTS.md) (§11).
+
+## How a topic is structured
+
+Every topic folder follows the same pattern, numbered for read order:
+
+- **`README.md`** is the entry point: a topic mind map, the SOA-C03 relevance, a linked document index, and a relationship map. It is the only file without a numeric prefix.
+- **Numbered documents** (`01-...`, `02-...`) teach the topic: concepts, architecture, and operations, each with diagrams and screenshots.
+- **The closing triple** is always the last three numbered files, in this order:
+  1. `<NN>-exam-questions.md`: original, exam-style questions with a rationale for every option.
+  2. `<NN+1>-exam-traps.md`: the distinctions and misconceptions that flip an answer.
+  3. `<NN+2>-hands-on-project.md`: a standalone build that exercises the topic's services end to end.
+
+Each document ends with a `## Sources` section.
+
+## Repository map
+
+The repository is organized as a reading order, from the underlying principles up to exam-day review.
+
+```mermaid
+flowchart TD
+    CERT["Certification<br/>SOA-C03 exam guide"] --> CONCEPTS["01-concepts<br/>cross-cutting principles"]
+    CONCEPTS --> SERVICES["02-services<br/>canonical service documentation"]
+    SERVICES --> CROSS["03-cross-service<br/>what happens when services interact"]
+    CROSS --> DOMAINS["04-domains<br/>knowledge maps for the five exam domains"]
+    DOMAINS --> SCEN["05-scenarios<br/>original reasoning exercises"]
+    SCEN --> LABS["06-labs<br/>hands-on builds"]
+    LABS --> CHEAT["07-cheatsheets<br/>last-minute review"]
+    classDef step fill:#F1F3F3,stroke:#232F3E,color:#232F3E
+    class CERT,CONCEPTS,SERVICES,CROSS,DOMAINS,SCEN,LABS,CHEAT step
+```
+
+Alongside those layers, `08-reference/` holds the source material (AWS documentation, whitepapers, prescriptive guidance, glossary), `assets/` holds the certification badge, the exam guide PDF, and the captured screenshots, and `99-archive/` holds historical and SOA-C02 material.
+
+| Layer | Question it answers |
+|-------|---------------------|
+| `01-concepts/` | What is this fundamental CloudOps principle across AWS? |
+| `02-services/` | What is this AWS service and how do I operate it? |
+| `03-cross-service/` | What happens when two or more services interact? |
+| `04-domains/` | How does this knowledge map to the exam's tasks and skills? |
+| `05-scenarios/` | Can I reason through an operational problem end to end? |
+| `06-labs/` | Can I build it? |
+| `07-cheatsheets/` | What do I need to recall on exam day? |
+| `08-reference/` | Where did this come from? |
+
+Folders and files carry numeric prefixes that encode the read sequence (for example `01-concepts/01-networking/01-ip-addressing/`). Directories are created progressively as each topic is documented. Each major concept has **one canonical home**; related documents link to it rather than duplicating it.
+
+## Exam domains and format
 
 | # | Domain | Weight |
 |---|--------|--------|
@@ -34,73 +97,40 @@ The goal is to understand **how AWS services actually behave** and **how to reas
 | 4 | Security and Compliance | 16% |
 | 5 | Networking and Content Delivery | 18% |
 
+**Format:** 65 questions in 130 minutes, multiple-choice and multiple-response, no labs (50 scored and 15 unscored). Confirm the current numbers on the certification page before you book.
+
+**Exam guide:** [AWS Certified CloudOps Engineer – Associate (SOA-C03), official exam guide (PDF)](assets/docs/soa-c03-exam-guide.pdf). This is the authoritative reference for certification scope.
+
 > The in-scope AWS service list is non-exhaustive and changes over time. Never treat a static list as the complete exam definition.
 
-**Exam guide:** [AWS Certified CloudOps Engineer – Associate (SOA-C03), official exam guide (PDF)](assets/docs/soa-c03-exam-guide.pdf): scope, tasks, skills, and the in-scope service list. This is the authoritative reference for certification scope; it is not rewritten in the repository.
-
----
-
-## 📁 Repository structure
-
-```
-aws-cloudops-soa-c03/
-├── 01-concepts/          Cross-cutting principles (networking, security, reliability…)
-├── 02-services/          Canonical documentation for individual AWS services
-├── 03-cross-service/     Service + service relationship documents
-├── 04-domains/           Knowledge maps for the five exam domains
-├── 05-scenarios/         Original scenario-based reasoning exercises
-├── 06-labs/              Hands-on exercises and walkthroughs
-├── 07-cheatsheets/       Quick-review material for last-minute revision
-├── 08-reference/         Whitepapers, prescriptive guidance, glossary
-├── assets/               Certification badge, exam guide PDF, screenshot images, diagrams
-└── 99-archive/           Deprecated, historical, and SOA-C02 material
-```
-
-Folders and files carry numeric prefixes that encode the read sequence (e.g. `01-concepts/01-networking/01-ip-addressing/`). `README.md` is the only file without a prefix; it is the entry point of its folder. Directories are created progressively as each topic is documented.
-
-### How the layers relate
-
-- **`01-concepts/`** answers *"What is this fundamental CloudOps principle across AWS?"*, the core knowledge, read first.
-- **`02-services/`** answers *"What is this AWS service and how do I operate it?"*
-- **`03-cross-service/`** answers *"What happens when two or more services interact?"*
-- **`04-domains/`** maps that knowledge onto the exam's tasks and skills.
-
-Each major concept has **one canonical home**. Related documents link to it rather than duplicating it.
-
----
-
-## 🧭 How to use this repository
-
-1. Read the [SOA-C03 exam guide](assets/docs/soa-c03-exam-guide.pdf) for scope, domains, tasks, and skills.
-2. Study a topic from [`01-concepts/`](01-concepts/) (a principle) or [`02-services/`](02-services/) (a service).
-3. Reinforce it through the matching `03-cross-service/` relationship and `04-domains/` context.
-4. Test your reasoning with `05-scenarios/` and build muscle memory in `06-labs/`.
-5. Before the exam, review with `07-cheatsheets/`.
-
-The complete research, architecture, and writing methodology is defined in [`AGENTS.md`](AGENTS.md).
-
----
-
-## 📈 Progress
+## Progress
 
 Documentation proceeds one topic at a time, following the [study roadmap in `AGENTS.md`](AGENTS.md) (§11).
 
-| Status | Topic | Location |
-|--------|-------|----------|
-| ✅ | IAM | [`02-services/13-security-identity-compliance/01-iam/`](02-services/13-security-identity-compliance/01-iam/) |
-| ✅ | IP addressing / CIDR | [`01-concepts/01-networking/01-ip-addressing/`](01-concepts/01-networking/01-ip-addressing/) |
-| ✅ | Systems Manager | [`02-services/10-management-governance/15-systems-manager/`](02-services/10-management-governance/15-systems-manager/) |
+| Status | Topic | Entry point |
+|--------|-------|-------------|
+| ✅ | IAM | [README](02-services/13-security-identity-compliance/01-iam/README.md) |
+| ✅ | IP addressing / CIDR | [README](01-concepts/01-networking/01-ip-addressing/README.md) |
+| ✅ | Systems Manager | [README](02-services/10-management-governance/15-systems-manager/README.md) |
 | ⬜ | IPv4 vs IPv6 *(next)* | `01-concepts/01-networking/02-ipv4-ipv6/` |
+| ⬜ | VPC | `02-services/12-networking-content-delivery/01-vpc/` |
+| ⬜ | EC2 | `02-services/05-compute/01-ec2/` |
+| ⬜ | CloudWatch | `02-services/10-management-governance/05-cloudwatch/` |
 
----
+Each documented topic ships with its own exam-question set, exam-traps file, and hands-on project.
 
-## 💡 Key principles
+## Key principles
 
-- **Canonical knowledge**, one source of truth per concept, linked, never duplicated.
-- **Certification-first**, every document maps to a specific SOA-C03 domain, task, or skill.
-- **Verified facts**, defaults, limits, and quotas are checked against current AWS documentation, never invented.
-- **Original scenarios**, no exam dumps; reasoning exercises built from public AWS knowledge.
-- **Cross-service thinking**, the exam rewards understanding how services compose, not isolated memorization.
+- **Canonical knowledge.** One source of truth per concept, linked, never duplicated.
+- **Certification-first.** Every document maps to a specific SOA-C03 domain, task, or skill.
+- **Verified facts.** Defaults, limits, and quotas are checked against current AWS documentation, never invented.
+- **Original questions.** Exam-style practice written from public AWS knowledge; no exam dumps are copied.
+- **Hands-on.** Every topic ends with a project that builds the services it documents.
+- **Cross-service thinking.** The exam rewards understanding how services compose, not isolated memorization.
+
+## How this repository is built
+
+The research, architecture, diagramming, screenshot, and writing methodology (including the exam-question sourcing rules) is defined in [`AGENTS.md`](AGENTS.md).
 
 ---
 
