@@ -49,7 +49,7 @@ The Create parameter form makes the tier choice explicit by listing what each ti
 
 ![Create parameter form showing the Standard and Advanced tier cards and the three parameter types](../../../assets/images/screenshots/ssm/03-paramstore-create-tier-type.png)
 
-*The Create parameter form. The Standard card lists 10,000 parameters, 4 KB values, and no additional charge; the Advanced card lists cross-account sharing, 100,000 parameters, 8 KB values, and expiration and no-change notifications. The Type section below chooses String, StringList, or SecureString, which is also where a value becomes encrypted.*
+*The Create parameter form. The tier cards (1) set the tier: the **Standard** card lists 10,000 parameters, 4 KB values, and no additional charge, while the **Advanced** card lists cross-account sharing, 100,000 parameters, 8 KB values, and expiration and no-change notifications. The **Type** section (2) chooses `String`, `StringList`, or `SecureString`, which is also where a value becomes encrypted.*
 
 ## Parameter policies
 
