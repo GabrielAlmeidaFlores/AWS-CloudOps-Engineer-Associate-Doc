@@ -188,6 +188,336 @@ END:VCALENDAR'
     aws ssm create-ops-item --title "Lab fleet needs an audit" --source "Custom" --priority 3
     ```
 
+## Infrastructure as code (CloudFormation)
+
+The steps above work the fleet by hand. The template below builds the same infrastructure in one stack: the VPC, the two nodes with the instance role and the `Env=lab` and `Patch Group=LAB` tags, the resource group, the parameters, the inventory bucket and its data sync, the inventory and state-manager associations, the patch baseline registered to the `LAB` patch group, the maintenance window with its target and patch task, the Change Calendar document, and the AppConfig application. The latest Amazon Linux 2023 AMI is resolved from a public SSM parameter at deploy time, so no AMI ID is pinned. CloudFormation cannot create an OpsCenter OpsItem, because there is no OpsItem resource type, so step 13 covers that part.
+
+Save it as `ssm-fleet.yaml`:
+
+```yaml
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Systems Manager fleet workflow for the SSM hands-on project
+
+Parameters:
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
+  InventoryBucketName:
+    Type: String
+    Default: example-ssm-inventory-111122223333
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: lab-vpc
+
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: lab-public
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  GatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref InternetGateway
+
+  RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+
+  DefaultRoute:
+    Type: AWS::EC2::Route
+    DependsOn: GatewayAttachment
+    Properties:
+      RouteTableId: !Ref RouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  SubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet
+      RouteTableId: !Ref RouteTable
+
+  NodeSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: outbound only for SSM managed nodes
+      VpcId: !Ref Vpc
+      SecurityGroupEgress:
+        - IpProtocol: "-1"
+          CidrIp: 0.0.0.0/0
+
+  NodeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore"
+
+  NodeInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref NodeRole
+
+  NodeA:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: t3.micro
+      IamInstanceProfile: !Ref NodeInstanceProfile
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds:
+        - !Ref NodeSecurityGroup
+      Tags:
+        - Key: Name
+          Value: node-a
+        - Key: Env
+          Value: lab
+        - Key: "Patch Group"
+          Value: LAB
+
+  NodeB:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: t3.micro
+      IamInstanceProfile: !Ref NodeInstanceProfile
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds:
+        - !Ref NodeSecurityGroup
+      Tags:
+        - Key: Name
+          Value: node-b
+        - Key: Env
+          Value: lab
+        - Key: "Patch Group"
+          Value: LAB
+
+  ConfigLogLevel:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /lab/config/log-level
+      Type: String
+      Value: info
+
+  ConfigApiToken:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /lab/config/api-token
+      Type: SecureString
+      Value: example-token
+
+  LabFleetGroup:
+    Type: AWS::ResourceGroups::Group
+    Properties:
+      Name: lab-fleet
+      ResourceQuery:
+        Type: TAG_FILTERS_1_0
+        Query: '{"ResourceTypeFilters":["AWS::EC2::Instance"],"TagFilters":[{"Key":"Env","Values":["lab"]}]}'
+
+  InventoryBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref InventoryBucketName
+
+  InventoryBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref InventoryBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: SSMBucketPermissionsCheck
+            Effect: Allow
+            Principal:
+              Service: ssm.amazonaws.com
+            Action: s3:GetBucketAcl
+            Resource: !GetAtt InventoryBucket.Arn
+          - Sid: SSMBucketDelivery
+            Effect: Allow
+            Principal:
+              Service: ssm.amazonaws.com
+            Action: s3:PutObject
+            Resource: !Sub "${InventoryBucket.Arn}/*"
+            Condition:
+              StringEquals:
+                s3:x-amz-acl: bucket-owner-full-control
+
+  InventoryAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      AssociationName: lab-inventory
+      Name: AWS-GatherSoftwareInventory
+      ScheduleExpression: rate(1 day)
+      Targets:
+        - Key: tag:Env
+          Values:
+            - lab
+
+  InventoryDataSync:
+    Type: AWS::SSM::ResourceDataSync
+    Properties:
+      SyncName: lab-inventory
+      SyncType: SyncToDestination
+      S3Destination:
+        BucketName: !Ref InventoryBucket
+        BucketRegion: !Ref AWS::Region
+        SyncFormat: JsonSerDe
+        BucketPrefix: inventory
+
+  CloudWatchAgentAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      AssociationName: lab-cloudwatch-agent
+      Name: AWS-ConfigureAWSPackage
+      ScheduleExpression: rate(7 days)
+      Targets:
+        - Key: tag:Env
+          Values:
+            - lab
+      Parameters:
+        action:
+          - Install
+        name:
+          - AmazonCloudWatchAgent
+
+  LabBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: lab-baseline
+      OperatingSystem: AMAZON_LINUX_2023
+      PatchGroups:
+        - LAB
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: CLASSIFICATION
+                  Values:
+                    - Security
+                    - Bugfix
+            ApproveAfterDays: 7
+            ComplianceLevel: HIGH
+
+  MaintenanceWindow:
+    Type: AWS::SSM::MaintenanceWindow
+    Properties:
+      Name: lab-weekly-patch
+      Schedule: cron(0 3 ? * SUN *)
+      Duration: 3
+      Cutoff: 1
+      AllowUnassociatedTargets: true
+
+  MaintenanceWindowTarget:
+    Type: AWS::SSM::MaintenanceWindowTarget
+    Properties:
+      WindowId: !Ref MaintenanceWindow
+      ResourceType: INSTANCE
+      Targets:
+        - Key: tag:Patch Group
+          Values:
+            - LAB
+
+  MaintenanceWindowTask:
+    Type: AWS::SSM::MaintenanceWindowTask
+    Properties:
+      WindowId: !Ref MaintenanceWindow
+      Priority: 1
+      MaxConcurrency: "50%"
+      MaxErrors: "1"
+      TaskType: RUN_COMMAND
+      TaskArn: AWS-RunPatchBaseline
+      Targets:
+        - Key: WindowTargetIds
+          Values:
+            - !Ref MaintenanceWindowTarget
+      TaskInvocationParameters:
+        MaintenanceWindowRunCommandParameters:
+          Parameters:
+            Operation:
+              - Install
+            RebootOption:
+              - RebootIfNeeded
+
+  FreezeCalendar:
+    Type: AWS::SSM::Document
+    Properties:
+      Name: lab-freeze
+      DocumentType: ChangeCalendar
+      Content: |
+        BEGIN:VCALENDAR
+        VERSION:2.0
+        PRODID:-//AWS//Change Calendar//EN
+        END:VCALENDAR
+
+  LabApp:
+    Type: AWS::AppConfig::Application
+    Properties:
+      Name: lab-app
+
+  LabProfile:
+    Type: AWS::AppConfig::ConfigurationProfile
+    Properties:
+      ApplicationId: !Ref LabApp
+      Name: lab-profile
+      LocationUri: ssm-document://lab-config
+
+  LabEnvironment:
+    Type: AWS::AppConfig::Environment
+    Properties:
+      ApplicationId: !Ref LabApp
+      Name: lab-env
+
+Outputs:
+  NodeAId:
+    Value: !Ref NodeA
+  NodeBId:
+    Value: !Ref NodeB
+  BaselineId:
+    Value: !Ref LabBaseline
+  MaintenanceWindowId:
+    Value: !Ref MaintenanceWindow
+  DataSyncName:
+    Value: !Ref InventoryDataSync
+```
+
+Deploy and remove it:
+
+```bash
+aws cloudformation deploy --stack-name lab-ssm-fleet \
+  --template-file ssm-fleet.yaml \
+  --capabilities CAPABILITY_NAMED_IAM --region us-east-2
+
+aws cloudformation delete-stack --stack-name lab-ssm-fleet --region us-east-2
+```
+
+Two parts of the workflow stay outside the template. The `CAPABILITY_NAMED_IAM` flag is required because the template creates the instance role and profile. The OpsItem from step 13 has no CloudFormation resource type, so raise it with the CLI after the stack is up. The `InventoryBucketName` parameter defaults to the example account ID, so change it if the name is taken.
+
 ## How it works
 
 Patching is the clearest flow, because it shows the tag-to-baseline path and the two ways to trigger it. The node's `Patch Group` tag selects the baseline; the operation is either a one-time Run Command or a scheduled Maintenance Window task, and both end at the same compliance report.

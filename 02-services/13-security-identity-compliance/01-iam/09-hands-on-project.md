@@ -139,6 +139,197 @@ flowchart LR
    aws accessanalyzer create-analyzer --analyzer-name lab --type ACCOUNT
    ```
 
+## Infrastructure as code (CloudFormation)
+
+The steps above create the identity chain by hand. The template below builds the same KMS key, encrypted bucket, group, user, role with its permissions boundary and MFA-gated statement, instance profile, Access Analyzer, and CloudTrail trail in one stack. The account ID and partition come from pseudo-parameters, so no value is hardcoded. S3 bucket names are globally unique: the `ReportsBucketName` and `TrailBucketName` parameters default to the example account ID, so change them if the name is already taken.
+
+Save it as `identity.yaml`:
+
+```yaml
+AWSTemplateFormatVersion: "2010-09-09"
+Description: End-to-end identity with a scoped role, boundary, and audit for the IAM project
+
+Parameters:
+  ReportsBucketName:
+    Type: String
+    Default: example-reports-111122223333
+  TrailBucketName:
+    Type: String
+    Default: example-cloudtrail-111122223333
+
+Resources:
+  ReportsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: reports bucket key
+      EnableKeyRotation: true
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: EnableIamPolicies
+            Effect: Allow
+            Principal:
+              AWS: !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+            Action: kms:*
+            Resource: "*"
+
+  ReportsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref ReportsBucketName
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: !Ref ReportsKey
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  ReportsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ReportsBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !GetAtt ReadReportsRole.Arn
+            Action: s3:GetObject
+            Resource: !Sub "${ReportsBucket.Arn}/reports/*"
+
+  Analysts:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: analysts
+      ManagedPolicyArns:
+        - !Sub "arn:${AWS::Partition}:iam::aws:policy/ReadOnlyAccess"
+
+  Analyst1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: analyst1
+
+  Analyst1Membership:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: !Ref Analysts
+      Users:
+        - !Ref Analyst1
+
+  ReadReportsRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: read-reports
+      PermissionsBoundary: !Sub "arn:${AWS::Partition}:iam::aws:policy/ReadOnlyAccess"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+          - Effect: Allow
+            Principal:
+              AWS: !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:root"
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: read-reports-inline
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "${ReportsBucket.Arn}/reports/*"
+              - Effect: Allow
+                Action: kms:Decrypt
+                Resource: !GetAtt ReportsKey.Arn
+              - Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub "${ReportsBucket.Arn}/payments/*"
+                Condition:
+                  Bool:
+                    aws:MultiFactorAuthPresent: "true"
+
+  ReadReportsInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: read-reports
+      Roles:
+        - !Ref ReadReportsRole
+
+  AccountAnalyzer:
+    Type: AWS::AccessAnalyzer::Analyzer
+    Properties:
+      AnalyzerName: lab
+      Type: ACCOUNT
+
+  TrailBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref TrailBucketName
+
+  TrailBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref TrailBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AWSCloudTrailAclCheck
+            Effect: Allow
+            Principal:
+              Service: cloudtrail.amazonaws.com
+            Action: s3:GetBucketAcl
+            Resource: !GetAtt TrailBucket.Arn
+          - Sid: AWSCloudTrailWrite
+            Effect: Allow
+            Principal:
+              Service: cloudtrail.amazonaws.com
+            Action: s3:PutObject
+            Resource: !Sub "${TrailBucket.Arn}/AWSLogs/${AWS::AccountId}/*"
+            Condition:
+              StringEquals:
+                s3:x-amz-acl: bucket-owner-full-control
+
+  LabTrail:
+    Type: AWS::CloudTrail::Trail
+    DependsOn: TrailBucketPolicy
+    Properties:
+      TrailName: lab-trail
+      S3BucketName: !Ref TrailBucket
+      IsLogging: true
+      IsMultiRegionTrail: false
+      IncludeGlobalServiceEvents: true
+
+Outputs:
+  RoleArn:
+    Value: !GetAtt ReadReportsRole.Arn
+  InstanceProfileName:
+    Value: !Ref ReadReportsInstanceProfile
+  BucketName:
+    Value: !Ref ReportsBucket
+  KeyArn:
+    Value: !GetAtt ReportsKey.Arn
+  AnalyzerArn:
+    Value: !GetAtt AccountAnalyzer.Arn
+```
+
+Deploy and remove it:
+
+```bash
+aws cloudformation deploy --stack-name lab-identity \
+  --template-file identity.yaml \
+  --capabilities CAPABILITY_NAMED_IAM --region us-east-2
+
+aws cloudformation delete-stack --stack-name lab-identity --region us-east-2
+```
+
+Two resources outlive a delete: the KMS key stays in `PendingDeletion` for the waiting period, and the buckets are emptied first if they hold objects. The `CAPABILITY_NAMED_IAM` flag is required because the template creates a role and a user with fixed names.
+
 ## How it works
 
 The access decision is the evaluation chain. An explicit `Deny` anywhere wins; otherwise the request needs an `Allow` in either the identity policy or the resource policy; and any boundary or SCP can only reduce the result. Reading a `SecureString`-style encrypted object needs both the S3 action and `kms:Decrypt`, which is why two statements are required.

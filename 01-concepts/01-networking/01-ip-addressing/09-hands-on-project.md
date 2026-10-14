@@ -115,6 +115,187 @@ flowchart LR
    aws ec2 create-route --route-table-id rtb-B --destination-cidr-block 10.0.0.0/16 --vpc-peering-connection-id pcx-A
    ```
 
+## Infrastructure as code (CloudFormation)
+
+The steps above build the network with the CLI. The template below builds the same two VPCs, the subnets, the internet and NAT gateways, the route tables, and the peering connection in one stack. Because both VPCs live in the same account, CloudFormation accepts the peering request automatically, so there is no separate accept step. The zones are chosen by index (`!Select [0, !GetAZs ""]`) so the template ports to any account without editing zone names.
+
+Save it as `peered-vpc.yaml`:
+
+```yaml
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Peered two-tier VPC network for the IP addressing project
+
+Resources:
+  VpcA:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: vpc-a
+
+  VpcB:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.1.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: vpc-b
+
+  PublicSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcA
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: subnet-pub-a
+
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcA
+      CidrBlock: 10.0.10.0/24
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      Tags:
+        - Key: Name
+          Value: subnet-priv-a
+
+  SubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcB
+      CidrBlock: 10.1.0.0/24
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      Tags:
+        - Key: Name
+          Value: subnet-b
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: igw-a
+
+  GatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VpcA
+      InternetGatewayId: !Ref InternetGateway
+
+  NatEip:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+
+  NatGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatEip.AllocationId
+      SubnetId: !Ref PublicSubnetA
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VpcA
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: GatewayAttachment
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  PublicSubnetAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnetA
+      RouteTableId: !Ref PublicRouteTable
+
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VpcA
+
+  PrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway
+
+  PrivateSubnetAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnetA
+      RouteTableId: !Ref PrivateRouteTable
+
+  RouteTableB:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VpcB
+
+  SubnetBAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetB
+      RouteTableId: !Ref RouteTableB
+
+  PeeringConnection:
+    Type: AWS::EC2::VPCPeeringConnection
+    Properties:
+      VpcId: !Ref VpcA
+      PeerVpcId: !Ref VpcB
+      Tags:
+        - Key: Name
+          Value: pcx-a-b
+
+  PrivatePeerRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 10.1.0.0/16
+      VpcPeeringConnectionId: !Ref PeeringConnection
+
+  PeerRouteB:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref RouteTableB
+      DestinationCidrBlock: 10.0.0.0/16
+      VpcPeeringConnectionId: !Ref PeeringConnection
+
+Outputs:
+  VpcAId:
+    Value: !Ref VpcA
+  VpcBId:
+    Value: !Ref VpcB
+  PrivateRouteTableId:
+    Value: !Ref PrivateRouteTable
+  PeeringConnectionId:
+    Value: !Ref PeeringConnection
+  NatGatewayEip:
+    Value: !Ref NatEip
+```
+
+Deploy and remove it:
+
+```bash
+aws cloudformation deploy --stack-name lab-peered-vpc \
+  --template-file peered-vpc.yaml --region us-east-2
+
+aws cloudformation delete-stack --stack-name lab-peered-vpc --region us-east-2
+```
+
+The stack charges for the NAT gateway and its Elastic IP for as long as it exists, so delete it when the exercise is done.
+
 ## How it works
 
 The packet path is the point. A private instance sends outbound traffic that leaves through the NAT gateway, not the internet gateway, because the private route table carries only the NAT route. Traffic to the peering peer leaves through the peering connection because the route table has a more specific route for the peer's CIDR than the `local` route's VPC range. The `local` route always matches the VPC's own CIDR and can never be removed, so intra-VPC traffic never leaves the VPC.
