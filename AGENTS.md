@@ -799,7 +799,7 @@ Every directory and every documentation file carries a numeric prefix that encod
 - **Category folders** under `02-services/` use a two-digit prefix in AWS's in-scope category order (`01-analytics` … `14-storage`).
 - **Service, concept, and relationship folders** under a category use a two-digit prefix for study order within that category (`13-security-identity-compliance/01-iam/`).
 - **Files** inside a folder use a two-digit prefix for read order (`01-concepts.md`, `02-security.md`, … `07-quick-review.md`).
-- **Practice questions** live at `<topic>/<NN>-exam-questions.md`; the category folder carries an `exam-questions.md` index that links each topic's set (§69).
+- **Practice questions** live at `<topic>/<NN>-exam-questions.md`, placed immediately **before** the topic's `exam-traps.md` so the two sit side by side with the questions first; the category folder carries an `exam-questions.md` index that links each topic's set (§69).
 
 When you add a new topic, assign it the next number in its folder's read order. `README.md` remains unnumbered and lists the folder's files in their numbered read order.
 
@@ -1388,12 +1388,12 @@ When creating a service, prefer this internal structure:
 ├── cost.md
 ├── limits-defaults.md
 ├── comparisons.md
+├── exam-questions.md
 ├── exam-traps.md
 ├── scenarios.md
 ├── hands-on.md
 ├── cli-api-iac.md
 ├── cross-service.md
-├── exam-questions.md
 └── quick-review.md
 ```
 
@@ -2868,7 +2868,7 @@ Before finalizing documentation, verify:
 + No document was lengthened by padding, rephrasing, or restating (the padding ban, §29).
 + Each document adds facts a reader could not infer from its title.
 + Diagrams and screenshots are present wherever the subject needs them (§29), and they follow the §32 style and the §67 rules.
-+ The topic carries a `<NN>-exam-questions.md` set with at least ten original exam-style questions, a rationale for every option, and a category `exam-questions.md` index (§69).
++ The topic carries a `<NN>-exam-questions.md` set with at least ten original exam-style questions, a rationale for every option, placed immediately before `exam-traps.md` (questions first), and listed in the category `exam-questions.md` index (§69).
 
 Only after this process should the final documentation be generated.
 
@@ -3329,7 +3329,7 @@ Every documented topic carries a set of **exam practice questions**: original it
 
 ## Where they live
 
-- One set per topic, at `<topic>/<NN>-exam-questions.md`, numbered next in the folder's read order (`15-systems-manager/18-exam-questions.md`).
+- One set per topic, at `<topic>/<NN>-exam-questions.md`, placed immediately **before** the topic's `exam-traps.md` so the two sit side by side in read order, questions first and traps second (`15-systems-manager/14-exam-questions.md`, then `15-exam-traps.md`).
 - One index per category, at `<category>/exam-questions.md`, listing each topic in the category and linking its set.
 - The topic README's `## Document index` lists the set like any other document.
 

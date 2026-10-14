@@ -127,7 +127,7 @@ A team attaches more than ten managed policies to one role and the console rejec
 - **C.** The statement misstates inline policy counts.
 - **D.** There is a default quota.
 
-Reference: [06-limits-defaults.md](06-limits-defaults.md).
+Reference: [07-limits-defaults.md](07-limits-defaults.md).
 </details>
 
 ---

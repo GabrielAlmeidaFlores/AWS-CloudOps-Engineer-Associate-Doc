@@ -84,7 +84,7 @@ A patch baseline is registered for patch group `PROD`. Some nodes that should be
 - **B.** Patch Manager supports Linux.
 - **D.** A registered group overrides the default; the default is only the fallback.
 
-Reference: [04-patch-manager.md](04-patch-manager.md), [17-tagging.md](17-tagging.md).
+Reference: [04-patch-manager.md](04-patch-manager.md), [18-tagging.md](18-tagging.md).
 </details>
 
 ---

@@ -4,7 +4,7 @@ This category index links the SOA-C03 practice-question set for each documented 
 
 | Topic | Questions | Set |
 |-------|-----------|-----|
-| AWS Systems Manager | 12 | [15-systems-manager/18-exam-questions.md](15-systems-manager/18-exam-questions.md) |
+| AWS Systems Manager | 12 | [15-systems-manager/14-exam-questions.md](15-systems-manager/14-exam-questions.md) |
 
 As new topics are documented in this category (Auto Scaling, CloudFormation, CloudWatch, CloudTrail, Config, Organizations, and the rest), their sets are added here.
 

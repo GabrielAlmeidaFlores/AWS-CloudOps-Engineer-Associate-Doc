@@ -4,7 +4,7 @@ This category index links the SOA-C03 practice-question set for each documented 
 
 | Topic | Questions | Set |
 |-------|-----------|-----|
-| IP addressing / CIDR | 10 | [01-ip-addressing/08-exam-questions.md](01-ip-addressing/08-exam-questions.md) |
+| IP addressing / CIDR | 10 | [01-ip-addressing/05-exam-questions.md](01-ip-addressing/05-exam-questions.md) |
 
 As new concepts are documented in this category (IPv4 vs IPv6, DNS, routing, private connectivity, hybrid connectivity, network troubleshooting), their sets are added here.
 

@@ -54,7 +54,7 @@ The console describes the workflow as four ordered steps, which is the cleanest 
 *The Maintenance Windows overview. **How it works** (1) lists the four steps: create the window, assign targets, assign tasks, and review status after execution. The **Create Maintenance Window** button (2) starts step one. The **Run complex tasks** block (3) names what a task can be: Run Command, Automation workflows, AWS Step Functions state machines (Standard workflows only), or AWS Lambda functions.*
 
 - **Task types.** Run Command commands, Automation workflows, Lambda functions, and Step Functions state machines (Standard workflows only).
-- **Targets.** Managed nodes and many other AWS resource types (S3 buckets, SQS queues, KMS keys, and more). Offline nodes can be targeted through an AWS resource group. A Maintenance Window target accepts up to five tag keys, and a node must carry **all** of them to be included; the AND semantics and case sensitivity are the same rules documented in [17-tagging.md](17-tagging.md).
+- **Targets.** Managed nodes and many other AWS resource types (S3 buckets, SQS queues, KMS keys, and more). Offline nodes can be targeted through an AWS resource group. A Maintenance Window target accepts up to five tag keys, and a node must carry **all** of them to be included; the AND semantics and case sensitivity are the same rules documented in [18-tagging.md](18-tagging.md).
 - **Scheduling.** Cron and rate expressions, a time zone, and cutoff and date restrictions to bound when work may run.
 - **Example uses.** Install or update applications, apply patches, update SSM Agent, build AMIs, or drain a node from a load balancer, patch it, and add it back.
 

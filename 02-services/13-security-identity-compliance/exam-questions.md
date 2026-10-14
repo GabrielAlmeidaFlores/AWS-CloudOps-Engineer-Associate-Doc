@@ -4,7 +4,7 @@ This category index links the SOA-C03 practice-question set for each documented 
 
 | Topic | Questions | Set |
 |-------|-----------|-----|
-| AWS Identity and Access Management (IAM) | 11 | [01-iam/08-exam-questions.md](01-iam/08-exam-questions.md) |
+| AWS Identity and Access Management (IAM) | 11 | [01-iam/05-exam-questions.md](01-iam/05-exam-questions.md) |
 
 As new topics are documented in this category (KMS, Secrets Manager, GuardDuty, Inspector, Security Hub, IAM Access Analyzer, WAF, Shield, and the networking security resources), their sets are added here.
 
