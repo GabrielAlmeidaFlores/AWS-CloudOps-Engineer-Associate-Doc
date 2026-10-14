@@ -1404,9 +1404,12 @@ Every topic **ends** with a hands-on project: the last numbered file in the fold
 The project follows a fixed shape so every topic reads alike:
 
 - **Goal.** One sentence on what the reader builds and what it proves.
-- **What you build.** The small architecture or change, described in a few lines, with a Mermaid diagram when it is more than a single resource.
+- **What you build.** The architecture or change, described in a few lines.
+- **Coverage.** The project uses the **maximum set** of the services and concepts the topic documents, in one coherent build, rather than a single-service exercise. A **Concepts covered** table maps each documented service or concept to the step where it appears.
+- **Architecture diagram.** A Mermaid `flowchart` of the whole build, in the §32 AWS style (containers, category colors, fixed node styles).
 - **Prerequisites.** The topic's own documents to read first, and any prior topic.
 - **Steps.** Numbered console and AWS CLI steps that build it end to end.
+- **How it works.** An explanation of the mechanics the build demonstrates, with a Mermaid flow diagram where a request, data, or patching path is not obvious.
 - **Validation.** How to confirm it works, with the exact command and the expected result.
 - **Failure injection.** A safe way to break it and observe the failure, where the topic allows it.
 - **Cleanup.** The commands to remove every resource the project created.
@@ -1853,7 +1856,7 @@ For every service/topic, investigate the following concepts where relevant:
 30. Console screenshots, the AWS Management Console screens a reader cannot picture from prose (a form to fill, a wizard step, a result table, a non-obvious setting), captured and annotated per §67. A multi-step console workflow is captured one screenshot per step.
 31. Sources, a `## Sources` section at the end of each document (no separate `sources.md` file)
 32. Exam practice questions, at least ten original exam-style items per topic in `<topic>/<NN>-exam-questions.md`, with a per-option rationale in a collapsible answer (§69).
-33. A hands-on project at the end of the topic (`<topic>/<NN>-hands-on-project.md`): goal, build steps (console and CLI), validation, failure injection where safe, and cleanup (§20).
+33. A hands-on project at the end of the topic (`<topic>/<NN>-hands-on-project.md`) that exercises the **maximum set** of the topic's services and concepts in one build, with an architecture Mermaid diagram, a coverage table, a "how it works" explanation, build steps (console and CLI), validation, failure injection where safe, and cleanup (§20).
 
 Only include sections that are technically relevant.
 
@@ -3021,7 +3024,7 @@ Add the topic's exam practice questions: at least ten original items in `<topic>
 
 ### Step 16
 
-Write the topic's hands-on project as its last file, `<topic>/<NN>-hands-on-project.md`: goal, build steps (console and CLI), validation, failure injection where safe, and cleanup (§20).
+Write the topic's hands-on project as its last file, `<topic>/<NN>-hands-on-project.md`: the maximum set of the topic's services and concepts in one build, an architecture Mermaid diagram, a coverage table, a "how it works" explanation, build steps (console and CLI), validation, failure injection where safe, and cleanup (§20).
 
 The research order itself should remain flexible.
 
