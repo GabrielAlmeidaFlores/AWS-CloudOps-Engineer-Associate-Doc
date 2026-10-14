@@ -22,7 +22,7 @@ A team plans a `/24` subnet for web servers in a VPC. How many IPv4 addresses ca
 - **B.** 255 subtracts only the broadcast address.
 - **D.** 254 subtracts two, the non-AWS convention.
 
-Reference: [02-aws-addressing.md](02-aws-addressing.md), [07-limits-defaults.md](07-limits-defaults.md).
+Reference: [02-aws-addressing.md](02-aws-addressing.md), [05-limits-defaults.md](05-limits-defaults.md).
 </details>
 
 ---
@@ -64,7 +64,7 @@ A subnet is created with the CIDR block `10.0.0.0/15`. It is rejected. Why?
 - **C.** `/24` is not a requirement.
 - **D.** `/15` is invalid everywhere, not only outside the default VPC.
 
-Reference: [02-aws-addressing.md](02-aws-addressing.md), [07-limits-defaults.md](07-limits-defaults.md).
+Reference: [02-aws-addressing.md](02-aws-addressing.md), [05-limits-defaults.md](05-limits-defaults.md).
 </details>
 
 ---
@@ -211,5 +211,5 @@ A subnet with a `/28` CIDR is running out of addresses and cannot host the plann
 - **C.** VPC CIDR exhaustion is a different failure.
 - **D.** Public addresses are not the constraint here.
 
-Reference: [07-limits-defaults.md](07-limits-defaults.md), [03-troubleshooting.md](03-troubleshooting.md).
+Reference: [05-limits-defaults.md](05-limits-defaults.md), [03-troubleshooting.md](03-troubleshooting.md).
 </details>

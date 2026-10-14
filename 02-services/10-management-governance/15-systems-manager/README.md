@@ -81,11 +81,12 @@ Read the map outward from Systems Manager: it runs commands and patches on EC2 m
 11. [11-monitoring.md](11-monitoring.md): CloudWatch, CloudTrail, and Config integration.
 12. [12-troubleshooting.md](12-troubleshooting.md): diagnosing nodes that will not register or run.
 13. [13-comparisons.md](13-comparisons.md): the distinctions that decide exam answers.
-14. [14-exam-questions.md](14-exam-questions.md): twelve original SOA-C03 practice questions covering this topic.
-15. [15-exam-traps.md](15-exam-traps.md): recurring misconceptions.
-16. [16-limits-defaults.md](16-limits-defaults.md): quotas, defaults, and numbers that matter.
-17. [17-quick-review.md](17-quick-review.md): the must-know summary.
-18. [18-tagging.md](18-tagging.md): the tag model, `tag:` targeting, the `Patch Group` key, and taggable resources.
+14. [14-limits-defaults.md](14-limits-defaults.md): quotas, defaults, and numbers that matter.
+15. [15-quick-review.md](15-quick-review.md): the must-know summary.
+16. [16-tagging.md](16-tagging.md): the tag model, `tag:` targeting, the `Patch Group` key, and taggable resources.
+17. [17-exam-questions.md](17-exam-questions.md): twelve original SOA-C03 practice questions covering this topic.
+18. [18-exam-traps.md](18-exam-traps.md): recurring misconceptions.
+19. [19-hands-on-project.md](19-hands-on-project.md): a project that onboards a node, patches it by group, and inventories it.
 
 Each document ends with its own `Sources` section; there is no separate `sources.md`.
 

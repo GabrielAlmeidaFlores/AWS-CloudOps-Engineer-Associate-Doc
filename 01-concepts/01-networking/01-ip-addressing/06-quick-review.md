@@ -1,7 +1,7 @@
 # IP addressing quick review
 
 > [!NOTE]
-> This is the last thing you read before the exam, a one-page gate. If any line below isn't instantly obvious, go back to the source document: the math is in `01-concepts.md`, the AWS rules in `02-aws-addressing.md`, and the numbers in `07-limits-defaults.md`.
+> This is the last thing you read before the exam, a one-page gate. If any line below isn't instantly obvious, go back to the source document: the math is in `01-concepts.md`, the AWS rules in `02-aws-addressing.md`, and the numbers in `05-limits-defaults.md`.
 
 ## Non-negotiables
 
@@ -35,4 +35,4 @@ Count the resources the subnet must hold, add the 5 reserved addresses, and roun
 
 ## Sources
 
-- Full references live in the per-topic documents: `01-concepts.md`, `02-aws-addressing.md`, and `07-limits-defaults.md`.
+- Full references live in the per-topic documents: `01-concepts.md`, `02-aws-addressing.md`, and `05-limits-defaults.md`.

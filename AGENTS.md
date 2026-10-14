@@ -799,7 +799,7 @@ Every directory and every documentation file carries a numeric prefix that encod
 - **Category folders** under `02-services/` use a two-digit prefix in AWS's in-scope category order (`01-analytics` … `14-storage`).
 - **Service, concept, and relationship folders** under a category use a two-digit prefix for study order within that category (`13-security-identity-compliance/01-iam/`).
 - **Files** inside a folder use a two-digit prefix for read order (`01-concepts.md`, `02-security.md`, … `07-quick-review.md`).
-- **Practice questions** live at `<topic>/<NN>-exam-questions.md`, placed immediately **before** the topic's `exam-traps.md` so the two sit side by side with the questions first; the category folder carries an `exam-questions.md` index that links each topic's set (§69).
+- **Closing files.** The last three numbered files in a topic are the **closing triple**, in order: `<NN>-exam-questions.md`, `<NN+1>-exam-traps.md`, `<NN+2>-hands-on-project.md` (§69). The project is standalone; no other document depends on it (§20).
 
 When you add a new topic, assign it the next number in its folder's read order. `README.md` remains unnumbered and lists the folder's files in their numbered read order.
 
@@ -1388,14 +1388,31 @@ When creating a service, prefer this internal structure:
 ├── cost.md
 ├── limits-defaults.md
 ├── comparisons.md
-├── exam-questions.md
-├── exam-traps.md
 ├── scenarios.md
-├── hands-on.md
 ├── cli-api-iac.md
 ├── cross-service.md
-└── quick-review.md
+├── quick-review.md
+├── exam-questions.md
+├── exam-traps.md
+└── hands-on-project.md
 ```
+
+### Hands-on project (the last file)
+
+Every topic **ends** with a hands-on project: the last numbered file in the folder, `<NN>-hands-on-project.md`. It is a self-contained project idea that turns the topic into practice, not a content section that other documents depend on. No other document links to it as a prerequisite, and it depends only on the topic's own documentation.
+
+The project follows a fixed shape so every topic reads alike:
+
+- **Goal.** One sentence on what the reader builds and what it proves.
+- **What you build.** The small architecture or change, described in a few lines, with a Mermaid diagram when it is more than a single resource.
+- **Prerequisites.** The topic's own documents to read first, and any prior topic.
+- **Steps.** Numbered console and AWS CLI steps that build it end to end.
+- **Validation.** How to confirm it works, with the exact command and the expected result.
+- **Failure injection.** A safe way to break it and observe the failure, where the topic allows it.
+- **Cleanup.** The commands to remove every resource the project created.
+- **What it practices.** The SOA-C03 domain, task, and skills the project exercises.
+
+The project uses the topic's own resources and does not duplicate the topic's explanation; it links to the canonical documents for the detail.
 
 Do not create empty files.
 
@@ -1836,6 +1853,7 @@ For every service/topic, investigate the following concepts where relevant:
 30. Console screenshots, the AWS Management Console screens a reader cannot picture from prose (a form to fill, a wizard step, a result table, a non-obvious setting), captured and annotated per §67. A multi-step console workflow is captured one screenshot per step.
 31. Sources, a `## Sources` section at the end of each document (no separate `sources.md` file)
 32. Exam practice questions, at least ten original exam-style items per topic in `<topic>/<NN>-exam-questions.md`, with a per-option rationale in a collapsible answer (§69).
+33. A hands-on project at the end of the topic (`<topic>/<NN>-hands-on-project.md`): goal, build steps (console and CLI), validation, failure injection where safe, and cleanup (§20).
 
 Only include sections that are technically relevant.
 
@@ -2868,7 +2886,7 @@ Before finalizing documentation, verify:
 + No document was lengthened by padding, rephrasing, or restating (the padding ban, §29).
 + Each document adds facts a reader could not infer from its title.
 + Diagrams and screenshots are present wherever the subject needs them (§29), and they follow the §32 style and the §67 rules.
-+ The topic carries a `<NN>-exam-questions.md` set with at least ten original exam-style questions, a rationale for every option, placed immediately before `exam-traps.md` (questions first), and listed in the category `exam-questions.md` index (§69).
++ The topic ends with the closing triple as its last three files: `<NN>-exam-questions.md` (at least ten original exam-style questions with a rationale per option), `<NN+1>-exam-traps.md`, and `<NN+2>-hands-on-project.md`, which is standalone (§69).
 
 Only after this process should the final documentation be generated.
 
@@ -2999,7 +3017,11 @@ Update the topic README: its `## Topic mind map` (§68) to reflect the topic's r
 
 ### Step 15
 
-Add the topic's exam practice questions: at least ten original items in `<topic>/<NN>-exam-questions.md` and the set listed in the category `exam-questions.md` index (§69).
+Add the topic's exam practice questions: at least ten original items in `<topic>/<NN>-exam-questions.md`, the first of the closing triple (§69).
+
+### Step 16
+
+Write the topic's hands-on project as its last file, `<topic>/<NN>-hands-on-project.md`: goal, build steps (console and CLI), validation, failure injection where safe, and cleanup (§20).
 
 The research order itself should remain flexible.
 
@@ -3329,9 +3351,9 @@ Every documented topic carries a set of **exam practice questions**: original it
 
 ## Where they live
 
-- One set per topic, at `<topic>/<NN>-exam-questions.md`, placed immediately **before** the topic's `exam-traps.md` so the two sit side by side in read order, questions first and traps second (`15-systems-manager/14-exam-questions.md`, then `15-exam-traps.md`).
-- One index per category, at `<category>/exam-questions.md`, listing each topic in the category and linking its set.
-- The topic README's `## Document index` lists the set like any other document.
+- **The closing triple.** The **last three numbered files** in a topic are, in order: `<NN>-exam-questions.md`, `<NN+1>-exam-traps.md`, and `<NN+2>-hands-on-project.md`. The questions and traps sit side by side with the questions first, and the hands-on project closes the topic. No file comes after them.
+- The topic README's `## Document index` lists all three like any other document.
+- There is **no category-level index**. Each topic's set lives with the topic; do not create a `<category>/exam-questions.md`.
 
 ## How many
 

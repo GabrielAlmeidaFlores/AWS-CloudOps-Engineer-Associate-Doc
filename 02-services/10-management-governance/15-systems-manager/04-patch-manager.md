@@ -35,7 +35,7 @@ A **patch group** associates a set of nodes with a specific baseline, so differe
 - **Not used with patch policies.** Patch groups are a legacy mechanism; patching configured through *patch policies* in Quick Setup does not use them.
 
 > [!IMPORTANT]
-> The `Patch Group` key and generic tag targeting share the tag rules in [18-tagging.md](18-tagging.md): a `send-command` target array holds at most five key-value pairs, multiple keys combine with AND, and matching is case-sensitive. A common failure is a baseline registered for `Patch Group = PROD` while the node is tagged `PatchGroup = Prod` (or `Patch Group = Prod`): the value must match exactly and the target key spelling must match the tag spelling, or the node silently falls back to the default baseline.
+> The `Patch Group` key and generic tag targeting share the tag rules in [16-tagging.md](16-tagging.md): a `send-command` target array holds at most five key-value pairs, multiple keys combine with AND, and matching is case-sensitive. A common failure is a baseline registered for `Patch Group = PROD` while the node is tagged `PatchGroup = Prod` (or `Patch Group = Prod`): the value must match exactly and the target key spelling must match the tag spelling, or the node silently falls back to the default baseline.
 
 ## Running patching
 

@@ -1,7 +1,7 @@
 # IAM quick review
 
 > [!NOTE]
-> This is the last thing you read before the exam, a one-page gate. If any line below isn't instantly obvious, go back to the source document rather than skimming: evaluation logic lives in `01-concepts.md`, the traps in `06-exam-traps.md`, and the numbers in `07-limits-defaults.md`. The goal is that every item here is recall, not re-reading.
+> This is the last thing you read before the exam, a one-page gate. If any line below isn't instantly obvious, go back to the source document rather than skimming: evaluation logic lives in `01-concepts.md`, the traps in `08-exam-traps.md`, and the numbers in `05-limits-defaults.md`. The goal is that every item here is recall, not re-reading.
 
 ## Non-negotiables
 
@@ -44,4 +44,4 @@ An action is allowed only if some policy allows it **and** nothing denies it **a
 
 ## Sources
 
-- Full references live in the per-topic documents: `01-concepts.md`, `03-troubleshooting.md`, and `07-limits-defaults.md`.
+- Full references live in the per-topic documents: `01-concepts.md`, `03-troubleshooting.md`, and `05-limits-defaults.md`.

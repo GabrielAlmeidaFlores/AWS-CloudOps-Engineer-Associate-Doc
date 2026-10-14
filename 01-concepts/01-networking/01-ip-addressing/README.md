@@ -54,10 +54,11 @@ Read the map outward from CIDR: the notation sizes a VPC, the VPC divides into s
 2. [02-aws-addressing.md](02-aws-addressing.md): how AWS applies CIDR: VPC and subnet ranges, the five reserved addresses, private vs public IP.
 3. [03-troubleshooting.md](03-troubleshooting.md): diagnosing address exhaustion and overlap problems.
 4. [04-comparisons.md](04-comparisons.md): CIDR vs subnet mask, public vs private IP.
-5. [05-exam-questions.md](05-exam-questions.md): ten original SOA-C03 practice questions covering this topic.
-6. [06-exam-traps.md](06-exam-traps.md): recurring misconceptions.
-7. [07-limits-defaults.md](07-limits-defaults.md): ranges, reserved counts, and the numbers that matter.
-8. [08-quick-review.md](08-quick-review.md): the must-know summary.
+5. [05-limits-defaults.md](05-limits-defaults.md): ranges, reserved counts, and the numbers that matter.
+6. [06-quick-review.md](06-quick-review.md): the must-know summary.
+7. [07-exam-questions.md](07-exam-questions.md): ten original SOA-C03 practice questions covering this topic.
+8. [08-exam-traps.md](08-exam-traps.md): recurring misconceptions.
+9. [09-hands-on-project.md](09-hands-on-project.md): a project that designs and builds a two-tier VPC address plan.
 
 Each document ends with its own `Sources` section; there is no separate `sources.md`.
 
