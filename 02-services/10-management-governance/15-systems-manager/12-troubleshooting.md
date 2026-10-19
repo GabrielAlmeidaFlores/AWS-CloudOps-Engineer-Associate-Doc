@@ -7,7 +7,7 @@ This document gives the diagnostic order for the failure that produces most SSM 
 A node that is missing from Fleet Manager has failed at one of four layers: the agent, the IAM role, the network path, or instance metadata. Check them in this order, because a failure at an earlier layer makes the later checks meaningless.
 
 1. **Agent.** Is SSM Agent installed and running? Confirm the version with `aws ssm describe-instance-information` or on the node. If it was never installed (a non-AWS AMI), install it. If it is stopped, start it. Some capabilities have minimum versions (Session Manager needs 2.3.68.0 or later; Default Host Management Configuration needs 3.2.582.0 or later).
-2. **IAM role.** The instance needs a role that allows `ssm:UpdateInstanceInformation`. `AmazonSSMManagedInstanceCore` provides it. A custom policy that omits it leaves the node unregistered even though the agent runs.
+2. **IAM role.** The instance needs a role that allows `ssm:UpdateInstanceInformation`. `AmazonSSMManagedInstanceCore` provides it. A custom instance profile that omits it leaves the node unregistered even though the agent runs, unless Default Host Management Configuration is enabled: the agent then falls back to the DHMC role when the profile does not allow that permission.
 3. **Network path.** The agent connects outbound over HTTPS (TCP 443) to `ssm.*`, `ssmmessages.*`, and `ec2messages.*`. A private subnet with no NAT route and no VPC endpoints cannot reach them. Check route tables, egress security-group and NACL rules, DNS resolution, and any HTTP proxy.
 4. **Instance metadata.** The agent uses IMDS. Default Host Management Configuration requires IMDSv2 specifically and does not support IMDSv1.
 
@@ -17,8 +17,8 @@ If all four are correct, read the agent log (`/var/log/amazon/ssm/` on Linux, `C
 flowchart TD
     A["Node not managed"] --> B{"SSM Agent installed and running?"}
     B -->|No| C["Install or start the agent; check the version"]
-    B -->|Yes| D{"Instance role allows ssm:UpdateInstanceInformation?"}
-    D -->|No| E["Attach AmazonSSMManagedInstanceCore or add the permission"]
+    B -->|Yes| D{"Instance role or DHMC grants ssm:UpdateInstanceInformation?"}
+    D -->|No| E["Grant it in the profile, or enable DHMC (IMDSv2, agent 3.2.582.0+)"]
     D -->|Yes| F{"Reaches ssm, ssmmessages, ec2messages on 443?"}
     F -->|No| G["Fix route, egress SG or NACL, DNS, proxy, or add VPC endpoints"]
     F -->|Yes| H{"IMDS reachable (IMDSv2 for DHMC)?"}

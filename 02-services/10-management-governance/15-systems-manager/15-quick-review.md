@@ -9,7 +9,7 @@ This page is the final recall gate for the topic, not a second explanation. It c
 
 These are the facts you should be able to state from memory. Each one decides a common scenario, and the explanation is in the document that owns it, not in this summary.
 
-- **A managed node needs three things.** SSM Agent installed and running, an IAM role that allows `ssm:UpdateInstanceInformation`, and a network path to the SSM endpoints. If a node is not managed, it is one of those, plus IMDS for Default Host Management.
+- **A managed node needs three things.** SSM Agent installed and running, an IAM role that allows `ssm:UpdateInstanceInformation` (an instance profile, or the DHMC role), and a network path to the SSM endpoints. If a node is not managed, it is one of those, plus IMDSv2 and agent 3.2.582.0+ for Default Host Management.
 - **The agent connects out.** HTTPS 443 outbound to `ssm`, `ssmmessages`, and `ec2messages`. No inbound port, no bastion, no SSH key.
 - **Session Manager replaces bastion hosts and SSH.** Access is granted with IAM, and sessions are logged to CloudTrail, CloudWatch Logs, and S3 (not for port-forwarding or SSH sessions).
 - **Run Command runs once; State Manager maintains state; Maintenance Windows run in a window.** That one sentence decides most "which tool" questions.

@@ -3,7 +3,7 @@
 This file collects the Systems Manager misconceptions that survive a first read and states what AWS actually does. It is a correction layer, not an introduction; each trap points back to the document that establishes the correct behavior, so the reader can repair the model rather than memorize the correction.
 
 > [!CAUTION]
-> The two most expensive Systems Manager traps are: (1) assuming a node is managed just because it launches, when the real gate is the **instance IAM role** allowing `ssm:UpdateInstanceInformation`; and (2) treating **patch groups** and **patch policies** as interchangeable. Both show up as "the feature silently does nothing" scenarios.
+> The two most expensive Systems Manager traps are: (1) assuming a node is managed just because it launches, when the real gate is an **IAM role** allowing `ssm:UpdateInstanceInformation`, supplied by the instance profile or by Default Host Management Configuration; and (2) treating **patch groups** and **patch policies** as interchangeable. Both show up as "the feature silently does nothing" scenarios.
 
 ### "Any EC2 instance is managed by default"
 
@@ -17,7 +17,7 @@ This file collects the Systems Manager misconceptions that survive a first read 
 
 **Mistake:** Installing the agent and expecting the node to register.
 
-**Actual behavior:** The instance needs a role granting `ssm:UpdateInstanceInformation`, normally through `AmazonSSMManagedInstanceCore`. Without it the agent runs but the node never appears.
+**Actual behavior:** The instance needs a role granting `ssm:UpdateInstanceInformation`, normally through `AmazonSSMManagedInstanceCore`. Without it the agent runs but the node never appears, unless Default Host Management Configuration is enabled and the instance profile does not grant that permission; in that case the agent uses the DHMC role.
 
 **Why it matters:** This is the single most common cause of a node that is "not managed" despite a running agent.
 

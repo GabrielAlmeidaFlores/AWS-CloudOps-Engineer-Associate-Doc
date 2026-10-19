@@ -49,21 +49,21 @@ Reference: [01-fundamentals.md](01-fundamentals.md).
 
 ## Q3
 
-Default Host Management Configuration is enabled in a Region, but some instances still show as unmanaged. Each has an instance profile whose policy grants `s3:GetObject` only. What should you do?
+Default Host Management Configuration is enabled in a Region, but some instances still show as unmanaged. Each has an instance profile whose policy grants `s3:GetObject` only. What should you check first?
 
-- A. Reboot the instances so the agent re-reads the configuration.
-- B. Add `ssm:UpdateInstanceInformation` to the instance profile policy, or detach the profile.
-- C. Delete the Default Host Management role and recreate it.
-- D. Move the instances to a public subnet.
+- A. Add `ssm:UpdateInstanceInformation` to the instance profile policy.
+- B. Confirm the instances use IMDSv2 and run SSM Agent 3.2.582.0 or later.
+- C. Detach the instance profile so the agent cannot use it.
+- D. Reboot the instances so the agent re-reads the configuration.
 
 <details><summary>Answer</summary>
 
-**B.** When an instance profile is attached, the agent uses it first; a profile that does not allow `UpdateInstanceInformation` leaves the node unmanaged, so add the permission or remove the profile so the DHMC role applies.
-- **A.** A reboot does not change IAM.
-- **C.** The DHMC role is fine.
-- **D.** Subnet placement is not the issue when an endpoint or NAT path exists.
+**B.** The profile grants only `s3:GetObject`, so it does not allow `ssm:UpdateInstanceInformation`; SSM Agent therefore falls back to the Default Host Management Configuration role. Check the remaining DHMC prerequisites: IMDSv2, SSM Agent 3.2.582.0 or later, activation in the instance's Region, a network path to the SSM endpoints, and up to 30 minutes for the setting to take effect.
+- **A.** Adding `ssm:UpdateInstanceInformation` makes the instance profile win, which stops the instance from using the DHMC role; it works against the configuration.
+- **C.** Detaching the profile is not required; a profile without `ssm:UpdateInstanceInformation` does not block DHMC.
+- **D.** A reboot does not change the DHMC prerequisites or the registration state.
 
-Reference: [01-fundamentals.md](01-fundamentals.md).
+Reference: [01-fundamentals.md](01-fundamentals.md); AWS: https://docs.aws.amazon.com/systems-manager/latest/userguide/fleet-manager-default-host-management-configuration.html
 </details>
 
 ---

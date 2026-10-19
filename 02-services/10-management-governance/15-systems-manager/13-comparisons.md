@@ -47,7 +47,7 @@ The default rule for the exam: configuration goes in **Parameter Store**, rotati
 
 ## Default Host Management Configuration vs instance profile
 
-Both give a node the permissions Systems Manager needs; the table shows when the account-level configuration replaces the per-instance profile.
+Both give a node the permissions Systems Manager needs; the table shows when the account-level configuration takes over from the per-instance profile.
 
 | | Default Host Management Configuration | Instance profile |
 |--|---------------------------------------|------------------|
@@ -56,7 +56,7 @@ Both give a node the permissions Systems Manager needs; the table shows when the
 | Requires | IMDSv2 and SSM Agent 3.2.582.0+ | Agent and a role with `UpdateInstanceInformation` |
 | Precedence | Used only when no profile grants registration | Used first if present and permitting |
 
-A node with an instance profile that allows `ssm:UpdateInstanceInformation` will not fall back to the Default Host Management role. That precedence is a deliberate exam distinction.
+A node with an instance profile that allows `ssm:UpdateInstanceInformation` will not fall back to the Default Host Management role. A profile that does not allow it does not block DHMC; the agent falls back to the DHMC role. That precedence is a deliberate exam distinction.
 
 ## Session Manager vs bastion host or SSH
 

@@ -84,7 +84,7 @@ aws iam attach-role-policy --role-name SSMInstanceRole \
 `AmazonSSMManagedInstanceCore` grants the agent the exact calls it needs, in particular `ssm:UpdateInstanceInformation` (registration), the `ssmmessages` and `ec2messages` calls (the command and session channels), and CloudWatch Logs write for agent logs. It does **not** grant broad access to your other resources; that is intentional, and you add only what a given capability needs.
 
 > [!IMPORTANT]
-> A policy named `AmazonSSMManagedInstanceCore` on the role is necessary but not sufficient. `ssm:UpdateInstanceInformation` is what flips a node from *not managed* to *managed*. If you attach a custom policy that omits it, the agent registers incompletely or not at all, and the node stays invisible in Fleet Manager even though the agent is installed and running. Check this permission first when a node will not appear.
+> A policy named `AmazonSSMManagedInstanceCore` on the role is necessary but not sufficient. `ssm:UpdateInstanceInformation` is what flips a node from *not managed* to *managed*. If you attach a custom policy that omits it, the agent registers incompletely or not at all, and the node stays invisible in Fleet Manager even though the agent is installed and running. The exception is a node covered by Default Host Management Configuration: a profile that omits `ssm:UpdateInstanceInformation` does not block DHMC, because the agent falls back to the DHMC role. Check this permission first when a node will not appear and DHMC is not in play.
 
 ## Default Host Management Configuration
 
@@ -94,7 +94,7 @@ Normally you create a role and attach it to every instance. Default Host Managem
 - **What it enables.** Session Manager, Patch Manager, and Inventory, and it keeps SSM Agent updated automatically.
 - **Requirements.** The instance must use **IMDSv2** (IMDSv1 is not supported), and SSM Agent **3.2.582.0 or later** must be installed.
 - **Scope.** Activated per account and per Region; the role applies to every managed EC2 instance in that scope.
-- **Precedence.** If an instance profile is also attached, SSM Agent uses the instance profile first. An instance profile that allows `ssm:UpdateInstanceInformation` will therefore stop the instance from using the Default Host Management Configuration permissions.
+- **Precedence.** If an instance profile is also attached, SSM Agent uses the instance profile first. An instance profile that allows `ssm:UpdateInstanceInformation` will therefore stop the instance from using the Default Host Management Configuration permissions. If the profile does not allow it, the agent falls back to the DHMC role, so a profile with only unrelated permissions does not prevent registration.
 
 > [!IMPORTANT]
 > Default Host Management Configuration needs IMDSv2 and SSM Agent 3.2.582.0 or later, and it is enabled **per Region**, not once for the whole account. A scenario that says "instances in a new Region are unmanaged" after DHMC was enabled in one Region is testing exactly this per-Region scope. It also does not support IMDSv1, so an instance still on IMDSv1 must be transitioned first.
