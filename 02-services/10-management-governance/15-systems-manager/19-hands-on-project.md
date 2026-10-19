@@ -77,7 +77,7 @@ flowchart LR
 
 ## Prerequisites
 
-Read these documents first; the project assumes the agent, patching, and tagging rules they explain.
+Read these first: the build assumes the agent, patching, and tagging rules they establish, and the steps do not repeat them.
 
 - Read [01-fundamentals.md](01-fundamentals.md), [04-patch-manager.md](04-patch-manager.md), and [16-tagging.md](16-tagging.md) first.
 - Two EC2 instances running a supported Linux AMI with the SSM Agent and an instance role that includes `AmazonSSMManagedInstanceCore` (or Default Host Management Configuration enabled). A private subnet needs a NAT route or VPC endpoints for `ssm`, `ssmmessages`, and `ec2messages`.
@@ -85,7 +85,7 @@ Read these documents first; the project assumes the agent, patching, and tagging
 
 ## Steps
 
-Run these in order; each step builds on the previous one.
+Run the steps in order: each one builds on the state left by the previous step, and the commands assume the names and IDs created earlier.
 
 1. **Confirm both nodes are managed.** If a node is missing, work the four layers in [12-troubleshooting.md](12-troubleshooting.md): agent, role, network, IMDS.
 
@@ -558,7 +558,7 @@ flowchart LR
 
 ## Validation
 
-After the build, confirm each item below with the command shown.
+After the build, use these checks to prove the intended behavior, not just that the resources exist; each command returns the value or state the build should produce.
 
 1. **Fleet health.** Both nodes are `Online` with a current agent version in Fleet Manager.
 
@@ -586,7 +586,7 @@ After the build, confirm each item below with the command shown.
 
 ## Failure injection
 
-Break one part of the workflow at a time and watch the failure travel through the tag-to-baseline path.
+Each failure removes one part of the workflow, so you can watch the symptom travel through the tag-to-baseline path; restore the part before the next test.
 
 - **Lost tag.** Remove the `Patch Group` tag from one node and re-scan; it falls to the OS default baseline, the fallback path [04-patch-manager.md](04-patch-manager.md) describes.
 - **Broken registration.** Detach the instance role on one node and watch it drop to unmanaged, the first failure in [12-troubleshooting.md](12-troubleshooting.md).
@@ -611,7 +611,7 @@ aws ec2 delete-tags --resources i-AAA i-BBB --tags Key=Env Key="Patch Group"
 
 ## What it practices
 
-The project exercises the following SOA-C03 domain tasks and skills.
+The build maps to these SOA-C03 tasks and skills; use the mapping to connect the hands-on work to the exam objectives it tests.
 
 - **Domain 1, Task 1.1 (monitoring and logging):** Fleet Manager, Inventory, Compliance, and OpsCenter.
 - **Domain 1, Task 1.2 (remediation):** Automation, EventBridge-driven remediation, and OpsCenter follow-up.
@@ -621,7 +621,7 @@ The project exercises the following SOA-C03 domain tasks and skills.
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AWS Systems Manager User Guide*. https://docs.aws.amazon.com/systems-manager/latest/userguide/
 - AWS: *Patch Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager.html

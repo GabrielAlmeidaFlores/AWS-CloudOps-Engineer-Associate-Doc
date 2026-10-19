@@ -7,7 +7,7 @@ This page is the final recall gate for the topic, not a second explanation. It c
 
 ## Non-negotiables
 
-These are the rules the exam expects you to recall without deriving them.
+These are the rules you should be able to state from memory. Each one decides a common scenario, and the explanation is in the document that owns it.
 
 - **Explicit deny wins.** A `Deny` in any applicable policy overrides every `Allow` in every other policy, identity, resource, boundary, or SCP. This single rule decides most "why is access denied" questions.
 - **Implicit deny is the default.** If no policy explicitly allows an action; it is denied. IAM has no implicit allow.
@@ -17,7 +17,7 @@ These are the rules the exam expects you to recall without deriving them.
 
 ## Policy types
 
-IAM policies fall into a small number of types, and the type determines where the policy applies.
+IAM policies fall into a small number of types, and the type determines where the policy attaches and which requests it can allow. The list below gives each type its scope.
 
 - **Identity-based policy**, attaches to a user, group, or role and defines what that identity can do.
 - **Resource-based policy**, attaches to a resource (S3 bucket, KMS key, SQS queue) and includes a `Principal` element naming who is granted access.
@@ -26,7 +26,7 @@ IAM policies fall into a small number of types, and the type determines where th
 
 ## Role anatomy
 
-Every role carries two policies that answer two different questions:
+Every role carries two policies that answer two different questions, and mixing them up is the classic cross-account failure. The list below separates the trust policy from the permissions policy.
 
 - **Trust policy**, *who may assume the role* (the principal). An EC2 role's trust policy names `ec2.amazonaws.com`.
 - **Permissions policy**, *what the assumed session may do*.
@@ -35,7 +35,7 @@ Mixing them up is the classic cross-account failure: an access-denied on `sts:As
 
 ## Key numbers
 
-These are the numbers most likely to appear in a scenario.
+These are the values a scenario can turn on. Memorize the behavioral default; look up the quota ceiling when the question supplies the number.
 
 - **Role session duration:** 1 hour by default, configurable up to 12 hours.
 - **Roles per account:** 1,000 default (10,000 max).
@@ -52,6 +52,6 @@ An action is allowed only if some policy allows it **and** nothing denies it **a
 
 ## Sources
 
-The detailed sources live in the topic documents, so this page links to them instead of repeating the full list.
+This page keeps the bibliography short: the detailed sources live in the topic documents, and the links below point to the files that carry them.
 
 - Full references live in the per-topic documents: `01-concepts.md`, `03-troubleshooting.md`, and `05-limits-defaults.md`.

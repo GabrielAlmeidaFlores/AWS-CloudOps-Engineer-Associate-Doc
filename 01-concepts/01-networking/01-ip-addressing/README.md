@@ -50,7 +50,7 @@ Read the map outward from CIDR: the notation sizes a VPC, the VPC divides into s
 
 ## Document index (read in this order)
 
-The documents are numbered in the order they build on each other.
+The documents are numbered in the order they build on each other, so read them from top to bottom rather than jumping to a reference file. The list states what each document contributes.
 
 1. [01-concepts.md](01-concepts.md): IP anatomy, CIDR notation, network/broadcast, and subnet math.
 2. [02-aws-addressing.md](02-aws-addressing.md): how AWS applies CIDR: VPC and subnet ranges, the five reserved addresses, private vs public IP.
@@ -66,13 +66,13 @@ Each document ends with its own `Sources` section; there is no separate `sources
 
 ## Relationship map
 
-The map below shows what this concept depends on and what builds on it.
+The map below shows the direct dependencies. Read the arrows as 'needs' or 'is used by', so you can see what must be understood first and what this topic unlocks.
 
 - **Depends On**, nothing. This is the base layer of AWS networking.
 - **Prerequisite For**, VPC, subnets, route tables, security groups, NAT gateway, VPC peering, and every resource that holds an IP.
 - **Commonly Used With**, VPC, subnet, Elastic IP, NAT gateway, internet gateway.
 
-See also (both documents are planned, not yet created):
+The related documents below are planned and not yet created; they show where this topic connects once those pages exist.
 
 - VPC (service)
 - Domain 5: Networking and Content Delivery

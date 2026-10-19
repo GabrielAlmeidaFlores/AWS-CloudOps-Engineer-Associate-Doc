@@ -38,7 +38,7 @@ The first address in a block (all host bits `0`) is the **network address**. The
 
 ## Subnet math (worked)
 
-Take `10.0.0.0/24`:
+Take `10.0.0.0/24` and look at how the address splits into network and host bits:
 
 - `2^(32−24) = 2^8 = 256` addresses, from `10.0.0.0` to `10.0.0.255`.
 - Network = `10.0.0.0`, broadcast = `10.0.0.255`, range = `10.0.0.1`–`10.0.0.254`.
@@ -69,7 +69,7 @@ To size a subnet, count the resources you need, add the 5 reserved, and round **
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
 - AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html

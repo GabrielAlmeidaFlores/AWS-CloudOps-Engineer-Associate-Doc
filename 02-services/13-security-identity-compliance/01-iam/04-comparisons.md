@@ -81,7 +81,7 @@ Both are **intersections**: they reduce, never expand, effective permissions.
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *Managed policies and inline policies*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
 - AWS: *IAM Identity Center*. https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html

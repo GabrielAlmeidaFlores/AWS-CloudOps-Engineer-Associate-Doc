@@ -25,7 +25,7 @@ Following the flow from the top, you confirm which identity is really making the
 
 ## Diagnose in order
 
-Follow these checks in order; the evaluation chain makes the early steps the most decisive.
+Follow these checks in order. The evaluation chain makes the early steps the most decisive: an explicit deny or a wrong principal explains more failures than a subtle condition later in the chain.
 
 1. **Confirm the principal.** `aws sts get-caller-identity` shows which identity and account the call is actually using. It is often not the one you assumed, a stale `AWS_PROFILE`, an environment variable access key overriding a role, or an instance role instead of a user.
 2. **Look for an explicit deny.** A `Deny` anywhere (identity policy, resource policy, permissions boundary, or SCP) overrides every `Allow`. This is the most common cause of a request that "should" be allowed but isn't.
@@ -36,7 +36,7 @@ Follow these checks in order; the evaluation chain makes the early steps the mos
 
 ## Tools
 
-These tools show the decision from different angles.
+These tools show the decision from different angles: one simulates the policy, one records the actual call, and one analyzes the resource policy for external access.
 
 - **IAM policy simulator**, evaluates a policy set against a specific action and resource without making a live call. First stop for "why is this denied."
 - **CloudTrail**, records the API call, the principal, and whether access was denied. Search for the error code (`AccessDenied`) and the caller identity.
@@ -65,7 +65,7 @@ When two policies disagree, **deny wins**. If you see an allow and a deny for th
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *IAM policy simulator*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
 - AWS: *IAM Access Analyzer*. https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html

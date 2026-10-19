@@ -27,7 +27,7 @@ This file is the Systems Manager number lookup: the behavioral defaults the exam
 
 ## Good to know
 
-These defaults and network facts matter for troubleshooting and for quota questions.
+These defaults and network facts matter for troubleshooting and for quota questions: the agent's outbound ports explain connectivity failures, and the service quotas explain why an operation stops working at scale.
 
 - **SSM Agent communication ports.** Outbound HTTPS (TCP 443) to `ssm.*`, `ssmmessages.*`, and `ec2messages.*`. No inbound ports are required.
 - **Minimum agent versions.** Session Manager needs 2.3.68.0 or later; Default Host Management Configuration needs 3.2.582.0 or later; environment-variable interpolation in documents needs 3.3.2746.0 or later.
@@ -46,7 +46,7 @@ Quotas are per account and per Region unless stated otherwise, and most can be r
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AWS Systems Manager endpoints and quotas*. https://docs.aws.amazon.com/general/latest/gr/ssm.html
 - AWS: *AWS Systems Manager Parameter Store quotas*. https://docs.aws.amazon.com/general/latest/gr/ssm.html#parameter-store

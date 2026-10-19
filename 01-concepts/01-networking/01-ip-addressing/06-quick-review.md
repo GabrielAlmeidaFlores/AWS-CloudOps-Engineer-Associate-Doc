@@ -7,7 +7,7 @@ This page is the final recall gate for the topic, not a second explanation. It c
 
 ## Non-negotiables
 
-These are the rules the exam expects you to recall without deriving them.
+These are the rules you should be able to state from memory. Each one decides a common scenario, and the explanation is in the document that owns it.
 
 - **Addresses in a block** = `2^(32 − n)`. A `/24` holds 2^8 = 256 addresses; a `/28` holds 2^4 = 16.
 - **Usable in an AWS subnet** = `2^(32 − n) − 5`. AWS reserves five addresses in every subnet, not the two (network and broadcast) that plain IPv4 reserves.
@@ -39,6 +39,6 @@ Count the resources the subnet must hold, add the 5 reserved addresses, and roun
 
 ## Sources
 
-The detailed sources live in the topic documents, so this page links to them instead of repeating the full list.
+This page keeps the bibliography short: the detailed sources live in the topic documents, and the links below point to the files that carry them.
 
 - Full references live in the per-topic documents: `01-concepts.md`, `02-aws-addressing.md`, and `05-limits-defaults.md`.

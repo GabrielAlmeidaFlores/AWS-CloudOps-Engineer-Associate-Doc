@@ -8,7 +8,7 @@ Stand up two VPCs joined by peering, with a public and a private subnet on one s
 
 ## What you build
 
-Two VPCs and the gateways that connect them:
+The build creates two VPCs and the gateways that connect them, with each component playing a specific role in the address and routing model:
 
 - **VPC A** `10.0.0.0/16` hosts the application: a public subnet `10.0.0.0/24` and a private subnet `10.0.10.0/24`, an internet gateway, and a NAT gateway with an Elastic IP for the private subnet's outbound traffic.
 - **VPC B** `10.1.0.0/16` hosts a shared service in `10.1.0.0/24`.
@@ -64,14 +64,14 @@ flowchart LR
 
 ## Prerequisites
 
-Read these documents before starting, because the build assumes the address math and routing rules they explain.
+Read these first: the build assumes the address math and routing rules they establish, and the steps do not repeat them.
 
 - Read [01-concepts.md](01-concepts.md), [02-aws-addressing.md](02-aws-addressing.md), and [05-limits-defaults.md](05-limits-defaults.md) first.
 - AWS CLI configured for `us-east-2`, and permission to create VPCs, subnets, gateways, and peering connections.
 
 ## Steps
 
-Run these in order; each step depends on the resource created before it.
+Run the steps in order: each one consumes an identifier produced by the step before it, and the commands assume the resource names created earlier in the sequence.
 
 1. **Create both VPCs and turn on DNS hostnames.** DNS support makes the peering usable by name.
 
@@ -322,7 +322,7 @@ flowchart TD
 
 ## Validation
 
-Check each item after the build; the expected result is stated with the command.
+Use these checks after the build to prove the intended behavior, not just that the resources exist; each command returns the value or state the build should produce.
 
 1. **Reserved-address math.** Each `/24` must report **251** available addresses, which is 256 minus the five AWS reserves (network, VPC router, DNS, a future-use address, and broadcast).
 
@@ -347,7 +347,7 @@ Check each item after the build; the expected result is stated with the command.
 
 ## Failure injection
 
-Break one dependency at a time and confirm the symptom matches the explanation.
+Each failure removes one dependency, so you can see which layer produces which symptom; restore the dependency before moving to the next test.
 
 - **Overlap.** Create a second peering request from a VPC whose CIDR overlaps A (for example `10.0.0.0/24`). The connection is created but traffic never flows, because peering requires non-overlapping CIDRs. This is the failure [03-troubleshooting.md](03-troubleshooting.md) documents.
 - **Missing route.** Delete the peering route from the private table and confirm the peer becomes unreachable even though the peering connection is still `active`.
@@ -371,14 +371,14 @@ aws ec2 delete-vpc --vpc-id vpc-B
 
 ## What it practices
 
-The project exercises the following SOA-C03 domain tasks and skills.
+The build maps to these SOA-C03 tasks and skills; use the mapping to connect the hands-on work to the exam objectives it tests.
 
 - **Domain 5, Task 5.1 (network connectivity):** Skill 5.1.1, configure a VPC, subnets, route tables, internet and NAT gateways; and private connectivity between VPCs.
 - **Domain 5, Task 5.3 (network troubleshooting):** Skill 5.3.1, diagnose subnet, route-table, NAT, and peering problems; the failure injection exercises the overlap, missing-route, and missing-default-route cases.
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
 - AWS: *Subnets and reserved addresses*. https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html

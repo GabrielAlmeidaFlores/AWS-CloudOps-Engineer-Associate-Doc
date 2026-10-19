@@ -139,7 +139,7 @@ aws ssm create-maintenance-window \
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AWS Systems Manager Documents*. https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html
 - AWS: *AWS Systems Manager Automation*. https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation.html

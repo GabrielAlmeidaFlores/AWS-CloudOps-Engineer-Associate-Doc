@@ -50,7 +50,7 @@ AWS STS allows 600 requests per second per account per Region across `AssumeRole
 
 ## Good to know
 
-These defaults and edge cases matter when a policy behaves differently than its text suggests.
+These defaults and edge cases matter when a policy behaves differently than its text suggests, such as a size limit that silently truncates a policy or a session duration that expires a credential early.
 
 - White space does not count against policy size limits, so a policy can be reformatted for readability without changing its size.
 - User, group, and role names are case-insensitive and must be unique within the account.
@@ -58,6 +58,6 @@ These defaults and edge cases matter when a policy behaves differently than its 
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *IAM and AWS STS quotas*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html

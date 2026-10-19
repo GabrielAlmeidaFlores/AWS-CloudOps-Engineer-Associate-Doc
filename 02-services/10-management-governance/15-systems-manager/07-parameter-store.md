@@ -20,7 +20,7 @@ The console lists each parameter with its name, tier, and type, which is how you
 
 ## Features
 
-Beyond storing a value, Parameter Store provides the following behaviors.
+Beyond storing a value, Parameter Store provides the behaviors that make it usable as configuration infrastructure rather than a text file:
 
 - **Hierarchical naming.** Group parameters under a path, for example `/dev/webserver/linux/approved-ami`. You can then fetch a whole branch (`/dev/webserver`) or a leaf, and IAM can grant access by prefix.
 - **Versioning.** Parameter Store keeps the **100 most recent versions** of each parameter, so you can reconstruct a previous value when investigating an incident.
@@ -43,7 +43,7 @@ Each parameter belongs to a tier, configured per account and Region. The tier se
 | Tier change | Upgradeable to Advanced | Not downgradeable |
 | Cost | No additional charge | Charges apply |
 
-Three operational points matter:
+Three operational points decide whether a parameter is safe to use in production:
 
 - **Default tier setting.** The account-Region default can be `Standard`, `Advanced`, or `Intelligent-Tiering`. Changing the default affects only new parameters that do not specify a tier; existing parameters are untouched.
 - **One-way tier change.** A Standard parameter can be upgraded to Advanced at any time, but an Advanced parameter **cannot** be downgraded to Standard. Downgrading would truncate an 8 KB value to 4 KB, delete any attached policies, and change the encryption form. To stop paying for an Advanced parameter, delete it and recreate it as Standard.
@@ -115,7 +115,7 @@ aws ssm put-parameter --name "/myapp/prod/temp-token" \
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AWS Systems Manager Parameter Store*. https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 - AWS: *Choosing parameter tiers in Parameter Store*. https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html

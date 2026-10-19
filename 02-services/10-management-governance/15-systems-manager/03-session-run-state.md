@@ -133,7 +133,7 @@ aws ssm create-association \
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AWS Systems Manager Session Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html
 - AWS: *AWS Systems Manager Run Command*. https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html

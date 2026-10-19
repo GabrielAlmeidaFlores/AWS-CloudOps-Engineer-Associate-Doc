@@ -22,7 +22,7 @@ This repository exists to turn the SOA-C03 exam scope into a navigable knowledge
 
 ## Start here
 
-The repository is meant to be read in this order.
+The repository is meant to be read in this order: the exam guide defines the scope, the topics build the knowledge, and the closing triple tests and applies it.
 
 1. **Read the exam guide** for scope, domains, tasks, and skills: [SOA-C03 exam guide (PDF)](assets/docs/soa-c03-exam-guide.pdf).
 2. **Pick a topic** from [Documented topics](#documented-topics) and read its `README.md`, which maps the topic and links every document in order.
@@ -44,7 +44,7 @@ See [Progress](#progress) for what is documented, what is next, and the full [ro
 
 ## How a topic is structured
 
-Every topic folder follows the same pattern, numbered for read order:
+Every topic folder follows the same pattern, numbered for read order, so you can move from concept to reference to practice without guessing what comes next.
 
 - **`README.md`** is the entry point: a topic mind map, the SOA-C03 relevance, a linked document index, and a relationship map. It is the only file without a numeric prefix.
 - **Numbered documents** (`01-...`, `02-...`) teach the topic: concepts, architecture, and operations, each with diagrams and screenshots.
@@ -121,7 +121,7 @@ Each documented topic ships with its own exam-question set, exam-traps file, and
 
 ## Key principles
 
-The build follows a short set of rules.
+The build follows a short set of rules that decide what goes where, what gets linked, and what gets tested.
 
 - **Canonical knowledge.** One source of truth per concept, linked, never duplicated.
 - **Certification-first.** Every document maps to a specific SOA-C03 domain, task, or skill.

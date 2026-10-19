@@ -16,7 +16,7 @@ The root user (the email address and password that created the account) has unre
 
 ## Least privilege
 
-Grant only the actions and resources a principal needs.
+Grant only the actions and resources a principal needs, and treat that as a starting point rather than a one-time review:
 
 - Role over a long-lived user for any workload or cross-account access, a role yields temporary credentials, so a leaked credential expires on its own.
 - Resource-based policies where the resource should be the point of control (S3 buckets, KMS keys, SQS queues), because access then travels with the resource rather than the caller.
@@ -25,7 +25,7 @@ Grant only the actions and resources a principal needs.
 
 ## MFA and password policy
 
-These are the baseline controls for every human identity in the account.
+These are the baseline controls for every human identity in the account; they are the defaults an auditor checks first, before any resource-specific policy.
 
 - **MFA** on the root user and on every human user. Virtual MFA (TOTP) or hardware (U2F) device. MFA protects console sign-in; it does not protect programmatic access keys, which is why human users should normally assume a role instead of holding keys.
 - **Password policy** is account-wide: minimum length, complexity, rotation, and reuse prevention. There is exactly one password policy per account, so it applies to every IAM user and cannot be set per user.
@@ -134,7 +134,7 @@ An SCP limits what *your* principals can do; an RCP limits who can do things to 
 
 ## Rotation and credentials
 
-Long-lived credentials are the exception; when they exist, rotate and protect them.
+Long-lived credentials are the exception in a role-based design. When they must exist, rotate them on a schedule and protect them more tightly than a temporary credential.
 
 - Rotate access keys on a schedule; never commit them to a repository.
 - Give EC2, Lambda, and ECS workloads roles, not keys, via an instance profile or execution role.
@@ -142,7 +142,7 @@ Long-lived credentials are the exception; when they exist, rotate and protect th
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *IAM security best practices*. https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
 - AWS: *Permissions boundaries for IAM entities*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html

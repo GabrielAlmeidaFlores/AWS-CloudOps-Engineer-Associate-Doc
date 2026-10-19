@@ -95,7 +95,7 @@ This file collects the Systems Manager misconceptions that survive a first read 
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AWS Systems Manager User Guide* (per-tool pages cited in the sibling documents). https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html
 - AWS: *AWS Systems Manager endpoints and quotas*. https://docs.aws.amazon.com/general/latest/gr/ssm.html

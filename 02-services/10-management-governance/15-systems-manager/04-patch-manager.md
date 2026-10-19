@@ -4,7 +4,7 @@ This document explains how Patch Manager answers two questions: which patches a 
 
 ## What it does
 
-Patch Manager covers more than operating-system updates; the main capabilities are below.
+Patch Manager does more than install operating-system updates: it defines approval rules, groups nodes by baseline, runs scans and installs, and reports compliance. The capabilities below are the ones that shape an exam scenario.
 
 - **Operating system and application patches.** Patch Manager applies OS patches and, within limits, application patches. On Windows Server, application patching covers only updates released by Microsoft.
 - **Scan or scan-and-install.** A `Scan` operation reports missing patches only; an `Install` operation scans and installs everything the baseline approves.
@@ -41,7 +41,7 @@ A **patch group** associates a set of nodes with a specific baseline, so differe
 
 ## Running patching
 
-A patch run starts from one of several triggers, and the trigger decides the scope and the timing.
+A patch run starts from one of several triggers, and the trigger decides both the scope and the timing: an on-demand run is immediate and narrow, a scheduled association repeats, and a maintenance window bounds disruptive work to a fixed period.
 
 - **On demand.** A **Patch now** operation runs a scan or install immediately.
 - **On a schedule.** A `Scan` or `Install` task runs inside a Maintenance Windows window, or through a **patch policy** configured in Quick Setup. Patch policies are the recommended method: one policy can cover every account and Region in an organization, selected accounts and Regions, or a single account-Region pair.
@@ -81,7 +81,7 @@ Read the diagram left to right: the `Patch Group` tag places the node into a gro
 
 ## Compliance and integration
 
-Patch results feed the compliance and reporting tools you already use.
+Patch results do not stay inside Patch Manager. The compliance data flows into Systems Manager Compliance, AWS Config, and Security Hub, so the same patch state appears in the tools an auditor or a dashboard already reads.
 
 - **Systems Manager Compliance** surfaces Patch Manager patch compliance by default, alongside State Manager association status.
 - **Security Hub CSPM** receives patch compliance findings.
@@ -110,7 +110,7 @@ Change `Operation=Scan` to `Operation=Install` to install the approved patches.
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AWS Systems Manager Patch Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager.html
 - AWS: *Predefined and custom patch baselines*. https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-predefined-and-custom-patch-baselines.html

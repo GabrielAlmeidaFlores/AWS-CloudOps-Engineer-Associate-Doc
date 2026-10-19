@@ -22,7 +22,7 @@ The IAM Users console lists every long-lived identity in the account next to the
 
 ## Policies
 
-A policy is a JSON document with a list of statements. Each statement has:
+A policy is a JSON document with a list of statements, and each statement has the same small set of fields:
 
 - **Effect**, `Allow` or `Deny`.
 - **Action**, the service operations (e.g. `s3:GetObject`).
@@ -98,7 +98,7 @@ If no policy explicitly allows an action, the default is **implicit deny**. IAM 
 
 ## Roles in practice
 
-A role has two halves:
+A role has two halves, and confusing them is the most common cross-account mistake:
 
 - **Trust policy**, who may assume the role (the principal). Written as a resource-based policy on the role.
 - **Permissions policy**, what the assumed role may do.
@@ -143,7 +143,7 @@ Finally, name the role and review the generated trust policy before creating it:
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *Policy evaluation logic*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
 - AWS: *What is IAM?*. https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html

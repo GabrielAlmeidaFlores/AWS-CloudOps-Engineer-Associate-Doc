@@ -44,7 +44,7 @@ aws ssm send-command \
   --parameters 'commands=["hostname"]'
 ```
 
-Two limits shape how you write this:
+Two limits shape how you write tag-based targeting, and one of them is a hard AWS limit rather than a Systems Manager convention:
 
 - **Five key-value pairs per target array.** A single `SendCommand` target array holds at most five key-value pairs.
 - **Multiple pairs are AND.** If you add more than one tag key to a target, a node must carry **all** of them to match. There is no OR across tag keys in one target; to express OR, use separate targets.
@@ -182,7 +182,7 @@ aws ssm add-tags-to-resource --resource-type PatchBaseline \
 
 ## Exam traps
 
-These are the tag behaviors that most often produce a wrong answer.
+These are the tag behaviors that most often produce a wrong answer. Each one is a place where the intuitive answer and the actual Systems Manager behavior differ.
 
 - **`ManagedInstance` tags are for `mi-` hybrid nodes only.** An EC2 instance is tagged through EC2. An answer that says to tag an EC2 instance with `AddTagsToResource --resource-type ManagedInstance` is wrong.
 - **Case sensitivity.** `PatchGroup` and `Patch Group` are both valid keys, but a target written with one does not select nodes tagged with the other. There is no case-insensitive matching.
@@ -192,7 +192,7 @@ These are the tag behaviors that most often produce a wrong answer.
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AddTagsToResource*. https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html
 - AWS: *Tag*. https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_Tag.html

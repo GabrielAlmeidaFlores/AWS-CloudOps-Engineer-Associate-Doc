@@ -51,7 +51,7 @@ aws resource-groups list-group-resources --group-name prod-web
 
 ## Limits and an exam note
 
-The limits below decide how far a tag-based grouping scheme can scale.
+The limits below decide how far a tag-based grouping scheme can scale, and one of them is regional: a group cannot span Regions, so a multi-Region fleet needs a group per Region even when the tags are identical.
 
 - **Resource groups per account per Region:** 100 by default (adjustable).
 - **Tags per resource:** 50 user-created tags; a tag key is 1 to 128 characters, and keys beginning with `aws:` are reserved.
@@ -59,7 +59,7 @@ The limits below decide how far a tag-based grouping scheme can scale.
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *What are resource groups?*. https://docs.aws.amazon.com/ARG/latest/userguide/resource-groups.html
 - AWS: *AWS services that work with AWS Resource Groups*. https://docs.aws.amazon.com/ARG/latest/userguide/integrated-services-list.html

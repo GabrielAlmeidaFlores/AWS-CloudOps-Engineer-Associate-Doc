@@ -67,7 +67,7 @@ Read the left block as detection sources and the right block as destinations. An
 
 ## Cross-account and cross-Region
 
-These features extend visibility beyond a single account and Region.
+These features extend visibility beyond a single account and Region, which is what makes them useful for an organization with multiple accounts or a fleet spread across Regions.
 
 - **Resource data sync** aggregates Inventory and Compliance data into one S3 bucket for Athena queries, and aggregates Explorer OpsData across Regions.
 - **AWS Organizations** lets a single patch policy or Quick Setup configuration span accounts and Regions.
@@ -89,7 +89,7 @@ This is the "out of Systems Manager" direction: the runbook failed, Systems Mana
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *Logging and monitoring in AWS Systems Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring.html
 - AWS: *Monitoring Systems Manager events with Amazon EventBridge*. https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-eventbridge-events.html

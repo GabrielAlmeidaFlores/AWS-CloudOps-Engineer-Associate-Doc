@@ -12,7 +12,7 @@ A Distributor **package** is a collection of installable software plus the instr
 
 ## Where packages come from
 
-Distributor packages come from three sources, each with a different trust model.
+Distributor packages come from three sources, and the source decides who controls the artifact and how you update it. The list below names the source and the trust boundary for each.
 
 - **AWS-provided.** Many AWS agent packages are ready to deploy, for example `AmazonCloudWatchAgent` and `AWSPVDriver`.
 - **Third-party.** Vendor packages such as Trend Micro. These are not managed by AWS, so the vendor publishes them and you own the due diligence.
@@ -26,7 +26,7 @@ You target nodes by instance or device ID, AWS account number, tag, or Region, a
 - **On a schedule.** Deploy with a State Manager association, which can also install the package when a node first launches.
 - **On version change.** Deploy whenever the default package version changes.
 
-Two update modes matter:
+Two update modes matter, and the choice decides whether an install happens immediately on every target or is staged so nodes pick it up on their next check-in:
 
 - **Reinstall.** Uninstall the current version, then install the new one. The package is unavailable during the swap.
 - **In-place update.** Run an update script that replaces the version without uninstalling. The package stays available, which suits security-monitoring agents that must not go down.
@@ -83,7 +83,7 @@ aws ssm create-association \
 
 ## Limits and an exam note
 
-The quotas below bound how many packages and versions you can keep.
+The quotas below bound how many packages and versions an account can keep in a Region. They matter when a deployment fails at scale or when a package version must be retained for rollback.
 
 - **Packages per account per Region:** 500; **versions per package:** 25.
 - **Package size:** 20 GB maximum; **manifest:** 64 KB; up to 20 attachments of 1 GB each; up to 1,000 files per package.
@@ -91,7 +91,7 @@ The quotas below bound how many packages and versions you can keep.
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *AWS Systems Manager Distributor*. https://docs.aws.amazon.com/systems-manager/latest/userguide/distributor.html
 - AWS: *Auditing and logging Distributor activity*. https://docs.aws.amazon.com/systems-manager/latest/userguide/distributor-logging-auditing.html

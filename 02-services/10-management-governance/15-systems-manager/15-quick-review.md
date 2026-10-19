@@ -7,7 +7,7 @@ This page is the final recall gate for the topic, not a second explanation. It c
 
 ## Non-negotiables
 
-These are the facts the exam expects you to recall without deriving them.
+These are the facts you should be able to state from memory. Each one decides a common scenario, and the explanation is in the document that owns it, not in this summary.
 
 - **A managed node needs three things.** SSM Agent installed and running, an IAM role that allows `ssm:UpdateInstanceInformation`, and a network path to the SSM endpoints. If a node is not managed, it is one of those, plus IMDS for Default Host Management.
 - **The agent connects out.** HTTPS 443 outbound to `ssm`, `ssmmessages`, and `ec2messages`. No inbound port, no bastion, no SSH key.
@@ -20,7 +20,7 @@ These are the facts the exam expects you to recall without deriving them.
 
 ## The tools in one line each
 
-Each tool has one job, and the list below keeps them apart.
+The tools overlap in the console, so the list gives each one its single job; use it to map a scenario to the right tool before you recall the details.
 
 - **Fleet Manager:** console/GUI remote management of nodes.
 - **Compliance:** patch and association compliance across the fleet.
@@ -44,7 +44,7 @@ Each tool has one job, and the list below keeps them apart.
 
 ## Key numbers
 
-These are the numbers most likely to appear in a scenario.
+These are the values a scenario can turn on. Memorize the behavioral default; look up the quota ceiling when the question supplies the number.
 
 - Managed nodes: **2,400** per account per Region by default.
 - Automation: **12 hours** max in a user context; `executeScript` **10 minutes**.
@@ -60,6 +60,6 @@ Install the agent, grant the role, reach the endpoints: after that, Systems Mana
 
 ## Sources
 
-The detailed sources live in the topic documents, so this page links to them instead of repeating the full list.
+This page keeps the bibliography short: the detailed sources live in the topic documents, and the links below point to the files that carry them.
 
 - Full references live in the per-tool documents. Start with `01-fundamentals.md` and `04-patch-manager.md`.

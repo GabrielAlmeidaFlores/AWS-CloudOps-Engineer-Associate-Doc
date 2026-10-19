@@ -4,7 +4,7 @@ This document gives the diagnostic order for the failure that produces most SSM 
 
 ## Symptom: a node is not managed (or disappeared)
 
-Check the layers in this order.
+A node that is missing from Fleet Manager has failed at one of four layers: the agent, the IAM role, the network path, or instance metadata. Check them in this order, because a failure at an earlier layer makes the later checks meaningless.
 
 1. **Agent.** Is SSM Agent installed and running? Confirm the version with `aws ssm describe-instance-information` or on the node. If it was never installed (a non-AWS AMI), install it. If it is stopped, start it. Some capabilities have minimum versions (Session Manager needs 2.3.68.0 or later; Default Host Management Configuration needs 3.2.582.0 or later).
 2. **IAM role.** The instance needs a role that allows `ssm:UpdateInstanceInformation`. `AmazonSSMManagedInstanceCore` provides it. A custom policy that omits it leaves the node unregistered even though the agent runs.
@@ -36,7 +36,7 @@ The flow is a decision tree rather than a checklist on purpose: the first "no" i
 
 ## Symptom: Run Command does not execute
 
-Work these checks from the node outward; the first failure usually explains the rest.
+Work these checks from the node outward. The first failure you find is usually the cause, and the later checks only confirm what the earlier layer already implies.
 
 - Confirm the node is **managed and Online** (`PingStatus: Online`). Run Command cannot reach a node that is not registered.
 - Confirm the document exists and is shared with the account, and that its type is `Command`.
@@ -46,7 +46,7 @@ Work these checks from the node outward; the first failure usually explains the 
 
 ## Symptom: Session Manager cannot connect
 
-A failed session is usually one of the following, checked in this order.
+A session that will not open is usually one of the following. Check them in this order: the agent and its version, the instance role, the network path to the session endpoints, and the session preferences that control logging and encryption.
 
 - Agent version 2.3.68.0 or later.
 - The **caller** needs `ssm:StartSession`; the **instance role** needs the `ssmmessages` permissions.
@@ -56,7 +56,7 @@ A failed session is usually one of the following, checked in this order.
 
 ## Symptom: patching fails or a node is non-compliant
 
-Check the patch group, the baseline, and the scan result in that order.
+A patch failure or a non-compliant node usually comes from the patch group, the baseline it resolves to, or the scan result. Check the group tag first, then the baseline registration, then the last scan, because each step depends on the one before it.
 
 - The node has **no patch group tag**, so it resolves to no baseline. Add `Patch Group` (or `PatchGroup`) and register the group with a baseline.
 - The tag key is misspelled or has the wrong case; the key is case-sensitive.
@@ -82,7 +82,7 @@ A node missing from this list was never managed (agent, role, or network). A nod
 
 ## Sources
 
-The entries below are the AWS documentation pages this document draws on.
+The references below are the official AWS pages behind the behavior and numbers in this document; use them when a value or rule needs checking against the source.
 
 - AWS: *Troubleshooting SSM Agent*. https://docs.aws.amazon.com/systems-manager/latest/userguide/troubleshooting-ssm-agent.html
 - AWS: *Troubleshooting Systems Manager Run Command*. https://docs.aws.amazon.com/systems-manager/latest/userguide/troubleshooting-remote-commands.html
