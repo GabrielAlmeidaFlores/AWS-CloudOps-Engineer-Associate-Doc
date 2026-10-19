@@ -29,6 +29,12 @@ The Resource Groups console lists the groups in the current Region. The screensh
 
 *The Resource Groups console. The two groups, `dev_team_instance` and `prd_team_instance`, are named by environment and owned by the account; Create resource group starts a new one. Both sit in the same Region, which is the scope a resource group is limited to.*
 
+Opening a group shows how its membership is defined, which is the part that matters for targeting. The configuration screen below shows `dev_team_instance` as a tag-based query: the resource type `AWS::EC2::Instance` and the tag `Environment: DEV`.
+
+![Resource group configuration showing a tag-based query for EC2 instances tagged Environment=DEV](../../../assets/images/screenshots/ssm/22-resource-groups-config.png)
+
+*The group configuration for `dev_team_instance`. Label 1 marks the tag-based query type, label 2 the resource type, and label 3 the tag that defines membership. Label 4 marks the member list, which currently holds one instance, `WEBSERVER-SANDBOX`; membership is computed from the query, not maintained by hand, so retagging an instance moves it in or out of the group with no query edit.*
+
 ## Example
 
 Create a tag-based group for production web servers and list its members:
