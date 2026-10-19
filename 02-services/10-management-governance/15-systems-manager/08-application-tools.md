@@ -57,6 +57,8 @@ Read it left to right: the value comes from a source, is validated, and is deplo
 
 ## Limits and an exam note
 
+The AppConfig quotas below are the ones that appear in sizing questions.
+
 - **Applications per Region:** 100 by default; 20 environments and 100 configuration profiles per application; 20 deployment strategies per Region.
 - **Data plane throughput:** `GetLatestConfiguration` serves 1,000 requests per second; without the AppConfig Agent a client is limited to about 1 million configurations received per day (burst).
 - **Exam trap:** calling the AppConfig data plane directly for every read will hit the daily retrieval limit. The AWS AppConfig Agent caches configuration locally, which is why "use the AppConfig Agent" is the answer when a scenario needs frequent reads without throttling.
@@ -84,6 +86,8 @@ aws appconfig start-deployment \
 ```
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *AWS Systems Manager Application Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/application-manager.html
 - AWS: *What is AWS AppConfig?*. https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html

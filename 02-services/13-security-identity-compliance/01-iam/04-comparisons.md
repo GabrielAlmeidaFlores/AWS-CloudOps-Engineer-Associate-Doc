@@ -79,6 +79,8 @@ Both are **intersections**: they reduce, never expand, effective permissions.
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *Managed policies and inline policies*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
 - AWS: *IAM Identity Center*. https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
 - AWS: *Permissions boundaries for IAM entities*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html

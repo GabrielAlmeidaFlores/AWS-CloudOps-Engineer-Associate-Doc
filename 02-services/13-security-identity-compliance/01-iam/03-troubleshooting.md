@@ -25,6 +25,8 @@ Following the flow from the top, you confirm which identity is really making the
 
 ## Diagnose in order
 
+Follow these checks in order; the evaluation chain makes the early steps the most decisive.
+
 1. **Confirm the principal.** `aws sts get-caller-identity` shows which identity and account the call is actually using. It is often not the one you assumed, a stale `AWS_PROFILE`, an environment variable access key overriding a role, or an instance role instead of a user.
 2. **Look for an explicit deny.** A `Deny` anywhere (identity policy, resource policy, permissions boundary, or SCP) overrides every `Allow`. This is the most common cause of a request that "should" be allowed but isn't.
 3. **Check for an allow.** If nothing explicitly allows the action, the implicit deny applies. Remember that identity and resource policies combine as a union for same-account access, so an allow in either one is enough.
@@ -33,6 +35,8 @@ Following the flow from the top, you confirm which identity is really making the
 6. **Check the resource ARN.** A policy that allows `s3:GetObject` but names the wrong bucket ARN will deny the real request.
 
 ## Tools
+
+These tools show the decision from different angles.
 
 - **IAM policy simulator**, evaluates a policy set against a specific action and resource without making a live call. First stop for "why is this denied."
 - **CloudTrail**, records the API call, the principal, and whether access was denied. Search for the error code (`AccessDenied`) and the caller identity.
@@ -60,6 +64,8 @@ The policy simulator is a console tool rather than a CLI command, and it is usua
 When two policies disagree, **deny wins**. If you see an allow and a deny for the same action, the deny is what AWS enforces. Most "mystery" access failures trace back to an overlooked deny in a permissions boundary, an SCP, or an old inline policy that was never removed.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *IAM policy simulator*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
 - AWS: *IAM Access Analyzer*. https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html

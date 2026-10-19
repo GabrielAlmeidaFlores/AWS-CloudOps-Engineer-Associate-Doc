@@ -99,6 +99,8 @@ Read the map outward from IAM: Organizations and its SCPs cap what the account i
 
 ## Document index (read in this order)
 
+The documents are numbered in the order they build on each other.
+
 1. [01-concepts.md](01-concepts.md): principals, policy structure, and the policy evaluation logic.
 2. [02-security.md](02-security.md): least privilege, MFA, password policy, permissions boundaries, SCPs.
 3. [03-troubleshooting.md](03-troubleshooting.md): diagnosing an access-denied failure.
@@ -112,6 +114,8 @@ Read the map outward from IAM: Organizations and its SCPs cap what the account i
 Each document ends with its own `Sources` section; there is no separate `sources.md`.
 
 ## Relationship map
+
+The map below shows what IAM depends on and what relies on it.
 
 - **Secured By**, itself (it is the security primitive).
 - **Monitored By**, CloudTrail (API calls), IAM Access Analyzer (findings), Trusted Advisor (IAM checks).

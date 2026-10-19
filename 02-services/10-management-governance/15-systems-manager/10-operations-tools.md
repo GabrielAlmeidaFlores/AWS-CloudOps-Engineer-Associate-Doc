@@ -98,5 +98,7 @@ aws ssm describe-ops-items --filters Key=Status,Values=Open
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *AWS Systems Manager Explorer*. https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer.html
 - AWS: *AWS Systems Manager OpsCenter*. https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html

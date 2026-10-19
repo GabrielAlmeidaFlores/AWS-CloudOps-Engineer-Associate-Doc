@@ -4,6 +4,8 @@ Patch Manager automates patching managed nodes with security and other updates. 
 
 ## What it does
 
+Patch Manager covers more than operating-system updates; the main capabilities are below.
+
 - **Operating system and application patches.** Patch Manager applies OS patches and, within limits, application patches. On Windows Server, application patching covers only updates released by Microsoft.
 - **Scan or scan-and-install.** A `Scan` operation reports missing patches only; an `Install` operation scans and installs everything the baseline approves.
 - **Cross-platform and cross-environment.** It patches EC2 instances, edge devices, on-premises servers, and VMs, by operating system type, across multiple supported OS versions.
@@ -38,6 +40,8 @@ A **patch group** associates a set of nodes with a specific baseline, so differe
 > The `Patch Group` key and generic tag targeting share the tag rules in [16-tagging.md](16-tagging.md): a `send-command` target array holds at most five key-value pairs, multiple keys combine with AND, and matching is case-sensitive. A common failure is a baseline registered for `Patch Group = PROD` while the node is tagged `PatchGroup = Prod` (or `Patch Group = Prod`): the value must match exactly and the target key spelling must match the tag spelling, or the node silently falls back to the default baseline.
 
 ## Running patching
+
+A patch run starts from one of several triggers, and the trigger decides the scope and the timing.
 
 - **On demand.** A **Patch now** operation runs a scan or install immediately.
 - **On a schedule.** A `Scan` or `Install` task runs inside a Maintenance Windows window, or through a **patch policy** configured in Quick Setup. Patch policies are the recommended method: one policy can cover every account and Region in an organization, selected accounts and Regions, or a single account-Region pair.
@@ -77,6 +81,8 @@ Read the diagram left to right: the `Patch Group` tag places the node into a gro
 
 ## Compliance and integration
 
+Patch results feed the compliance and reporting tools you already use.
+
 - **Systems Manager Compliance** surfaces Patch Manager patch compliance by default, alongside State Manager association status.
 - **Security Hub CSPM** receives patch compliance findings.
 - **AWS Config** records compliance history and change tracking.
@@ -103,6 +109,8 @@ aws ssm send-command \
 Change `Operation=Scan` to `Operation=Install` to install the approved patches.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *AWS Systems Manager Patch Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager.html
 - AWS: *Predefined and custom patch baselines*. https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-predefined-and-custom-patch-baselines.html

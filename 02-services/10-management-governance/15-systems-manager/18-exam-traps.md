@@ -95,6 +95,8 @@ Recurring mistakes candidates make, and what AWS actually does.
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *AWS Systems Manager User Guide* (per-tool pages cited in the sibling documents). https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html
 - AWS: *AWS Systems Manager endpoints and quotas*. https://docs.aws.amazon.com/general/latest/gr/ssm.html
 - AWS: *AWS Systems Manager pricing*. https://aws.amazon.com/systems-manager/pricing/

@@ -24,6 +24,8 @@ The goal is to understand **how AWS services actually behave** and **how to reas
 
 ## Start here
 
+The repository is meant to be read in this order.
+
 1. **Read the exam guide** for scope, domains, tasks, and skills: [SOA-C03 exam guide (PDF)](assets/docs/soa-c03-exam-guide.pdf).
 2. **Pick a topic** from [Documented topics](#documented-topics) and read its `README.md`, which maps the topic and links every document in order.
 3. **Work the closing triple** of each topic: answer its `exam-questions`, review its `exam-traps`, then build its `hands-on-project`.
@@ -120,6 +122,8 @@ Documentation proceeds one topic at a time, following the [study roadmap in `AGE
 Each documented topic ships with its own exam-question set, exam-traps file, and hands-on project.
 
 ## Key principles
+
+The build follows a short set of rules.
 
 - **Canonical knowledge.** One source of truth per concept, linked, never duplicated.
 - **Certification-first.** Every document maps to a specific SOA-C03 domain, task, or skill.

@@ -84,6 +84,8 @@ Cost-optimization questions now include "release unused Elastic IPs" as a correc
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
 - AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
 - AWS: *Amazon VPC quotas*. https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html

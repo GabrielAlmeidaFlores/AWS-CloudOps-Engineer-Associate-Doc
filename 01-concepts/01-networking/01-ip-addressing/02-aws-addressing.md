@@ -50,6 +50,8 @@ The console enforces that containment while you fill in the form. The screenshot
 
 ## Private vs public IP
 
+AWS assigns both address types, and the distinction decides whether a resource is reachable from the internet.
+
 - **Private IP**, an address inside your VPC CIDR, typically from the RFC 1918 ranges. Not routable on the internet.
 - **Public IP**, a globally routable address attached to an instance or NAT gateway. AWS assigns it from its pool, either auto-assigned (changes on stop/start) or an Elastic IP you keep.
 - The private-to-public mapping is done by NAT, the internet gateway for an instance's own public IP, or a NAT gateway for outbound traffic from private subnets. Instances in private subnets never hold a public IP.
@@ -69,6 +71,8 @@ You cannot use these for a VPC CIDR: `0.0.0.0/8`, `127.0.0.0/8` (loopback), `169
 AWS stores a CIDR in canonical form: `100.68.0.18/18` becomes `100.68.0.0/18`. If you bring your own IP (BYOIP), you may use the network and broadcast addresses, unlike an AWS-owned range.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
 - AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html

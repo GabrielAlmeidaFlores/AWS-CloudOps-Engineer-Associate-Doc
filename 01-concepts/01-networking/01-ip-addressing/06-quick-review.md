@@ -5,6 +5,8 @@
 
 ## Non-negotiables
 
+These are the rules the exam expects you to recall without deriving them.
+
 - **Addresses in a block** = `2^(32 − n)`. A `/24` holds 2^8 = 256 addresses; a `/28` holds 2^4 = 16.
 - **Usable in an AWS subnet** = `2^(32 − n) − 5`. AWS reserves five addresses in every subnet, not the two (network and broadcast) that plain IPv4 reserves.
 - **A `/28` is 16 addresses, 11 usable.** It is the smallest IPv4 subnet AWS allows.
@@ -34,5 +36,7 @@ AWS recommends the RFC 1918 private ranges for VPC CIDRs: `10.0.0.0/8` (about 16
 Count the resources the subnet must hold, add the 5 reserved addresses, and round up to the next power of two. To fit 20 instances: 20 + 5 = 25, so choose a `/27` (32 addresses). A `/28` holds only 11 usable and would fail.
 
 ## Sources
+
+The detailed sources live in the topic documents, so this page links to them instead of repeating the full list.
 
 - Full references live in the per-topic documents: `01-concepts.md`, `02-aws-addressing.md`, and `05-limits-defaults.md`.

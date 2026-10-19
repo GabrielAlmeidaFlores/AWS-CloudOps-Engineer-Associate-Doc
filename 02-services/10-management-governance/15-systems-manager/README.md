@@ -68,6 +68,8 @@ Read the map outward from Systems Manager: it runs commands and patches on EC2 m
 
 ## Document index (read in this order)
 
+The documents are numbered in the order they build on each other.
+
 1. [01-fundamentals.md](01-fundamentals.md): the SSM Agent, managed nodes, the instance IAM role, and Default Host Management Configuration.
 2. [02-node-tools.md](02-node-tools.md): Fleet Manager, Compliance, Inventory, and Hybrid Activations.
 3. [03-session-run-state.md](03-session-run-state.md): Session Manager, Run Command, and State Manager.
@@ -92,6 +94,8 @@ Each document ends with its own `Sources` section; there is no separate `sources
 
 ## Relationship map
 
+The map below shows the services Systems Manager depends on and the services it feeds.
+
 - **Depends On**, EC2 (managed nodes), IAM (the instance role and caller permissions), and the Systems Manager service endpoints the agent contacts.
 - **Integrates With**, CloudWatch (metrics and dashboards), AWS Config (compliance records and remediation), EventBridge (event-driven automation), CloudFormation (parameter and resource provisioning), and Secrets Manager (secret storage).
 - **Monitored By**, CloudWatch, AWS Config, Systems Manager Compliance, and OpsCenter.
@@ -106,6 +110,8 @@ See also (these documents are planned, not yet created):
 - EC2 + Systems Manager (cross-service)
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *What is AWS Systems Manager?*. https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html
 - AWS: *Working with SSM Agent*. https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html

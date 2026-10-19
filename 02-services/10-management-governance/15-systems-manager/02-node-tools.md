@@ -108,6 +108,8 @@ aws ssm describe-instance-information \
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *AWS Systems Manager Fleet Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/fleet-manager.html
 - AWS: *AWS Systems Manager Compliance*. https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-compliance.html
 - AWS: *AWS Systems Manager Inventory*. https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-inventory.html

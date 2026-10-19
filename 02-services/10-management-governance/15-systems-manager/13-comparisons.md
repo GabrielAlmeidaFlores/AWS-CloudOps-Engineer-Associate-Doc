@@ -84,6 +84,8 @@ Use Run Command for a command; use Automation when the work is a workflow across
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *Choosing between State Manager and Maintenance Windows*. https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-vs-maintenance-windows.html
 - AWS: *AWS Systems Manager Patch Manager* and *patch groups*. https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager.html
 - AWS: *AWS Systems Manager Parameter Store*. https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html

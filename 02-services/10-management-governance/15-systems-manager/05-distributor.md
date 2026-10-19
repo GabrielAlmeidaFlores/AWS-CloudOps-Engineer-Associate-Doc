@@ -12,6 +12,8 @@ A Distributor **package** is a collection of installable software plus the instr
 
 ## Where packages come from
 
+Distributor packages come from three sources, each with a different trust model.
+
 - **AWS-provided.** Many AWS agent packages are ready to deploy, for example `AmazonCloudWatchAgent` and `AWSPVDriver`.
 - **Third-party.** Vendor packages such as Trend Micro. These are not managed by AWS, so the vendor publishes them and you own the due diligence.
 - **Your own.** You build the `.zip` files and manifest for software you write.
@@ -55,6 +57,8 @@ Read it left to right: the package is authored once and stored in S3, Run Comman
 
 ## Access control and auditing
 
+Distributor uses IAM and CloudTrail to separate who can change a package from who can deploy it.
+
 - **IAM** controls who can create, update, deploy, or delete packages and versions. A common split gives an operator permission to deploy but not to change the package.
 - **CloudTrail** and related logging capture Distributor user actions for audit.
 
@@ -79,11 +83,15 @@ aws ssm create-association \
 
 ## Limits and an exam note
 
+The quotas below bound how many packages and versions you can keep.
+
 - **Packages per account per Region:** 500; **versions per package:** 25.
 - **Package size:** 20 GB maximum; **manifest:** 64 KB; up to 20 attachments of 1 GB each; up to 1,000 files per package.
 - **Exam trap:** third-party packages (Trend Micro, for example) are published and maintained by the vendor, not by AWS. The shared responsibility model puts the security of a vendor package on you to validate, so an answer that treats a third-party package as AWS-supported is wrong.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *AWS Systems Manager Distributor*. https://docs.aws.amazon.com/systems-manager/latest/userguide/distributor.html
 - AWS: *Auditing and logging Distributor activity*. https://docs.aws.amazon.com/systems-manager/latest/userguide/distributor-logging-auditing.html

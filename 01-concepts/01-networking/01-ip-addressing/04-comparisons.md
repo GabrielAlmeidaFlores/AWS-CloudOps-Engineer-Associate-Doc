@@ -40,6 +40,8 @@ A `/16` is a common VPC size because it leaves room to carve many `/24` subnets 
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *IP addressing for your VPCs and subnets*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html
 - AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
 - AWS: *New – AWS Public IPv4 Address Charge + Public IP Insights*. https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/

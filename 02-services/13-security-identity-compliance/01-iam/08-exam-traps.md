@@ -63,6 +63,8 @@ Recurring mistakes candidates make, and what AWS actually does.
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *SOA-C03 exam guide, Content Domain 4*. https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03-domain4.html
 - AWS: *Policy evaluation logic*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
 - Community: candidate reports on SOA-C03 IAM misconceptions (re:Post, Reddit r/AWSCertifications).

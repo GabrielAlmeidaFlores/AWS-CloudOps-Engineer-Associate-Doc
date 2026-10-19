@@ -182,6 +182,8 @@ aws ssm add-tags-to-resource --resource-type PatchBaseline \
 
 ## Exam traps
 
+These are the tag behaviors that most often produce a wrong answer.
+
 - **`ManagedInstance` tags are for `mi-` hybrid nodes only.** An EC2 instance is tagged through EC2. An answer that says to tag an EC2 instance with `AddTagsToResource --resource-type ManagedInstance` is wrong.
 - **Case sensitivity.** `PatchGroup` and `Patch Group` are both valid keys, but a target written with one does not select nodes tagged with the other. There is no case-insensitive matching.
 - **AND, not OR.** Multiple tag keys in one target require all keys. Node with one key is excluded.
@@ -189,6 +191,8 @@ aws ssm add-tags-to-resource --resource-type PatchBaseline \
 - **Tag timing follows execution.** Tags are resolved when the operation runs, so membership is dynamic: retag a node and its next command, association, or patch run reflects the change.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *AddTagsToResource*. https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html
 - AWS: *Tag*. https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_Tag.html

@@ -55,10 +55,14 @@ flowchart LR
 
 ## Prerequisites
 
+Read these documents first; the project assumes the evaluation logic and the policy types they explain.
+
 - Read [01-concepts.md](01-concepts.md), [02-security.md](02-security.md), and [03-troubleshooting.md](03-troubleshooting.md) first.
 - AWS CLI configured with permission to manage IAM, S3, KMS, CloudTrail, and Access Analyzer.
 
 ## Steps
+
+Run these in order; each step adds one layer to the identity chain.
 
 1. **Create the KMS key and the bucket.** The key policy is the default-root policy; the bucket uses SSE-KMS with that key.
 
@@ -359,6 +363,8 @@ flowchart TD
 
 ## Validation
 
+After the build, confirm each item below with the command shown.
+
 1. **Simulate the decision.** The allowed prefix returns `allowed`; another bucket returns `implicitDeny`.
 
    ```bash
@@ -384,6 +390,8 @@ flowchart TD
 
 ## Failure injection
 
+Break one link in the chain at a time and confirm the resulting decision.
+
 - **Widen the resource.** Change `Resource` to `arn:aws:s3:::example-reports-111122223333/*` and re-run the simulator against `payments/q1.csv`; it returns `allowed` without MFA, showing how an over-broad scope removes the intended boundary. What Access Analyzer flags next depends on the resource policy.
 - **Explicit deny wins.** Add a `Deny` for `reports/secret/*` and confirm the simulator returns `explicitDeny` even though the `Allow` still matches. This is the rule [01-concepts.md](01-concepts.md) documents.
 - **Boundary cap.** Remove the boundary and confirm a broader action that the boundary denied now succeeds, which shows a boundary can only cap.
@@ -407,10 +415,14 @@ aws kms schedule-key-deletion --key-id KEY-ID --pending-window-in-days 7
 
 ## What it practices
 
+The project exercises the following SOA-C03 domain tasks and skills.
+
 - **Domain 4, Task 4.1 (secure access):** Skill 4.1.1, implement IAM features (users, groups, roles, instance profiles, resource policies, conditions, boundaries). Skill 4.1.2, troubleshoot and audit access with the policy simulator, Access Analyzer, and CloudTrail.
 - **Domain 4, Task 4.2 (data protection):** KMS key policy and encryption on the data store.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *Policy evaluation logic*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
 - AWS: *Permissions boundaries*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html

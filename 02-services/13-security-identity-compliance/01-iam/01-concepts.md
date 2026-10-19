@@ -141,6 +141,8 @@ Finally, name the role and review the generated trust policy before creating it:
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *Policy evaluation logic*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
 - AWS: *What is IAM?*. https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
 - AWS: *SOA-C03 exam guide, Content Domain 4*. https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03-domain4.html

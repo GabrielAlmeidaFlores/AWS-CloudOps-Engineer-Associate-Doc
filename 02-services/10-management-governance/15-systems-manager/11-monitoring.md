@@ -4,6 +4,8 @@ Systems Manager does not operate in isolation. It reads and writes state through
 
 ## CloudWatch
 
+Systems Manager sends logs and metrics to CloudWatch, and CloudWatch can also surface application problems back as OpsItems.
+
 - **Agent and session logs.** SSM Agent logs and Session Manager session logs can be sent to CloudWatch Logs (with optional KMS encryption), alongside S3 and CloudTrail destinations.
 - **Dashboards.** CloudWatch dashboards can display Systems Manager data and the metrics of the resources SSM acts on, so a single dashboard shows both the automation and its effect.
 - **Application Insights.** CloudWatch Application Insights for .NET and SQL Server can create OpsItems for detected application problems.
@@ -13,6 +15,8 @@ Systems Manager does not operate in isolation. It reads and writes state through
 CloudTrail records Systems Manager API calls, giving an audit trail of who started a session, ran a command, changed a parameter, or executed a runbook, and from where. Session start and stop are visible here as API activity, and Distributor and Automation actions are attributable to an IAM principal.
 
 ## AWS Config
+
+AWS Config supplies the compliance history and change tracking that Systems Manager does not keep itself.
 
 - **Compliance history.** Config records compliance history and change tracking for Patch Manager patching data and State Manager associations.
 - **Remediation.** An AWS Config rule can trigger a Systems Manager Automation runbook as remediation, which closes the loop from detection to fix without a human in the middle.
@@ -63,6 +67,8 @@ Read the left block as detection sources and the right block as destinations. An
 
 ## Cross-account and cross-Region
 
+These features extend visibility beyond a single account and Region.
+
 - **Resource data sync** aggregates Inventory and Compliance data into one S3 bucket for Athena queries, and aggregates Explorer OpsData across Regions.
 - **AWS Organizations** lets a single patch policy or Quick Setup configuration span accounts and Regions.
 - **Explorer's multiple-account/multiple-Region mode** requires Organizations with All features, aggregating account data into the management account.
@@ -82,6 +88,8 @@ An EventBridge rule that reacts to a failed Systems Manager Automation execution
 This is the "out of Systems Manager" direction: the runbook failed, Systems Manager emitted the event, and EventBridge routed it to SNS. An alarm-driven rule runs the other way, using `"source": ["aws.cloudwatch"]` with the `CloudWatch Alarm State Change` detail type, and can start a runbook when an alarm enters the `ALARM` state.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *Logging and monitoring in AWS Systems Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring.html
 - AWS: *Monitoring Systems Manager events with Amazon EventBridge*. https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-eventbridge-events.html

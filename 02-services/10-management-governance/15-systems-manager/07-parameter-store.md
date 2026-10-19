@@ -4,6 +4,8 @@ Parameter Store is a centralized store for named values, called *parameters*: a 
 
 ## Parameter types
 
+Parameter Store has three value types, and the type controls encryption and cost.
+
 - **`String`.** Plain text: environment names, endpoint URLs, resource identifiers.
 - **`StringList`.** A comma-separated list of plain-text values, for example `subnet-123abc,subnet-456def,subnet-789ghi`.
 - **`SecureString`.** A value encrypted with AWS KMS. Use it for configuration that must be encrypted, such as service endpoints and account identifiers.
@@ -17,6 +19,8 @@ The console lists each parameter with its name, tier, and type, which is how you
 *The Parameter Store parameter list. The Tier column shows Standard or Advanced and the Type column shows String, StringList, or SecureString; the Create parameter button opens the form that sets both. The one parameter shown (`AmazonCloudWatch-linux`) is a Standard String parameter.*
 
 ## Features
+
+Beyond storing a value, Parameter Store provides the following behaviors.
 
 - **Hierarchical naming.** Group parameters under a path, for example `/dev/webserver/linux/approved-ami`. You can then fetch a whole branch (`/dev/webserver`) or a leaf, and IAM can grant access by prefix.
 - **Versioning.** Parameter Store keeps the **100 most recent versions** of each parameter, so you can reconstruct a previous value when investigating an incident.
@@ -110,6 +114,8 @@ aws ssm put-parameter --name "/myapp/prod/temp-token" \
 ```
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *AWS Systems Manager Parameter Store*. https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 - AWS: *Choosing parameter tiers in Parameter Store*. https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html

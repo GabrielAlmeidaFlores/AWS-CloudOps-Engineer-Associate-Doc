@@ -114,6 +114,8 @@ A node that shows `PingStatus: Online` is registered and reachable; `ConnectionL
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *What is AWS Systems Manager?*. https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html
 - AWS: *Working with SSM Agent*. https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
 - AWS: *Managing EC2 instances automatically with Default Host Management Configuration*. https://docs.aws.amazon.com/systems-manager/latest/userguide/fleet-manager-default-host-management-configuration.html

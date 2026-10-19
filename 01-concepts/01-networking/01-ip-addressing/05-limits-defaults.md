@@ -65,6 +65,8 @@ The IPv4 CIDR-blocks limit is the one candidates miss: the primary block and eve
 
 ## Good to know
 
+These defaults and side facts come up in sizing and cost questions but do not fit the quota table above.
+
 - **RFC 1918:** `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, the private ranges AWS recommends for VPCs.
 - **Prohibited VPC ranges:** `0.0.0.0/8`, `127.0.0.0/8`, `169.254.0.0/16`, `224.0.0.0/4` (multicast).
 - **Service-reserved range to avoid:** `172.17.0.0/16` (used internally by Cloud9 and SageMaker AI).
@@ -73,6 +75,8 @@ The IPv4 CIDR-blocks limit is the one candidates miss: the primary block and eve
 - **Canonicalization:** AWS stores `100.68.0.18/18` as `100.68.0.0/18`.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
 - AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html

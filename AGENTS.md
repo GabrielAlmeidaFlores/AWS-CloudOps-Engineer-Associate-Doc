@@ -206,6 +206,8 @@ At minimum investigate:
 
 ### Certification
 
+Confirm the exam scope before anything else.
+
 + current SOA-C03 exam guide, including the local copy at `assets/docs/soa-c03-exam-guide.pdf` (read this before writing any certification-mapped content);
 + relevant domains;
 + relevant tasks;
@@ -1774,6 +1776,10 @@ Tables, headings, bullet lists, and Mermaid diagrams are required in this reposi
 
 Never use the em dash. It is one of the most reliable signals of machine-written text, and it is banned outright. Rewrite the sentence with a comma, a colon, a semicolon, or parentheses, or split it into two sentences. Do not substitute a hyphen, an en dash, or a spaced hyphen for it; use real punctuation. Also avoid colon-heavy grocery lists.
 
+#### Lists
+
+A heading or a bold label must never be followed directly by a bulleted or numbered list. Write a lead-in paragraph first, even when the heading is procedural such as Prerequisites, Steps, Validation, or Sources. The paragraph says what the list contains and why the reader needs it, so the list supports the prose rather than replacing it. A section titled CloudWatch, for example, opens with a sentence about what Systems Manager sends to CloudWatch, then lists the log, dashboard, and Application Insights integrations. A bare heading followed by bullets is the pattern to remove.
+
 #### Notes and callouts
 
 Use blockquoted callouts (`> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!CAUTION]`, `[!WARNING]`) to flag what the user must remember. A callout is not a one-liner. It must stand on its own: name the concept, explain why it matters for the exam, and state the consequence of getting it wrong. The reader must grasp the point without reading the surrounding section. Do not write a two-word hint, write what the concept means, where it applies, and the scenario where it decides the answer.
@@ -2832,6 +2838,8 @@ Before finalizing documentation, verify:
 
 ### Certification
 
+These checks confirm the scope is current.
+
 + Current SOA-C03 guide researched.
 + Relevant domain identified.
 + Relevant tasks identified.
@@ -2840,6 +2848,8 @@ Before finalizing documentation, verify:
 + Historical SOA-C02 information not confused with current information.
 
 ### Technical
+
+These checks confirm the service behavior and the numbers are right.
 
 + Official AWS documentation researched.
 + Important behavior cross-checked.
@@ -2854,12 +2864,16 @@ Before finalizing documentation, verify:
 
 ### Community
 
+These checks confirm the practitioner angle was researched.
+
 + Practitioner discussions investigated.
 + Common misunderstandings identified.
 + Real-world operational problems identified.
 + Community claims cross-checked.
 
 ### Architecture
+
+These checks confirm the visual material is complete and valid.
 
 + Existing AWS diagram searched for.
 + Appropriate external diagram searched for.
@@ -2871,6 +2885,8 @@ Before finalizing documentation, verify:
 
 ### Repository
 
+These checks confirm the knowledge is placed and linked correctly.
+
 + Correct canonical location identified.
 + Existing knowledge checked.
 + Duplicate information avoided.
@@ -2881,6 +2897,8 @@ Before finalizing documentation, verify:
 
 ### References
 
+These checks confirm every claim is traceable.
+
 + Important claims traceable.
 + Official AWS sources included.
 + External sources clearly identified.
@@ -2888,6 +2906,8 @@ Before finalizing documentation, verify:
 + No fabricated citations.
 
 ### Content depth
+
+These checks confirm the document teaches rather than summarizes.
 
 + Every substantive document meets the substance floor (§29): verified behavior, at least one concrete value, operational detail, an exam trap, and cross-service links.
 + No document trips a shallow-content trigger (§29).
@@ -3105,6 +3125,8 @@ The values below are in CSS pixels of the original screenshot. Multiply each by 
 
 ### Rules
 
+The annotation follows these drawing rules.
+
 + **Highlight box.** Outline the target element with a single-color rectangle that hugs it, so it is clear exactly which control the number refers to.
 + **Label box.** Draw each numbered label as a rectangle over whitespace, holding the number and a short phrase (for example `1.  Choose the principal`). The label box must not cover the element it points at or any other value on the screen.
 + **Arrow endpoints.** The arrow starts at the edge of the label box and ends at the edge of the target's highlight box, leaving the clearance at each end. The arrow must not start or end inside either box, must not overlap or cross the label text, and must not cross any other label.
@@ -3114,6 +3136,8 @@ The values below are in CSS pixels of the original screenshot. Multiply each by 
 + **One arrow per number.** Every numbered label has exactly one arrow to exactly one target. Do not leave a label without an arrow, or an arrow without a label.
 
 ### Procedure
+
+Run these steps for each screenshot.
 
 1. Capture the raw screen to a temporary file (for example under `.playwright-mcp/`) with no annotations.
 2. Open it with a local image library (Pillow), upscale it by the supersample factor with a smooth filter (Lanczos), and scale the font sizes and line widths by the same factor.
@@ -3289,6 +3313,8 @@ A bare image with no lead-in or no caption is incomplete. The lead-in orients th
 
 ## Security
 
+Keep these rules in force for every capture.
+
 + Never commit `aws.credentials` or any file that contains the console password.
 + The sandbox account ID, region, and resource ARNs may appear in screenshots; this repository accepts that for the sandbox account.
 + Before capturing, confirm the screen shows no secret, access key, or password value. If a form would reveal a secret, do not screenshot it.
@@ -3304,6 +3330,8 @@ Every topic README carries a **mind map**: one compact diagram that explains the
 A `## Topic mind map` section sits after the topic's introduction and its *SOA-C03 relevance*, and immediately before the `## Document index`. The reader sees the topic and its relationships first, then the linked list of documents to walk.
 
 ## What it contains
+
+The mind map carries the following elements.
 
 - **One diagram per README.** A single Mermaid `flowchart TD` (root at the top, the neighbors branching below), per §32, centered on the topic (a service, concept, or relationship).
 - **The neighbors, not the documents.** One node per directly related AWS service (or, for a concept, the related construct), each carrying a short description of what it is or what it does in this context. The folder's own documents are not listed; the `## Document index` below carries the links.
@@ -3358,6 +3386,8 @@ flowchart TD
 Every documented topic carries a set of **exam practice questions**: original items that test the topic the way SOA-C03 tests it. The documentation teaches; the question set checks whether the knowledge holds under exam pressure. The questions live with the topic, and a category index links every set in that category.
 
 ## Where they live
+
+The question files and their links follow this placement.
 
 - **The closing triple.** The **last three numbered files** in a topic are, in order: `<NN>-exam-questions.md`, `<NN+1>-exam-traps.md`, and `<NN+2>-hands-on-project.md`. The questions and traps sit side by side with the questions first, and the hands-on project closes the topic. No file comes after them.
 - The topic README's `## Document index` lists all three like any other document.

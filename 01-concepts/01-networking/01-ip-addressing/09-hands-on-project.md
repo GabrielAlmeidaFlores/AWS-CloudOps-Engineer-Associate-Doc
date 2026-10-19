@@ -64,10 +64,14 @@ flowchart LR
 
 ## Prerequisites
 
+Read these documents before starting, because the build assumes the address math and routing rules they explain.
+
 - Read [01-concepts.md](01-concepts.md), [02-aws-addressing.md](02-aws-addressing.md), and [05-limits-defaults.md](05-limits-defaults.md) first.
 - AWS CLI configured for `us-east-2`, and permission to create VPCs, subnets, gateways, and peering connections.
 
 ## Steps
+
+Run these in order; each step depends on the resource created before it.
 
 1. **Create both VPCs and turn on DNS hostnames.** DNS support makes the peering usable by name.
 
@@ -318,6 +322,8 @@ flowchart TD
 
 ## Validation
 
+Check each item after the build; the expected result is stated with the command.
+
 1. **Reserved-address math.** Each `/24` must report **251** available addresses, which is 256 minus the five AWS reserves (network, VPC router, DNS, a future-use address, and broadcast).
 
    ```bash
@@ -341,6 +347,8 @@ flowchart TD
 
 ## Failure injection
 
+Break one dependency at a time and confirm the symptom matches the explanation.
+
 - **Overlap.** Create a second peering request from a VPC whose CIDR overlaps A (for example `10.0.0.0/24`). The connection is created but traffic never flows, because peering requires non-overlapping CIDRs. This is the failure [03-troubleshooting.md](03-troubleshooting.md) documents.
 - **Missing route.** Delete the peering route from the private table and confirm the peer becomes unreachable even though the peering connection is still `active`.
 - **No default route.** Remove the `0.0.0.0/0` route from the public table and confirm the public host loses internet reachability.
@@ -363,10 +371,14 @@ aws ec2 delete-vpc --vpc-id vpc-B
 
 ## What it practices
 
+The project exercises the following SOA-C03 domain tasks and skills.
+
 - **Domain 5, Task 5.1 (network connectivity):** Skill 5.1.1, configure a VPC, subnets, route tables, internet and NAT gateways; and private connectivity between VPCs.
 - **Domain 5, Task 5.3 (network troubleshooting):** Skill 5.3.1, diagnose subnet, route-table, NAT, and peering problems; the failure injection exercises the overlap, missing-route, and missing-default-route cases.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html
 - AWS: *Subnets and reserved addresses*. https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html

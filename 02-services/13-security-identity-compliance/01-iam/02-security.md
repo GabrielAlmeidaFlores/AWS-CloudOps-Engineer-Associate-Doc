@@ -23,6 +23,8 @@ Grant only the actions and resources a principal needs.
 
 ## MFA and password policy
 
+These are the baseline controls for every human identity in the account.
+
 - **MFA** on the root user and on every human user. Virtual MFA (TOTP) or hardware (U2F) device. MFA protects console sign-in; it does not protect programmatic access keys, which is why human users should normally assume a role instead of holding keys.
 - **Password policy** is account-wide: minimum length, complexity, rotation, and reuse prevention. There is exactly one password policy per account, so it applies to every IAM user and cannot be set per user.
 
@@ -130,11 +132,15 @@ An SCP limits what *your* principals can do; an RCP limits who can do things to 
 
 ## Rotation and credentials
 
+Long-lived credentials are the exception; when they exist, rotate and protect them.
+
 - Rotate access keys on a schedule; never commit them to a repository.
 - Give EC2, Lambda, and ECS workloads roles, not keys, via an instance profile or execution role.
 - Use `aws sts get-caller-identity` to confirm which principal is acting in a session before debugging a permission error.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *IAM security best practices*. https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
 - AWS: *Permissions boundaries for IAM entities*. https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html

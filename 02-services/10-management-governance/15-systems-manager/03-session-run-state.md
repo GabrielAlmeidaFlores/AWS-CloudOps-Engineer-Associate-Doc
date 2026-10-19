@@ -133,6 +133,8 @@ aws ssm create-association \
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *AWS Systems Manager Session Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html
 - AWS: *AWS Systems Manager Run Command*. https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
 - AWS: *AWS Systems Manager State Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state.html

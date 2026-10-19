@@ -5,6 +5,8 @@
 
 ## Non-negotiables
 
+These are the rules the exam expects you to recall without deriving them.
+
 - **Explicit deny wins.** A `Deny` in any applicable policy overrides every `Allow` in every other policy, identity, resource, boundary, or SCP. This single rule decides most "why is access denied" questions.
 - **Implicit deny is the default.** If no policy explicitly allows an action; it is denied. IAM has no implicit allow.
 - **Union vs intersection.** Identity-based and resource-based policies combine as a **union** (either can allow. Permissions boundaries and SCPs are **intersections**) they can only remove access, never add it.
@@ -12,6 +14,8 @@
 - **IAM is global, not regional.** A user, role, or policy exists account-wide and is usable from every Region, unlike most AWS resources.
 
 ## Policy types
+
+IAM policies fall into a small number of types, and the type determines where the policy applies.
 
 - **Identity-based policy**, attaches to a user, group, or role and defines what that identity can do.
 - **Resource-based policy**, attaches to a resource (S3 bucket, KMS key, SQS queue) and includes a `Principal` element naming who is granted access.
@@ -29,6 +33,8 @@ Mixing them up is the classic cross-account failure: an access-denied on `sts:As
 
 ## Key numbers
 
+These are the numbers most likely to appear in a scenario.
+
 - **Role session duration:** 1 hour by default, configurable up to 12 hours.
 - **Roles per account:** 1,000 default (10,000 max).
 - **Customer managed policies per account:** 1,500 default (10,000 max).
@@ -43,5 +49,7 @@ Start with the **IAM policy simulator** (evaluates a policy without a live call)
 An action is allowed only if some policy allows it **and** nothing denies it **and** no boundary or SCP caps it.
 
 ## Sources
+
+The detailed sources live in the topic documents, so this page links to them instead of repeating the full list.
 
 - Full references live in the per-topic documents: `01-concepts.md`, `03-troubleshooting.md`, and `05-limits-defaults.md`.

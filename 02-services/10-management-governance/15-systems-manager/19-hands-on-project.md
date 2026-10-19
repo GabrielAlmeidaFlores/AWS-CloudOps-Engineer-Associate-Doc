@@ -77,11 +77,15 @@ flowchart LR
 
 ## Prerequisites
 
+Read these documents first; the project assumes the agent, patching, and tagging rules they explain.
+
 - Read [01-fundamentals.md](01-fundamentals.md), [04-patch-manager.md](04-patch-manager.md), and [16-tagging.md](16-tagging.md) first.
 - Two EC2 instances running a supported Linux AMI with the SSM Agent and an instance role that includes `AmazonSSMManagedInstanceCore` (or Default Host Management Configuration enabled). A private subnet needs a NAT route or VPC endpoints for `ssm`, `ssmmessages`, and `ec2messages`.
 - AWS CLI configured for `us-east-2`.
 
 ## Steps
+
+Run these in order; each step builds on the previous one.
 
 1. **Confirm both nodes are managed.** If a node is missing, work the four layers in [12-troubleshooting.md](12-troubleshooting.md): agent, role, network, IMDS.
 
@@ -554,6 +558,8 @@ flowchart LR
 
 ## Validation
 
+After the build, confirm each item below with the command shown.
+
 1. **Fleet health.** Both nodes are `Online` with a current agent version in Fleet Manager.
 
    ```bash
@@ -580,6 +586,8 @@ flowchart LR
 
 ## Failure injection
 
+Break one part of the workflow at a time and watch the failure travel through the tag-to-baseline path.
+
 - **Lost tag.** Remove the `Patch Group` tag from one node and re-scan; it falls to the OS default baseline, the fallback path [04-patch-manager.md](04-patch-manager.md) describes.
 - **Broken registration.** Detach the instance role on one node and watch it drop to unmanaged, the first failure in [12-troubleshooting.md](12-troubleshooting.md).
 - **Association without tag.** Target an association at a tag no node carries and confirm it matches zero nodes, which is the AND rule in [16-tagging.md](16-tagging.md).
@@ -603,6 +611,8 @@ aws ec2 delete-tags --resources i-AAA i-BBB --tags Key=Env Key="Patch Group"
 
 ## What it practices
 
+The project exercises the following SOA-C03 domain tasks and skills.
+
 - **Domain 1, Task 1.1 (monitoring and logging):** Fleet Manager, Inventory, Compliance, and OpsCenter.
 - **Domain 1, Task 1.2 (remediation):** Automation, EventBridge-driven remediation, and OpsCenter follow-up.
 - **Domain 3, Task 3.1 (provision and maintain):** patch baselines, State Manager associations, Distributor, and Maintenance Windows.
@@ -610,6 +620,8 @@ aws ec2 delete-tags --resources i-AAA i-BBB --tags Key=Env Key="Patch Group"
 - **Domain 4 (compliance and secrets):** patch compliance and `SecureString` storage.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *AWS Systems Manager User Guide*. https://docs.aws.amazon.com/systems-manager/latest/userguide/
 - AWS: *Patch Manager*. https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager.html

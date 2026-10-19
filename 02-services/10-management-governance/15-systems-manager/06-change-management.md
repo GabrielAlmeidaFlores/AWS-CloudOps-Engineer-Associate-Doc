@@ -139,6 +139,8 @@ aws ssm create-maintenance-window \
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *AWS Systems Manager Documents*. https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html
 - AWS: *AWS Systems Manager Automation*. https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation.html
 - AWS: *AWS Systems Manager Maintenance Windows*. https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows.html

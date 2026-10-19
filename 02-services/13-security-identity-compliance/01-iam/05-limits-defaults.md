@@ -50,10 +50,14 @@ AWS STS allows 600 requests per second per account per Region across `AssumeRole
 
 ## Good to know
 
+These defaults and edge cases matter when a policy behaves differently than its text suggests.
+
 - White space does not count against policy size limits, so a policy can be reformatted for readability without changing its size.
 - User, group, and role names are case-insensitive and must be unique within the account.
 - An account alias is 3–63 characters, lowercase, and must follow DNS naming rules.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *IAM and AWS STS quotas*. https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html

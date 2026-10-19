@@ -27,6 +27,8 @@ Values verified against the AWS Systems Manager endpoints and quotas page and th
 
 ## Good to know
 
+These defaults and network facts matter for troubleshooting and for quota questions.
+
 - **SSM Agent communication ports.** Outbound HTTPS (TCP 443) to `ssm.*`, `ssmmessages.*`, and `ec2messages.*`. No inbound ports are required.
 - **Minimum agent versions.** Session Manager needs 2.3.68.0 or later; Default Host Management Configuration needs 3.2.582.0 or later; environment-variable interpolation in documents needs 3.3.2746.0 or later.
 - **Hybrid node prefixes.** `mi-` for hybrid-activated nodes, `i-` for EC2 instances.
@@ -43,6 +45,8 @@ Values verified against the AWS Systems Manager endpoints and quotas page and th
 Quotas are per account and per Region unless stated otherwise, and most can be raised through Service Quotas. When a scenario reports that a Systems Manager feature stopped working at a specific scale, check whether the applicable quota was reached before inspecting the configuration: hitting the managed-node, association, or patch-baseline default is a common cause.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *AWS Systems Manager endpoints and quotas*. https://docs.aws.amazon.com/general/latest/gr/ssm.html
 - AWS: *AWS Systems Manager Parameter Store quotas*. https://docs.aws.amazon.com/general/latest/gr/ssm.html#parameter-store

@@ -36,6 +36,8 @@ The flow is a decision tree rather than a checklist on purpose: the first "no" i
 
 ## Symptom: Run Command does not execute
 
+Work these checks from the node outward; the first failure usually explains the rest.
+
 - Confirm the node is **managed and Online** (`PingStatus: Online`). Run Command cannot reach a node that is not registered.
 - Confirm the document exists and is shared with the account, and that its type is `Command`.
 - Confirm the **instance role** allows the actions the document performs. A node can be managed and still fail a command whose actions its role does not permit.
@@ -44,6 +46,8 @@ The flow is a decision tree rather than a checklist on purpose: the first "no" i
 
 ## Symptom: Session Manager cannot connect
 
+A failed session is usually one of the following, checked in this order.
+
 - Agent version 2.3.68.0 or later.
 - The **caller** needs `ssm:StartSession`; the **instance role** needs the `ssmmessages` permissions.
 - The node must reach the `ssmmessages` endpoint (NAT or a VPC interface endpoint).
@@ -51,6 +55,8 @@ The flow is a decision tree rather than a checklist on purpose: the first "no" i
 - Expect no session logging for **port-forwarding or SSH** sessions; only interactive shell sessions are logged.
 
 ## Symptom: patching fails or a node is non-compliant
+
+Check the patch group, the baseline, and the scan result in that order.
 
 - The node has **no patch group tag**, so it resolves to no baseline. Add `Patch Group` (or `PatchGroup`) and register the group with a baseline.
 - The tag key is misspelled or has the wrong case; the key is case-sensitive.
@@ -75,6 +81,8 @@ aws ssm describe-instance-information \
 A node missing from this list was never managed (agent, role, or network). A node present with `ConnectionLost` registered before but is not reaching the service now.
 
 ## Sources
+
+The entries below are the AWS documentation pages this document draws on.
 
 - AWS: *Troubleshooting SSM Agent*. https://docs.aws.amazon.com/systems-manager/latest/userguide/troubleshooting-ssm-agent.html
 - AWS: *Troubleshooting Systems Manager Run Command*. https://docs.aws.amazon.com/systems-manager/latest/userguide/troubleshooting-remote-commands.html

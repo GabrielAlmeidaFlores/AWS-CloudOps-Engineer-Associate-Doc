@@ -67,5 +67,7 @@ To size a subnet, count the resources you need, add the 5 reserved, and round **
 
 ## Sources
 
+The entries below are the AWS documentation pages this document draws on.
+
 - AWS: *Subnet CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html
 - AWS: *VPC CIDR blocks*. https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html

@@ -5,6 +5,8 @@
 
 ## Non-negotiables
 
+These are the facts the exam expects you to recall without deriving them.
+
 - **A managed node needs three things.** SSM Agent installed and running, an IAM role that allows `ssm:UpdateInstanceInformation`, and a network path to the SSM endpoints. If a node is not managed, it is one of those, plus IMDS for Default Host Management.
 - **The agent connects out.** HTTPS 443 outbound to `ssm`, `ssmmessages`, and `ec2messages`. No inbound port, no bastion, no SSH key.
 - **Session Manager replaces bastion hosts and SSH.** Access is granted with IAM, and sessions are logged to CloudTrail, CloudWatch Logs, and S3 (not for port-forwarding or SSH sessions).
@@ -15,6 +17,8 @@
 - **Automation runs runbooks.** They can be triggered manually, by EventBridge, by Maintenance Windows, or by AWS Config remediation.
 
 ## The tools in one line each
+
+Each tool has one job, and the list below keeps them apart.
 
 - **Fleet Manager:** console/GUI remote management of nodes.
 - **Compliance:** patch and association compliance across the fleet.
@@ -38,6 +42,8 @@
 
 ## Key numbers
 
+These are the numbers most likely to appear in a scenario.
+
 - Managed nodes: **2,400** per account per Region by default.
 - Automation: **12 hours** max in a user context; `executeScript` **10 minutes**.
 - Parameter Store: **10,000** Standard / **100,000** Advanced; **4 KB** / **8 KB**; **100** versions retained.
@@ -51,5 +57,7 @@
 Install the agent, grant the role, reach the endpoints: after that, Systems Manager is a set of tools that all reach the node over the agent's outbound channel, each chosen by whether the job is a one-time command, an ongoing state, a scheduled window, or a multi-step workflow.
 
 ## Sources
+
+The detailed sources live in the topic documents, so this page links to them instead of repeating the full list.
 
 - Full references live in the per-tool documents. Start with `01-fundamentals.md` and `04-patch-manager.md`.
