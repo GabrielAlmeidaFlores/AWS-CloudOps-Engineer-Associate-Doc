@@ -4,6 +4,8 @@ This file is the address-number lookup for sizing and connectivity questions: th
 
 ## Must remember
 
+These are the address values the exam expects you to recall without looking them up; the table gives the number, the unit, and why it decides a sizing question.
+
 | Item | Value | Why it matters |
 |------|-------|----------------|
 | IPv4 address size | 32 bits | The basis of every `2^(32 − n)` calculation |
@@ -29,6 +31,8 @@ AWS withholds five addresses in every IPv4 subnet because the subnet needs them 
 A `/24` therefore yields 251 usable addresses and a `/28` yields 11.
 
 ## Address capacity
+
+The table converts a prefix length into total and usable addresses, so you can size a subnet without redoing the arithmetic.
 
 | Prefix | Addresses | Usable in an AWS subnet |
 |--------|-----------|-------------------------|

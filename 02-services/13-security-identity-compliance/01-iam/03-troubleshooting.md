@@ -51,6 +51,8 @@ The policy simulator is a console tool rather than a CLI command, and it is usua
 
 ## Common causes
 
+The table maps the failure to its usual cause and the check that confirms it, so you can move from symptom to fix without guessing.
+
 | Symptom | Likely cause |
 |---------|--------------|
 | Denied even though the policy looks right | An explicit `Deny` elsewhere, or a boundary/SCP |

@@ -51,7 +51,7 @@ The console is where a policy is authored, and the Create policy screen offers t
 
 *The IAM policy editor. A statement can be hand-written in the JSON tab or assembled through the Visual builder (1); the side panel (2) adds services, actions, resources, and conditions without editing the JSON by hand. The editor validates the document and reports errors, warnings, and suggestions as you type.*
 
-Three policy types matter most:
+Three policy types matter most in a scenario, and the table gives where each one attaches and what it controls.
 
 | Type | Attached to | Scope |
 |------|-------------|-------|

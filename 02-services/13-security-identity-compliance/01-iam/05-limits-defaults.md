@@ -7,6 +7,8 @@ This file is the IAM number lookup: the behavioral defaults the exam expects you
 
 ## Must remember
 
+These are the IAM values the exam expects you to recall; the table gives the number, the unit, and whether it can be raised.
+
 | Item | Value | Why it matters |
 |------|-------|----------------|
 | Policy evaluation default | Implicit deny | No allow means no access, IAM has no implicit allow |

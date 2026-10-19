@@ -4,6 +4,8 @@ This file is the Systems Manager number lookup: the behavioral defaults the exam
 
 ## Must remember
 
+These are the Systems Manager values the exam expects you to recall; the table gives the number, the unit, and whether it can be raised.
+
 | Item | Value | Why it matters |
 |------|-------|----------------|
 | Managed nodes per account per Region | 2,400 default | Default safe fleet size; exceeding it can drop nodes from Systems Manager |
@@ -37,7 +39,7 @@ These defaults and network facts matter for troubleshooting and for quota questi
 - **Distributor.** 500 packages, 25 versions per package, 20 GB package size, 20 attachments, 64 KB manifest.
 - **Fleet Manager RDP.** 5 concurrent sessions default, 60-minute maximum duration, 10-minute idle timeout (Microsoft licensing limits concurrent RDP).
 - **Parameter Store throughput.** Default 40 TPS shared across `GetParameter`, `GetParameters`, and `GetParametersByPath`; higher throughput is billed and can reach 10,000 TPS for `GetParameter`. `SecureString` reads are further bounded by KMS throughput.
-- **Explorer / Inventory resource data syncs.** 5 each.
+- **Explorer / Inventory resource data syncs.** 5 each. Beyond that, a new sync is rejected, so centralizing more than five sources needs a different design.
 - **Enabling higher throughput or the advanced tier incurs charges.** Treat these as cost decisions, not just configuration.
 
 ## How to read a quota

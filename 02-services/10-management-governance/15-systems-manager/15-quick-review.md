@@ -44,15 +44,17 @@ The tools overlap in the console, so the list gives each one its single job; use
 
 ## Key numbers
 
-These are the values a scenario can turn on. Memorize the behavioral default; look up the quota ceiling when the question supplies the number.
+These are the numbers a scenario can turn on, and each row pairs the default with what it controls and what happens when it is exceeded.
 
-- Managed nodes: **2,400** per account per Region by default.
-- Automation: **12 hours** max in a user context; `executeScript` **10 minutes**.
-- Parameter Store: **10,000** Standard / **100,000** Advanced; **4 KB** / **8 KB**; **100** versions retained.
-- Inventory: **30 minutes** minimum interval; **30 days** retention.
-- State Manager: **2,000** associations; **20** per node.
-- Session Manager idle timeout: **20 minutes** default.
-- Document size: **64 KB**; **500** documents.
+| Setting | Default | What it controls and why it matters |
+|---------|---------|-------------------------------------|
+| Managed nodes | 2,400 per account per Region | The registration ceiling. A fleet above it needs a quota increase before new nodes appear, which is the usual cause of "the instance launched but never shows up". |
+| Automation execution | 12 hours in a user context; `executeScript` step 10 minutes | The hard timeout on a runbook step. A long script fails at the step timeout unless the work is split or the timeout is raised. |
+| Parameter Store | 10,000 Standard and 100,000 Advanced parameters per account per Region; 4 KB Standard and 8 KB Advanced values; 100 versions retained | The count and value-size ceilings. A large config blob or a high parameter count forces the Advanced tier, which changes the cost model. |
+| Inventory | 30 minutes minimum collection interval; 30 days console retention | How fresh and how far back the inventory data goes. Longer retention requires a resource data sync to S3. |
+| State Manager | 2,000 associations per account per Region; 20 per node | The scale limits for ongoing enforcement. A node that already has 20 associations cannot take another, which appears as a failed association. |
+| Session Manager | 20-minute default idle timeout | When an idle session closes. A long interactive task needs activity or a configured timeout. |
+| SSM documents | 64 KB per document; 500 documents per account per Region | The size and count limits for the documents that define commands and runbooks. A large script must be fetched from S3 instead of embedded. |
 
 ## The one-liner
 

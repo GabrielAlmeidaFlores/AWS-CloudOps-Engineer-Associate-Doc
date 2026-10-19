@@ -53,8 +53,8 @@ aws resource-groups list-group-resources --group-name prod-web
 
 The limits below decide how far a tag-based grouping scheme can scale, and one of them is regional: a group cannot span Regions, so a multi-Region fleet needs a group per Region even when the tags are identical.
 
-- **Resource groups per account per Region:** 100 by default (adjustable).
-- **Tags per resource:** 50 user-created tags; a tag key is 1 to 128 characters, and keys beginning with `aws:` are reserved.
+- **Resource groups per account per Region:** 100 by default (adjustable). A large tag-based scheme can exceed it, and the fix is a quota increase rather than splitting the query.
+- **Tags per resource:** 50 user-created tags; a tag key is 1 to 128 characters, and keys beginning with `aws:` are reserved. The cap is per resource, and a resource at the cap rejects the next tag.
 - **Regional, always.** A resource group cannot span Regions, so a fleet that runs in three Regions needs three groups even when the tag values are identical. A scenario that expects one group to cover every Region is testing exactly this.
 
 ## Sources

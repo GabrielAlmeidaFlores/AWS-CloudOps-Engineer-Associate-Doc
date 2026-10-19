@@ -125,6 +125,8 @@ An SCP limits what *your* principals can do; an RCP limits who can do things to 
 
 ## Identity vs resource policy (quick reference)
 
+The two policy types answer different questions, and the table is the quick reference for which one to reach for in a scenario.
+
 | Attribute | Identity-based | Resource-based |
 |-----------|----------------|----------------|
 | Attached to | user, group, role | a resource |

@@ -8,7 +8,7 @@ A tag is a key and an optional value, both strings. Neither has meaning to AWS; 
 
 - **Key length:** 1 to 128 Unicode characters. Keys beginning with `aws:` are reserved for AWS and cannot be applied by you.
 - **Value length:** up to 256 Unicode characters. A value is optional but most targeting uses one.
-- **Tags per resource:** 50, except **Automations, which allow 5**.
+- **Tags per resource:** 50, except **Automations, which allow 5**. A tag scheme that works for instances can fail when applied to a runbook because the runbook hits its lower cap.
 - **No PII.** AWS explicitly warns against putting personally identifiable information in a tag value.
 
 Tags are applied at resource creation (the `…Create…` APIs accept a `Tags` parameter) or afterward with `AddTagsToResource`. The `ResourceType` for that call is one of a fixed set.

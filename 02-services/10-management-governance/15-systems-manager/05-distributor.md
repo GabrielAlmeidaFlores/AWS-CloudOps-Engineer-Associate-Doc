@@ -85,8 +85,8 @@ aws ssm create-association \
 
 The quotas below bound how many packages and versions an account can keep in a Region. They matter when a deployment fails at scale or when a package version must be retained for rollback.
 
-- **Packages per account per Region:** 500; **versions per package:** 25.
-- **Package size:** 20 GB maximum; **manifest:** 64 KB; up to 20 attachments of 1 GB each; up to 1,000 files per package.
+- **Packages per account per Region:** 500; **versions per package:** 25. A new package beyond 500 is rejected, and a package keeps only 25 versions, so older versions must be pruned before you can publish again.
+- **Package size:** 20 GB maximum; **manifest:** 64 KB; up to 20 attachments of 1 GB each; up to 1,000 files per package. A package that exceeds any of these limits fails at creation, so large artifacts must be split or fetched from S3.
 - **Exam trap:** third-party packages (Trend Micro, for example) are published and maintained by the vendor, not by AWS. The shared responsibility model puts the security of a vendor package on you to validate, so an answer that treats a third-party package as AWS-supported is wrong.
 
 ## Sources

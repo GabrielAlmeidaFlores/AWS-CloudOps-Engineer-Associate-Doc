@@ -56,6 +56,8 @@ flowchart LR
 
 ## Concepts covered
 
+The table maps each Systems Manager capability in this project to the document that explains it and the step where the build applies it.
+
 | Capability | Document | Where it appears in the build |
 |------------|----------|-------------------------------|
 | Managed nodes and the instance role | [01-fundamentals.md](01-fundamentals.md) | Step 1 |

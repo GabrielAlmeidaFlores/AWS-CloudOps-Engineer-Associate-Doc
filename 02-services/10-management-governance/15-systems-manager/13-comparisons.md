@@ -4,6 +4,8 @@ This file isolates the Systems Manager distinctions that change an exam answer, 
 
 ## Run Command vs State Manager vs Maintenance Windows
 
+All three can run a command, so the table separates them by when the work runs, how it is targeted, and what each one is designed to guarantee.
+
 | | Run Command | State Manager | Maintenance Windows |
 |--|-------------|---------------|---------------------|
 | Nature | Run a command once | Maintain a state on a schedule | Run a task inside a bounded window |
@@ -19,6 +21,8 @@ The documentation states the distinction directly: choose State Manager to **aut
 
 ## Patch groups vs patch policies
 
+Both mechanisms influence which baseline a node uses, but they operate at different scopes; the table shows where each is defined and whether they can be combined.
+
 | | Patch groups | Patch policies (Quick Setup) |
 |--|--------------|------------------------------|
 | Mechanism | Tag (`Patch Group` or `PatchGroup`) mapped to a baseline | Policy configured in Quick Setup |
@@ -29,6 +33,8 @@ The documentation states the distinction directly: choose State Manager to **aut
 A common trap: a scenario that sets a `Patch Group` tag *and* configures a patch policy is mixing two mechanisms. Patch policies do not read patch groups.
 
 ## Parameter Store vs Secrets Manager vs AppConfig
+
+All three store configuration, but they differ in what they protect and how the value reaches the application; the table isolates the deciding difference.
 
 | | Parameter Store | Secrets Manager | AppConfig |
 |--|-----------------|-----------------|-----------|
@@ -41,6 +47,8 @@ The default rule for the exam: configuration goes in **Parameter Store**, rotati
 
 ## Default Host Management Configuration vs instance profile
 
+Both give a node the permissions Systems Manager needs; the table shows when the account-level configuration replaces the per-instance profile.
+
 | | Default Host Management Configuration | Instance profile |
 |--|---------------------------------------|------------------|
 | IAM setup | Automatic default role | You create and attach a role |
@@ -51,6 +59,8 @@ The default rule for the exam: configuration goes in **Parameter Store**, rotati
 A node with an instance profile that allows `ssm:UpdateInstanceInformation` will not fall back to the Default Host Management role. That precedence is a deliberate exam distinction.
 
 ## Session Manager vs bastion host or SSH
+
+The table compares the access paths by the inbound port, credential, and audit trail each one requires.
 
 | | Session Manager | Bastion host + SSH |
 |--|-----------------|--------------------|
@@ -63,6 +73,8 @@ Session Manager replaces bastion hosts, SSH keys, and open inbound ports with IA
 
 ## Explorer vs OpsCenter (and Application Manager)
 
+The tools present the same operational data differently; the table separates the dashboard view, the work queue, and the application view.
+
 | | Explorer | OpsCenter | Application Manager |
 |--|----------|-----------|---------------------|
 | Role | Aggregated operations dashboard | Queue of OpsItems to investigate and fix | Application-centric operations view |
@@ -72,6 +84,8 @@ Session Manager replaces bastion hosts, SSH keys, and open inbound ports with IA
 Explorer is the *view*; OpsCenter is the *work*. "Reduce mean time to resolution by viewing, investigating, and remediating in one place" points to OpsCenter. Application Manager is the application-context variant and is closed to new customers.
 
 ## Automation vs Run Command
+
+Both execute on a node, but one runs a single command and the other runs a workflow; the table shows which fits a multi-step or branching task.
 
 | | Run Command | Automation |
 |--|-------------|------------|

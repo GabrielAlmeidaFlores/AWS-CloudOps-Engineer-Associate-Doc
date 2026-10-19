@@ -34,6 +34,8 @@ Every topic follows the same shape, so the method is the same everywhere.
 
 ## Documented topics
 
+The table lists the topics documented so far, the type of each one, what it covers, and the folder to open first.
+
 | Topic | Type | What it covers | Entry point |
 |-------|------|----------------|-------------|
 | IP addressing / CIDR | Concept | CIDR math, reserved addresses, subnets, public/private routing, NAT, peering | [README](01-concepts/01-networking/01-ip-addressing/README.md) |
@@ -88,6 +90,8 @@ Alongside those layers, `08-reference/` holds the source material (AWS documenta
 Folders and files carry numeric prefixes that encode the read sequence (for example `01-concepts/01-networking/01-ip-addressing/`). Directories are created progressively as each topic is documented. Each major concept has **one canonical home**; related documents link to it rather than duplicating it.
 
 ## Exam domains and format
+
+The table gives the five domains and their weights, which is the first thing to use when planning study time.
 
 | # | Domain | Weight |
 |---|--------|--------|

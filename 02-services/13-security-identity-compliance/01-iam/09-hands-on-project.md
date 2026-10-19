@@ -38,6 +38,8 @@ flowchart LR
 
 ## Concepts covered
 
+The table maps each IAM concept in this project to the document that explains it and the step where the build applies it.
+
 | Concept | Document | Where it appears in the build |
 |---------|----------|-------------------------------|
 | Users, groups, roles | [01-concepts.md](01-concepts.md) | The analyst user, the analysts group, the role |

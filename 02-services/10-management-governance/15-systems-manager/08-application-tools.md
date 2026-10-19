@@ -49,6 +49,8 @@ Read it left to right: the value comes from a source, is validated, and is deplo
 
 ## Choosing between the three
 
+Application Manager, AppConfig, and Parameter Store solve different parts of the same problem; the table separates them by what they change and when the change takes effect.
+
 | Need | Tool |
 |------|------|
 | Static configuration or lightweight secrets, read at runtime | Parameter Store (see [07-parameter-store.md](07-parameter-store.md)) |

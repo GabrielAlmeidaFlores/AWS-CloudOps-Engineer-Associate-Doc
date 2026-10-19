@@ -103,6 +103,8 @@ Read the arrows from right to left: the instance is the one that holds the conne
 
 ## Choosing between them
 
+The three tools overlap in what they can run, so the table separates them by trigger, scope, and the question each one answers.
+
 | Question the scenario asks | Tool |
 |----------------------------|------|
 | "Open a shell, or tunnel a port, without SSH or a bastion" | Session Manager |

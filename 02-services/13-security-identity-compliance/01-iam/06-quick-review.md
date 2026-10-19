@@ -35,12 +35,14 @@ Mixing them up is the classic cross-account failure: an access-denied on `sts:As
 
 ## Key numbers
 
-These are the values a scenario can turn on. Memorize the behavioral default; look up the quota ceiling when the question supplies the number.
+These are the numbers a scenario can turn on, and each row pairs the default with what it controls and what happens when it is exceeded.
 
-- **Role session duration:** 1 hour by default, configurable up to 12 hours.
-- **Roles per account:** 1,000 default (10,000 max).
-- **Customer managed policies per account:** 1,500 default (10,000 max).
-- **Customer managed policy size:** 6,144 characters.
+| Setting | Default | What it controls and why it matters |
+|---------|---------|-------------------------------------|
+| Role session duration | 1 hour, configurable up to 12 hours | How long the temporary credentials last. A batch job that runs longer than the session fails with expired credentials unless the role is re-assumed or the duration is raised. |
+| Roles per account | 1,000, up to 10,000 | The identity ceiling. Hitting it blocks new workload onboarding and is usually fixed by reusing roles or raising the quota. |
+| Customer managed policies per account | 1,500, up to 10,000 | The reusable policy ceiling. Large organizations hit it and consolidate policies or move to permissions boundaries. |
+| Customer managed policy size | 6,144 characters | The maximum document size. A policy that grows past it cannot be saved, which forces splitting the statement or using conditions. |
 
 ## Troubleshooting levers
 

@@ -21,6 +21,8 @@ The path runs from symptom to fix: check the usable count first (`2^(32−n) −
 
 ## Symptom table
 
+The two failure modes have different causes, so the table maps each symptom to the layer to check first and the fix that matches.
+
 | Symptom | Likely cause | Fix |
 |---------|--------------|-----|
 | "Insufficient free addresses" in a subnet | The subnet exhausted its usable range, the 5 reserved addresses are gone first | Launch in another subnet, or build a larger subnet from a secondary VPC CIDR |

@@ -51,6 +51,8 @@ flowchart LR
 
 ## Concepts covered
 
+The table maps each concept in this project to the document that explains it and the step where the build applies it.
+
 | Concept | Document | Where it appears in the build |
 |---------|----------|-------------------------------|
 | CIDR notation and host math | [01-concepts.md](01-concepts.md) | Choosing `/16` and `/24` blocks |

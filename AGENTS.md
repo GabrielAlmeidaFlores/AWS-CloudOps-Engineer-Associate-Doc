@@ -815,6 +815,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 ## Phase 1: Networking & IP fundamentals
 
+Phase 1 builds the networking and IP foundations, from addressing through VPC, gateways, routing, and DNS; each topic depends on the one before it.
+
 | # | Topic | Canonical path | Type | Depends | Status |
 |---|-------|----------------|------|---------|--------|
 | 1 | IP addressing / CIDR | `01-concepts/01-networking/01-ip-addressing/` | Concept | - | ✅ |
@@ -838,6 +840,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 ## Phase 2: Compute & block storage
 
+Phase 2 moves to compute and block storage, starting with EC2 and EBS, then the image pipeline and the networking relationships that connect them.
+
 | 19 | EC2 | `02-services/05-compute/01-ec2/` | Service | 3, 7 | ⬜ |
 | 20 | EBS | `02-services/14-storage/02-ebs/` | Service | 19 | ⬜ |
 | 21 | EC2 Image Builder | `02-services/05-compute/02-ec2-image-builder/` | Service | 19, 20 | ⬜ |
@@ -847,12 +851,16 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 ## Phase 3: Object & shared storage
 
+Phase 3 covers object and shared storage, where S3 and EFS establish the storage models the later services use.
+
 | 25 | S3 | `02-services/14-storage/01-s3/` | Service | - | ⬜ |
 | 26 | EFS | `02-services/14-storage/03-efs/` | Service | 3, 19 | ⬜ |
 | 27 | FSx | `02-services/14-storage/04-fsx/` | Service | 19, 26 | ⬜ |
 | 28 | Encryption (concept) | `01-concepts/02-security/06-encryption/` | Concept | - | ⬜ |
 
 ## Phase 4: Observability (Domain 1)
+
+Phase 4 builds the observability knowledge that feeds Domain 1, from metrics and logs to alarms, dashboards, and remediation.
 
 | 29 | Metrics | `01-concepts/03-observability/01-metrics/` | Concept | - | ⬜ |
 | 30 | CloudWatch | `02-services/10-management-governance/05-cloudwatch/` | Service | 19, 29 | ⬜ |
@@ -866,6 +874,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 38 | EC2 + CloudWatch | `03-cross-service/02-compute-monitoring/01-ec2-cloudwatch/` | Relationship | 19, 30 | ⬜ |
 
 ## Phase 5: Reliability & scaling (Domain 2)
+
+Phase 5 builds the reliability and scaling knowledge that feeds Domain 2, from high availability and elasticity to load balancing and failover.
 
 | 39 | High availability | `01-concepts/04-reliability/01-high-availability/` | Concept | 3, 19 | ⬜ |
 | 40 | Fault tolerance | `01-concepts/04-reliability/02-fault-tolerance/` | Concept | 39 | ⬜ |
@@ -881,6 +891,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 ## Phase 6: Databases
 
+Phase 6 covers the database services, including relational, serverless, key-value, and caching options.
+
 | 50 | RDS | `02-services/07-database/06-rds/` | Service | 3, 20, 28 | ⬜ |
 | 51 | RDS Multi-AZ | `03-cross-service/06-reliability/02-rds-multi-az/` | Relationship | 50 | ⬜ |
 | 52 | RDS Proxy | `02-services/07-database/07-rds-proxy/` | Service | 50 | ⬜ |
@@ -891,6 +903,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 57 | ElastiCache | `02-services/07-database/05-elasticache/` | Service | 50, 55 | ⬜ |
 
 ## Phase 7: Application integration & serverless
+
+Phase 7 covers application integration and serverless, including the messaging and event services that connect workloads.
 
 | 58 | SNS | `02-services/02-application-integration/02-sns/` | Service | - | ⬜ |
 | 59 | SQS | `02-services/02-application-integration/03-sqs/` | Service | - | ⬜ |
@@ -903,6 +917,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 66 | Lambda + VPC | `03-cross-service/01-compute-networking/05-lambda-vpc/` | Relationship | 3, 62 | ⬜ |
 
 ## Phase 8: Deployment & automation (Domain 3)
+
+Phase 8 builds the deployment and automation knowledge that feeds Domain 3, from infrastructure as code to Systems Manager and Organizations.
 
 | 67 | Infrastructure as Code | `01-concepts/05-automation/01-infrastructure-as-code/` | Concept | - | ⬜ |
 | 68 | CloudFormation | `02-services/10-management-governance/02-cloudformation/` | Service | 67 | ⬜ |
@@ -917,6 +933,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 77 | CloudFormation StackSets + Organizations | `03-cross-service/07-deployment-automation/02-cloudformation-stacksets-organizations/` | Relationship | 68, 76 | ⬜ |
 
 ## Phase 9: Security & compliance (Domain 4, beyond IAM)
+
+Phase 9 builds the security and compliance knowledge that feeds Domain 4, beyond the IAM topic documented first.
 
 | 78 | Least privilege | `01-concepts/02-security/05-least-privilege/` | Concept | 0 | ⬜ |
 | 79 | KMS | `02-services/13-security-identity-compliance/04-kms/` | Service | 28 | ⬜ |
@@ -937,6 +955,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 ## Phase 10: Content delivery & edge
 
+Phase 10 covers content delivery and edge services, including CloudFront, Global Accelerator, and DNS-based failover.
+
 | 94 | CloudFront | `02-services/12-networking-content-delivery/10-cloudfront/` | Service | 45, 81 | ⬜ |
 | 95 | Global Accelerator | `02-services/12-networking-content-delivery/11-global-accelerator/` | Service | 43 | ⬜ |
 | 96 | CloudFront + WAF + Shield | `03-cross-service/03-networking-security/03-cloudfront-waf-shield/` | Relationship | 92–94 | ⬜ |
@@ -945,12 +965,16 @@ This is the fixed sequence in which we document the repository. Work it top to b
 
 ## Phase 11: Cost & optimization
 
+Phase 11 covers cost management and optimization, including the tools that explain and reduce spend.
+
 | 99 | Cost Explorer | `02-services/04-cloud-financial-management/01-cost-explorer/` | Service | 37 | ⬜ |
 | 100 | Cost & Usage Reports | `02-services/04-cloud-financial-management/02-cost-and-usage-reports/` | Service | 99 | ⬜ |
 | 101 | Savings Plans | `02-services/04-cloud-financial-management/03-savings-plans/` | Service | 99 | ⬜ |
 | 102 | Compute Optimizer | `02-services/10-management-governance/06-compute-optimizer/` | Service | 19, 30 | ⬜ |
 
 ## Phase 12: Containers
+
+Phase 12 covers containers, from image storage to orchestration and monitoring.
 
 | 103 | ECR | `02-services/06-containers/01-ecr/` | Service | 19 | ⬜ |
 | 104 | ECS | `02-services/06-containers/02-ecs/` | Service | 62, 103 | ⬜ |
@@ -959,6 +983,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 107 | EKS + CloudWatch | `03-cross-service/02-compute-monitoring/03-eks-cloudwatch/` | Relationship | 30, 105 | ⬜ |
 
 ## Phase 13: Remaining niche services (single consolidated doc each)
+
+Phase 13 covers the remaining in-scope services, each in a single consolidated document.
 
 | 108 | Athena | `02-services/01-analytics/01-athena/` | Service | 25 | ⬜ |
 | 109 | Data Firehose | `02-services/01-analytics/02-data-firehose/` | Service | 25 | ⬜ |
@@ -974,6 +1000,8 @@ This is the fixed sequence in which we document the repository. Work it top to b
 | 119 | IPAM | `02-services/10-management-governance/17-ipam/` | Service | 3 | ⬜ |
 
 ## Phase 0: done
+
+Phase 0 is the prerequisite already documented, and it anchors the order of the phases that follow.
 
 | # | Topic | Canonical path | Status |
 |---|-------|----------------|--------|
@@ -1780,6 +1808,14 @@ Never use the em dash. It is one of the most reliable signals of machine-written
 
 A heading or a bold label must never be followed directly by a bulleted or numbered list. Write a lead-in paragraph first, even when the heading is procedural such as Prerequisites, Steps, Validation, or Sources. The paragraph must do real work: name what the list contains, explain why it matters or how to use it, and add the context a reader needs before scanning the items. A one-line announcement such as "Check these in order" or "The entries below are the sources" is too shallow and is not acceptable. A section titled CloudWatch, for example, opens with a sentence about what Systems Manager sends to CloudWatch, then lists the log, dashboard, and Application Insights integrations. A bare heading followed by bullets is the pattern to remove.
 
+#### Tables
+
+A heading or a bold label must never be followed directly by a table. Write a lead-in paragraph first. The paragraph must do real work: name what the table compares or lists, explain why it matters or how to read it, and add the context a reader needs before scanning the columns. A one-line label such as "Symptom table" or "Limits" is too shallow and is not acceptable. Two tables must not sit back to back without a paragraph between them. The table supports the prose; it does not replace it.
+
+#### Numbers and one-line facts
+
+A list of bare numbers or one-line facts is not documentation. Each item must say what the value controls, what happens when it is exceeded, and how a scenario uses it. A "Key numbers" section is a table with a "Why it matters" column, or a set of bullets that carry the consequence, not just the value. For a tool, state the job it does and what distinguishes it from the adjacent tool. If a reader would still ask "so what", the item is not finished.
+
 #### Notes and callouts
 
 Use blockquoted callouts (`> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!CAUTION]`, `[!WARNING]`) to flag what the user must remember. A callout is not a one-liner. It must stand on its own: name the concept, explain why it matters for the exam, and state the consequence of getting it wrong. The reader must grasp the point without reading the surrounding section. Do not write a two-word hint, write what the concept means, where it applies, and the scenario where it decides the answer.
@@ -2059,7 +2095,7 @@ Node styles (non-service nodes):
 | Allow or success | `#7AA116` | `#7AA116` | `#ffffff` |
 | Deny or failure | `#DD344C` | `#DD344C` | `#ffffff` |
 
-Shapes:
+The following shapes carry a fixed meaning across every diagram:
 
 | Meaning | Syntax | Renders as |
 |---------|--------|-----------|
@@ -2915,6 +2951,8 @@ These checks confirm the document teaches rather than summarizes and that it has
 
 + Every substantive document meets the substance floor (§29): verified behavior, at least one concrete value, operational detail, an exam trap, and cross-service links.
 + Every substantive document and every README opens with a purpose paragraph that answers the four questions in §29.
++ Every table is introduced by a meaningful paragraph, not a heading or a bold label (§28).
++ No list consists of bare numbers or one-line facts without the consequence or use (§28).
 + A structural check confirms that the first block after each H1 is a purpose paragraph, not a heading, callout, list, table, or code block (the root README is exempt; its purpose sits in the "What this is" section below the centered title block).
 + No document trips a shallow-content trigger (§29).
 + No document was lengthened by padding, rephrasing, or restating (the padding ban, §29).
@@ -3035,7 +3073,7 @@ Determine which existing documents should be linked instead of duplicated.
 
 ### Step 11
 
-Create or update the documentation, including the purpose paragraph required by §29 and the AWS-styled Mermaid diagrams required by §32.
+Create or update the documentation, including the purpose paragraph required by §29, the list and table lead-in paragraphs and the depth rule for numbers and one-line facts required by §28, and the AWS-styled Mermaid diagrams required by §32.
 
 ### Step 12
 
