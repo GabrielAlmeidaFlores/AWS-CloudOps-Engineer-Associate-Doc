@@ -11,6 +11,9 @@ aws.credentials
 # Playwright MCP browser artifacts (snapshots, logs)
 .playwright-mcp/
 
+# Local validation scripts
+scripts/
+
 # Python bytecode
 __pycache__/
 *.py[cod]

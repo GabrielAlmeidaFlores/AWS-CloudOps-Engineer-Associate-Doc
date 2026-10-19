@@ -2915,7 +2915,7 @@ These checks confirm the document teaches rather than summarizes.
 
 + Every substantive document meets the substance floor (§29): verified behavior, at least one concrete value, operational detail, an exam trap, and cross-service links.
 + Every substantive document and every README opens with a purpose paragraph that answers the four questions in §29.
-+ `scripts/check-doc-purpose.py` reports no document whose first block after the H1 is missing a purpose paragraph (the root README is exempt; its purpose sits in the "What this is" section below the centered title block).
++ A structural check confirms that the first block after each H1 is a purpose paragraph, not a heading, callout, list, table, or code block (the root README is exempt; its purpose sits in the "What this is" section below the centered title block).
 + No document trips a shallow-content trigger (§29).
 + No document was lengthened by padding, rephrasing, or restating (the padding ban, §29).
 + Each document adds facts a reader could not infer from its title.
