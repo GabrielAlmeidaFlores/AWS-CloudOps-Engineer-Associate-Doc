@@ -1,5 +1,7 @@
 # IAM concepts
 
+This document establishes the IAM model the rest of the topic depends on: principals, policy structure, and the evaluation logic that decides an allow or a deny. It comes first because every later document assumes the chain; the operational controls are in [02-security.md](02-security.md), and the failure paths are in [03-troubleshooting.md](03-troubleshooting.md).
+
 > [!IMPORTANT]
 > The policy evaluation logic is the highest-yield IAM topic on the exam. Learn three rules cold: (1) **explicit `Deny` always wins**, because a single deny in any policy overrides every allow. (2) **Identity + resource policies are a union**, so an action allowed by either succeeds, and a resource-based grant can work even when the identity policy is empty. (3) **Permissions boundaries and SCPs are intersections**, so they cap what an otherwise-allowed identity can do. Most "why is access denied" questions hinge on misreading which of these three applies.
 

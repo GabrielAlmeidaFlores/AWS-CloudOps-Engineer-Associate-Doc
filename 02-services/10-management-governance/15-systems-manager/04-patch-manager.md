@@ -1,6 +1,6 @@
 # Patch Manager
 
-Patch Manager automates patching managed nodes with security and other updates. It answers two questions: which patches should a node have, and does it have them. The first is defined by a *patch baseline*; the second is reported as *patch compliance*. The bridge between the two is the *patch group*, a tag that tells a node which baseline applies to it.
+This document explains how Patch Manager answers two questions: which patches a node should have, and whether it has them. It is separate from Run Command because patching adds a baseline, a patch group, and a compliance model; the command mechanics are in [03-session-run-state.md](03-session-run-state.md), and the tag that selects the baseline is in [16-tagging.md](16-tagging.md).
 
 ## What it does
 

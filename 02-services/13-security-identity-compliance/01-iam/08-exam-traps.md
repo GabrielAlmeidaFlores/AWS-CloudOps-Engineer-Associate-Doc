@@ -1,6 +1,6 @@
 # IAM exam traps
 
-Recurring mistakes candidates make, and what AWS actually does.
+This file collects the IAM misconceptions that survive a first read and states what AWS actually does. It is a correction layer, not an introduction; each trap points back to the document that establishes the correct behavior, so the reader can repair the model rather than memorize the correction.
 
 > [!CAUTION]
 > These are the traps that cost points. The two most expensive are: (1) forgetting that **an explicit deny beats every allow**, so a scenario with a working allow plus a hidden deny in a boundary, SCP, or inline policy is actually denied; and (2) mixing up the role's **trust policy** (who may assume the role) with its **permissions policy** (what the assumed role may do). Fixing the wrong one of the two is the classic "cross-account access still failing" question.

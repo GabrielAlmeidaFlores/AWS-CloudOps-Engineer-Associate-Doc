@@ -1,6 +1,6 @@
 # Hands-on project: operate a small fleet end to end
 
-This is the topic's practice project. It takes the Systems Manager capabilities documented in this folder and wires them into one fleet workflow: managed nodes and the instance role, tagging, Resource Groups, Parameter Store, Inventory with a resource data sync, Patch Manager with a patch group, Run Command, State Manager, Session Manager, Distributor, AppConfig, Automation, a Maintenance Window, Compliance, OpsCenter, and Fleet Manager. Nothing depends on it; it depends only on this topic.
+This project turns the folder's Systems Manager capabilities into one fleet workflow you can run, break, and repair: managed nodes, tagging, Resource Groups, Parameter Store, Inventory, patch groups, Run Command, State Manager, Session Manager, Distributor, AppConfig, Automation, a Maintenance Window, Compliance, OpsCenter, and Fleet Manager. It is the practice half of the topic, not another explanation, and nothing else depends on it; the mechanics are in the linked documents, and the build applies them end to end.
 
 ## Goal
 

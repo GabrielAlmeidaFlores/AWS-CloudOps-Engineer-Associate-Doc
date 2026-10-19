@@ -1,6 +1,6 @@
 # Hands-on project: build a peered, two-tier VPC network
 
-This is the topic's practice project. It takes every address concept documented in this folder and puts them into one build: CIDR sizing, the reserved addresses, public and private subnets, the internet gateway, the NAT gateway with an Elastic IP, route tables, and VPC peering with non-overlapping ranges. Nothing depends on it; it depends only on this topic.
+This project turns the folder's address concepts into one build you can inspect, break, and repair: two peered VPCs with public and private subnets, a NAT gateway, route tables, and non-overlapping ranges. It is the practice half of the topic, not another explanation, and nothing else in the folder depends on it; the mechanics are in the linked documents, and the build applies them end to end.
 
 ## Goal
 

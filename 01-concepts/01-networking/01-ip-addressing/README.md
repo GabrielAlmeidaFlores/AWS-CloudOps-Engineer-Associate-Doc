@@ -1,6 +1,6 @@
 # IP addressing / CIDR
 
-An IP address identifies a host on a network. CIDR notation (`a.b.c.d/n`) describes a *range* of addresses by fixing the leading `n` bits. AWS uses CIDR for every VPC and subnet, so subnet math decides how many resources fit and whether two networks can connect.
+This README is the map for the IP addressing topic. An IP address identifies a host, CIDR notation describes a range, and AWS uses CIDR for every VPC and subnet, so subnet math decides capacity and connectivity. The page explains why the documents are ordered as they are and how they connect; the explanation starts in [01-concepts.md](01-concepts.md).
 
 ## What IP addressing is
 

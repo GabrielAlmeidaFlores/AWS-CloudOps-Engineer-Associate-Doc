@@ -1,6 +1,6 @@
 # Systems Manager fundamentals
 
-Before any Systems Manager capability works, three things must be true of a machine: the **SSM Agent** is installed and running, the agent can reach the **Systems Manager service endpoints**, and the machine has an **IAM role** that authorizes it to register. When those hold, the machine appears as a *managed node* and Systems Manager can act on it. This document explains each piece and the Default Host Management Configuration that removes the manual IAM step for EC2.
+This document establishes the three conditions that make a machine manageable at all: the SSM Agent is installed and running, the agent can reach the service endpoints, and an IAM role authorizes it to register. It also covers Default Host Management Configuration, which removes the manual IAM step for EC2, so this is the setup every later tool assumes. The individual node tools are in [02-node-tools.md](02-node-tools.md) and [03-session-run-state.md](03-session-run-state.md).
 
 ## Managed nodes
 

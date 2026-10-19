@@ -1,5 +1,7 @@
 # Systems Manager quick review
 
+This page is the final recall gate for the topic, not a second explanation. It compresses the managed-node requirements, the tool roles, and the key numbers into the facts you should be able to state without derivation.
+
 > [!NOTE]
 > This is the last thing you read before the exam. If any line below is not instantly obvious, go back to the document that owns it: fundamentals in `01-fundamentals.md`, node tools in `02-node-tools.md` and `03-session-run-state.md`, patching in `04-patch-manager.md`, automation in `06-change-management.md`, and configuration in `07-parameter-store.md`.
 

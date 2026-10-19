@@ -1867,6 +1867,10 @@ For every service/topic, investigate the following concepts where relevant:
 32. Exam practice questions, at least ten original exam-style items per topic in `<topic>/<NN>-exam-questions.md`, with a per-option rationale in a collapsible answer (§69).
 33. A hands-on project at the end of the topic (`<topic>/<NN>-hands-on-project.md`) that exercises the **maximum set** of the topic's services and concepts in one build, with an architecture Mermaid diagram, a coverage table, a "how it works" explanation, build steps (console and CLI), a CloudFormation template that builds the same infrastructure, validation, failure injection where safe, and cleanup (§20).
 
+### Document purpose statement
+
+Every substantive document, and every topic or repository README, opens with a purpose statement: one paragraph immediately after the `#` title, before any other heading, callout, list, table, or code block. It answers four questions in two to four sentences: the question or task the file serves; why it exists as a separate file and what gap it closes; what it covers and what it deliberately leaves to a linked document; and whether it is a lesson, a reference, a recall gate, a test, a build, or a map, plus where the reader goes next. Do not add a heading or a bold label; the paragraph itself is the purpose statement. Write it specifically: a sentence that could be moved unchanged to another service's document is not a purpose statement. Do not repeat the README's SOA-C03 mapping or the document-index one-liner. `AGENTS.md` is exempt because it is the specification, not a topic document.
+
 Only include sections that are technically relevant.
 
 Diagrams and console screenshots are part of the deliverable, not optional extras. If a document describes an architecture, a flow, or a relationship, it carries a diagram (§32). If it describes a console operation, a configuration form, or an audit result, it carries a screenshot (§67). Generate both while the document is written, not afterward.
@@ -2910,6 +2914,8 @@ These checks confirm every claim is traceable.
 These checks confirm the document teaches rather than summarizes.
 
 + Every substantive document meets the substance floor (§29): verified behavior, at least one concrete value, operational detail, an exam trap, and cross-service links.
++ Every substantive document and every README opens with a purpose paragraph that answers the four questions in §29.
++ `scripts/check-doc-purpose.py` reports no document whose first block after the H1 is missing a purpose paragraph (the root README is exempt; its purpose sits in the "What this is" section below the centered title block).
 + No document trips a shallow-content trigger (§29).
 + No document was lengthened by padding, rephrasing, or restating (the padding ban, §29).
 + Each document adds facts a reader could not infer from its title.
@@ -3029,7 +3035,7 @@ Determine which existing documents should be linked instead of duplicated.
 
 ### Step 11
 
-Create or update the documentation, including the AWS-styled Mermaid diagrams required by §32.
+Create or update the documentation, including the purpose paragraph required by §29 and the AWS-styled Mermaid diagrams required by §32.
 
 ### Step 12
 

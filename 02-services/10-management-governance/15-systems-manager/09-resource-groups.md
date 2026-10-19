@@ -1,6 +1,6 @@
 # Resource Groups
 
-AWS Resource Groups organizes AWS resources into logical collections so you can act on many resources at once rather than moving service by service. It is not part of Systems Manager itself, but Systems Manager leans on it: a resource group is a common way to target Run Command, State Manager associations, Maintenance Windows, and Application Manager views. Understanding resource groups is what lets you target "a layer of an application" instead of listing instance IDs.
+This document explains how Resource Groups turns a tag scheme into a reusable target that Systems Manager can act on, which is why it belongs in this topic even though it is not an SSM service. It covers tag-based and stack-based queries, the regional and nesting rules, and the targeting pattern; the tag syntax itself is in [16-tagging.md](16-tagging.md).
 
 ## What a resource group is
 

@@ -1,6 +1,6 @@
 # IP addressing / CIDR exam practice questions
 
-Ten original, scenario-based questions covering the IP addressing docs in this folder. They map mainly to **Domain 5 (Networking and Content Delivery)**. Written in the SOA-C03 style, not copied from any exam.
+This set tests the topic under exam conditions; it does not teach it. The ten original scenario questions cover the material in this folder and map mainly to Domain 5, and each answer explains why the keyed option is right and why every distractor fails. Read the topic documents first, then use this set to expose gaps.
 
 The set covers: CIDR notation, network and broadcast addresses, the reserved addresses in a subnet, allowed subnet sizes, private versus public addresses, Elastic IP, NAT gateway placement, VPC peering overlap, and the local route.
 

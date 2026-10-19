@@ -1,6 +1,6 @@
 # IAM exam practice questions
 
-Eleven original, scenario-based questions covering the IAM docs in this folder. They map mainly to **Domain 4 (Security and Compliance)**, and touch **Domain 1 (auditing with CloudTrail)** and **Domain 3 (roles as code)**. Written in the SOA-C03 style, not copied from any exam.
+This set tests the IAM material under exam conditions; it does not teach it. The eleven original scenario questions cover the docs in this folder and map mainly to Domain 4, with touches of Domains 1 and 3, and each answer explains why the keyed option is right and why every distractor fails. Read the topic documents first, then use this set to expose gaps.
 
 The set covers: the policy evaluation order, SCPs versus permissions boundaries, roles versus users, cross-account access, resource-based policies, MFA conditions, policy types and limits, Access Analyzer, STS, and least privilege.
 

@@ -1,6 +1,6 @@
 # Monitoring and integration
 
-Systems Manager does not operate in isolation. It reads and writes state through CloudWatch, CloudTrail, AWS Config, EventBridge, and Security Hub, and it aggregates operational data across accounts and Regions. This document maps those integrations so you can answer "where does this data come from" and "how do I see it across the organization".
+This document maps where Systems Manager sends data and where it reads it back: CloudWatch, CloudTrail, AWS Config, EventBridge, and Security Hub, plus cross-account and cross-Region aggregation. It is an integration map, not a monitoring tutorial; the remediation path that consumes these signals is in [06-change-management.md](06-change-management.md) and [10-operations-tools.md](10-operations-tools.md).
 
 ## CloudWatch
 

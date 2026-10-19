@@ -1,6 +1,6 @@
 # Parameter Store
 
-Parameter Store is a centralized store for named values, called *parameters*: a block of text, a list, an AMI ID, a license key, an endpoint URL, or a password. It lets an application read configuration at runtime instead of hard-coding it, and it lets you change that configuration without a redeploy. It is the configuration side of Systems Manager, distinct from the node-action tools and from AppConfig's validated rollouts.
+This document explains Parameter Store as the configuration side of Systems Manager: named values an application reads at runtime, with types, versions, and access control. It is separate from the node-action tools because the problem is configuration delivery rather than remote execution; validated application rollouts belong to AppConfig in [08-application-tools.md](08-application-tools.md).
 
 ## Parameter types
 

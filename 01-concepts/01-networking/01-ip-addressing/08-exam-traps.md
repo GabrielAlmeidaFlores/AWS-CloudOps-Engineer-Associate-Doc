@@ -1,5 +1,7 @@
 # IP addressing exam traps
 
+This file collects the address misconceptions that survive a first read and shows what AWS actually does in each case. It is a correction layer, not an introduction; the correct behavior is built in [01-concepts.md](01-concepts.md) and [02-aws-addressing.md](02-aws-addressing.md), and each trap links the rule it violates.
+
 ### Common Mistake
 
 A subnet's usable address count is `2^(32 − n) − 2`, reserving only the network and broadcast address.

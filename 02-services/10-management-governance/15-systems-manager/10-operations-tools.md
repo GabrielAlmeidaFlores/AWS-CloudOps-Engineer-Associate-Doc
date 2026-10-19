@@ -1,6 +1,6 @@
 # Operations tools
 
-Explorer and OpsCenter turn the operational data Systems Manager already collects into something an operator can act on. Explorer is the dashboard that aggregates and visualizes that data; OpsCenter is the work queue of issues that need investigation and remediation, each tied to a runbook. Both are the tools a scenario points to when the answer is "see the problem and fix it in one place".
+This document covers Explorer and OpsCenter, the two tools that turn Systems Manager's collected data into a dashboard and a work queue. It is the operational-view layer rather than an action layer; the events and metrics that feed them are in [11-monitoring.md](11-monitoring.md).
 
 ## Explorer
 

@@ -1,5 +1,7 @@
 # IAM quick review
 
+This page is the final recall gate for the topic, not a second explanation. It compresses the evaluation order, the policy types, and the key numbers into the facts you should be able to state without derivation.
+
 > [!NOTE]
 > This is the last thing you read before the exam, a one-page gate. If any line below isn't instantly obvious, go back to the source document rather than skimming: evaluation logic lives in `01-concepts.md`, the traps in `08-exam-traps.md`, and the numbers in `05-limits-defaults.md`. The goal is that every item here is recall, not re-reading.
 

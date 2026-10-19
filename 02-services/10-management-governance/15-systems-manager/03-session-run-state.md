@@ -1,6 +1,6 @@
 # Session Manager, Run Command, and State Manager
 
-Three tools cover the day-to-day act of operating a node: getting a shell on it, running a command on it once, and keeping it in a defined state over time. They share one mechanism, the SSM Agent's outbound channel, which is why none of them needs an inbound port, a bastion host, or an SSH key. This document treats each in turn, then the comparison that decides which one an exam scenario is asking for.
+This document covers the three day-to-day operating tools (Session Manager, Run Command, and State Manager) and the comparison that decides which one a scenario is asking for. They share the agent's outbound channel, which is why none needs an inbound port or a bastion; the comparison is the exam-critical part, and it is placed after the three tool sections.
 
 ## Session Manager
 

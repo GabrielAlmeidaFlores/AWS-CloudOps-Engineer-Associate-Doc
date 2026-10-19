@@ -18,9 +18,7 @@
 
 ## What this is
 
-A study system for the **AWS Certified CloudOps Engineer – Associate (SOA-C03)** exam, formerly the *AWS Certified SysOps Administrator – Associate*. It is not copied AWS documentation. It is a knowledge graph that connects the exam's requirements, verified AWS behavior, real operations, and cross-service relationships into one navigable reference.
-
-The goal is to understand **how AWS services actually behave** and **how to reason about them as an operator**, not to memorize feature lists.
+This repository exists to turn the SOA-C03 exam scope into a navigable knowledge graph, not another copy of the AWS documentation. The exam was formerly the AWS Certified SysOps Administrator – Associate. The repository connects the exam's requirements, verified AWS behavior, real operations, and cross-service relationships, so the reader learns **how AWS services actually behave** and **how to reason about them as an operator** rather than memorizing feature lists.
 
 ## Start here
 

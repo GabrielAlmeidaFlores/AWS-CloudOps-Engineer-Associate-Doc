@@ -1,6 +1,6 @@
 # AWS Systems Manager (SSM)
 
-AWS Systems Manager (SSM) is the operations hub for your compute. It gives you one place to view and act on *managed nodes* (EC2 instances, edge devices, on-premises servers, and VMs) across accounts and Regions: run commands, open shell sessions without SSH, patch operating systems, keep software in a known state, store configuration and secrets, and automate remediation. The unifying idea is simple: install the SSM Agent on a node, give it an IAM role, and the node registers with Systems Manager; from then on you operate it remotely through AWS instead of logging in.
+This README is the map for the Systems Manager topic. Systems Manager is the operations hub for compute: install the SSM Agent on a node, give it an IAM role, and you operate it remotely through AWS instead of logging in. The page states why the service is in scope for SOA-C03 and how the documents are ordered; the explanation starts in [01-fundamentals.md](01-fundamentals.md).
 
 ## What Systems Manager is
 

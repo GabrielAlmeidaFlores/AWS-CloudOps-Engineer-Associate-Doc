@@ -1,6 +1,6 @@
 # Tagging and tag-based targeting
 
-Tags are how Systems Manager decides *which* nodes and resources an operation acts on. Almost every scenario that says "target the production web tier" or "patch only the staging hosts" is really a question about tags: the tag is the selector, and the Systems Manager API is the action. This document covers the tag model itself, the `tag:` targeting syntax, the special `Patch Group` key, the Systems Manager resources that accept tags, and the integration points where tags change behavior.
+This document explains how tags become the selector for Systems Manager operations, including the `tag:` syntax, the special `Patch Group` key, and the resources that accept tags. It is a cross-cutting reference because tags decide targeting for almost every other tool; resource-group targeting is in [09-resource-groups.md](09-resource-groups.md), and patch-group resolution is in [04-patch-manager.md](04-patch-manager.md).
 
 ## The tag model
 

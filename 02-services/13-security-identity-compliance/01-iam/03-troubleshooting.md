@@ -1,6 +1,6 @@
 # IAM troubleshooting
 
-Access-denied is the most common IAM failure, and almost every case reduces to one of three things: an explicit deny somewhere in the chain, a missing allow, or a condition that did not match. Work it as a chain, not a guess.
+This document turns access-denied into a diagnostic chain: confirm the principal, check for an explicit deny, check the allows, then check the boundary, SCP, and conditions. It is a troubleshooting guide, so it assumes the evaluation model in [01-concepts.md](01-concepts.md) and focuses on the tools that show each step of the decision.
 
 > [!TIP]
 > Start with the **IAM policy simulator** before any live call. It evaluates the effective permissions of a principal against a specific action and resource ARN and reports allow or deny plus the reason, without you triggering the real request or waiting for CloudTrail. Only when the simulator says "allowed" but the live call still fails do you reach for CloudTrail, the boundary/SCP, and `DecodeAuthorizationMessage`.

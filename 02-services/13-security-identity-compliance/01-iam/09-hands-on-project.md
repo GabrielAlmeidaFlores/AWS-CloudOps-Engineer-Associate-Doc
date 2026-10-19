@@ -1,6 +1,6 @@
 # Hands-on project: build an end-to-end identity and prove the access decision
 
-This is the topic's practice project. It takes every IAM concept documented in this folder and puts them into one build: users and groups, roles and trust policies, identity and resource policies, a permissions boundary, an MFA condition, STS, an instance profile, a KMS key policy, Access Analyzer, and a CloudTrail audit. Nothing depends on it; it depends only on this topic.
+This project turns the folder's IAM concepts into one identity chain you can build, break, and audit: a scoped role, a permissions boundary, an MFA condition, an instance profile, a KMS key policy, Access Analyzer, and CloudTrail. It is the practice half of the topic, not another explanation, and nothing else depends on it; the mechanics are in the linked documents, and the build applies them end to end.
 
 ## Goal
 

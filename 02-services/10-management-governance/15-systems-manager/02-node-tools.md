@@ -1,6 +1,6 @@
 # Systems Manager node tools
 
-Systems Manager groups its node-focused capabilities into a few tools that you reach from the unified console: a fleet view, a compliance view, an inventory of what is installed, and the activation path that brings non-EC2 machines under management. This document covers Fleet Manager, Compliance, Inventory, and Hybrid Activations. Remote access (Session Manager, Run Command) and state enforcement (State Manager) are covered in [03-session-run-state.md](03-session-run-state.md), and patching in [04-patch-manager.md](04-patch-manager.md).
+This document covers the tools that give you a view of the fleet and bring non-EC2 machines into it: Fleet Manager, Compliance, Inventory, and Hybrid Activations. It stops at the view and registration layer; remote access and state enforcement are in [03-session-run-state.md](03-session-run-state.md), and patching is in [04-patch-manager.md](04-patch-manager.md).
 
 ## Fleet Manager
 

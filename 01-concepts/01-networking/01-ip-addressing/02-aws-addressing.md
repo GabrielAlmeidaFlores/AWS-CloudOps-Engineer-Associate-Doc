@@ -1,6 +1,6 @@
 # AWS addressing rules
 
-How AWS applies CIDR when you create VPCs and subnets, and the reserved addresses you lose along the way.
+This document explains how AWS applies CIDR when you create VPCs and subnets, and which addresses you lose to the platform. It is separate from the general address math because the five reserved addresses, the allowed block sizes, and the prohibited ranges are AWS rules rather than IPv4 rules; the underlying notation is in [01-concepts.md](01-concepts.md).
 
 ## VPC CIDR blocks
 

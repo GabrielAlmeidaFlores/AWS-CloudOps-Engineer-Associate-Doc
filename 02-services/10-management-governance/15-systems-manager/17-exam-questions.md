@@ -1,6 +1,6 @@
 # Systems Manager exam practice questions
 
-Twelve original, scenario-based questions covering the Systems Manager docs in this folder. They map mainly to **Domain 1 (Monitoring, Logging, and Remediation)**, **Domain 3 (Deployment, Provisioning, and Automation)**, and **Domain 4 (Security and Compliance)**. These are written in the SOA-C03 style, not copied from any exam.
+This set tests the Systems Manager material under exam conditions; it does not teach it. The twelve original scenario questions cover the tools in this folder and map mainly to Domains 1, 3, and 4, and each answer explains why the keyed option is right and why every distractor fails. Read the topic documents first, then use this set to expose gaps.
 
 The set covers: managed-node onboarding, Default Host Management Configuration, Session Manager logging, Run Command versus State Manager, patch groups, Parameter Store tiers and policies, Automation rate control, Maintenance Windows, Inventory aggregation, OpsCenter, and tagging.
 

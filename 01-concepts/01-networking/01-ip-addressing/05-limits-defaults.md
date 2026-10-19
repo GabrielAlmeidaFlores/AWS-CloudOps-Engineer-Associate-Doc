@@ -1,6 +1,6 @@
 # IP addressing limits and defaults
 
-These are the values that decide sizing and connectivity questions. The first table is what the exam expects you to recall without thinking; the rest is operational context. Every value is verified against current AWS documentation.
+This file is the address-number lookup for sizing and connectivity questions: the values the exam expects you to recall, plus the operational context behind them. It is a reference, so it does not re-derive the math; the explanations live in [01-concepts.md](01-concepts.md) and [02-aws-addressing.md](02-aws-addressing.md).
 
 ## Must remember
 

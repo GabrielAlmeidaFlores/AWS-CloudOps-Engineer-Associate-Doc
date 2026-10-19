@@ -1,6 +1,6 @@
 # Application tools
 
-Two Systems Manager tools operate on an *application* rather than a single node or resource. Application Manager gathers operational information about an application's resources into one view; AppConfig safely changes application behavior at runtime. One caveat up front: Application Manager is no longer open to new customers, so treat it as a conceptual and exam-awareness topic rather than something you will provision.
+This document covers the two tools that operate on an application rather than a node: Application Manager for a gathered operational view, and AppConfig for validated runtime configuration changes. It also records the availability caveat for Application Manager; the per-node configuration store is in [07-parameter-store.md](07-parameter-store.md).
 
 ## Application Manager
 

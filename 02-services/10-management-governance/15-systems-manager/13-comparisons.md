@@ -1,6 +1,6 @@
 # Systems Manager comparisons
 
-These are the distinctions that decide exam answers. Each one pits two Systems Manager capabilities or one Systems Manager capability against an adjacent service, and the difference changes which is correct.
+This file isolates the Systems Manager distinctions that change an exam answer, such as Run Command versus State Manager versus Maintenance Windows. It is a comparison reference, not a tool manual; each pair is explained in its owning document, and this file states only the deciding difference.
 
 ## Run Command vs State Manager vs Maintenance Windows
 

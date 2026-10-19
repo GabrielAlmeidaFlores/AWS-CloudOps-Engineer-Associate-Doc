@@ -1,6 +1,6 @@
 # IAM limits and defaults
 
-Values verified against the IAM quotas documentation. The behavioral defaults matter most; quota ceilings rarely appear on the exam.
+This file is the IAM number lookup: the behavioral defaults the exam expects you to recall and the quota ceilings that explain a policy or session failure. It is a reference, so it does not re-teach the evaluation logic; the explanations live in [01-concepts.md](01-concepts.md) and [03-troubleshooting.md](03-troubleshooting.md).
 
 > [!IMPORTANT]
 > The "must remember" table below is the exam-critical subset. The quota table is "good to know", the exam rarely asks for an exact quota ceiling, and when it does the value is usually in the question stem. What it does test are the behavioral defaults: **role session duration (1 hour by default, up to 12 hours maximum)** and that **IAM is global** (a role is visible and usable from every Region, unlike most resources). Commit those two rather than the quota table.

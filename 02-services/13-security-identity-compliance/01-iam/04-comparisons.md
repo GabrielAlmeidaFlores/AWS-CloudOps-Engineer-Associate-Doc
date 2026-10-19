@@ -1,5 +1,7 @@
 # IAM comparisons
 
+This file isolates the IAM distinctions that change an answer: identity versus resource policies, managed versus inline, roles versus users, and boundaries versus SCPs. It is a comparison reference, not a tutorial; each pair is explained in its owning document, and this file states only the deciding difference.
+
 > [!IMPORTANT]
 > The exam's default answer for "a service or workload needs access" is a **role**, not a user with static keys. A role is assumed and yields short-lived STS credentials; a user with access keys is long-lived and those keys must be stored somewhere, which is the classic leak. Whenever a question offers both "IAM user with access keys" and "IAM role" for a workload (EC2, Lambda, ECS, a cross-account application) the role is the intended answer. This one distinction decides more scenario questions than any other IAM fact.
 

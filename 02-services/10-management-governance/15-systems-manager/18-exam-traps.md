@@ -1,6 +1,6 @@
 # Systems Manager exam traps
 
-Recurring mistakes candidates make, and what AWS actually does.
+This file collects the Systems Manager misconceptions that survive a first read and states what AWS actually does. It is a correction layer, not an introduction; each trap points back to the document that establishes the correct behavior, so the reader can repair the model rather than memorize the correction.
 
 > [!CAUTION]
 > The two most expensive Systems Manager traps are: (1) assuming a node is managed just because it launches, when the real gate is the **instance IAM role** allowing `ssm:UpdateInstanceInformation`; and (2) treating **patch groups** and **patch policies** as interchangeable. Both show up as "the feature silently does nothing" scenarios.

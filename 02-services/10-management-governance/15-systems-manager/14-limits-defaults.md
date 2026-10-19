@@ -1,6 +1,6 @@
 # Systems Manager limits and defaults
 
-Values verified against the AWS Systems Manager endpoints and quotas page and the per-tool documentation. The behavioral defaults matter more than the quota ceilings for the exam; the quotas appear when a scenario asks why something stopped working at scale.
+This file is the Systems Manager number lookup: the behavioral defaults the exam expects you to recall, plus the quota ceilings that explain failures at scale. It is a reference, so it does not repeat the tool mechanics; each row points to the document that owns the behavior.
 
 ## Must remember
 

@@ -1,5 +1,7 @@
 # IP addressing comparisons
 
+This document separates the address distinctions that are easy to blur in a scenario: CIDR versus a subnet mask, private versus public addresses, and the AWS-specific address types. It is a comparison file, not a tutorial; the concepts themselves are built in [01-concepts.md](01-concepts.md) and [02-aws-addressing.md](02-aws-addressing.md).
+
 ## CIDR vs subnet mask
 
 CIDR and a subnet mask express the same idea (how many leading bits identify the network) in two different syntaxes. A subnet mask writes the boundary in dotted-decimal; CIDR writes it as a prefix length. AWS uses CIDR notation everywhere (console, CLI, API, CloudFormation), so read it directly rather than converting.

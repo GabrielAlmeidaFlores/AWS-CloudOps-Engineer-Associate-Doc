@@ -1,6 +1,6 @@
 # Distributor
 
-Distributor packages and publishes software to managed nodes. You use it when the software you need is a versioned artifact rather than a one-off command: an agent, a security tool, or an in-house application that has to land on many nodes at a known version. Distributor turns that artifact into a *package*, then Run Command or State Manager installs it.
+This document explains how Distributor turns a versioned artifact into a package and lands it on managed nodes, which is a different job from running a command or enforcing a state. It covers packages, versions, sources, and the authoring-versus-deploying permission split; command execution itself is in [03-session-run-state.md](03-session-run-state.md).
 
 ## What a package is
 

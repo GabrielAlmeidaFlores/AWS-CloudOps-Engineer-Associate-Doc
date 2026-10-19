@@ -1,5 +1,7 @@
 # IAM security
 
+This document covers the controls that make an IAM setup defensible: MFA, password policy, credential rotation, least privilege, and the conditions that narrow access. It is the hardening layer, not the evaluation model; the policy logic it hardens is in [01-concepts.md](01-concepts.md), and the boundary and SCP mechanics are compared in [04-comparisons.md](04-comparisons.md).
+
 > [!IMPORTANT]
 > Permissions boundaries and SCPs never *grant* access; they only narrow it. Each is an intersection: the effective permission is what the identity policy allows *and* the boundary or SCP does not exclude. So if a scenario asks how to give a user more access, a boundary or SCP is the wrong answer; adding one can only remove access that was already allowed. Candidates repeatedly pick "add a permissions boundary" to fix an over-permissioned user, when the boundary restricts rather than expands.
 

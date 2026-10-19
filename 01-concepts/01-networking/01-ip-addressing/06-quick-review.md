@@ -1,5 +1,7 @@
 # IP addressing quick review
 
+This page is the final recall gate for the topic, not a second explanation. It compresses the address math, the reserved addresses, and the limits into the facts you should be able to state without derivation.
+
 > [!NOTE]
 > This is the last thing you read before the exam, a one-page gate. If any line below isn't instantly obvious, go back to the source document: the math is in `01-concepts.md`, the AWS rules in `02-aws-addressing.md`, and the numbers in `05-limits-defaults.md`.
 

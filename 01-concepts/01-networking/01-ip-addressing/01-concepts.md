@@ -1,5 +1,7 @@
 # IP addressing concepts
 
+This document establishes the address model every AWS network depends on: how an IPv4 address is built, how CIDR notation describes a range, and how host bits become usable addresses. It comes first because subnet sizing, VPC design, and peering all assume this math; the AWS-specific reservations and limits are in [02-aws-addressing.md](02-aws-addressing.md), and the failure paths are in [03-troubleshooting.md](03-troubleshooting.md).
+
 ## IPv4 addressing
 
 An IPv4 address is 32 bits, written as four decimal octets (`0`–`255`) separated by dots:

@@ -1,6 +1,6 @@
 # Change management
 
-The change-management tools decide **what** runs, **when** it runs, and **whether it is allowed to run now**. Documents define the actions; Automation executes multi-step workflows; Maintenance Windows schedule disruptive work in a bounded window; Change Calendar gates whether changes may proceed at all; Quick Setup configures the common set of these for a whole organization in one pass. Together they are the automation half of Systems Manager that the exam tests under Domain 1 (runbooks for remediation) and Domain 3 (automating existing resources).
+This document covers the tools that decide what runs, when it runs, and whether it may run now: Documents, Automation, Maintenance Windows, Change Calendar, and Quick Setup. It is the automation half of Systems Manager, distinct from the node tools; the runbook actions it schedules are built on the command and state mechanics in [03-session-run-state.md](03-session-run-state.md).
 
 ## Documents
 

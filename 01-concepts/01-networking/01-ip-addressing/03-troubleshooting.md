@@ -1,6 +1,6 @@
 # IP addressing troubleshooting
 
-Most CIDR problems surface as one of two symptoms: a subnet runs out of addresses, or two networks cannot connect. Work the first as a capacity problem and the second as an overlap problem; they have different causes and different fixes.
+This document turns CIDR failures into two diagnosable paths: a subnet that runs out of addresses, and two networks that cannot connect. It is a troubleshooting guide rather than a concept lesson, so it assumes the address math in [01-concepts.md](01-concepts.md) and the AWS reservations in [02-aws-addressing.md](02-aws-addressing.md); the first path is a capacity problem and the second an overlap problem.
 
 The diagram below traces the capacity path, the more common of the two.
 

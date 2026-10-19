@@ -1,6 +1,6 @@
 # Troubleshooting Systems Manager
 
-Most Systems Manager failures are the same failure: a node that should be managed is not, or is not reachable for a command, session, or patch. The work is to isolate which of four layers is broken, in order: the **agent**, the **IAM role**, the **network path**, and **instance metadata**. Work them top to bottom rather than guessing.
+This document gives the diagnostic order for the failure that produces most SSM symptoms: a node that should be managed is not, or cannot be reached. It works the four layers in order (agent, IAM role, network path, instance metadata) and is meant to be used top to bottom; the setup those layers depend on is in [01-fundamentals.md](01-fundamentals.md).
 
 ## Symptom: a node is not managed (or disappeared)
 
